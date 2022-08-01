@@ -1,16 +1,20 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Form.LoginForm;
 import com.mysite.shoppingMall.Repository.UserRepository;
+import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Vo.IsLogined;
 import com.mysite.shoppingMall.Vo.MallUser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -19,50 +23,66 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+
+    @RequestMapping("/login")
+    public String showLogin(LoginForm loginForm) {
+        return "user/login.html";
+    }
 
     // === 로그인 ===
     @RequestMapping("/doLogin")
-    @ResponseBody
-    public String doLogin(String userEmail, String userPassword, HttpSession session) {
+    public String doLogin(Model model, HttpSession session, @Valid LoginForm loginForm, BindingResult bindingResult) {
 
         IsLogined isLogined = Ut.isLogined(session);
 
+        if(bindingResult.hasErrors()){
+            return "user/login.html";
+        }
+
         if (isLogined.getLogin() == 1) {
-            return "이미 로그인 되어 있습니다.";
+            bindingResult.reject("", "이미 로그인이 되어있습니다.");
+            return "user/login.html";
         }
 
-        if (Ut.empty(userEmail)) {
-            return "이메일을 입력하세요.";
-        }
+        MallUser user = userService.getUser(loginForm.getEmail());
 
-        if (Ut.empty(userPassword)) {
-            return "비밀번호를 입력하세요.";
-        }
-
-        Optional<MallUser> opUser = userRepository.findByuserEmail(userEmail);
-        MallUser user = opUser.orElse(null);
         if (user == null) {
-            return "이메일이 존재하지 않습니다.";
+            bindingResult.reject("", "이메일이 존재하지 않습니다.");
+            return "user/login.html";
         }
 
-        if (!passwordEncoder.matches(userPassword, user.getUserPassword())) {
-            return "비밀번호가 일치하지 않습니다.";
+        if(user.getUserEmail().equals("admin@test.com")){
+            if(user.getUserPassword().equals(loginForm.getPassword())){
+                model.addAttribute("msg", String.format("%s님 환영합니다.",user.getNickName()));
+                model.addAttribute("replaceUri", "/");
+                userService.sessionControll(session, user, "set");
+                return "common/js";
+            }
+            bindingResult.reject("", "비밀번호가 일치하지 않습니다.");
+            return "user/login.html";
         }
 
-        session.setAttribute("UserId", user.getId());
+        if (!userService.matchPw(loginForm.getPassword(), user)) {
+            bindingResult.reject("", "비밀번호가 일치하지 않습니다.");
+            return "user/login.html";
+        }
 
-        return "환영합니다.";
+        userService.sessionControll(session, user, "set");
+
+        model.addAttribute("msg", String.format("%s님 환영합니다.",user.getNickName()));
+        model.addAttribute("replaceUri", "/");
+        return "common/js";
 
     }
 
     // === 로그아웃 ===
     @RequestMapping("/doLogout")
     @ResponseBody
-    public String doLogout(HttpSession session){
+    public String doLogout(HttpSession session) {
         IsLogined isLogined = Ut.isLogined(session);
 
-        if(isLogined.getLogin() == 0){
+        if (isLogined.getLogin() == 0) {
             return "이미 로그아웃 되어 있습니다.";
         }
 
@@ -90,7 +110,7 @@ public class UserController {
             return "전화번호를 입력하세요.";
         }
 
-        if (userRepository.existsByuserEmail(userEmail)){
+        if (userRepository.existsByuserEmail(userEmail)) {
             return "이메일이 이미 존재합니다.";
         }
 
@@ -104,7 +124,7 @@ public class UserController {
 
         MallUser user = new MallUser();
         user.setUserEmail(userEmail);
-        user.setUserPassword(passwordEncoder.encode(userPassword));
+//        user.setUserPassword(passwordEncoder.encode(userPassword));
         user.setNickName(nickName);
         user.setCellphone(cellphone);
         user.setRegDate(LocalDateTime.now());
@@ -117,8 +137,8 @@ public class UserController {
     // === 회원정보 수정 ===
     @RequestMapping("/doModify")
     @ResponseBody
-    public String doModify(Integer id, String userEmail, String userPassword, String nickName, String cellphone){
-        if (id == null){
+    public String doModify(Integer id, String userEmail, String userPassword, String nickName, String cellphone) {
+        if (id == null) {
             return "id를 입력해주세요.";
         }
 
@@ -138,7 +158,7 @@ public class UserController {
             return "수정할 전화번호를 입력하세요.";
         }
 
-        if (userRepository.existsByuserEmail(userEmail)){
+        if (userRepository.existsByuserEmail(userEmail)) {
             return "이메일이 이미 존재합니다.";
         }
 
@@ -154,7 +174,7 @@ public class UserController {
         MallUser user = opMallUser.get();
 
         user.setUserEmail(userEmail);
-        user.setUserPassword(passwordEncoder.encode(userPassword));
+//        user.setUserPassword(passwordEncoder.encode(userPassword));
         user.setCellphone(cellphone);
         user.setNickName(nickName);
         user.setUpdateDate(LocalDateTime.now());
@@ -166,25 +186,25 @@ public class UserController {
     // === 회원 탈퇴 ===
     @RequestMapping("/doDelete")
     @ResponseBody
-    public String doDelete(String userEmail, String userPassword, HttpSession session){
-        if(Ut.empty(userEmail)){
+    public String doDelete(String userEmail, String userPassword, HttpSession session) {
+        if (Ut.empty(userEmail)) {
             return "이메일을 입력해주세요.";
         }
 
-        if(Ut.empty(userPassword)){
+        if (Ut.empty(userPassword)) {
             return "비밀번호를 입력해주세요.";
         }
 
         Optional<MallUser> opUser = userRepository.findByuserEmail(userEmail);
         MallUser user = opUser.orElse(null);
 
-        if(user == null){
+        if (user == null) {
             return "회원이 존재하지 않습니다.";
         }
 
-        if(!passwordEncoder.matches(userPassword, user.getUserPassword())){
-            return "비밀번호를 확인해주세요";
-        }
+//        if (!passwordEncoder.matches(userPassword, user.getUserPassword())) {
+//            return "비밀번호를 확인해주세요";
+//        }
 
         userRepository.delete(user);
         session.removeAttribute("UserId");

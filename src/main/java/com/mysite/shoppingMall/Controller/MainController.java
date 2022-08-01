@@ -2,13 +2,21 @@ package com.mysite.shoppingMall.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
     @RequestMapping("/test")
-    @ResponseBody
     public String showTest(){
-        return "하이요";
+        return """
+                <script>
+                alert("하이요");
+                location.replace(/product/list);
+                </script>
+                """;
     }
+    @RequestMapping("/")
+        public String rootMain() {
+            return "redirect:product/list";
+        }
+
 }
