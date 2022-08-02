@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>페이지 이름</title>
+</head>
+
+<main layout:fragment="main">
+
+</main>
+</html>

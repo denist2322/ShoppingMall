@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/common/common.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+<head>
+    <meta charset="UTF-8">
+    <!--    <div th:replace="common/darkMod :: darkFragment"></div>-->
+    <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">게시판</title>
+</head>
+<body>
+<section class="container w-full mx-auto h-screen">
+    <div class="top-bar h-24 w-full bg-white relative">
+        <div class="top-bar image w-full mx-auto h-full flex">
+            <a th:href="@{|/|}" class="logo flex flex-items-center">
+                <img src="https://mimiyoon.co.kr/24d/lr_logo_w310419/part_img/lr01_logo.png" alt="MiMi">
+            </a>
+
+            <div class="flex-grow"></div>
+
+            <ul class="top-bar icon flex items-center mx-auto">
+                <li>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" target="_blank" class="p-3">로그인</a>
+                </li>
+                <li>
+                    <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" target="_blank" class="p-3">로그아웃</a>
+                </li>
+                <li>
+                    <a th:href="@{|/user/join|}" class="p-3">회원가입</a>
+                </li>
+                <li>
+                    <a th:if = "${session.UserId != null}" href="#" target="_blank" class="p-3">장바구니</a>
+                </li>
+                <li>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" target="_blank" class="p-3">장바구니</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+    <div class="top-bar h-12 flex">
+        <nav class="top-bar__menu-box-1 w-full flex justify-center">
+            <ul class="flex h-full">
+                <li>
+                    <a href="#" class="flex items-center h-full px-5">
+                        <span>MAN</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center h-full px-5">
+                        <span>WOMAN</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center h-full px-5">
+                        <span>TRANNING</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center h-full px-5">
+                        <span>ACC</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+<main layout:fragment="main">
+</main>
+<div class="footer w-full h-96 flex flex-col">
+    <nav class="division w-full h-20 flex justify-center border border-gray mt-5 mb-5">
+        <ul class="flex">
+            <li>
+                <a href="https://about.hiver.co.kr/" class="flex h-full px-5 items-center">회사소개</a>
+            </li>
+            <li>
+                <a href="" class="flex h-full px-5 items-center"> 자주묻는 질문</a>
+            </li>
+            <li>
+                <a href="" class="flex h-full px-5 items-center"> 이용약관</a>
+            </li>
+            <li>
+                <a href="" class="flex h-full px-5 items-center">개인정보처리방침</a>
+            </li>
+        </ul>
+    </nav>
+
+    <nav class="address flex w-full h-64">
+        <div class="address-left flex w-3/5 flex-col mr-8">
+            <div class="flex text-3xl">알을낳다</div>
+            <div class="flex mt-2">
+        <span>대표이사 : 박혁거세 사업자등록번호 : 1234-56-78910 통신판매업신고 : 1111-충남공주-22222
+        호스팅사업자 : (주)브랜디 주소 : 서울 강남구 테헤란로38길 12 (역삼동)
+          개인정보관리책임자 : 주현주(privacy@brandi.co.kr)
+        </span>
+            </div>
+            <div class="flex mt-2">
+        <span>(주)알을낳다가 제공하는 알을않다서비스는 통신판매중개자로서 통신판매 당사자가 아니며,
+판매자가 등록한 상품정보 및 거래에 알을낳다는 책임지지 않습니다.</span>
+            </div>
+            <div class="flex mt-2">
+        <span>100% 정품
+알을낳다에서 판매되는 모든 브랜드 제품은 정식제조, 정식수입원을 통해 유통되는 100% 정품입니다.</span>
+            </div>
+            <div class="flex mt-5">
+                <span class="mx-2">안전거래센터</span>
+                <a href="https://sites.google.com/brandi.co.kr/safety/%ED%99%88" target="_blank"class="declare text-gray-500">신고하기</a>
+            </div>
+        </div>
+        <div class="address-right flex w-2/5 flex-col">
+            <div class="flex text-3xl">고객센터</div>
+            <a href="#" class="text-3xl"> 1234-5678</a>
+            <div class="flex mt-2">
+      <span>영업시간 AM 10:00 ~ PM 17:00(주말 및 공휴일 휴무)
+점심시간 PM 12:30 ~ PM 13:30</span>
+            </div>
+            <div class="flex m-5w-60 h-12">
+                <a href="#" class="mr-3 flex w-28 justify-center items-center border-4 border-black">입점문의</a>
+                <a href="#" class="mr-3 flex w-32 justify-center items-center border-4 border-black">교환/환불문의</a>
+            </div>
+        </div>
+    </nav>
+</div>
+</section>
+</body>
+</html>
+

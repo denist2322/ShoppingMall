@@ -27,15 +27,19 @@ public class UserService {
         return passwordEncoder.matches(userPassword, user.getUserPassword());
     }
 
-    public void sessionControll(HttpSession session, MallUser user, String option) {
-        if(option.equals("set")) {
-            if(user.getNickName().equals("관리자")){
+    public void setSession(HttpSession session, MallUser user) {
+
+            if(user.getName().equals("관리자")){
                 session.setAttribute("UserId", user.getId());
                 session.setAttribute("authority", "0");
             }
 
             session.setAttribute("UserId", user.getId());
             session.setAttribute("authority", "1");
-        }
+
+    }
+
+    public void removeSession(HttpSession session, Integer userId){
+        session.removeAttribute("UserId");
     }
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class IsLogined {
 
-    private int userId;
-    private int login;
+    private Integer userId;
+    private Integer login;
 
 }

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout_noHeadUnder}">
+<head>
+    <meta charset="UTF-8">
+    <title>페이지 이름</title>
+</head>
+
+<main layout:fragment="main"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <section class="h-screen flex justify-center">
+        <div class="container px-6 py-12 h-full">
+            <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+                <form class="w-full">
+                    <!-- userId input -->
+                    <div class="mb-6 flex">
+                        <input
+                                type="email"
+                                class="form-control mr-3 flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="이메일"
+                        />
+                        <button
+                                type="submit"
+                                class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                        >
+                            인증번호 발송
+                        </button>
+                    </div>
+
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                class="form-control mr-3 flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="인증번호를 입력하세요"
+                        />
+                        <button
+                                type="submit"
+                                class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                        >
+                            이메일 재발송
+                        </button>
+                    </div>
+                    <!-- Password input -->
+                    <div class="mb-6">
+                        <input
+                                type="password"
+                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="비밀번호"
+                        />
+                    </div>
+
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="비밀번호 확인"
+                        />
+                    </div>
+
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="이름"
+                        />
+                    </div>
+
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                class="form-control flex mr-2 w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="생년월일 앞6자리"
+                        />
+                    </div>
+
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                class="form-control mr-6 flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="기본 주소"
+                        />
+                        <a
+                                type="submit"
+                                class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                                onclick="openPost();"
+                        >
+                            검색
+                        </a>
+                        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                        <script>
+    function openPost(){
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+        }
+    }).open();
+    }
+</script>
+                    </div>
+
+
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="나머지 주소"
+                        />
+                    </div>
+
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="전화번호 입력"
+                        />
+                    </div>
+                    <!-- Submit button -->
+                    <div class="flex">
+                        <button
+                                type="submit"
+                                class="flex w-2/1 justify-center items-center h-11 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                        >
+                            가입하기
+                        </button>
+                        <button
+                                type="submit"
+                                class="flex w-2/1 justify-center items-center h-11 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                        >
+                            취소
+                        </button>
+                    </div>
+                    <div
+                            class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+                    >
+                    </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+</html>

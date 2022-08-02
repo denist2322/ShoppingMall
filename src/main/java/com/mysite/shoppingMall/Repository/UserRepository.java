@@ -10,7 +10,7 @@ public interface UserRepository extends JpaRepository<MallUser,Integer> {
 
     boolean existsByuserEmail(String userEmail);
 
-    boolean existsBynickName(String nickName);
+    boolean existsByname(String nickName);
 
     boolean existsBycellphone(String cellphone);
 }

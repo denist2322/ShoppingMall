@@ -20,6 +20,8 @@ public class MallUser {
     private LocalDateTime updateDate;
     private String userEmail;
     private String userPassword;
-    private String nickName;
+    private String name;
+    private Integer birthday;
+    private String homeAddress;
     private String cellphone;
 }
