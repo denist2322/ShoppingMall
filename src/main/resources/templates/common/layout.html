@@ -21,19 +21,19 @@
 
             <ul class="top-bar icon flex items-center mx-auto">
                 <li>
-                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" target="_blank" class="p-3">로그인</a>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3">로그인</a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" target="_blank" class="p-3">로그아웃</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" class="p-3">로그아웃</a>
                 </li>
                 <li>
                     <a th:href="@{|/user/join|}" class="p-3">회원가입</a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" href="#" target="_blank" class="p-3">장바구니</a>
+                    <a th:if = "${session.UserId != null}" href="#" class="p-3">장바구니</a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" target="_blank" class="p-3">장바구니</a>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3">장바구니</a>
                 </li>
             </ul>
         </div>

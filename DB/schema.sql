@@ -9,9 +9,10 @@ CREATE TABLE mall_user(
  update_date DATETIME NOT NULL,
  user_email VARCHAR(50) NOT NULL,
  user_password VARCHAR(100) NOT NULL,
- nick_name VARCHAR(20) NOT NULL,
- cellphone CHAR(20) NOT NULL,
- delDate DATETIME COMMENT '탈퇴날짜'
+ `name` VARCHAR(20) NOT NULL,
+ birthday INT(100) UNSIGNED NOT NULL,
+ home_address VARCHAR(50) NOT NULL,
+ cellphone CHAR(20) NOT NULL
 );
 
 INSERT INTO mall_user SET
@@ -19,7 +20,9 @@ INSERT INTO mall_user SET
  update_date = NOW(),
  user_email = "admin@test.com",
  user_password = "admin",
- nick_name = "관리자",
+ `name` = "관리자",
+ birthday = 100000,
+ home_address = "대전 어딘가",
  cellphone = "010-0000-0000";
 
 
@@ -28,7 +31,9 @@ INSERT INTO mall_user SET
  update_date = NOW(),
  user_email = "user1@test.com",
  user_password = "user1",
- nick_name = "테스트 유저",
+ `name` = "테스트 유저",
+ birthday = 110101,
+ home_address = "대전 어딘가",
  cellphone = "010-1111-0000";
 
   SELECT * FROM mall_user;
