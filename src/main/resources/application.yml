@@ -1,6 +1,21 @@
 server:
   port: 8085
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pullstack1b@gmail.com
+    password: qhaiagnpjvlhgtad
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/

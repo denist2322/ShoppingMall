@@ -5,6 +5,7 @@ import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Vo.IsLogined;
+import com.mysite.shoppingMall.Vo.MailDto;
 import com.mysite.shoppingMall.Vo.MallUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -97,7 +98,8 @@ public class UserController {
 
     // === 회원가입 ===
     @RequestMapping("/join")
-    public String showJoin(LoginForm loginForm) {
+    public String showJoin(MailDto mailDto, Model model) {
+        System.out.println(mailDto);
         return "user/join.html";
     }
     @RequestMapping("/doJoin")
