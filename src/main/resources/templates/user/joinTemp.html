@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<form name="sendData" th:action="@{|/user/join|}" method="post">
+    <input type="hidden" name="email" th:value = "${mailDto.email}">
+    <input type="hidden" name="authentication" th:value = "${mailDto.authentication}">
+    <input type="hidden" name="confirmAuthentication" th:value = "${mailDto.confirmAuthentication}">
+    <input type="hidden" name="success" th:value = "${mailDto.success}">
+    <input type="hidden" name="fail" th:value = "${mailDto.fail}">
+</form>
+<script layout:fragment="script" type='text/javascript'>
+    document.sendData.submit();
+</script>
+</body>
+</html>

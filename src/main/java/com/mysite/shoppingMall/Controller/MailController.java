@@ -18,22 +18,19 @@ public class MailController {
 
     @PostMapping("/mail")
     public String execMail(MailDto mailDto) {
-        MailDto mailResult = mailService.mailSimpleSend(mailDto);
-        return "forward:/user/join";
+        mailService.mailSimpleSend(mailDto);
+        return "user/joinTemp.html";
     }
 
     @PostMapping("/confirm")
     public String confirm(MailDto mailDto) {
-        System.out.println(mailDto.getAuthentication());
-        System.out.println(mailDto.getConfirmAuthentication());
         if (mailDto.getAuthentication().equals(mailDto.getConfirmAuthentication())) {
             mailDto.setSuccess("Success");
             mailDto.setFail(null);
-            return "user/join";
+            return "user/joinTemp.html";
         }
         mailDto.setSuccess(null);
         mailDto.setFail("Fail");
-        return "user/join";
+        return "user/joinTemp.html";
     }
-
 }

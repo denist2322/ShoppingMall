@@ -6,62 +6,62 @@
     <title>페이지 이름</title>
 </head>
 
-<main layout:fragment="main"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-<body onload="NotReload();">
+<main layout:fragment="main">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <body>
     <section class="h-screen flex justify-center">
 
         <div class="container px-6 py-12 h-full">
             <div class="flex justify-center items-center flex-wrap h-full text-gray-800">
-                    <div th:if="${mailDto.success != null}">인증이 완료되었습니다.</div>
-                    <div th:if="${mailDto.fail != null}">인증이 실패했습니다.</div>
+                <div th:if="${mailDto.success == 'Success'}">인증이 완료되었습니다.</div>
+                <div th:if="${mailDto.fail == 'Fail'}">인증이 실패했습니다.</div>
                 <div class=" flex">
-                <form th:action="@{|/mail|}" method="post" class="w-full -mb-16">
-                    <!-- userId input -->
-                    <div class=" flex">
-                        <input
-                                th:if="${mailDto.email == null}"
-                                type="email"
-                                name="email"
-                                class="form-control mr-3 flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="이메일"
-                        />
-                        <input
-                                th:if="${mailDto.email != null}"
-                                type="email"
-                                name="email"
-                                class="form-control mr-3 flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                th:value = "${mailDto.email}"
-                                readonly
-                        />
-                        <input
-                                th:if="${mailDto.email == null}"
-                                type="submit"
-                                class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
-                                data-mdb-ripple="true"
-                                data-mdb-ripple-color="light"
-                                value = "인증번호 발송"
-                        />
+                    <form th:action="@{|/mail|}" method="post" class="w-full -mb-16">
+                        <!-- userId input -->
+                        <div class=" flex">
+                            <input
+                                    th:if="${mailDto.email == null}"
+                                    type="email"
+                                    name="email"
+                                    class="form-control mr-3 flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    placeholder="이메일"
+                            />
+                            <input
+                                    th:if="${mailDto.email != null}"
+                                    type="email"
+                                    name="email"
+                                    class="form-control mr-3 flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    th:value="${mailDto.email}"
+                                    readonly
+                            />
+                            <input
+                                    th:if="${mailDto.email == null}"
+                                    type="submit"
+                                    class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                    data-mdb-ripple="true"
+                                    data-mdb-ripple-color="light"
+                                    value="인증번호 발송"
+                            />
 
-                    </div>
-                </form>
-                    <form th:if="${mailDto.email != null}" th:action="@{|/mail|}" method="post" class="w-full -mb-16">
-                        <input type="hidden" name="email" value="${mailDto.email}">
-                        <input type="hidden" name="send" value = "ReSend">
+                        </div>
+                    </form>
+                    <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post" class="w-full -mb-16">
+                        <input type="hidden" name="email" th:value="${mailDto.email}">
                         <input
                                 type="submit"
                                 class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
-                                value = "재발송"
+                                value="재발송"
                         >
                     </form>
 
-                    </div>
+                </div>
 
-                <form th:if="${mailDto.success == null}" th:action="@{|/confirm|}" method="post" class="w-full">
+                <form th:if="${mailDto.success != 'Success'}" th:action="@{|/confirm|}" method="post" class="w-full">
                     <div class="mb-6 flex">
-                        <input type="hidden" name="email" th:value="${mailDto.email}" >
-                        <input type="hidden" name="authentication" th:value="${mailDto.authentication}" >
+                        <input type="hidden" name="email" th:value="${mailDto.email}">
+                        <input type="hidden" name="authentication" th:value="${mailDto.authentication}">
                         <input
                                 type="text"
                                 name="confirmAuthentication"
@@ -77,7 +77,7 @@
                             확인
                         </button>
                     </div>
-                    </form>
+                </form>
                 <form class="w-full">
                     <!-- Password input -->
                     <div class="mb-6">
@@ -109,21 +109,26 @@
 
                     <div class="mb-6 flex">
 
-                        <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="text" id="sample6_postcode" placeholder="우편번호">
+                        <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" id="sample6_postcode" placeholder="우편번호">
 
-                        <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none justify-center" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                        <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none justify-center"
+                               type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
                     </div>
 
                     <div class="mb-6 flex">
 
-                        <input class="flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="text" id="sample6_address" placeholder="주소">
+                        <input class="flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" id="sample6_address" placeholder="주소">
                         <br>
                     </div>
 
                     <div class="mb-6 flex">
-                        <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="text" id="sample6_detailAddress" placeholder="상세주소">
+                        <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" id="sample6_detailAddress" placeholder="상세주소">
 
-                        <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="text" id="sample6_extraAddress" placeholder="참고항목">
+                        <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" id="sample6_extraAddress" placeholder="참고항목">
                     </div>
 
                     <div class="mb-6 flex">
@@ -137,15 +142,10 @@
 
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                     <script>
-function NotReload(){
-    if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || (event.keyCode == 116) ) {
-        event.keyCode = 0;
-        event.cancelBubble = true;
-        event.returnValue = false;
-    }
-}
-document.onkeydown = NotReload;
-출처: https://alisyabob.tistory.com/268 [it 공부 끄적이기:티스토리]
+       window.onbeforeunload = function(e) {
+            location.replace("/user/join")
+       };
+
 
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -194,7 +194,8 @@ document.onkeydown = NotReload;
             }
         }).open();
     }
-</script>
+
+                    </script>
                     <!-- Submit button -->
                     <div class="flex">
                         <button
@@ -221,6 +222,6 @@ document.onkeydown = NotReload;
             </div>
         </div>
     </section>
-</body>
+    </body>
 </main>
 </html>

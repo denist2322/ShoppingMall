@@ -15,7 +15,7 @@ public class MailService {
     private static final String FROM_ADDRESS = "no_repy@boki.com";
 
     @Async
-    public MailDto mailSimpleSend(MailDto mailDto) {
+    public void mailSimpleSend(MailDto mailDto) {
         mailDto.setTitle("본인인증 메일입니다.");
         mailDto.setMessage("아래 인증번호를 홈페이지에서 기입해주세요.");
         SimpleMailMessage message = new SimpleMailMessage();
@@ -26,8 +26,7 @@ public class MailService {
         message.setText(msg);
         mailDto.setAuthentication(randomAuthentication);
         mailDto.setConfirmAuthentication("0");
-        mailDto.setSend("send");
+        System.out.println("send");
         mailSender.send(message);
-        return mailDto;
     }
 }

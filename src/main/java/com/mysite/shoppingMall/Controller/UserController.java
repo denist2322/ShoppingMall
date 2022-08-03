@@ -2,6 +2,7 @@ package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Form.LoginForm;
 import com.mysite.shoppingMall.Repository.UserRepository;
+import com.mysite.shoppingMall.Service.MailService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Vo.IsLogined;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,6 +25,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
+
+    private final MailService mailService;
     private final UserRepository userRepository;
     private final UserService userService;
 
@@ -98,11 +102,10 @@ public class UserController {
 
     // === 회원가입 ===
     @RequestMapping("/join")
-    public String showJoin(MailDto mailDto, Model model) {
-        System.out.println(mailDto);
+    public String showJoin(MailDto mailDto) {
         return "user/join.html";
     }
-    @RequestMapping("/doJoin")
+    @PostMapping("/dojoin")
     @ResponseBody
     public String doJoin(String userEmail, String userPassword, String name, String cellphone, Integer birthday, String homeAddress ) {
         if (Ut.empty(userEmail)) {

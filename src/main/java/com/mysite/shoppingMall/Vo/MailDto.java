@@ -15,5 +15,4 @@ public class MailDto {
     private String confirmAuthentication;
     private String success;
     private String fail;
-    private String send;
 }
