@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <!--    <div th:replace="common/darkMod :: darkFragment"></div>-->
-    <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">게시판</title>
+    <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">하늘하늘</title>
 </head>
 <body>
 <section class="container w-full mx-auto h-screen">
@@ -27,7 +27,10 @@
                     <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" class="p-3">로그아웃</a>
                 </li>
                 <li>
-                    <a th:href="@{|/user/join|}" class="p-3">회원가입</a>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/join|}" class="p-3">회원가입</a>
+                </li>
+                <li>
+                    <a th:if = "${session.UserId != null}" href="#" class="p-3">마이페이지</a>
                 </li>
                 <li>
                     <a th:if = "${session.UserId != null}" href="#" class="p-3">장바구니</a>

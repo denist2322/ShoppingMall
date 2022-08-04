@@ -1,5 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Form.JoinForm;
 import com.mysite.shoppingMall.Form.LoginForm;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Service.MailService;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,7 +43,7 @@ public class UserController {
 
         IsLogined isLogined = Ut.isLogined(session);
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "user/login.html";
         }
 
@@ -57,9 +59,9 @@ public class UserController {
             return "user/login.html";
         }
 
-        if(user.getUserEmail().equals("admin@test.com")){
-            if(user.getUserPassword().equals(loginForm.getPassword())){
-                model.addAttribute("msg", String.format("%s님 환영합니다.",user.getName()));
+        if (user.getUserEmail().equals("admin@test.com")) {
+            if (user.getUserPassword().equals(loginForm.getPassword())) {
+                model.addAttribute("msg", String.format("%s님 환영합니다.", user.getName()));
                 model.addAttribute("replaceUri", "/");
                 userService.setSession(session, user);
                 return "common/js";
@@ -75,7 +77,7 @@ public class UserController {
 
         userService.setSession(session, user);
 
-        model.addAttribute("msg", String.format("%s님 환영합니다.",user.getName()));
+        model.addAttribute("msg", String.format("%s님 환영합니다.", user.getName()));
         model.addAttribute("replaceUri", "/");
         return "common/js";
 
@@ -102,58 +104,49 @@ public class UserController {
 
     // === 회원가입 ===
     @RequestMapping("/join")
-    public String showJoin(MailDto mailDto) {
+    public String showJoin(MailDto mailDto, JoinForm joinForm) {
         return "user/join.html";
     }
-    @PostMapping("/dojoin")
-    @ResponseBody
-    public String doJoin(String userEmail, String userPassword, String name, String cellphone, Integer birthday, String homeAddress ) {
-        if (Ut.empty(userEmail)) {
-            return "이메일을 입력하세요.";
+
+    @PostMapping("/doJoin")
+    public String doJoin(MailDto mailDto, @Valid JoinForm joinForm, BindingResult bindingResult, Model model) {
+        if(!mailDto.getSuccess().equals("Success")){
+            bindingResult.reject("", "이메일 인증이 필요합니다.");
+            return "user/join.html";
         }
 
-        if (Ut.empty(userPassword)) {
-            return "비밀번호를 입력하세요.";
+        if (bindingResult.hasErrors()) {
+            return "user/join.html";
         }
 
-        if (Ut.empty(name)) {
-            return "닉네임을 입력하세요.";
+        if (joinForm.getAddress1().trim().length() == 0 || joinForm.getAddress2().trim().length() == 0 || joinForm.getAddress3().trim().length() == 0 || joinForm.getAddress4().trim().length() == 0){
+            bindingResult.reject("", "주소를 입력해주세요.");
+            return "user/join.html";
         }
 
-        if (Ut.empty(cellphone)) {
-            return "전화번호를 입력하세요.";
+        if (!joinForm.getPassword1().equals(joinForm.getPassword2())){
+            bindingResult.reject("", "비밀번호가 맞지 않습니다.");
+            return "user/join.html";
         }
 
-        if (userRepository.existsByuserEmail(userEmail)) {
-            return "이메일이 이미 존재합니다.";
-        }
+        userService.create(joinForm);
 
-        if (userRepository.existsByname(name)) {
-            return "이름이 존재합니다.";
-        }
 
-        if (userRepository.existsBycellphone(cellphone)) {
-            return "이미 사용중인 전화번호입니다.";
-        }
-
-        MallUser user = new MallUser();
-        user.setUserEmail(userEmail);
-//        user.setUserPassword(passwordEncoder.encode(userPassword));
-        user.setName(name);
-        user.setCellphone(cellphone);
-        user.setBirthday(birthday);
-        user.setHomeAddress(homeAddress);
-        user.setRegDate(LocalDateTime.now());
-        user.setUpdateDate(LocalDateTime.now());
-        userRepository.save(user);
-
-        return "회원가입이 완료되었습니다.";
+        model.addAttribute("msg", "회원가입이 완료되었습니다.");
+        model.addAttribute("replaceUri", "/");
+        return "common/js";
     }
 
     // === 회원정보 수정 ===
-    @RequestMapping("/doModify")
+    @GetMapping("/myPage")
+    public String myPage(HttpSession session){
+        MallUser mallUser = userService.getUser(session);
+        return "user/myPage.html";
+    }
+
+    @PostMapping("/myPage")
     @ResponseBody
-    public String doModify(Integer id, String userEmail, String userPassword, String name, String cellphone) {
+    public String myPage(Integer id, String userEmail, String userPassword, String name, String cellphone) {
         if (id == null) {
             return "id를 입력해주세요.";
         }
