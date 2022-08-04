@@ -109,7 +109,7 @@ public class UserController {
 
     @PostMapping("/doJoin")
     public String doJoin(MailDto mailDto, @Valid JoinForm joinForm, BindingResult bindingResult, Model model) {
-        if(!mailDto.getSuccess().equals("Success")){
+        if (!mailDto.getSuccess().equals("Success")) {
             bindingResult.reject("", "이메일 인증이 필요합니다.");
             return "user/join.html";
         }
@@ -118,12 +118,12 @@ public class UserController {
             return "user/join.html";
         }
 
-        if (joinForm.getAddress1().trim().length() == 0 || joinForm.getAddress2().trim().length() == 0 || joinForm.getAddress3().trim().length() == 0 || joinForm.getAddress4().trim().length() == 0){
+        if (joinForm.getAddress1().trim().length() == 0 || joinForm.getAddress2().trim().length() == 0 || joinForm.getAddress3().trim().length() == 0 || joinForm.getAddress4().trim().length() == 0) {
             bindingResult.reject("", "주소를 입력해주세요.");
             return "user/join.html";
         }
 
-        if (!joinForm.getPassword1().equals(joinForm.getPassword2())){
+        if (!joinForm.getPassword1().equals(joinForm.getPassword2())) {
             bindingResult.reject("", "비밀번호가 맞지 않습니다.");
             return "user/join.html";
         }
@@ -138,24 +138,20 @@ public class UserController {
 
     // === 회원정보 수정 ===
     @GetMapping("/myPage")
-    public String myPage(JoinForm joinForm, HttpSession session, Model model){
+    public String myPage(JoinForm joinForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
         String[] addressTmp = mallUser.getHomeAddress().split("\\*\\*");
-
-        joinForm.setEmail2(mallUser.getUserEmail());
-        joinForm.setName2(mallUser.getName());
-        joinForm.setBirthday2(mallUser.getBirthday());
-        joinForm.setCellphone2(mallUser.getCellphone());
         joinForm.setAddress1(addressTmp[3].trim());
         joinForm.setAddress2(addressTmp[0].trim());
         joinForm.setAddress3(addressTmp[1].trim());
         joinForm.setAddress4(addressTmp[2].trim());
+        model.addAttribute("mallUser", mallUser);
         return "user/myPage.html";
     }
 
-    @PostMapping("/myPages")
-    public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult,Model model) {
-        if(bindingResult.hasErrors()){
+    @PostMapping("/myPage")
+    public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             return "user/myPage.html";
         }
 
