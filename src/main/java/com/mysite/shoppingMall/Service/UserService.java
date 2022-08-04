@@ -57,14 +57,25 @@ public class UserService {
         MallUser user = new MallUser();
         user.setUserEmail(joinForm.getEmail2());
         user.setUserPassword(passwordEncoder.encode(joinForm.getPassword2()));
-        user.setName(joinForm.getName());
-        user.setCellphone(joinForm.getCellphone());
-        user.setBirthday(joinForm.getBirthday());
-        String fullAddress = joinForm.getAddress2() + " " + joinForm.getAddress3() + joinForm.getAddress4() + joinForm.getAddress1() ;
+        user.setName(joinForm.getName2());
+        user.setCellphone(joinForm.getCellphone2());
+        user.setBirthday(joinForm.getBirthday2());
+        String fullAddress = joinForm.getAddress2() + "**" + joinForm.getAddress3() + "**" + joinForm.getAddress4() + "**" + joinForm.getAddress1() ;
         user.setHomeAddress(fullAddress);
         user.setRegDate(LocalDateTime.now());
         user.setUpdateDate(LocalDateTime.now());
         userRepository.save(user);
     }
 
+    public void modifyUser(JoinForm joinForm) {
+        Optional<MallUser> opMallUser = userRepository.findByuserEmail(joinForm.getEmail2());
+        MallUser user = opMallUser.get();
+        user.setUserPassword(passwordEncoder.encode(joinForm.getPassword2()));
+        user.setCellphone(joinForm.getCellphone2());
+        user.setName(joinForm.getName2());
+        user.setUpdateDate(LocalDateTime.now());
+        String fullAddress = joinForm.getAddress2() + "**" + joinForm.getAddress3() + "**" + joinForm.getAddress4() + "**" + joinForm.getAddress1() ;
+        user.setHomeAddress(fullAddress);
+        userRepository.save(user);
+    }
 }

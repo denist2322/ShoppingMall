@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
@@ -139,57 +138,33 @@ public class UserController {
 
     // === 회원정보 수정 ===
     @GetMapping("/myPage")
-    public String myPage(HttpSession session){
+    public String myPage(JoinForm joinForm, HttpSession session, Model model){
         MallUser mallUser = userService.getUser(session);
+        String[] addressTmp = mallUser.getHomeAddress().split("\\*\\*");
+
+        joinForm.setEmail2(mallUser.getUserEmail());
+        joinForm.setName2(mallUser.getName());
+        joinForm.setBirthday2(mallUser.getBirthday());
+        joinForm.setCellphone2(mallUser.getCellphone());
+        joinForm.setAddress1(addressTmp[3].trim());
+        joinForm.setAddress2(addressTmp[0].trim());
+        joinForm.setAddress3(addressTmp[1].trim());
+        joinForm.setAddress4(addressTmp[2].trim());
         return "user/myPage.html";
     }
 
-    @PostMapping("/myPage")
-    @ResponseBody
-    public String myPage(Integer id, String userEmail, String userPassword, String name, String cellphone) {
-        if (id == null) {
-            return "id를 입력해주세요.";
+    @PostMapping("/myPages")
+    public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult,Model model) {
+        if(bindingResult.hasErrors()){
+            return "user/myPage.html";
         }
 
-        if (Ut.empty(userEmail)) {
-            return "수정할 이메일을 입력하세요.";
-        }
+        userService.modifyUser(joinForm);
 
-        if (Ut.empty(userPassword)) {
-            return "수정할 비밀번호를 입력하세요.";
-        }
 
-        if (Ut.empty(name)) {
-            return "수정할 닉네임을 입력하세요.";
-        }
-
-        if (Ut.empty(cellphone)) {
-            return "수정할 전화번호를 입력하세요.";
-        }
-
-        if (userRepository.existsByuserEmail(userEmail)) {
-            return "이메일이 이미 존재합니다.";
-        }
-
-        if (userRepository.existsByname(name)) {
-            return "이미 사용중인 닉네임입니다.";
-        }
-
-        if (userRepository.existsBycellphone(cellphone)) {
-            return "이미 사용중인 전화번호입니다.";
-        }
-
-        Optional<MallUser> opMallUser = userRepository.findById(id);
-        MallUser user = opMallUser.get();
-
-        user.setUserEmail(userEmail);
-//        user.setUserPassword(passwordEncoder.encode(userPassword));
-        user.setCellphone(cellphone);
-        user.setName(name);
-        user.setUpdateDate(LocalDateTime.now());
-        userRepository.save(user);
-
-        return "회원정보 수정이 완료되었습니다.";
+        model.addAttribute("msg", "회원정보가 수정되었습니다.");
+        model.addAttribute("replaceUri", "/user/myPage");
+        return "common/js";
     }
 
     // === 회원 탈퇴 ===

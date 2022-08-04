@@ -30,7 +30,7 @@
                     <a th:if = "${session.UserId == null}" th:href="@{|/user/join|}" class="p-3">회원가입</a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" href="#" class="p-3">마이페이지</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{|/user/myPage|}" class="p-3">마이페이지</a>
                 </li>
                 <li>
                     <a th:if = "${session.UserId != null}" href="#" class="p-3">장바구니</a>
