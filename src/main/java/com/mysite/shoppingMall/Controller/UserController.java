@@ -32,7 +32,8 @@ public class UserController {
     private final UserService userService;
 
     @RequestMapping("/login")
-    public String showLogin(LoginForm loginForm) {
+    public String showLogin(LoginForm loginForm, Model model) {
+        model.addAttribute("Red", "text-red-500");
         return "user/login.html";
     }
 
@@ -147,6 +148,7 @@ public class UserController {
         joinForm.setAddress4(addressTmp[2].trim());
         model.addAttribute("mallUser", mallUser);
         return "user/myPage.html";
+
     }
 
     @PostMapping("/myPage")

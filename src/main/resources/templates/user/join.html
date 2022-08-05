@@ -7,18 +7,21 @@
 </head>
 
 <main layout:fragment="main">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <body>
+
     <section class="h-screen flex justify-center">
 
-        <div class="container px-6 py-12 h-full">
-            <div class="flex justify-center items-center flex-wrap h-full text-gray-800">
-                <div th:if="${mailDto.success == 'Success'}">인증이 완료되었습니다.</div>
-                <div th:if="${mailDto.fail == 'Fail'}">인증이 실패했습니다.</div>
-                <div class=" flex">
-                    <form th:action="@{|/mail|}" method="post" class="w-full -mb-16">
+        <div class="container px-6 py-12 h-full w-full" th:object="${joinForm}">
+
+            <div class="flex justify-center w-full items-center flex-wrap h-full text-gray-800">
+                <div class="flex justify-center items-center text-red-500 pb-3 box-border">
+                    <div th:replace="/common/errorForm :: formErrorsFragment"></div>
+                    <div th:if="${mailDto.success == 'Success'}">인증이 완료되었습니다.</div>
+                    <div th:if="${mailDto.fail == 'Fail'}">인증이 실패했습니다.</div>
+                </div>
+                <div class="flex w-full mb-6">
+                    <form th:action="@{|/mail|}" method="post" class="flex w-full">
                         <!-- userId input -->
-                        <div class=" flex">
+                        <div class="flex w-full">
                             <input
                                     th:if="${mailDto.email == null}"
                                     type="email"
@@ -42,20 +45,19 @@
                                     data-mdb-ripple-color="light"
                                     value="인증번호 발송"
                             />
-
                         </div>
                     </form>
-                    <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post" class="w-full -mb-16">
-                        <input type="hidden" name="email" th:value="${mailDto.email}">
+
+                    <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post" class="flex w-2/5 box-border">
+                        <input type="hidden" name="email" th:value="${mailDto.email}" class="w-full">
                         <input
                                 type="submit"
-                                class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                class="flex justify-center w-full ml-1 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
-                                value="재발송"
+                                value="재전송"
                         >
                     </form>
-
                 </div>
 
                 <form th:if="${mailDto.success != 'Success'}" th:action="@{|/confirm|}" method="post" class="w-full">
@@ -103,7 +105,7 @@
                     <div class="mb-6 flex">
                         <input
                                 type="text"
-                                name="name2"
+                                name="name"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="이름"
                         />
@@ -127,17 +129,16 @@
 
                     <div class="mb-6 flex">
                         <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" name="address4" id="sample6_extraAddress" placeholder="동" readonly/>
+                               type="text" name="address3" id="sample6_detailAddress" placeholder="상세주소" readonly/>
 
                         <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" name="address3" id="sample6_detailAddress" placeholder="상세주소" />
-
+                               type="text" name="address4" id="sample6_extraAddress" placeholder="참고항목" readonly/>
                     </div>
 
                     <div class="mb-6 flex">
                         <input
                                 type="text"
-                                name="birthday2"
+                                name="birthday"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="생년월일 앞6자리"
                         />
@@ -146,7 +147,7 @@
                     <div class="mb-6 flex">
                         <input
                                 type="text"
-                                name="cellphone2"
+                                name="cellphone"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="핸드폰 번호"
                         />
@@ -219,19 +220,10 @@
                         >
                             가입하기
                         </button>
-                        <button
-                                type="submit"
-                                class="flex w-2/1 justify-center items-center h-11 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                                data-mdb-ripple="true"
-                                data-mdb-ripple-color="light"
-                        >
-                            취소
-                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-    </body>
 </main>
 </html>

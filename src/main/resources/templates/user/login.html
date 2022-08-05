@@ -20,16 +20,13 @@
         >
             <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                 <form th:action="@{|/user/doLogin|}" th:object="${loginForm}" method="POST">
-                    <div role="alert"  th:if="${#fields.hasAnyErrors()}">
-                        <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-                    </div>
+                    <div th:replace="/common/errorForm :: formErrorsFragment"></div>
                     <!-- Email input -->
                     <div class="mb-6">
                         <input
                                 type="email"
                                 name="email"
                                 class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="exampleFormControlInput2"
                                 placeholder="Email address"
                                 th:value="${loginForm.email}"
                         />
@@ -41,7 +38,6 @@
                                 type="password"
                                 name="password"
                                 class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="exampleFormControlInput2"
                                 placeholder="Password"
                         />
                     </div>
@@ -57,7 +53,7 @@
                             >ID 저장</label
                             >
                         </div>
-                        <a href="#!" class="text-gray-800">비밀번호를 잊어버리셨나요?</a>
+                        <a href="#!" th:class="'text-xl ' + ${Red}">비밀번호를 잊어버리셨나요?</a>
                     </div>
 
                     <div class="text-center lg:text-left">
