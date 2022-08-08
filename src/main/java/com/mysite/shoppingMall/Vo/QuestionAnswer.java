@@ -3,10 +3,7 @@ package com.mysite.shoppingMall.Vo;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,4 +16,7 @@ public class QuestionAnswer {
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
     private String body;
+
+    @ManyToOne
+    private Question question;
 }
