@@ -95,4 +95,21 @@ public class ProductController {
 //        return "%d번 게시물을 삭제했습니다.".formatted(id);
 //    }
 
+    @RequestMapping("/buy") // 단건조회
+    public String productBuy(Long id, Model model){
+        Product product = productService.findProduct(id);
+        int discountPrice = (int)(product.getPrice() * (1 - (double)product.getDiscount() / 100));
+        model.addAttribute("product", product);
+        model.addAttribute("discountPrice", discountPrice);
+        return "product/productDetail.html";
+    }
+
 }
+
+/*
+session.loginUserId
+List<Question> questionList = questionRepository.findBy
+
+
+
+*/

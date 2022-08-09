@@ -41,50 +41,61 @@ INSERT INTO mall_user SET
 CREATE TABLE product(
  id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
  reg_date DATETIME NOT NULL,
- update_date DATETIME NOT NULL,
  title VARCHAR(50) NOT NULL,
- `body` TEXT NOT NULL
+ `body` TEXT NOT NULL,
+ main_image TEXT,
+ price INT UNSIGNED NOT NULL,
+ discount INT UNSIGNED NOT NULL
 );
 
 INSERT INTO product SET
  reg_date = NOW(),
- update_date  = NOW(),
- title = "품목1",
- `body` = "품목1";
+ title = "더스티 오픈숄더 크롭 티셔츠",
+ `body` = "평균 2~3일내로 발송됩니다.",
+ main_image = "더스티 오프숄더 크롭 티셔츠 메인 이미지.jpg",
+ price = 25000,
+ discount = 30;
 
-INSERT INTO product SET
- reg_date = NOW(),
- update_date  = NOW(),
- title = "품목2",
- `body` = "품목2";
+ CREATE TABLE product_image(
+   id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   images TEXT,
+   product_id INT(100) UNSIGNED NOT NULL
+ );
 
- SELECT * FROM product;
+INSERT INTO product_image SET
+images = "더스티 오프숄더 크롭 티셔츠 상세 이미지1.jpg",
+product_id = 1;
+
+INSERT INTO product_image SET
+images = "더스티 오프숄더 크롭 티셔츠 상세 이미지2.jpg",
+product_id = 1;
+
+INSERT INTO product_image SET
+images = "더스티 오프숄더 크롭 티셔츠 상세 이미지3.jpg",
+product_id = 1;
+
+INSERT INTO product_image SET
+images = "더스티 오프숄더 크롭 티셔츠 상세 이미지4.jpg",
+product_id = 1;
+
+INSERT INTO product_image SET
+images = "더스티 오프숄더 크롭 티셔츠 상세 이미지5.jpg",
+product_id = 1;
+
+SELECT * FROM product;
+SELECT * FROM product_image;
 
 CREATE TABLE question_answer(
 id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 reg_date DATETIME NOT NULL,
 update_date DATETIME NOT NULL,
-`body` TEXT NOT NULL,
-question_id INT UNSIGNED NOT NULL
+`body` TEXT NOT NULL
 );
 
 INSERT INTO question_answer SET
  reg_date = NOW(),
  update_date  = NOW(),
- `body` = "환불 안해줄꺼야",
- question_id=1;
-
- INSERT INTO question_answer SET
- reg_date = NOW(),
- update_date  = NOW(),
- `body` = "환불 안해줄꺼야",
- question_id=2;
-
- INSERT INTO question_answer SET
- reg_date = NOW(),
- update_date  = NOW(),
- `body` = "환불 안해줄꺼야",
- question_id=3;
+ `body` = "환불 안해줄꺼야";
 
 SELECT * FROM question_answer;
 
@@ -92,32 +103,28 @@ CREATE TABLE Question (
     id INT(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `subject` VARCHAR(200) NOT NULL,
     content TEXT NOT NULL,
-    create_date DATETIME NOT NULL,
-    mall_user_id INT UNSIGNED NOT NULL
+    create_date DATETIME NOT NULL
 );
 
 INSERT INTO Question SET
 create_date = NOW(),
 `subject` = '질문 1',
-content = '주문 내역은 어디서 확인하나요 ?',
-mall_user_id = 2;
+content = '주문 내역은 어디서 확인하나요 ?';
 
 INSERT INTO Question SET
 create_date = NOW(),
 `subject` = '질문 2',
-content = '환불 기간은 어떻게 되나요 ?',
-mall_user_id = 2;
+content = '환불 기간은 어떻게 되나요 ?';
 
 INSERT INTO Question SET
 create_date = NOW(),
 `subject` = '질문 3',
-content = '교환 신청은 어떻게 하나요 ?',
-mall_user_id = 2;
+content = '교환 신청은 어떻게 하나요 ?';
 
 INSERT INTO Question SET
 create_date = NOW(),
 `subject` = '질문 4',
-content = '교환 발송은 언제 되나요 ?',
-mall_user_id = 2;
+content = '교환 발송은 언제 되나요 ?';
 
-SELECT * FROM Question;
+`create_date`
+SELECT * FROM question WHERE
