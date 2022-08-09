@@ -1,11 +1,20 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Service.ProductService;
+import com.mysite.shoppingMall.Service.UserService;
+import com.mysite.shoppingMall.Ut.Ut;
+import com.mysite.shoppingMall.Vo.IsLogined;
 import com.mysite.shoppingMall.Vo.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -13,7 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
 
     private final ProductService productService;
-    
+    private final UserService userService;
+
     //C 생성 ==============================================
 //    @RequestMapping("/doWrite")
 //    @ResponseBody
@@ -45,9 +55,9 @@ public class ProductController {
 //    }
 
     @RequestMapping("/detail") // 단건조회
-    public String showDetail(Long id, Model model){
+    public String showDetail(Long id, ProductBuyForm productBuyForm, Model model) {
         Product product = productService.findProduct(id);
-        int discountPrice = (int)(product.getPrice() * (1 - (double)product.getDiscount() / 100));
+        int discountPrice = (int) (product.getPrice() * (1 - (double) product.getDiscount() / 100));
         model.addAttribute("product", product);
         model.addAttribute("discountPrice", discountPrice);
         return "product/productDetail.html";
@@ -95,13 +105,30 @@ public class ProductController {
 //        return "%d번 게시물을 삭제했습니다.".formatted(id);
 //    }
 
-    @RequestMapping("/buy") // 단건조회
-    public String productBuy(Long id, Model model){
-        Product product = productService.findProduct(id);
-        int discountPrice = (int)(product.getPrice() * (1 - (double)product.getDiscount() / 100));
-        model.addAttribute("product", product);
-        model.addAttribute("discountPrice", discountPrice);
-        return "product/productDetail.html";
+    //post 방식을 써야 ? 파라미터를 지울 수 있음.
+    @GetMapping("/orderSheetTmp")
+    public String orderSheet(ProductBuyForm productBuyForm, BindingResult bindingResult, HttpSession session, Model model) {
+        IsLogined isLogined = Ut.isLogined(session);
+
+        if(isLogined.getLogin() == 0){
+            model.addAttribute("replaceUri", "/user/doLogin");
+            return "common/js";
+        }
+
+        if (productBuyForm.getOrderColor().equals("no") || productBuyForm.getOrderSize().equals("no")) {
+            bindingResult.reject("", "색상 혹은 사이즈를 선택해주세요.");
+            return "redirect:/product/detail?id=" + productBuyForm.getProductId();
+        }
+
+        int OrderNumber = (int)(Math.random()*10000000);
+        productBuyForm.setOrderNumber(OrderNumber);
+
+        return "product/orderTemp.html";
+    }
+
+    @PostMapping("/order")
+    public String order(ProductBuyForm productBuyForm){
+        return "product/order.html";
     }
 
 }

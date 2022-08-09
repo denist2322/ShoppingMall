@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<form name="sendData" th:action="@{|/product/order|}" method="post">
+    <input type="hidden" name="orderImage" th:value = "${productBuyForm.orderImage}">
+    <input type="hidden" name="orderTitle" th:value = "${productBuyForm.orderTitle}">
+    <input type="hidden" name="orderColor" th:value = "${productBuyForm.orderTitle}">
+    <input type="hidden" name="orderSize" th:value = "${productBuyForm.orderSize}">
+    <input type="hidden" name="orderPrice" th:value = "${productBuyForm.orderPrice}">
+    <input type="hidden" name="OrderNumber" th:value = "${productBuyForm.OrderNumber}">
+</form>
+<script layout:fragment="script" type='text/javascript'>
+    document.sendData.submit();
+</script>
+</body>
+</html>

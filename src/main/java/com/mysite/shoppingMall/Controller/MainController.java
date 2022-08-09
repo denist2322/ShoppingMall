@@ -1,7 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Repository.ProductRepository;
-import com.mysite.shoppingMall.Vo.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +23,7 @@ public class MainController {
 
     @RequestMapping("/test")
     public String showTest(Model model) {
-        Product product = productRepository.findById(1L).get();
-        int discountPrice = (int)(product.getPrice() * (product.getDiscount() / 100));
-        model.addAttribute("product", product);
-        model.addAttribute("discountPrice", discountPrice);
-        return "product/productDetail.html";
+        return "product/order.html";
     }
 
 }
