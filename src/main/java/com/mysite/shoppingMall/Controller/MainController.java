@@ -1,18 +1,16 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Repository.QuestionRepository;
-import com.mysite.shoppingMall.Vo.Question;
+import com.mysite.shoppingMall.Repository.ProductRepository;
+import com.mysite.shoppingMall.Vo.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Controller
 public class MainController {
     @Autowired
-    private QuestionRepository questionRepository;
+    private ProductRepository productRepository;
 
     @RequestMapping("/main")
     public String showMain() {
@@ -25,9 +23,10 @@ public class MainController {
     }
 
     @RequestMapping("/test")
-    @ResponseBody
-    public List<Question> showTest() {
-        return questionRepository.findAll();
+    public String showTest(Model model) {
+        Product product = productRepository.findById(1L).get();
+        model.addAttribute("product", product);
+        return "product/productDetail.html";
     }
 
 }
