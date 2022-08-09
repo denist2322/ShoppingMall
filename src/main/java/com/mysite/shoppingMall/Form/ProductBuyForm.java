@@ -12,5 +12,7 @@ public class ProductBuyForm {
     private String orderColor;
     private String orderSize;
     private String orderPrice;
-    private int OrderNumber;
+    private int orderNumber;
+    private String orderEmail1;
+    private String orderEmail2;
 }

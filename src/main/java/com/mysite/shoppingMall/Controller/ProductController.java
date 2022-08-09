@@ -5,6 +5,7 @@ import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Vo.IsLogined;
+import com.mysite.shoppingMall.Vo.MallUser;
 import com.mysite.shoppingMall.Vo.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final UserService userService;
+
 
     //C 생성 ==============================================
 //    @RequestMapping("/doWrite")
@@ -111,8 +113,7 @@ public class ProductController {
         IsLogined isLogined = Ut.isLogined(session);
 
         if(isLogined.getLogin() == 0){
-            model.addAttribute("replaceUri", "/user/doLogin");
-            return "common/js";
+            return "redirect:/user/login";
         }
 
         if (productBuyForm.getOrderColor().equals("no") || productBuyForm.getOrderSize().equals("no")) {
@@ -120,14 +121,21 @@ public class ProductController {
             return "redirect:/product/detail?id=" + productBuyForm.getProductId();
         }
 
-        int OrderNumber = (int)(Math.random()*10000000);
-        productBuyForm.setOrderNumber(OrderNumber);
+        int orderNumber = (int)(Math.random()*10000000);
+        productBuyForm.setOrderNumber(orderNumber);
 
         return "product/orderTemp.html";
     }
 
     @PostMapping("/order")
-    public String order(ProductBuyForm productBuyForm){
+    public String order(ProductBuyForm productBuyForm, HttpSession session, Model model){
+        MallUser mallUser = userService.getUser(session);
+        String[] emailTemp = mallUser.getUserEmail().split("\\@");
+        productBuyForm.setOrderEmail1(emailTemp[0]);
+        productBuyForm.setOrderEmail2(emailTemp[1]);
+
+        model.addAttribute("mallUser", mallUser);
+
         return "product/order.html";
     }
 
