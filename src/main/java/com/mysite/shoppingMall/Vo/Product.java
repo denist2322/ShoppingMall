@@ -19,6 +19,7 @@ public class Product {
     private String body;
     private String mainImage;
     private Long price;
+    private Long discount;
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<ProductImage> productImageList;
 }

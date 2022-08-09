@@ -20,15 +20,15 @@
                 </div>
                 <div class="flex justify-between mt-2">
                     <div class="box-border">
-                        <span class="items-center mr-2 text-2xl font-bold text-red-500">할인률</span>
-                        <span class="mr-2 text-2xl font-bold">[[${product.price}]]</span>
-                        <span class="text-lg text-gray-500 line-through">할인가격</span>
+                        <span class="items-center mr-2 text-2xl font-bold text-red-500">[[${product.discount}]]%</span>
+                        <span class="mr-2 text-2xl font-bold">[[${discountPrice}]]</span>
+                        <span class="text-lg text-gray-500 line-through">[[${product.price}]]</span>
                     </div>
                 </div>
                 <div class="box-border h-20 px-4 mt-3 border border-gray-400">
                     <div class="flex items-center justify-between h-full">
                         <span class="text-xl font-bold">최종 예상 구매가</span>
-                        <span class="text-xl text-red-300">할인가격</span>
+                        <span class="text-xl text-red-300">[[${discountPrice}]]</span>
                     </div>
                 </div>
 

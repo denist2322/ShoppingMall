@@ -47,7 +47,9 @@ public class ProductController {
     @RequestMapping("/detail") // 단건조회
     public String showDetail(Long id, Model model){
         Product product = productService.findProduct(id);
-        model.addAttribute("product",product);
+        int discountPrice = (int)(product.getPrice() * (1 - (double)product.getDiscount() / 100));
+        model.addAttribute("product", product);
+        model.addAttribute("discountPrice", discountPrice);
         return "product/productDetail.html";
     }
 
