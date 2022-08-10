@@ -8,9 +8,9 @@
 
 <main layout:fragment="main">
 
-    <section class="h-screen flex justify-center">
+    <section class="flex justify-center">
 
-        <div class="container px-6 py-12 h-full w-full" th:object="${joinForm}">
+        <div class="con px-6 py-12" th:object="${joinForm}">
 
             <div class="flex justify-center w-full items-center flex-wrap h-full text-gray-800">
                 <div class="flex justify-center items-center text-red-500 pb-3 box-border">
@@ -129,7 +129,7 @@
 
                     <div class="mb-6 flex">
                         <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" name="address3" id="sample6_detailAddress" placeholder="상세주소" readonly/>
+                               type="text" name="address3" id="sample6_detailAddress" placeholder="상세주소"/>
 
                         <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                type="text" name="address4" id="sample6_extraAddress" placeholder="참고항목" readonly/>

@@ -3,7 +3,6 @@ package com.mysite.shoppingMall.Controller;
 import com.mysite.shoppingMall.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,9 +20,9 @@ public class MainController {
         return "redirect:/main";
     }
 
-    @RequestMapping("/test")
-    public String showTest(Model model) {
-        return "product/order.html";
-    }
+//    @RequestMapping("/test")
+//    public String showTest(Model model) {
+//        return "product/order.html";
+//    }
 
 }
