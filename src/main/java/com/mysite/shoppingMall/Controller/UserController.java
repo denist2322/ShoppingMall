@@ -2,12 +2,12 @@ package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Form.JoinForm;
 import com.mysite.shoppingMall.Form.LoginForm;
+import com.mysite.shoppingMall.Form.MailDto;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Service.MailService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Vo.IsLogined;
-import com.mysite.shoppingMall.Form.MailDto;
 import com.mysite.shoppingMall.Vo.MallUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,11 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -166,32 +164,50 @@ public class UserController {
     }
 
     // === 회원 탈퇴 ===
-    @RequestMapping("/doDelete")
-    @ResponseBody
-    public String doDelete(String userEmail, String userPassword, HttpSession session) {
-        if (Ut.empty(userEmail)) {
-            return "이메일을 입력해주세요.";
-        }
-
-        if (Ut.empty(userPassword)) {
-            return "비밀번호를 입력해주세요.";
-        }
-
-        Optional<MallUser> opUser = userRepository.findByuserEmail(userEmail);
-        MallUser user = opUser.orElse(null);
-
-        if (user == null) {
-            return "회원이 존재하지 않습니다.";
-        }
-
-//        if (!passwordEncoder.matches(userPassword, user.getUserPassword())) {
-//            return "비밀번호를 확인해주세요";
+//    @RequestMapping("/doDelete")
+//    @ResponseBody
+//    public String doDelete(String userEmail, String userPassword, HttpSession session) {
+//        if (Ut.empty(userEmail)) {
+//            return "이메일을 입력해주세요.";
 //        }
+//
+//        if (Ut.empty(userPassword)) {
+//            return "비밀번호를 입력해주세요.";
+//        }
+//
+//        Optional<MallUser> opUser = userRepository.findByuserEmail(userEmail);
+//        MallUser user = opUser.orElse(null);
+//
+//        if (user == null) {
+//            return "회원이 존재하지 않습니다.";
+//        }
+//
+////        if (!passwordEncoder.matches(userPassword, user.getUserPassword())) {
+////            return "비밀번호를 확인해주세요";
+////        }
+//
+//        userRepository.delete(user);
+//        session.removeAttribute("UserId");
+//
+//        return "탈퇴가 처리 완료되었습니다.";
+//    }
 
-        userRepository.delete(user);
-        session.removeAttribute("UserId");
+    // == 장바구니 ==
+    @RequestMapping("/shoppingCart")
+    public String shoppingCart(){
+        return "pages/shoppingCart.html";
+    }
 
-        return "탈퇴가 처리 완료되었습니다.";
+    // == 이메일 찾기 ==
+    @RequestMapping("/findEmail")
+    public String findEmail(){
+        return "user/findEmail.html";
+    }
+
+    // == 비밀번호 찾기 ==
+    @RequestMapping("/findPw")
+    public String findPw(){
+        return "user/findPw.html";
     }
 
 }

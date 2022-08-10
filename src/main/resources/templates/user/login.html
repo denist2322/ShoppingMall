@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <!-- 테일윈드 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css">
 <!-- 폰트어썸 불러오기 -->
@@ -44,9 +44,9 @@
 
                     <div class="flex justify-between items-center mb-6">
                         <div class="form-group form-check">
-                            <a href="#!" th:class="'text-lg ' + ${Red}">이메일 찾기</a>
+                            <a th:href="@{|/user/findEmail|}">이메일 찾기</a>
                         </div>
-                        <a href="#!" th:class="'text-lg ' + ${Red}">비밀번호 찾기</a>
+                        <a th:href="@{|/user/findPw|}">비밀번호 찾기</a>
                     </div>
 
                     <div class="text-right">

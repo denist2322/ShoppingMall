@@ -22,7 +22,7 @@ public class MainController {
 
     @RequestMapping("/test")
     public String showTest() {
-        return "product/productList.html";
+        return "pages/shoppingCart.html";
     }
 
 }

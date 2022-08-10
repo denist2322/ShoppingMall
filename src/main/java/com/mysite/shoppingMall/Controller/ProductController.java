@@ -56,7 +56,7 @@ public class ProductController {
     public String showList(String category, Model model) {
         List<Product> productList = productService.findCategory(category);
         model.addAttribute("productList",productList);
-        return "product/productList.html";
+        return "pages/productList.html";
     }
 
     @RequestMapping("/detail") // 단건조회

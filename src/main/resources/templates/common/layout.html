@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css" type="text/css"/>
 <head>
     <meta charset="UTF-8">
     <!--    <div th:replace="common/darkMod :: darkFragment"></div>-->
@@ -34,7 +35,7 @@
                     <a th:if = "${session.UserId != null}" th:href="@{/user/myPage}" class="p-3 text-xl">마이페이지</a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" href="#" class="p-3 text-xl">장바구니</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{|/user/shoppingCart|}" class="p-3 text-xl">장바구니</a>
                 </li>
                 <li>
                     <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3 text-xl">장바구니</a>

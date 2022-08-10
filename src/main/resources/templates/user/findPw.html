@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 테일윈드 불러오기 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css">
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<!-- 데이지UI 불러오기 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.22.0/dist/full.css" type="text/css"/>
+<link rel="stylesheet" href="/common/common.css">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 찾기</title>
+</head>
+<body>
+<div class="flex w-full h-screen">
+    <div class="flex w-96 mx-auto justify-center flex-col">
+        <div class="text-2xl w-full font-bold mt-5 mb-2 text-center">비밀번호 재설정</div>
+        <div class="w-full text-center">
+            <div class="text-xl">회원님의 아이디 입니다.</div>
+            <strong class="text-xl">아이디정보</strong>
+        </div>
+
+        <div class="text-center mt-10">
+            <strong class="w-full text-lg">새로운 비밀번호를 입력해주세요.</strong>
+        </div>
+        <center>
+            <ul class="float-center">
+                <li class="mt-1">
+                    <input type="password" placeholder="새 비밀번호" class="mt-2 input input-bordered w-full">
+                </li>
+                <li>
+                    <input type="password" placeholder="새 비밀번호 확인" class="mt-2 input input-bordered w-full">
+                </li>
+            </ul>
+        </center>
+        <div class="mt-5 flex w-full h-auto justify-center">
+            <button type="button"
+                    class="w-full mr-1 py-3 bg-black text-white font-medium text-sm rounded box-border btn">
+                확인
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
