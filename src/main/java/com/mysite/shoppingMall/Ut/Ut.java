@@ -35,4 +35,35 @@ public class Ut {
         result.setUserId(0);
         return result;
     }
+
+    public static String[] splitEmail(String email){
+        if(email.indexOf("@") == -1){
+            return null;
+        }
+
+        String[] EmailTemp = email.split("\\@");
+
+        return EmailTemp;
+    }
+
+    public static String[] splitAddress(String address){
+        if(address.indexOf("**") == -1){
+            return null;
+        }
+
+        String[] AddressTemp = address.split("\\*\\*");
+
+        return AddressTemp;
+    }
+
+    public static String[] splitCellPhone(String phone){
+        if(phone.indexOf("-") == -1){
+            return null;
+        }
+
+        String[] phoneTemp = phone.split("\\-");
+
+        return phoneTemp;
+    }
+
 }

@@ -26,7 +26,8 @@
                     </dl>
                     <dl class="table-row overflow-visible">
                         <dd class="table-cell w-1/7 p-3 border-t border-b">
-                            <img th:src="'/product_image/'+${productBuyForm.orderTitle}+'/'+${productBuyForm.orderImage}" alt="없음" class="product_img">
+                            <img th:src="'/product_image/'+${productBuyForm.orderTitle}+'/'+${productBuyForm.orderImage}"
+                                 alt="없음" class="product_img">
                         </dd>
                         <dd class="table-cell p-3 align-middle border-t border-b">
                             <span class="block">[[${productBuyForm.orderTitle}]]</span>
@@ -37,92 +38,120 @@
                     </dl>
                 </div>
 
-                <div class="px-5 py-4 text-right border-b-2 border-black text-gray-400">상품<span class="text-black"> [[${productBuyForm.orderPrice}]]</span>원 + 배송<span class="text-black"> 0</span>원<span class="pl-3 box-border text-black">주문금액 39,500원</span></div>
+                <div class="px-5 py-4 text-right border-b-2 border-black text-gray-400">상품<span class="text-black"> [[${productBuyForm.orderPrice}]]</span>원
+                    + 배송<span class="text-black"> 0</span>원<span class="pl-3 box-border text-black">주문금액 [[${productBuyForm.orderPrice}]]원</span>
+                </div>
 
-                <div class="text-2xl text-right p-5 box-border">총 결제금액 <span class="text-yellow-400">39,500</span><span>원</span></div>
+                <div class="text-2xl text-right p-5 box-border">총 결제금액 <span class="text-yellow-400">[[${productBuyForm.orderPrice}]]</span><span>원</span>
+                </div>
             </div>
         </div>
         <!-- 주문상품 정보 끝 -->
 
         <!-- 주문자 정보 시작 -->
-        <div class="box-border">
-            <h2 class="mt-10 box-border border-b-2 border-black text-xl">주문자 정보</h2>
-            <div class="mb-10 table w-full border-b border-black">
-                <dl class="table-row">
-                    <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">이름</dt>
-                    <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                        <input type="text" name="" class="w-full border-2 mx-1 px-4 py-3 box-border">
-                    </dd>
-                </dl>
-                <dl class="table-row">
-                    <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">휴대폰</dt>
-                    <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                        <input type="text" class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength = '3'> -
-                        <input type="text" class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength = '4'> -
-                        <input type="text" class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength = '4'>
-                    </dd>
-                </dl>
-                <dl class="table-row">
-                    <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">이메일</dt>
-                    <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                        <input type="text" class="w-1/3 border-2 mx-1 px-4 py-3 box-border"> @
-                        <select name="email" class="w-1/3 border-2 mx-1 px-4 py-3 box-border">
-                            <option value="naver">naver.com</option>
-                            <option value="naver">daum.net</option>
-                            <option value="naver">hotmail.com</option>
-                            <option value="naver">nate.com</option>
-                            <option value="naver">gmail.com</option>
-                        </select>
-                    </dd>
-                </dl>
+        <form action="">
+            <input type="hidden" name="orderSheetNumber" th:value="${productBuyForm.orderNumber}">
+            <input type="hidden" name="paymentSuccess" value="success">
+            <div class="box-border">
+                <h2 class="mt-10 box-border border-b-2 border-black text-xl">주문자 정보</h2>
+                <div class="mb-10 table w-full border-b border-black">
+                    <dl class="table-row">
+                        <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">이름</dt>
+                        <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
+                            <input type="text" name="orderSheetName" th:value="${mallUser.name}"
+                                   class="w-full border-2 mx-1 px-4 py-3 box-border"/>
+                        </dd>
+                    </dl>
+                    <dl class="table-row">
+                        <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">휴대폰</dt>
+                        <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
+                            <input type="text" name="orderSheetCellPhone1" th:value="${productBuyForm.orderCellPhone1}"
+                                   class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength='3'> -
+                            <input type="text" name="orderSheetCellPhone2" th:value="${productBuyForm.orderCellPhone2}"
+                                   class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength='4'> -
+                            <input type="text" name="orderSheetCellPhone3" th:value="${productBuyForm.orderCellPhone3}"
+                                   class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength='4'>
+                        </dd>
+                    </dl>
+                    <dl class="table-row">
+                        <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">이메일</dt>
+                        <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
+                            <input type="text" name="orderSheetEmail1" th:value="${productBuyForm.orderEmail1}"
+                                   class="w-1/3 border-2 mx-1 px-4 py-3 box-border"> @
+                            <select name="orderSheetEmail2" th:value="${productBuyForm.orderEmail2}"
+                                    class="w-1/3 border-2 mx-1 px-4 py-3 box-border">
+                                <option value="naver.com">naver.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="hotmail.com">hotmail.com</option>
+                                <option value="nate.com">nate.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                            </select>
+                        </dd>
+                    </dl>
+                </div>
             </div>
-        </div>
-        <!-- 주문자 정보 끝 -->
+            <!-- 주문자 정보 끝 -->
 
-        <!--배송지 정보 시작-->
-        <div class="box-border">
-            <h2 class="mt-10 box-border border-b-2 border-black text-xl">배송지 정보</h2>
-            <div class="mb-10 table w-full border-b border-black">
-                <dl class="table-row">
-                    <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">수령자</dt>
-                    <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                        <input type="text" class="w-full border-2 mx-1 px-4 py-3 box-border">
-                    </dd>
-                </dl>
-                <dl class="table-row">
-                    <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">휴대폰</dt>
-                    <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                        <input type="text" class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength = '3'> -
-                        <input type="text" class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength = '4'> -
-                        <input type="text" class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength = '4'>
-                    </dd>
-                </dl>
-                <dl class="table-row">
-                    <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">배송주소</dt>
-                    <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                        <input class="w-1/3 px-4 py-3 border-2 mx-1 mb-1" type="text" id="sample6_postcode" placeholder="우편번호" readonly>
+            <!--배송지 정보 시작-->
+            <div class="box-border">
+                <h2 class="mt-10 box-border border-b-2 border-black text-xl">배송지 정보</h2>
+                <div class="mb-10 table w-full border-b border-black">
+                    <dl class="table-row">
+                        <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">수령자</dt>
+                        <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
+                            <input type="text" name="orderSheetName" th:value="${mallUser.name}"
+                                   class="w-full border-2 mx-1 px-4 py-3 box-border">
+                        </dd>
+                    </dl>
+                    <dl class="table-row">
+                        <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">휴대폰</dt>
+                        <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
+                            <input type="text" name="orderSheetReceiverPhone1"
+                                   th:value="${productBuyForm.orderCellPhone1}"
+                                   class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength='3'> -
+                            <input type="text" name="orderSheetReceiverPhone2"
+                                   th:value="${productBuyForm.orderCellPhone2}"
+                                   class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength='4'> -
+                            <input type="text" name="orderSheetReceiverPhone3"
+                                   th:value="${productBuyForm.orderCellPhone3}"
+                                   class="w-1/4 border-2 mx-1 px-4 py-3 box-border" maxlength='4'>
+                        </dd>
+                    </dl>
+                    <dl class="table-row">
+                        <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">배송주소</dt>
+                        <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
+                            <input class="w-1/3 px-4 py-3 border-2 mx-1 mb-1" type="text"
+                                   name="orderSheetReceiverAddress1" th:value="${productBuyForm.orderAddress1}"
+                                   id="sample6_postcode" placeholder="우편번호" readonly>
 
-                        <input class="w-full px-4 py-3 mx-1 border-2 mb-1" type="text" id="sample6_address" placeholder="주소" readonly>
-                        <input class="w-1/3 px-4 py-3 mx-1 border-2" type="text" id="sample6_extraAddress" placeholder="동" readonly>
-                        <input class="w-1/3 px-4 py-3 mx-1 border-2" type="text" id="sample6_detailAddress" placeholder="상세주소">
+                            <input class="w-full px-4 py-3 mx-1 border-2 mb-1" type="text"
+                                   name="orderSheetReceiverAddress2" th:value="${productBuyForm.orderAddress2}"
+                                   id="sample6_address" placeholder="주소" readonly>
+                            <input class="w-1/3 px-4 py-3 mx-1 border-2" type="text" name="orderSheetReceiverAddress3"
+                                   th:value="${productBuyForm.orderAddress3}" id="sample6_extraAddress" placeholder="동"
+                                   readonly>
+                            <input class="w-1/3 px-4 py-3 mx-1 border-2" type="text" name="orderSheetReceiverAddress4"
+                                   th:value="${productBuyForm.orderAddress4}" id="sample6_detailAddress"
+                                   placeholder="상세주소">
 
 
-                    </dd>
-                </dl>
-                <dl class="table-row">
-                    <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">배송메모</dt>
-                    <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                        <select name="email" class="w-full border-2 mx-1 px-4 py-3 box-border">
-                            <option value="입력" class="text-gray-300" selected>배송 시 요청사항을 입력해주세요.</option>
-                            <option value="집" class="text-gray-300">문 앞에 놓고가 주세요.</option>
-                            <option value="경비실" class="text-gray-300">경비실에 맡겨주세요.</option>
-                            <option value="택배보관" class="text-gray-300">택배보관함에 넣어주세요.</option>
-                            <option value="직접" class="text-gray-300">직접 받겠습니다.</option>
-                        </select>
-                    </dd>
-                </dl>
+                        </dd>
+                    </dl>
+                    <dl class="table-row">
+                        <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">배송메모</dt>
+                        <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
+                            <select name="orderSheetReceiverOption" class="w-full border-2 mx-1 px-4 py-3 box-border">
+                                <option value="" class="text-gray-300" selected>배송 시 요청사항을 입력해주세요.</option>
+                                <option value="문 앞에 놓고가 주세요." class="text-gray-300">문 앞에 놓고가 주세요.</option>
+                                <option value="경비실에 맡겨주세요." class="text-gray-300">경비실에 맡겨주세요.</option>
+                                <option value="택배보관함에 넣어주세요." class="text-gray-300">택배보관함에 넣어주세요.</option>
+                                <option value="직접 받겠습니다." class="text-gray-300">직접 받겠습니다.</option>
+                            </select>
+                        </dd>
+                    </dl>
+                </div>
             </div>
-        </div>
+        </form>
         <!--배송지 정보 끝-->
 
         <!--최종 결제 시작-->
@@ -131,14 +160,17 @@
             <div class="mb-10 table w-full border-b border-black">
                 <dl class="px-2 overflow-hidden mb-15">
                     <dt class="font-bold float-left w-1/2 px-2 py-3">총 상품금액</dt>
-                    <dd class="float-left text-right w-1/2 px-2 py-3">39,500원</dd>
+                    <dd class="float-left text-right w-1/2 px-2 py-3">[[${productBuyForm.orderPrice}]]원</dd>
                     <dt class="font-bold float-left w-1/2 px-2 py-3">배송비</dt>
                     <dd class="float-left text-right w-1/2 px-2 py-3">0원</dd>
                     <dt class="text-3xl font-bold float-left w-1/2 px-2 py-3">총 결제예상 금액</dt>
-                    <dd class="text-3xl font-bold text-yellow-400 float-left text-right w-1/2 px-2 py-3">39,500원</dd>
+                    <dd class="text-3xl font-bold text-yellow-400 float-left text-right w-1/2 px-2 py-3">
+                        [[${productBuyForm.orderPrice}]]원
+                    </dd>
                 </dl>
             </div>
         </div>
+
         <!--최종 결제 끝-->
 
         <!--약관 및 개인정보 시작-->
@@ -215,6 +247,7 @@
             }
         }).open();
     }
-</script>
+
+    </script>
 </main>
 </html>

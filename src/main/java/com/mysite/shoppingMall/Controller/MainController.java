@@ -20,9 +20,9 @@ public class MainController {
         return "redirect:/main";
     }
 
-//    @RequestMapping("/test")
-//    public String showTest(Model model) {
-//        return "product/order.html";
-//    }
+    @RequestMapping("/test")
+    public String showTest() {
+        return "product/productList.html";
+    }
 
 }

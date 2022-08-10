@@ -1,5 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Form.OrderSheetForm;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Service.UserService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -50,11 +52,12 @@ public class ProductController {
 
 
     //R 읽기 ==============================================
-//    @RequestMapping("/list")
-//    @ResponseBody
-//    public List<Product> showList(){
-//        return productRepository.findAll();
-//    }
+    @RequestMapping("/list")
+    public String showList(String category, Model model) {
+        List<Product> productList = productService.findCategory(category);
+        model.addAttribute("productList",productList);
+        return "product/productList.html";
+    }
 
     @RequestMapping("/detail") // 단건조회
     public String showDetail(Long id, ProductBuyForm productBuyForm, Model model) {
@@ -112,7 +115,7 @@ public class ProductController {
     public String orderSheet(ProductBuyForm productBuyForm, BindingResult bindingResult, HttpSession session, Model model) {
         IsLogined isLogined = Ut.isLogined(session);
 
-        if(isLogined.getLogin() == 0){
+        if (isLogined.getLogin() == 0) {
             return "redirect:/user/login";
         }
 
@@ -121,18 +124,29 @@ public class ProductController {
             return "redirect:/product/detail?id=" + productBuyForm.getProductId();
         }
 
-        int orderNumber = (int)(Math.random()*10000000);
+        int orderNumber = (int) (Math.random() * 10000000);
         productBuyForm.setOrderNumber(orderNumber);
 
         return "product/orderTemp.html";
     }
 
     @PostMapping("/order")
-    public String order(ProductBuyForm productBuyForm, HttpSession session, Model model){
+    public String order(OrderSheetForm orderSheetForm, ProductBuyForm productBuyForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
-        String[] emailTemp = mallUser.getUserEmail().split("\\@");
-        productBuyForm.setOrderEmail1(emailTemp[0]);
-        productBuyForm.setOrderEmail2(emailTemp[1]);
+        String[] emailTemp = Ut.splitEmail(mallUser.getUserEmail());
+        productBuyForm.setOrderEmail1(emailTemp[0].trim());
+        productBuyForm.setOrderEmail2(emailTemp[1].trim());
+
+        String[] cellPhone = Ut.splitCellPhone(mallUser.getCellphone());
+        productBuyForm.setOrderCellPhone1(cellPhone[0].trim());
+        productBuyForm.setOrderCellPhone2(cellPhone[1].trim());
+        productBuyForm.setOrderCellPhone3(cellPhone[2].trim());
+
+        String[] Address = Ut.splitAddress(mallUser.getHomeAddress());
+        productBuyForm.setOrderAddress1(Address[3].trim()); //우편번호
+        productBuyForm.setOrderAddress2(Address[0].trim()); //주소
+        productBuyForm.setOrderAddress3(Address[1].trim()); //동
+        productBuyForm.setOrderAddress4(Address[2].trim()); //상세주소
 
         model.addAttribute("mallUser", mallUser);
 

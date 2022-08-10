@@ -31,7 +31,7 @@
                     <a th:if = "${session.UserId == null}" th:href="@{|/user/join|}" class="p-3 text-xl">회원가입</a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" href="#" class="p-3 text-xl">마이페이지</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{/user/myPage}" class="p-3 text-xl">마이페이지</a>
                 </li>
                 <li>
                     <a th:if = "${session.UserId != null}" href="#" class="p-3 text-xl">장바구니</a>
@@ -49,22 +49,22 @@
         <nav class="top-bar__menu-box-1 w-full flex justify-center">
             <ul class="flex h-full">
                 <li>
-                    <a href="#" class="flex items-center h-full px-5">
+                    <a th:href="@{|/product/list?category=man|}" class="flex items-center h-full px-5">
                         <span class="text-2xl">MAN</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center h-full px-5">
+                    <a th:href="@{|/product/list?category=woman|}" class="flex items-center h-full px-5">
                         <span class="text-2xl">WOMAN</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center h-full px-5">
-                        <span class="text-2xl">TRANNING</span>
+                    <a th:href="@{|/product/list?category=training|}" class="flex items-center h-full px-5">
+                        <span class="text-2xl">TRAINING</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center h-full px-5">
+                    <a th:href="@{|/product/list?category=acc|}" class="flex items-center h-full px-5">
                         <span class="text-2xl">ACC</span>
                     </a>
                 </li>

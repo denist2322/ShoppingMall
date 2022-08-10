@@ -2,7 +2,7 @@ package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Service.MailService;
-import com.mysite.shoppingMall.Vo.MailDto;
+import com.mysite.shoppingMall.Form.MailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

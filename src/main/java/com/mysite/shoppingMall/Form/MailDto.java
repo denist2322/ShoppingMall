@@ -1,4 +1,4 @@
-package com.mysite.shoppingMall.Vo;
+package com.mysite.shoppingMall.Form;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

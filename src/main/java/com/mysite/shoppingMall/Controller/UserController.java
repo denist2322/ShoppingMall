@@ -7,7 +7,7 @@ import com.mysite.shoppingMall.Service.MailService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Vo.IsLogined;
-import com.mysite.shoppingMall.Vo.MailDto;
+import com.mysite.shoppingMall.Form.MailDto;
 import com.mysite.shoppingMall.Vo.MallUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

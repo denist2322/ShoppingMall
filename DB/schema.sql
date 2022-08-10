@@ -45,7 +45,8 @@ CREATE TABLE product(
  `body` TEXT NOT NULL,
  main_image TEXT,
  price INT UNSIGNED NOT NULL,
- discount INT UNSIGNED NOT NULL
+ discount INT UNSIGNED NOT NULL,
+ category VARCHAR(20) NOT NULL,
 );
 
 INSERT INTO product SET
@@ -54,7 +55,10 @@ INSERT INTO product SET
  `body` = "평균 2~3일내로 발송됩니다.",
  main_image = "더스티 오프숄더 크롭 티셔츠 메인 이미지.jpg",
  price = 25000,
- discount = 30;
+ discount = 30,
+ category = "woman";
+
+ SELECT * FROM product;
 
  CREATE TABLE product_image(
    id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -125,6 +129,3 @@ INSERT INTO Question SET
 create_date = NOW(),
 `subject` = '질문 4',
 content = '교환 발송은 언제 되나요 ?';
-
-`create_date`
-SELECT * FROM question WHERE

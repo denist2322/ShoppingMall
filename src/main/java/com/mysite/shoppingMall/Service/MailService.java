@@ -1,18 +1,13 @@
 package com.mysite.shoppingMall.Service;
 
 import com.mysite.shoppingMall.Repository.UserRepository;
-import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Vo.IsLogined;
-import com.mysite.shoppingMall.Vo.MailDto;
-import com.mysite.shoppingMall.Vo.MallUser;
+import com.mysite.shoppingMall.Form.MailDto;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
 
 @Service
 @AllArgsConstructor
