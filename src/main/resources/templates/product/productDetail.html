@@ -33,7 +33,7 @@
                 <div class="box-border h-20 px-4 mt-3 border border-gray-400">
                     <div class="flex items-center justify-between h-full">
                         <span class="text-xl font-bold">최종 예상 구매가</span>
-                        <input class="text-xl text-red-300" th:value="${discountPrice}" readonly/>
+                        <input class="text-xl text-red-300 focus:outline-none" th:value="${discountPrice}" readonly/>
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
 
                     <div th:each="image : ${product.productImageList}">
                         <!--foreach _ img-->
-                        <img th:src="'/product_image/'+${product.title}+'/'+${image.images}" alt="상세이미지" class="mb-20">
+                        <img th:src="'/product_image/'+${product.title}+'/'+${image.images}" alt="상세이미지">
                     </div>
                 </div>
             </div>
