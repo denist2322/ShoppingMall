@@ -1,8 +1,9 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Form.FindPwForm;
+import com.mysite.shoppingMall.Form.MailDto;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Service.MailService;
-import com.mysite.shoppingMall.Form.MailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,11 @@ public class MailController {
         }
         mailService.mailSimpleSend(mailDto);
         return "user/joinTemp.html";
+    }
+
+    @PostMapping("/findMail")
+    public String findMail(FindPwForm findPwForm) {
+        return "user/pwTemp.html";
     }
 
     @PostMapping("/confirm")

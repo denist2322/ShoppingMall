@@ -1,9 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Form.FindEmailForm;
-import com.mysite.shoppingMall.Form.JoinForm;
-import com.mysite.shoppingMall.Form.LoginForm;
-import com.mysite.shoppingMall.Form.MailDto;
+import com.mysite.shoppingMall.Form.*;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Service.MailService;
 import com.mysite.shoppingMall.Service.UserService;
@@ -223,7 +220,7 @@ public class UserController {
     }
     // == 비밀번호 찾기 ==
     @RequestMapping("/findPw")
-    public String findPw(){
+    public String findPw(FindPwForm findPwForm){
         return "user/findPw.html";
     }
 
