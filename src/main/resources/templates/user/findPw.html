@@ -20,7 +20,7 @@
                     비밀번호 찾기
                 </div>
                 <div th:if="${findPwForm.isSend != 'send'}">
-                    <form th:action="@{|\findPwMail|}" method="post">
+                    <form th:action="@{|/findPwMail|}" method="post">
                         <!-- Email input -->
                         <div>
                             <div class="mb-3 flex">
@@ -40,7 +40,7 @@
                     </form>
                 </div>
                 <div th:if="${findPwForm.isSend == 'send'}">
-                    <form th:action="@{|\findPwMail|}" method="post">
+                    <form th:action="@{|/findPwMail|}" method="post">
                         <!-- Email input -->
                         <div>
                             <div class="mb-3 flex">
@@ -61,11 +61,14 @@
                         </div>
                     </form>
                 </div>
-                <form action="">
+                <form th:action="@{|/confirmPw|}" method="post">
+                    <input type="hidden" name="email" th:value="${findPwForm.email}">
+                    <input type="hidden" name="authentication" th:value="${findPwForm.authentication}">
                     <!-- Name input -->
                     <div class="mb-3">
                         <input
                                 type="text"
+                                name="confirmAuthentication"
                                 class="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="인증번호 입력"
                         />

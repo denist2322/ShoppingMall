@@ -7,11 +7,12 @@
 <form name="sendData" th:action="@{|/user/findPw|}" method="get">
     <input type="hidden" name="email" th:value="${findPwForm.email}">
     <input type="hidden" name="authentication" th:value="${findPwForm.authentication}">
+    <input type="hidden" name="confirmAuthentication" th:value="${findPwForm.confirmAuthentication}">
+    <input type="hidden" name="isSucees" th:value="${findPwForm.isSucees}">
     <input type="hidden" name="isSend" th:value="${findPwForm.isSend}">
 </form>
 </body>
 <script layout:fragment="script" type='text/javascript'>
     document.sendData.submit();
-    history.replaceState({}, null, location.pathname);
 </script>
 </html>

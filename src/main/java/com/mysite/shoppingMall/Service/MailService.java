@@ -28,7 +28,7 @@ public class MailService {
         message.setSubject(mailDto.getTitle());
         message.setText(msg);
         mailDto.setAuthentication(randomAuthentication);
-        mailDto.setConfirmAuthentication("0");
+        mailDto.setConfirmAuthentication("");
 //        mailSender.send(message);
         System.out.println(randomAuthentication);
     }
@@ -41,13 +41,15 @@ public class MailService {
         message.setTo(findPwForm.getEmail());
         message.setSubject("비밀번호 찾기 메일입니다.");
         message.setText(msg);
+        findPwForm.setAuthentication(randomAuthentication);
+        findPwForm.setConfirmAuthentication("");
         findPwForm.setIsSend("send");
         //        mailSender.send(message);
         System.out.println(randomAuthentication);
     }
 
-    public boolean findEmail(MailDto mailDto) {
-        if(!userRepository.existsByuserEmail(mailDto.getEmail())){
+    public boolean findEmail(String email) {
+        if(!userRepository.existsByuserEmail(email)){
             return false;
         }
 
