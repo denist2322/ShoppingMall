@@ -14,9 +14,11 @@
 
             <div class="flex justify-center w-full items-center flex-wrap h-full text-gray-800">
                 <div class="flex justify-center items-center text-red-500 pb-3 box-border">
-                    <div th:replace="/common/errorForm :: formErrorsFragment"></div>
-                    <div th:if="${mailDto.success == 'Success'}">인증이 완료되었습니다.</div>
-                    <div th:if="${mailDto.fail == 'Fail'}">인증이 실패했습니다.</div>
+                    <div>
+                        <div th:replace="/common/errorForm :: formErrorsFragment"></div>
+                        <div th:if="${mailDto.success == 'Success'}">인증이 완료되었습니다.</div>
+                        <div th:if="${mailDto.fail == 'Fail'}">인증이 실패했습니다.</div>
+                    </div>
                 </div>
                 <div class="flex w-full mb-6">
                     <form th:action="@{|/mail|}" method="post" class="flex w-full">
