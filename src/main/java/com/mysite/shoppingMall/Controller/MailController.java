@@ -7,6 +7,7 @@ import com.mysite.shoppingMall.Service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class MailController {
 //        return "user/join";
 //    }
 
+    // == 메일보내기 ==
     @PostMapping("/mail")
     public String execMail(MailDto mailDto, Model model) {
         if(mailService.findEmail(mailDto)){
@@ -31,11 +33,17 @@ public class MailController {
         return "user/joinTemp.html";
     }
 
-    @PostMapping("/findMail")
-    public String findMail(FindPwForm findPwForm) {
+    @PostMapping("/findPwMail")
+    public String findPwMail(FindPwForm findPwForm, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "user/pwTemp.html";
+        }
+
+        mailService.mailSimpleSend(findPwForm);
         return "user/pwTemp.html";
     }
 
+    // == 인증 확인 ==
     @PostMapping("/confirm")
     public String confirm(MailDto mailDto) {
         if (mailDto.getAuthentication().equals(mailDto.getConfirmAuthentication())) {

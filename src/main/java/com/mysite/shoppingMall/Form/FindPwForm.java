@@ -9,7 +9,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class FindPwForm {
     @NotNull(message = "이메일을 입력해주세요.")
-    private String fPEmail;
-    private String isSuccess;
+    private String email;
+    private String authentication;
     private String isSend;
+
 }

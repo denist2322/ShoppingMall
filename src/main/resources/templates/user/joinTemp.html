@@ -9,10 +9,10 @@
     <input type="hidden" name="authentication" th:value = "${mailDto.authentication}">
     <input type="hidden" name="confirmAuthentication" th:value = "${mailDto.confirmAuthentication}">
     <input type="hidden" name="success" th:value = "${mailDto.success}">
-    <input type="hidden" name="fail" th:value = "${mailDto.fail}">
+    <input type="hidden" name="fail" th:value="${mailDto.fail}">
 </form>
+</body>
 <script layout:fragment="script" type='text/javascript'>
     document.sendData.submit();
 </script>
-</body>
 </html>
