@@ -19,7 +19,7 @@
                 <div class="mt-5 mb-2 text-xl font-bold text-center">
                     비밀번호 찾기
                 </div>
-                <div th:if="${findPwForm.isSend != 'send'}">
+                <div th:if="${findPwForm.isSend != 'send' && findPwForm.isSuccess != 'success'}">
                     <form th:action="@{|/findPwMail|}" method="post">
                         <!-- Email input -->
                         <div>
@@ -39,7 +39,7 @@
                         </div>
                     </form>
                 </div>
-                <div th:if="${findPwForm.isSend == 'send'}">
+                <div th:if="${findPwForm.isSend == 'send' && findPwForm.isSuccess != 'success'}">
                     <form th:action="@{|/findPwMail|}" method="post">
                         <!-- Email input -->
                         <div>
@@ -61,27 +61,41 @@
                         </div>
                     </form>
                 </div>
-                <form th:action="@{|/confirmPw|}" method="post">
-                    <input type="hidden" name="email" th:value="${findPwForm.email}">
-                    <input type="hidden" name="authentication" th:value="${findPwForm.authentication}">
-                    <!-- Name input -->
-                    <div class="mb-3">
-                        <input
-                                type="text"
-                                name="confirmAuthentication"
-                                class="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="인증번호 입력"
-                        />
-                    </div>
+                <div th:if="${findPwForm.isSuccess != 'success'}">
+                    <form th:action="@{|/confirmPw|}" method="post">
+                        <input type="hidden" name="email" th:value="${findPwForm.email}">
+                        <input type="hidden" name="authentication" th:value="${findPwForm.authentication}">
+                        <!-- Name input -->
+                        <div class="mb-3">
+                            <input
+                                    type="text"
+                                    name="confirmAuthentication"
+                                    class="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    placeholder="인증번호 입력"
+                            />
+                        </div>
 
-                    <div class="flex w-full h-auto justify-between">
-                        <input
-                                type="submit"
-                                class="w-full py-3 bg-black text-white font-medium text-sm rounded box-border btn"
-                                value="확인">
-                        </input>
-                    </div>
-                </form>
+                        <div class="flex w-full h-auto justify-between">
+                            <input
+                                    type="submit"
+                                    class="w-full py-3 bg-black text-white font-medium text-sm rounded box-border btn"
+                                    value="확인">
+                            </input>
+                        </div>
+                    </form>
+                </div>
+                <div th:if="${findPwForm.isSuccess == 'success'}">
+                        <!-- Name input -->
+                        <div class="mb-3 px-4 py-2">
+                            비밀번호 변경이 완료되었습니다.
+                        </div>
+
+                        <div class="flex w-full h-auto justify-between">
+                            <button class="w-full py-3 bg-black text-white font-medium text-sm rounded box-border btn">
+                                <a th:href="@{|/user/login|}">로그인 페이지로 이동</a>
+                            </button>
+                        </div>
+                </div>
             </div>
         </div>
     </div>

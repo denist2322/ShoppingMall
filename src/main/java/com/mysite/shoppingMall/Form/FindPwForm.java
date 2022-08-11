@@ -12,7 +12,7 @@ public class FindPwForm {
     private String email;
     private String authentication;
     private String confirmAuthentication;
-    private String isSucees;
+    private String isSuccess;
     private String isSend;
 
 }

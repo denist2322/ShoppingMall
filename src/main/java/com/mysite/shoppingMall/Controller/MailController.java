@@ -73,7 +73,7 @@ public class MailController {
         System.out.println(findPwForm.getAuthentication());
         System.out.println(findPwForm.getConfirmAuthentication());
         if (findPwForm.getAuthentication().equals(findPwForm.getConfirmAuthentication())){
-            findPwForm.setIsSucees("success");
+            findPwForm.setIsSuccess("success");
             String passwordTmp = RandomStringUtils.randomAlphanumeric(5);
             MallUser mallUser = userService.getUser(findPwForm.getEmail());
             mallUser.setUserPassword(passwordEncoder.encode(passwordTmp));
@@ -82,7 +82,7 @@ public class MailController {
             return "user/pwTemp.html";
         }
         System.out.println("틀림");
-        findPwForm.setIsSucees("fail");
+        findPwForm.setIsSuccess("fail");
         return "user/pwTemp.html";
     }
 }
