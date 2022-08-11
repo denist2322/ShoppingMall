@@ -1,5 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Form.FindEmailForm;
 import com.mysite.shoppingMall.Form.JoinForm;
 import com.mysite.shoppingMall.Form.LoginForm;
 import com.mysite.shoppingMall.Form.MailDto;
@@ -199,11 +200,27 @@ public class UserController {
     }
 
     // == 이메일 찾기 ==
-    @RequestMapping("/findEmail")
-    public String findEmail(){
+    @GetMapping("/findEmail")
+    public String findEmail(FindEmailForm findEmailForm){
         return "user/findEmail.html";
     }
 
+    @PostMapping("/findEmail")
+    public String findEmail(@Valid FindEmailForm findEmailForm, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            return "user/findEmail.html";
+        }
+
+        MallUser mallUser = userService.getUser(findEmailForm);
+
+        if(mallUser == null){
+            bindingResult.reject("","일치하는 회원이 존재하지 않습니다.");
+            return "user/findEmail.html";
+        }
+        model.addAttribute("mallUserEmail",mallUser.getUserEmail());
+
+        return "user/findEmail.html";
+    }
     // == 비밀번호 찾기 ==
     @RequestMapping("/findPw")
     public String findPw(){

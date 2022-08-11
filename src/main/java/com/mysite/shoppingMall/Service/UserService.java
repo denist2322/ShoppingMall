@@ -1,5 +1,6 @@
 package com.mysite.shoppingMall.Service;
 
+import com.mysite.shoppingMall.Form.FindEmailForm;
 import com.mysite.shoppingMall.Form.JoinForm;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Vo.MallUser;
@@ -28,6 +29,13 @@ public class UserService {
     public MallUser getUser(HttpSession session) {
         Integer loginId = (int)session.getAttribute("UserId");
         Optional<MallUser> opUser = userRepository.findById(loginId);
+        MallUser user = opUser.orElse(null);
+
+        return user;
+    }
+
+    public MallUser getUser(FindEmailForm findEmailForm) {
+        Optional<MallUser> opUser = userRepository.findByNameAndBirthday(findEmailForm.getFNname(), findEmailForm.getFNbirthday());
         MallUser user = opUser.orElse(null);
 
         return user;

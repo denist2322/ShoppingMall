@@ -1,6 +1,7 @@
 package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Repository.ProductRepository;
+import com.mysite.shoppingMall.Repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @RequestMapping("/main")
     public String showMain() {
@@ -22,7 +25,7 @@ public class MainController {
 
     @RequestMapping("/test")
     public String showTest() {
-        return "pages/shoppingCart.html";
+        return "/";
     }
 
 }

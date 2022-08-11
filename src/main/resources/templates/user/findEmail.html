@@ -5,7 +5,7 @@
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <!-- 데이지UI 불러오기 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.22.0/dist/full.css" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.22.0/dist/full.css" type="text/css"/>
 <link rel="stylesheet" href="/common/common.css">
 <head>
     <meta charset="UTF-8">
@@ -13,34 +13,50 @@
 </head>
 <body>
 <div class="flex w-full h-screen">
-    <div class="flex w-96 mx-auto justify-center flex-col">
+    <div class="flex w-96 mx-auto justify-center flex-col" th:object="${findEmailForm}">
+        <div th:replace="/common/errorForm :: formErrorsFragment"></div>
         <div class="text-2xl w-full font-bold mt-5 mb-2 text-center">이메일 찾기</div>
-        <form>
-            <!-- Email input -->
-            <div class="mb-3">
-                <input
-                        type="text"
-                        class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
-                        placeholder="이름"
-                />
-            </div>
+        <div th:if="${mallUserEmail == null}">
+            <form th:action="@{|/user/findEmail|}" method="post">
+                <!-- Email input -->
+                <div class="mb-3">
+                    <input
+                            type="text"
+                            name="fNname"
+                            class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
+                            placeholder="이름"
+                    />
+                </div>
 
-            <!-- BirthDay input -->
-            <div class="mb-3">
-                <input
-                        type="text"
-                        class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
-                        placeholder="생년월일"
-                />
-            </div>
+                <!-- BirthDay input -->
+                <div class="mb-3">
+                    <input
+                            type="text"
+                            name="fNbirthday"
+                            class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
+                            placeholder="생년월일"
+                    />
+                </div>
 
+                <div class="flex w-full h-auto justify-between">
+                    <input
+                            type="submit"
+                            class="w-full py-3 bg-black text-white font-medium text-sm rounded box-border btn"
+                            value="확인">
+                </div>
+            </form>
+        </div>
+        <div th:if="${mallUserEmail != null}">
+            <div>
+                회원님의 이메일은 [[${mallUserEmail}]] 입니다.
+            </div>
             <div class="flex w-full h-auto justify-between">
-                <input
-                        type="submit"
-                        class="w-full py-3 bg-black text-white font-medium text-sm rounded box-border btn"
-                        value="확인">
+                <button
+                        class="w-full py-3 bg-black text-white font-medium text-sm rounded box-border btn">
+                    <a th:href="@{|/user/login|}">로그인페이지로 이동</a>
+                </button>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 </div>
