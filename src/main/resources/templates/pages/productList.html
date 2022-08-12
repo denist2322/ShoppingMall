@@ -7,20 +7,20 @@
 </head>
 
 <main layout:fragment="main">
-    <div class="max-w-screen-xl mx-auto">
-    <section class="flex w-full h-auto">
-        <div th:if="${productList.size() == 0}">
+    <div class="con grid">
+    <section class="grid">
+        <div th:if="${productList.size() == 0}" class="con h-96 grid justify-center items-center text-lg">
             현재 상품이 존재하지 않습니다.
         </div>
-        <div th:if="${productList.size() != 0}">
+        <div th:if="${productList.size() != 0}" class="grid grid-cols-4">
             <div th:each="product : ${productList}">
-                <div class="flex flex-col w-1/4 h-auto p-5 box-border mt-2.5">
+                <div class="h-auto p-5 box-border mt-2.5">
                     <a th:href="'/product/detail?id='+${product.id}">
                         <img th:src="'/product_image/'+${product.title}+'/'+${product.mainImage}" alt="옷"
-                             class="w-full">
+                             class="product_img3 rounded-lg">
                         <div class="overflow-hidden whitespace-pre-line overflow-ellipsis">[[${product.title}]]
                         </div>
-                        <div class="mt-1 overflow-hidden tracking-tighter price whitespace-nowrap">
+                        <div class="whitespace-normal overflow-ellipsis text-lg">
                             <strong class="text-xl font-bold text-red-500">[[${product.discount}]]%</strong>
                             <em class="text-xl font-bold line-through">[[${product.price}]]</em>
                             <em class="text-xl font-bold">39,500</em>

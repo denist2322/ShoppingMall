@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css">
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<!-- 데이지UI 불러오기 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.22.0/dist/full.css" type="text/css" />
 <link rel="stylesheet" href="/common/common.css">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +28,7 @@
                         <input
                                 type="email"
                                 name="email"
-                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
                                 placeholder="Email address"
                                 th:value="${loginForm.email}"
                         />
@@ -37,7 +39,7 @@
                         <input
                                 type="password"
                                 name="password"
-                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
                                 placeholder="Password"
                         />
                     </div>
@@ -52,7 +54,7 @@
                     <div class="text-right">
                         <input
                                 type="submit"
-                                class="inline-block px-7 py-3 w-full bg-black text-white font-medium text-sm rounded focus:outline-none" value = "로그인"/>
+                                class="btn btn-active inline-block px-7 py-3 w-full bg-black text-white font-medium text-sm rounded focus:outline-none" value = "로그인"/>
                         <p class="text-sm font-semibold mt-2 pt-1 mb-0">
                             계정이 없으신가요?
                             <a
