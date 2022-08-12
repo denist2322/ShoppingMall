@@ -22,7 +22,7 @@ INSERT INTO mall_user SET
  user_password = "admin",
  `name` = "관리자",
  birthday = 100000,
- home_address = "대전 어딘가",
+ home_address = "대전 서구 갈마역로 6** (둔산동, 아이브)**200호**35230",
  cellphone = "010-0000-0000";
 
 
@@ -33,10 +33,10 @@ INSERT INTO mall_user SET
  user_password = "user1",
  `name` = "테스트 유저",
  birthday = 110101,
- home_address = "대전 어딘가",
+ home_address = "대전 서구 갈마역로 6** (둔산동, 아이브)**200호**35230",
  cellphone = "010-1111-0000";
 
-  SELECT * FROM mall_user;
+ SELECT * FROM mall_user;
 
 CREATE TABLE product(
  id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -46,7 +46,7 @@ CREATE TABLE product(
  main_image TEXT,
  price INT UNSIGNED NOT NULL,
  discount INT UNSIGNED NOT NULL,
- category VARCHAR(20) NOT NULL,
+ category VARCHAR(20) NOT NULL
 );
 
 INSERT INTO product SET
