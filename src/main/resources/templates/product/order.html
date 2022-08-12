@@ -120,10 +120,14 @@
                     <dl class="table-row">
                         <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">배송주소</dt>
                         <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                            <input class="w-1/3 px-4 py-3 border-2 mx-1 mb-1" type="text"
+                            <div class="flex">
+                            <input class="flex w-1/3 px-4 py-3 border-2 mx-1 mb-1" type="text"
                                    name="orderSheetReceiverAddress1" th:value="${productBuyForm.orderAddress1}"
                                    id="sample6_postcode" placeholder="우편번호" readonly>
 
+                            <input class="flex w-1/3 px-4 py-3 border-2 mx-1 mb-1"
+                                   type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/>
+                            </div>
                             <input class="w-full px-4 py-3 mx-1 border-2 mb-1" type="text"
                                    name="orderSheetReceiverAddress2" th:value="${productBuyForm.orderAddress2}"
                                    id="sample6_address" placeholder="주소" readonly>
