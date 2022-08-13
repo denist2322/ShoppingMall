@@ -190,11 +190,6 @@ public class UserController {
 //        return "탈퇴가 처리 완료되었습니다.";
 //    }
 
-    // == 장바구니 ==
-    @RequestMapping("/shoppingCart")
-    public String shoppingCart(){
-        return "pages/shoppingCart.html";
-    }
 
     // == 이메일 찾기 ==
     @GetMapping("/findEmail")

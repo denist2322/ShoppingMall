@@ -13,13 +13,13 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private LocalDateTime regDate;
     private String title;
     private String body;
     private String mainImage;
-    private Long price;
-    private Long discount;
+    private long price;
+    private long discount;
     private String category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<ProductImage> productImageList;

@@ -6,13 +6,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductBuyForm {
-    private String productId;
+    private long productId;
     private String orderImage;
     private String orderTitle;
     private String orderColor;
     private String orderSize;
     private String orderPrice;
-    private int orderNumber;
+    private long orderCounter;
+    private long orderNumber;
     private String orderEmail1;
     private String orderEmail2;
     private String orderCellPhone1;

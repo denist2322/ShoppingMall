@@ -15,6 +15,7 @@
             <input type="hidden" name="orderImage" th:value="${product.mainImage}"/>
             <input type="hidden" name="orderTitle" th:value="${product.title}"/>
             <input type="hidden" name="orderPrice" th:value="${discountPrice}"/>
+            <input type="hidden" name="orderCount" value=2/>
 
             <div class="w-1/2">
                 <img th:src="'/product_image/'+${product.title}+'/'+${product.mainImage}" alt="상품 이미지" class="border product_img2">
@@ -58,7 +59,7 @@
                     <strong class="block mr-10 text-lg ">색상 / 사이즈</strong>
                     <div class="table w-full table-fixed mt-8 box-border">
                         <div class="table-cell w-20">
-                            <input type="text" class="block w-8 h-8 bg-white border border-gray-200">
+                            <input type="text" class="block w-8 h-8 bg-black border border-gray-200">
                         </div>
                         <em class="table-cell w-auto pl-3 py-2 box-border font-bold text-right">최종가격</em>
                     </div>
@@ -68,7 +69,7 @@
                 </div>
 
                 <div class="box-border flex justify-center w-full mt-5">
-                    <a href="#" class="items-center p-3 text-white bg-gray-700 mr-4">장바구니</a>
+                    <a href="javascript:cart()" class="items-center p-3 text-white bg-gray-700 mr-4">장바구니</a>
                     <a href="javascript:order()" class="items-center p-3 text-white bg-black">구매하기</a>
                 </div>
             </div>
@@ -93,6 +94,12 @@
     <script layout:fragment="script" type='text/javascript'>
         function order(){
             form.action = "/product/orderSheetTmp";
+            form.method = "get";
+            form.submit();
+        }
+
+        function cart(){
+            form.action = "/addCart";
             form.method = "get";
             form.submit();
         }

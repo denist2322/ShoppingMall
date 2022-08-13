@@ -17,7 +17,7 @@
     </headerUnder>
 
     <mainSecond>
-        <h2 class="h-10 ml-2 mt-4 text-xl leading-10 border-b-2 border-black">일반상품(개수)</h2>
+        <h2 class="h-10 ml-2 mt-4 text-xl leading-10 border-b-2 border-black">상품목록</h2>
     </mainSecond>
     <mainthird>
         <table class="w-full h-2/5">
@@ -33,39 +33,40 @@
                 <th class="">
                     <input type="checkbox">
                 </th>
-                <th class="justify-center">주문번호</th>
-                <th class="">상품명</th>
+                <th class="justify-center">상품정보</th>
+                <th class=""></th>
                 <th class="justify-center">주문금액</th>
             </tr>
 
             </thead>
-            <tbody class="border-b-2 border-gray-200">
-            <tr>
-                <th class="justify-center">
-                    <input type="checkbox">
-                </th>
-                <th class="flex h-full">
-                    <ul class="flex w-full items-center justify-center h-full p-6">
-                        <li>
-                            <a href="#">
-                                <img class="w-full product_img"
-                                     src="https://s3.marpple.co/files/u_218933/2020/1/original/14474423ccd1acb63fab43dc936ab01302c64b547577e2e.png"
-                                     alt="" >
-                                상품이미지
-                            </a>
-                        </li>
-                    </ul>
-                </th>
-                <th class="">
-                    <div class="h-1/3 items-center">
-                        <span class="block w-full">상품명</span>
-                        <span class="block w-full">색상 / 사이즈</span>
-                        <span class="block w-full">갯수</span>
-                    </div>
-                </th>
-                <th class="justify-center">주문금액</th>
-            </tr>
-            </tbody>
+            <div th:each="shoppingCart : ${shoppingCartList}">
+                <tbody class="border-b-2 border-gray-200">
+                <tr>
+                    <th class="justify-center">
+                        <input type="checkbox">
+                    </th>
+                    <th class="flex h-full">
+                        <ul class="flex w-full items-center justify-center h-full p-6">
+                            <li>
+                                <a href="#">
+                                    <img class="w-full product_img"
+                                         th:src="'/product_image/'+${shoppingCart.product.title} + '/' + ${shoppingCart.product.mainImage}"
+                                         alt="" >
+                                </a>
+                            </li>
+                        </ul>
+                    </th>
+                    <th class="">
+                        <div class="h-1/3 items-center">
+                            <span class="block w-full">[[${shoppingCart.product.title}]]</span>
+                            <span class="block w-full">[[${shoppingCart.cartColor}]] / [[${shoppingCart.cartSize}]]</span>
+                            <span class="block w-full">[[${shoppingCart.cartCount}]]</span>
+                        </div>
+                    </th>
+                    <th class="justify-center">주문금액</th>
+                </tr>
+                </tbody>
+            </div>
         </table>
         <div class="w-full h-12 border-b-2 border-black">
         </div>
@@ -89,3 +90,4 @@
 
 </main>
 </html>
+<!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
