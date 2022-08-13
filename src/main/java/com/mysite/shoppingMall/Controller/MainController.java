@@ -2,9 +2,11 @@ package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Repository.ProductRepository;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
+import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -12,6 +14,8 @@ public class MainController {
     private ProductRepository productRepository;
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private ShoppingCartRepository shoppingCartRepository;
 
     @RequestMapping("/main")
     public String showMain() {
@@ -24,8 +28,11 @@ public class MainController {
     }
 
     @RequestMapping("/test")
+    @ResponseBody
     public String showTest() {
-        return "/";
+        if(shoppingCartRepository.existsByProductIdAndCartColor(1L,"White")){
+            return "있어";
+        }
+        return "없어";
     }
-
 }
