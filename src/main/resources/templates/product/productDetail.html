@@ -92,6 +92,11 @@
         <!-- 상품상세 정보 페이지 끝 -->
     </div>
     <script layout:fragment="script" type='text/javascript'>
+        //원화는 콤마를 붙여준다.
+        var money = $('#money').text();
+        var money2 = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $('#money').text(money2);
+
         function order(){
             form.action = "/product/orderSheetTmp";
             form.method = "get";
