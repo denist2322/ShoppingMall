@@ -151,6 +151,7 @@
                                 <option value="택배보관함에 넣어주세요." class="text-gray-300">택배보관함에 넣어주세요.</option>
                                 <option value="직접 받겠습니다." class="text-gray-300">직접 받겠습니다.</option>
                             </select>
+                            <input type="text" id="selboxDirect" name="orderSheetReceiverOption"/>
                         </dd>
                     </dl>
                 </div>
@@ -164,11 +165,11 @@
             <div class="mb-10 table w-full border-b border-black">
                 <dl class="px-2 overflow-hidden mb-15">
                     <dt class="font-bold float-left w-1/2 px-2 py-3">총 상품금액</dt>
-                    <dd class="float-left text-right w-1/2 px-2 py-3">[[${productBuyForm.orderPrice}]]원</dd>
+                    <dd class="float-left text-right w-1/2 px-2 py-3" id="money">[[${productBuyForm.orderPrice}]]원</dd>
                     <dt class="font-bold float-left w-1/2 px-2 py-3">배송비</dt>
-                    <dd class="float-left text-right w-1/2 px-2 py-3">0원</dd>
+                    <dd class="float-left text-right w-1/2 px-2 py-3" id="money">0원</dd>
                     <dt class="text-3xl font-bold float-left w-1/2 px-2 py-3">총 결제예상 금액</dt>
-                    <dd class="text-3xl font-bold text-yellow-400 float-left text-right w-1/2 px-2 py-3">
+                    <dd class="text-3xl font-bold text-yellow-400 float-left text-right w-1/2 px-2 py-3" id="money">
                         [[${productBuyForm.orderPrice}]]원
                     </dd>
                 </dl>
@@ -204,6 +205,12 @@
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
+
+    //원화는 콤마를 붙여준다.
+    var money = $('#money').text();
+    var money2 = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    $('#money').text(money2);
+
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -251,6 +258,8 @@
             }
         }).open();
     }
+
+
 
     </script>
 </main>
