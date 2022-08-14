@@ -41,17 +41,18 @@
                 <div class="box-border w-full mt-4 border border-black">
                     <select name="orderColor" id="color" class="w-full">
                         <option value="no">색상을 선택하세요.</option>
-                        <option value="Ivory">Ivory</option>
-                        <option value="Skyblue">Skyblue</option>
-                        <option value="Pink">Pink</option>
-                        <option value="Black">Black</option>
+                        <div th:each="color : ${product.productColorList}" id="selectColor">
+                        <option th:value="${color.productColor}" onclick="javascript:changeStyle()">[[${color.productColor}]]</option>
+                        </div>
                     </select>
                 </div>
 
                 <div class="box-border w-full mt-4 border border-black">
                     <select name="orderSize" id="size" class="w-full">
                         <option value="no">사이즈를 선택하세요.</option>
-                        <option value="Free">Free</option>
+                        <div th:each="size : ${product.productSizeList}">
+                        <option th:value="${size.productSize}">[[${size.productSize}]]</option>
+                        </div>
                     </select>
                 </div>
 
@@ -59,8 +60,9 @@
                     <strong class="block mr-10 text-lg ">색상 / 사이즈</strong>
                     <div class="table w-full table-fixed mt-8 box-border">
                         <div class="table-cell w-20">
-                            <input type="text" class="block w-8 h-8 bg-black border border-gray-200">
+                            <input type="text" class="block w-8 h-8 border border-gray-200" id="resultColor">
                         </div>
+                        <div></div>
                         <em class="table-cell w-auto pl-3 py-2 box-border font-bold text-right">최종가격</em>
                     </div>
                     <button class="absolute top-5 right-5 cursor-pointer">
@@ -92,11 +94,6 @@
         <!-- 상품상세 정보 페이지 끝 -->
     </div>
     <script layout:fragment="script" type='text/javascript'>
-        //원화는 콤마를 붙여준다.
-        var money = $('#money').text();
-        var money2 = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        $('#money').text(money2);
-
         function order(){
             form.action = "/product/orderSheetTmp";
             form.method = "get";
@@ -108,6 +105,15 @@
             form.method = "get";
             form.submit();
         }
+
+        // 옷의 색상을 선택하면 화면에 보여줌.
+         $(function() {
+            $("#color").change(function() {
+                $("#resultColor").css("background", $("option:selected").val().toLowerCase());
+           });
+         });
+
+
     </script>
 </main>
 </html>

@@ -22,7 +22,7 @@
                         </div>
                         <div class="whitespace-normal overflow-ellipsis text-lg">
                             <strong class="text-xl font-bold text-red-500">[[${product.discount}]]%</strong>
-                            <em class="text-xl font-bold line-through">[[${product.price}]]</em>
+                            <em class="text-xl font-bold line-through comma">[[${product.price}]]</em>
                             <em class="text-xl font-bold">39,500</em>
                         </div>
                     </a>
@@ -31,5 +31,10 @@
         </div>
     </section>
     </div>
+    <script>
+    $("input[type=number], input[type=tel]").filter(".comma").on("keyup", function(){
+        $(this).val($(this).val().replace(/[^0-9]/g, "").toLocaleString());
+     });
+    </script>
 </main>
 </html>

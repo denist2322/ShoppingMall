@@ -129,3 +129,52 @@ INSERT INTO Question SET
 create_date = NOW(),
 `subject` = '질문 4',
 content = '교환 발송은 언제 되나요 ?';
+
+CREATE TABLE Shopping_cart(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cart_color VARCHAR(20) NOT NULL,
+    cart_size VARCHAR(20) NOT NULL,
+    cart_count INT UNSIGNED NOT NULL,
+    product_id INT UNSIGNED NOT NULL,
+    mall_user_id INT UNSIGNED NOT NULL
+);
+
+INSERT INTO Shopping_cart SET
+cart_color = "White",
+cart_size = "Free",
+cart_count = 2,
+product_id = 1,
+mall_user_id = 1;
+
+SELECT * FROM shopping_cart;
+
+CREATE TABLE Product_color(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    product_color VARCHAR(20),
+    product_id INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE Product_size(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    product_size VARCHAR(20),
+    product_id INT UNSIGNED NOT NULL
+);
+
+INSERT INTO Product_color SET
+   product_color = "Ivory",
+   product_id = 1;
+INSERT INTO Product_color SET
+   product_color = "Pink",
+   product_id = 1;
+INSERT INTO Product_color SET
+   product_color = "Skyblue",
+   product_id = 1;
+INSERT INTO Product_color SET
+   product_color = "Black",
+   product_id = 1;
+INSERT INTO Product_size SET
+   product_size = "Free",
+   product_id = 1;
+
+SELECT * FROM Product_color;
+SELECT * FROM Product_size;
