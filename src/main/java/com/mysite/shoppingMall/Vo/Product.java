@@ -22,5 +22,11 @@ public class Product {
     private long discount;
     private String category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<ProductColor> productColorList;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<ProductSize> productSizeList;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<ProductImage> productImageList;
 }
