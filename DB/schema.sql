@@ -55,7 +55,7 @@ INSERT INTO product SET
  `body` = "평균 2~3일내로 발송됩니다.",
  main_image = "더스티 오프숄더 크롭 티셔츠 메인 이미지.jpg",
  price = 25000,
- discount = 30,
+ discount = 10,
  category = "woman";
 
  SELECT * FROM product;
@@ -173,7 +173,13 @@ INSERT INTO Product_color SET
    product_color = "Black",
    product_id = 1;
 INSERT INTO Product_size SET
-   product_size = "Free",
+   product_size = "S",
+   product_id = 1;
+INSERT INTO Product_size SET
+   product_size = "M",
+   product_id = 1;
+INSERT INTO Product_size SET
+   product_size = "L",
    product_id = 1;
 
 SELECT * FROM Product_color;
