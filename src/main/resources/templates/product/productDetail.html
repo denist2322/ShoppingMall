@@ -21,6 +21,14 @@
             form.submit();
         }
 
+        function minus() {
+            alert("개수가 줄어들었습니다.");
+        }
+
+        function plus() {
+            alert("개수가 증가하였습니다.");
+        }
+
         // 옷의 색상을 선택하면 화면에 보여줌.
          $(function() {
             $("#color").change(function() {
@@ -109,14 +117,20 @@
                 </div>
 
                 <div class="mt-4 relative box-border px-5 py-4 bg-gray-200">
-                    <strong class="block mr-10 text-lg ">색상 / 사이즈</strong>
-                    <div class="table w-full table-fixed mt-8 box-border">
-                        <div class="table-cell w-20">
-                            <input type="text" class="block w-8 h-8 border border-gray-200" id="resultColor">
+                    <strong class="block mr-10 text-lg">색상 / 사이즈</strong>
+                    <div class="flex justify-between w-full table-fixed mt-8 box-border">
+                        <div class="flex w-10">
+                            <input type="text" class="block w-8 h-8 border border-gray-200 mr-5" id="resultColor">
+                            <div id = "resultSize" class="flex items-center">
                         </div>
-                        <div id = "resultSize">
+
                         </div>
-                        <em class="table-cell w-auto pl-3 py-2 box-border font-bold text-right">최종가격</em>
+                        <div class="flex align-middle">
+                            <input type="button" value="-" onclick="minus()" class="w-8 h-8 bg-white cursor-pointer text-2xl">
+                            <input type="text" class="w-8 h-8 bg-white text-black text-bold font-xl text-center" value="1" readonly>
+                            <input type="button" value="+" onclick="plus()" class="w-8 h-8 bg-white cursor-pointer text-2xl">
+                        </div>
+                        <div class="flex px-auto py-2 box-border font-bold text-right">최종가격</div>
                     </div>
                     <button class="absolute top-5 right-5 cursor-pointer">
                         <img src="https://www.hiver.co.kr/static/22.05.01/images/btn-del-option.png" alt="" class="w-5 h-5">
