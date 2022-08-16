@@ -80,7 +80,9 @@
                             <span class="block w-full">[[${shoppingCart.cartCount}]]</span>
                         </div>
                     </th>
-                    <th class="justify-center">주문금액</th>
+                    <th>
+                        <input type="text" class="flex justify-center w-full h-1/4 text-lg">
+                    </th>
                 </tr>
                 </tbody>
             </div>
@@ -88,12 +90,18 @@
         <div class="w-full h-12 border-b-2 border-black">
         </div>
         <div class="border-2 border-gray-300 p-4 text-2xl h-72 mt-16">
-            <div class="text-2xl h-1/4 pt-2">배송비 :</div>
-            <div class="text-2xl h-1/4 pt-6">상품금액 :</div>
+            <div class="text-2xl h-1/4 pt-2">배송비 :
+                <input type="text" class="">
+            </div>
+            <div class="text-2xl h-1/4 pt-6">상품금액 :
+                <input type="text" class="">
+            </div>
             <div class="text-2xl h-1/4 pt-7">
                 <div class=" text-2xl h-1/4 pt-6 leading-loose border-t-2 border-gray-300">
                     <div class="flex justify-between w-full h-20">
-                        <span>총 결제금액 :</span>
+                        <span>총 결제금액 :
+                            <input type="text" class="">
+                        </span>
                         <button type="button" class=" text-right mr-6 border-2 text-white bg-black btn btn-active"
                                 onclick="orders()">주문하기
                         </button>
