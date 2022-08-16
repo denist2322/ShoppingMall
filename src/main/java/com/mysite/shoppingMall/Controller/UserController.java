@@ -137,7 +137,7 @@ public class UserController {
     @GetMapping("/myPage")
     public String myPage(JoinForm joinForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
-        String[] addressTmp = mallUser.getHomeAddress().split("\\*\\*");
+        String[] addressTmp = Ut.splitAddress(mallUser.getHomeAddress());
         joinForm.setAddress1(addressTmp[3].trim());
         joinForm.setAddress2(addressTmp[0].trim());
         joinForm.setAddress3(addressTmp[1].trim());

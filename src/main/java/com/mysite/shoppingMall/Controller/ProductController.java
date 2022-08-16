@@ -61,8 +61,9 @@ public class ProductController {
 
     @RequestMapping("/detail") // 단건조회
     public String showDetail(Long id, ProductBuyForm productBuyForm, Model model) {
+
         Product product = productService.findProduct(id);
-        int discountPrice = (int) (product.getPrice() * (1 - (double) product.getDiscount() / 100));
+        int discountPrice = productService.calcPrice(product, id);
         model.addAttribute("product", product);
         model.addAttribute("discountPrice", discountPrice);
         return "product/productDetail.html";
@@ -124,8 +125,8 @@ public class ProductController {
             return "redirect:/product/detail?id=" + productBuyForm.getProductId();
         }
 
-        int orderNumber = (int) (Math.random() * 10000000);
-        productBuyForm.setOrderNumber(orderNumber);
+        productService.setRandomNum(productBuyForm);
+
 
         return "product/orderTemp.html";
     }
@@ -133,21 +134,9 @@ public class ProductController {
     @PostMapping("/order")
     public String order(OrderSheetForm orderSheetForm, ProductBuyForm productBuyForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
-        String[] emailTemp = Ut.splitEmail(mallUser.getUserEmail());
-        productBuyForm.setOrderEmail1(emailTemp[0].trim());
-        productBuyForm.setOrderEmail2(emailTemp[1].trim());
 
-        String[] cellPhone = Ut.splitCellPhone(mallUser.getCellphone());
-        productBuyForm.setOrderCellPhone1(cellPhone[0].trim());
-        productBuyForm.setOrderCellPhone2(cellPhone[1].trim());
-        productBuyForm.setOrderCellPhone3(cellPhone[2].trim());
-
-        String[] Address = Ut.splitAddress(mallUser.getHomeAddress());
-        productBuyForm.setOrderAddress1(Address[3].trim()); //우편번호
-        productBuyForm.setOrderAddress2(Address[0].trim()); //주소
-        productBuyForm.setOrderAddress3(Address[1].trim()); //동
-        productBuyForm.setOrderAddress4(Address[2].trim()); //상세주소
-
+        productService.readyForOrder(productBuyForm,mallUser);
+        
         model.addAttribute("mallUser", mallUser);
 
         return "product/order.html";
