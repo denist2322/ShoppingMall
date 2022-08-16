@@ -8,6 +8,7 @@ import com.mysite.shoppingMall.Vo.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -49,5 +50,10 @@ public class ProductService {
         productBuyForm.setOrderAddress2(Address[0].trim()); //주소
         productBuyForm.setOrderAddress3(Address[1].trim()); //동
         productBuyForm.setOrderAddress4(Address[2].trim()); //상세주소
+    }
+    @Transactional
+    public List<Product> searchTitleAndBody(String keyword){
+        List<Product> productList = productRepository.findByTitleAndBody(keyword);
+        return productList;
     }
 }

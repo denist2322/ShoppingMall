@@ -137,12 +137,18 @@ public class UserController {
     @GetMapping("/myPage")
     public String myPage(JoinForm joinForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
+
         String[] addressTmp = Ut.splitAddress(mallUser.getHomeAddress());
         joinForm.setAddress1(addressTmp[3].trim());
         joinForm.setAddress2(addressTmp[0].trim());
         joinForm.setAddress3(addressTmp[1].trim());
         joinForm.setAddress4(addressTmp[2].trim());
+        String[] cellPhoneTmp = Ut.splitCellPhone(mallUser.getCellphone());
+        joinForm.setCellphone2_1(cellPhoneTmp[0].trim());
+        joinForm.setCellphone2_2(cellPhoneTmp[1].trim());
+        joinForm.setCellphone2_3(cellPhoneTmp[2].trim());
         model.addAttribute("mallUser", mallUser);
+
         return "user/myPage.html";
 
     }
