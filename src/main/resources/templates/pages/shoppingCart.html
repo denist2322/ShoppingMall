@@ -4,6 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>페이지 이름</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$("#cbx_chkAll").click(function() {
+				if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
+				else $("input[name=chk]").prop("checked", false);
+			});
+
+			$("input[name=chk]").click(function() {
+				var total = $("input[name=chk]").length;
+				var checked = $("input[name=chk]:checked").length;
+
+				if(total != checked) $("#cbx_chkAll").prop("checked", false);
+				else $("#cbx_chkAll").prop("checked", true);
+			});
+		});
+	</script>
 </head>
 
 <main layout:fragment="main">
@@ -30,8 +47,8 @@
             <thead class="h-12 items-center">
 
             <tr class="border-b-2 border-gray-200 mb-6">
-                <th class="">
-                    <input type="checkbox">
+                <th>
+                    <input type="checkbox" id="cbx_chkAll" />
                 </th>
                 <th class="justify-center">상품정보</th>
                 <th class=""></th>
@@ -43,7 +60,7 @@
                 <tbody class="border-b-2 border-gray-200">
                 <tr>
                     <th class="justify-center">
-                        <input type="checkbox">
+                        <input type="checkbox" name="chk">
                     </th>
                     <th class="flex h-full">
                         <ul class="flex w-full items-center justify-center h-full p-6">
