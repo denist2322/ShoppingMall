@@ -23,5 +23,9 @@ public class JoinForm {
     @NotNull(message = "생년월일을 입력해주세요.")
     private Integer birthday2;
     @NotNull(message = "핸드폰 번호를 입력해주세요.")
-    private String cellphone2;
+    private String cellphone2_1;
+    @NotNull(message = "핸드폰 번호를 입력해주세요.")
+    private String cellphone2_2;
+    @NotNull(message = "핸드폰 번호를 입력해주세요.")
+    private String cellphone2_3;
 }

@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public MallUser getUser(HttpSession session) {
-        Integer loginId = (int)session.getAttribute("UserId");
+        Integer loginId = (int) session.getAttribute("UserId");
         Optional<MallUser> opUser = userRepository.findById(loginId);
         MallUser user = opUser.orElse(null);
 
@@ -47,44 +47,44 @@ public class UserService {
 
     public void setSession(HttpSession session, MallUser user) {
 
-            if(user.getName().equals("관리자")){
-                session.setAttribute("UserId", user.getId());
-                session.setAttribute("authority", "0");
-            }
-
+        if (user.getName().equals("관리자")) {
             session.setAttribute("UserId", user.getId());
-            session.setAttribute("authority", "1");
+            session.setAttribute("authority", "0");
+        }
+
+        session.setAttribute("UserId", user.getId());
+        session.setAttribute("authority", "1");
 
     }
 
-    public void removeSession(HttpSession session, Integer userId){
+    public void removeSession(HttpSession session, Integer userId) {
         session.removeAttribute("UserId");
     }
 
     public void create(JoinForm joinForm) {
         MallUser user = new MallUser();
         user.setUserEmail(joinForm.getEmail2());
-        user.setUserPassword(passwordEncoder.encode(joinForm.getPassword2()));
-        user.setName(joinForm.getName2());
-        user.setCellphone(joinForm.getCellphone2());
         user.setBirthday(joinForm.getBirthday2());
-        String fullAddress = joinForm.getAddress2() + "**" + joinForm.getAddress3() + "**" + joinForm.getAddress4() + "**" + joinForm.getAddress1() ;
-        user.setHomeAddress(fullAddress);
         user.setRegDate(LocalDateTime.now());
-        user.setUpdateDate(LocalDateTime.now());
+        createAndModify(user, joinForm);
         userRepository.save(user);
     }
 
     public void modifyUser(JoinForm joinForm) {
         Optional<MallUser> opMallUser = userRepository.findByuserEmail(joinForm.getEmail2());
         MallUser user = opMallUser.get();
-        user.setUserPassword(passwordEncoder.encode(joinForm.getPassword2()));
-        user.setCellphone(joinForm.getCellphone2());
-        user.setName(joinForm.getName2());
-        user.setUpdateDate(LocalDateTime.now());
-        String fullAddress = joinForm.getAddress2() + "**" + joinForm.getAddress3() + "**" + joinForm.getAddress4() + "**" + joinForm.getAddress1() ;
-        user.setHomeAddress(fullAddress);
+        createAndModify(user, joinForm);
         userRepository.save(user);
+    }
+
+    public void createAndModify(MallUser user, JoinForm joinForm){
+        user.setName(joinForm.getName2());
+        user.setUserPassword(passwordEncoder.encode(joinForm.getPassword2()));
+        String cellPhone = joinForm.getCellphone2_1() + "-" + joinForm.getCellphone2_2() + "-" + joinForm.getCellphone2_3();
+        user.setCellphone(cellPhone);
+        String fullAddress = joinForm.getAddress2() + "**" + joinForm.getAddress3() + "**" + joinForm.getAddress4() + "**" + joinForm.getAddress1();
+        user.setHomeAddress(fullAddress);
+        user.setUpdateDate(LocalDateTime.now());
     }
 
 }

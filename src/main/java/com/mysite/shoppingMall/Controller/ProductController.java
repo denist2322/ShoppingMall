@@ -142,12 +142,12 @@ public class ProductController {
         return "product/order.html";
     }
 
+    @GetMapping("/search")
+    public String search(String keyword, Model model){
+        List<Product>productList = productService.searchTitleAndBody(keyword);
+        model.addAttribute("productList", productList);
+        model.addAttribute("keyword",keyword);
+        return "pages/productList.html";
+    }
+
 }
-
-/*
-session.loginUserId
-List<Question> questionList = questionRepository.findBy
-
-
-
-*/
