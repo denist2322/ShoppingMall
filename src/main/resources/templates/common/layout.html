@@ -14,6 +14,7 @@
     <meta charset="UTF-8">
     <!--J쿼리 import-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/32d831bebd.js" crossorigin="anonymous"></script>
     <!--    <div th:replace="common/darkMod :: darkFragment"></div>-->
     <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">하늘하늘</title>
 </head>
@@ -25,6 +26,14 @@
                 <img src="https://ifh.cc/g/8jDNxA.png" alt="하늘하늘" style="display: block; margin: 0 auto; width:200px; height:100px;">
             </a>
 
+            <div class="flex justify-center items-center w-1/2 h-full ml-20">
+                <form action="https://search.naver.com/search.naver">
+                    <div class="flex search">
+                        <input type="text" name="query" value="" class="flex w-60 h-12 border-b-2 border-black">
+                        <button type="submit" class="pl-3 fa-solid fa-magnifying-glass fa-xl"></button>
+                    </div>
+                </form>
+            </div>
             <div class="flex-grow"></div>
 
             <ul class="top-bar icon flex items-center mx-auto">
