@@ -10,7 +10,7 @@
     <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">하늘하늘</title>
 </head>
 <body>
-<section class="con h-screen">
+<section class="con">
     <div class="top-bar h-24 w-full bg-white relative">
         <div class="top-bar image w-full mx-auto h-full flex">
             <a th:href="@{|/|}" class="logo flex flex-items-center">
@@ -21,13 +21,13 @@
 
             <ul class="top-bar icon flex items-center mx-auto">
                 <li>
-                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3">로그인</a>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3 text-xl">로그인</a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" class="p-3">로그아웃</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" class="p-3 text-xl">로그아웃</a>
                 </li>
                 <li>
-                    <a th:href="@{|/user/join|}" class="p-3">회원가입</a>
+                    <a th:href="@{|/user/join|}" class="p-3 text-xl">회원가입</a>
                 </li>
                 <li>
                     <a href="" class="p-3">장바구니</a>
