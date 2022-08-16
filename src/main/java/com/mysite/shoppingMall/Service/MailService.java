@@ -3,11 +3,13 @@ package com.mysite.shoppingMall.Service;
 import com.mysite.shoppingMall.Form.FindPwForm;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Form.MailDto;
+import com.mysite.shoppingMall.Vo.MallUser;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
 public class MailService {
     private JavaMailSender mailSender;
     private UserRepository userRepository;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
     private static final String FROM_ADDRESS = "no_repy@boki.com";
 
     @Async
@@ -57,4 +61,27 @@ public class MailService {
     }
 
 
+    public void findPw(FindPwForm findPwForm) {
+        findPwForm.setIsSuccess("success");
+        String passwordTmp = RandomStringUtils.randomAlphanumeric(5);
+        MallUser mallUser = userService.getUser(findPwForm.getEmail());
+        mallUser.setUserPassword(passwordEncoder.encode(passwordTmp));
+        userRepository.save(mallUser);
+        System.out.println(passwordTmp);
+    }
+
+    public void isSuccess(int i, MailDto mailDto) {
+        if(i == 1){
+            mailDto.setSuccess("Success");
+            mailDto.setFail(null);
+        }
+        else if(i == 0){
+            mailDto.setSuccess(null);
+            mailDto.setFail("Fail");
+        }
+    }
+
+    public void findPwForm(FindPwForm findPwForm) {
+        findPwForm.setIsSuccess("fail");
+    }
 }
