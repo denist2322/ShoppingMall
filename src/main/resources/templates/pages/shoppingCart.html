@@ -40,9 +40,11 @@
         <table class="w-full h-2/5">
             <colgroup class="#">
                 <col width="3%"/>
-                <col width="40%"/>
-                <col width="37%"/>
+                <col width="30%"/>
                 <col width="20%"/>
+                <col width="12%"/>
+                <col width="20%"/>
+                <col width="15%"/>
             </colgroup>
             <thead class="h-12 items-center">
 
@@ -52,7 +54,9 @@
                 </th>
                 <th class="justify-center">상품정보</th>
                 <th class=""></th>
+                <th class="justify-center">수량</th>
                 <th class="justify-center">주문금액</th>
+                <th class="justify-center">삭제</th>
             </tr>
 
             </thead>
@@ -74,13 +78,29 @@
                         </ul>
                     </th>
                     <th class="">
-                        <div class="h-1/3 items-center">
+                        <div>
                             <span class="block w-full">[[${shoppingCart.product.title}]]</span>
                             <span class="block w-full">[[${shoppingCart.cartColor}]] / [[${shoppingCart.cartSize}]]</span>
-                            <span class="block w-full">[[${shoppingCart.cartCount}]]</span>
                         </div>
                     </th>
                     <th>
+                        <span class="block w-full">[[${shoppingCart.cartCount}]]</span>
+                    </th>
+                    <th>
+                        <script>
+                        /*<![CDATA[*/
+                        function calc(){
+                            let price = [[${shoppingCart.product.price}]];
+                            let discount = 1 - ([[${shoppingCart.product.discount}]] / 100);
+                            let result = price * discount;
+                            document.write(result);
+                        }
+                        calc();
+                        /*]]*/
+                        </script>
+                    </th>
+                    <th>
+                        <button class="block w-full"><i class="fa-solid fa-x"></i></button>
                     </th>
                 </tr>
                 </tbody>
@@ -115,4 +135,32 @@
 </html>
 <!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
 <script layout:fragment="script" type='text/javascript'>
+    $(document).ready(function(){
+
+	let totalPrice = 0;
+	let deliveryPrice = 0;
+	let finalTotalPrice = 0;
+
+
+
+	/* 배송비 결정 */
+	if(totalPrice >= 30000){
+		deliveryPrice = 0;
+	} else if(totalPrice == 0){
+		deliveryPrice = 0;
+	} else {
+		deliveryPrice = 3000;
+	}
+
+	finalTotalPrice = totalPrice + deliveryPrice;
+
+	/* 값 삽입 */
+	// 총 가격
+	$(".totalPrice_span").text(totalPrice.toLocaleString());
+	// 배송비
+	$(".delivery_price").text(deliveryPrice);
+	// 최종 가격(총 가격 + 배송비)
+	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
+});
+
 </script>
