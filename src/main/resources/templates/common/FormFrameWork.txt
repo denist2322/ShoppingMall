@@ -9,4 +9,9 @@
 <main layout:fragment="main">
 
 </main>
+
+<script layout:fragment="script" type='text/javascript'>
+        /*<![CDATA[*/
+        /*]]*/
+</script>
 </html>
