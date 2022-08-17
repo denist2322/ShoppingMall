@@ -85,3 +85,21 @@ align-items: center;
     width:400px;
     height:400px;
     }
+
+.icon.solid:before {
+		font-weight: 900 !important;
+		}
+
+.icon.brands:before {
+		font-family: 'Font Awesome 5 Brands';
+        }
+
+.icon.major {
+			...
+		}
+
+.icon.major:before {
+        ...
+		font-family: 'Font Awesome 5 Free';
+	    ...;
+		}
