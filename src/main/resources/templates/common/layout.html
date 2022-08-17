@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <script src="https://cdn.tailwindcss.com"></script>
+<!--css 연결-->
 <link rel="stylesheet" href="/common/common.css">
 <!--FontAwesome import-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.0/css/all.css">
@@ -10,11 +11,14 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <!--daisyUI import-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css" type="text/css"/>
+<!--폰트어썸-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
+<!--J쿼리 import-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 <head>
     <meta charset="UTF-8">
-    <!--J쿼리 import-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/32d831bebd.js" crossorigin="anonymous"></script>
     <!--    <div th:replace="common/darkMod :: darkFragment"></div>-->
     <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">하늘하늘</title>
 </head>
@@ -32,7 +36,7 @@
                     <div class="flex search">
                         <input th:if="${keyword!=null}" type="text" name="keyword" th:value="${keyword}" class="flex text-xl w-60 h-12 border-b-2 border-black focus:outline-none">
                         <input th:if="${keyword==null}" type="text" name="keyword" class="flex text-xl w-60 h-12 border-b-2 border-black focus:outline-none">
-                        <button type="submit" class="pl-3 fa-solid fa-magnifying-glass fa-xl"></button>
+                        <button type="submit" class="fa fa-search fa-xl pl-3"></button>
                     </div>
                 </form>
             </div>

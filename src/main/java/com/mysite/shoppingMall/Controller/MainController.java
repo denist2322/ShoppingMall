@@ -6,7 +6,6 @@ import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -27,12 +26,8 @@ public class MainController {
         return "redirect:/main";
     }
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public String showTest() {
-        if(shoppingCartRepository.existsByProductIdAndCartColor(1L,"White")){
-            return "있어";
-        }
-        return "없어";
-    }
+//    @RequestMapping("/test")
+//    public String showTest() {
+//        return "common/test.html";
+//    }
 }
