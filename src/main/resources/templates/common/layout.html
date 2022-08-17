@@ -32,11 +32,10 @@
 
             <!-- 검색기능 -->
             <div class="flex justify-center items-center w-1/2 h-full ml-20">
-                <form th:action="@{/product/search}" method="get" role="search">
+                <form role="search" id="form">
                     <div class="flex search">
-                        <input th:if="${keyword!=null}" type="text" name="keyword" th:value="${keyword}" class="flex text-xl w-60 h-12 border-b-2 border-black focus:outline-none">
-                        <input th:if="${keyword==null}" type="text" name="keyword" class="flex text-xl w-60 h-12 border-b-2 border-black focus:outline-none">
-                        <button type="submit" class="fa fa-search fa-xl pl-3"></button>
+                        <input type="text" name="keyword" id="keyword" th:value="${keyword}" class="flex text-xl w-60 h-12 border-b-2 border-black focus:outline-none">
+                        <button type="button" onclick="javascript:isKeyword()" class="fa fa-search fa-xl pl-3"></button>
                     </div>
                 </form>
             </div>
@@ -146,6 +145,21 @@
     </nav>
 </div>
 </section>
+<script layout:fragment="script" type='text/javascript'>
+    function isKeyword(){
+        let keyword = $("#keyword").val();
+
+        if(keyword.length != 0){
+            console.log("이동");
+            form.action = "/product/search";
+            form.method = "get";
+            form.submit();
+        }
+        else{
+            alert("검색어를 입력해주세요.");
+        }
+    }
+</script>
 </body>
 </html>
 
