@@ -63,87 +63,124 @@
             </ul>
         </div>
 
-
-
     </div>
-    <div class="top-bar h-12 flex">
-        <nav class="top-bar__menu-box-1 w-full flex justify-center">
-            <ul class="flex h-full">
-                <li>
-                    <a th:href="@{|/product/list?category=man|}" class="flex items-center h-full px-5">
-                        <span class="text-2xl">MAN</span>
+    <nav class="top-bar__menu-box-1 text-3xl my-2 w-full flex justify-center">
+        My Page
+    </nav>
+    <div class="myimage flex w-full h-24 border-2 boder-gray-300">
+        <p class="flex h-full justify-center w-28 items-center">
+            <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/img_member_default.gif" alt="">
+        </p>
+        <div class="w-full">
+            <div class="w-full pt-2 h-1/2">이름 님 저희 쇼핑몰을 이용해 주셔서 감사합니다.</div>
+            <div class="w-full pt-2 h-1/2">총 구매금액은 얼마 입니다.</div>
+        </div>
+    </div>
+
+    <div class="ordergold mt-6 w-full h-28">
+        <ul class="w-full h-24 border-2 boder-300">
+            <li class="flex pl-2 pt-4 h-1/2">
+                <div class="w-1/10">총 주문금액 :</div>
+                <div class="pl-6">000원</div>
+            </li>
+            <li class="flex pl-2 pt-4 h-1/2">
+                <div class="w-1/10">쿠폰 :</div>
+                <div class="pl-6 w-1/10">00개</div>
+                <div class="pl-6">
+                    <a
+                            href="#"
+                            class="flex justify-center w-10 items-center bg-green-500 text-white font-medium text-sm uppercase rounded shadow-md hover:bg-blue-700"
+                    >
+                        조회
                     </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="myordering mt-6 w-full h-32 border-2 border-gray-300">
+        <div class="w-full h-12">
+            <div class="flex h-12 pl-4 items-center border-b-2 border-gray-300">나의 주문처리 현황</div>
+        </div>
+        <div class="flex h-20">
+            <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
+                입금전
+                <a href="#">
+                    <span>0</span>
+                </a>
+            </li>
+            <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
+                배송준비중
+                <a href="#">
+                    <span>0</span>
+                </a>
+            </li>
+            <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
+                배송중
+                <a href="#">
+                    <span>0</span>
+                </a>
+            </li>
+            <li class="flex w-1/4 justify-center flex-col items-center">
+                배송완료
+                <a href="#">
+                    <span>0</span>
+                </a>
+            </li>
+        </div>
+    </div>
+    <main layout:fragment="main">
+    </main>
+    <div class="footer w-full h-96 flex flex-col">
+        <nav class="division w-full h-20 flex justify-center items-center border border-gray mt-5 mb-5">
+            <ul class="flex">
+                <li>
+                    <a href="" class="flex h-full px-5 items-center">회사소개</a>
                 </li>
                 <li>
-                    <a th:href="@{|/product/list?category=woman|}" class="flex items-center h-full px-5">
-                        <span class="text-2xl">WOMAN</span>
-                    </a>
+                    <a href="" class="flex h-full px-5 items-center"> Q & A</a>
                 </li>
                 <li>
-                    <a th:href="@{|/product/list?category=training|}" class="flex items-center h-full px-5">
-                        <span class="text-2xl">TRAINING</span>
-                    </a>
+                    <a href="" class="flex h-full px-5 items-center"> 이용약관</a>
                 </li>
                 <li>
-                    <a th:href="@{|/product/list?category=acc|}" class="flex items-center h-full px-5">
-                        <span class="text-2xl">ACC</span>
-                    </a>
+                    <a href="https://www.law.go.kr/html/renew/privacy.html" class="flex h-full px-5 items-center">개인정보처리방침</a>
                 </li>
             </ul>
         </nav>
-    </div>
-<main layout:fragment="main">
-</main>
-<div class="footer w-full h-96 flex flex-col">
-    <nav class="division w-full h-20 flex justify-center items-center border border-gray mt-5 mb-5">
-        <ul class="flex">
-            <li>
-                <a href="" class="flex h-full px-5 items-center">회사소개</a>
-            </li>
-            <li>
-                <a href="" class="flex h-full px-5 items-center"> Q & A</a>
-            </li>
-            <li>
-                <a href="" class="flex h-full px-5 items-center"> 이용약관</a>
-            </li>
-            <li>
-                <a href="https://www.law.go.kr/html/renew/privacy.html" class="flex h-full px-5 items-center">개인정보처리방침</a>
-            </li>
-        </ul>
-    </nav>
 
-    <nav class="address flex w-full h-64">
-        <div class="address-left flex w-3/5 flex-col mr-8">
-            <div class="flex text-3xl">하늘하늘</div>
-            <div class="flex mt-2">
+        <nav class="address flex w-full h-64">
+            <div class="address-left flex w-3/5 flex-col mr-8">
+                <div class="flex text-3xl">하늘하늘</div>
+                <div class="flex mt-2">
         <span>대표이사 : 하늘이좋아 사업자등록번호 : 1234-56-78910 통신판매업신고 : 1111-충남공주-22222
         호스팅사업자 : (주)하늘하늘 주소 : 서울 강남구 테헤란로38길 12 (역삼동)
           개인정보관리책임자 : 이하늘(privacy@brandi.co.kr)
         </span>
-            </div>
-            <div class="flex mt-2">
+                </div>
+                <div class="flex mt-2">
         <span>(주)하늘하늘가 제공하는 하늘하늘서비스는 통신판매중개자로서 통신판매 당사자가 아니며,
 판매자가 등록한 상품정보 및 거래에 하늘하늘은 책임지지 않습니다.</span>
-            </div>
-            <div class="flex mt-2">
+                </div>
+                <div class="flex mt-2">
         <span>100% 정품
 하늘하늘에서 판매되는 모든 브랜드 제품은 정식제조, 정식수입원을 통해 유통되는 100% 정품입니다.</span>
+                </div>
+                <div class="flex mt-5">
+                    <span class="mx-2">안전거래센터</span>
+                    <a href="https://sites.google.com/brandi.co.kr/safety/%ED%99%88" target="_blank"class="declare text-gray-500">신고하기</a>
+                </div>
             </div>
-            <div class="flex mt-5">
-                <span class="mx-2">안전거래센터</span>
-                <a href="https://sites.google.com/brandi.co.kr/safety/%ED%99%88" target="_blank"class="declare text-gray-500">신고하기</a>
-            </div>
-        </div>
-        <div class="address-right flex w-2/5 flex-col">
-            <div class="flex text-3xl">고객센터</div>
-            <a href="#" class="text-3xl"> 1234-5678</a>
-            <div class="flex mt-2">
+            <div class="address-right flex w-2/5 flex-col">
+                <div class="flex text-3xl">고객센터</div>
+                <a href="#" class="text-3xl"> 1234-5678</a>
+                <div class="flex mt-2">
       <span>영업시간 AM 10:00 ~ PM 17:00(주말 및 공휴일 휴무)
 점심시간 PM 12:30 ~ PM 13:30</span>
+                </div>
             </div>
-        </div>
-    </nav>
-</div>
+        </nav>
+    </div>
 </section>
 <script layout:fragment="script" type='text/javascript'>
     function isKeyword(){

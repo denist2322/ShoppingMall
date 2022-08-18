@@ -177,15 +177,6 @@
     // 총 가격
     totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
 
-	/* 배송비 결정 */
-	if(totalPrice >= 30000){
-		deliveryPrice = 0;
-	} else if(totalPrice == 0){
-		deliveryPrice = 0;
-	} else {
-		deliveryPrice = 3000;
-	}
-
 	finalTotalPrice = totalPrice + deliveryPrice;
 
 	/* 값 삽입 */

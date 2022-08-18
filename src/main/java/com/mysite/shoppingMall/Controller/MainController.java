@@ -28,6 +28,6 @@ public class MainController {
 
 //    @RequestMapping("/test")
 //    public String showTest() {
-//        return "common/test.html";
-//    }
+//        return "common/mypagelayout.html";
+//  }
 }
