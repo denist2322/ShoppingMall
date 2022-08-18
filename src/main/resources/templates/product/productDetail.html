@@ -21,14 +21,6 @@
             orderForm.submit();
         }
 
-        function minus() {
-            alert("개수가 줄어들었습니다.");
-        }
-
-        function plus() {
-            alert("개수가 증가하였습니다.");
-        }
-
         // 옷의 색상을 선택하면 화면에 보여줌.
          $(function() {
             $("#color").change(function() {
@@ -62,6 +54,7 @@
               document.write(discountPrice.toLocaleString());
          }
          /*]]*/
+
     </script>
     <div class="max-w-screen-lg mx-auto">
 
@@ -74,7 +67,8 @@
             <input type="hidden" name="orderCount" value=2/>
 
             <div class="w-1/2">
-                <img th:src="'/product_image/'+${product.title}+'/'+${product.mainImage}" alt="상품 이미지" class="border product_img2">
+                <img th:src="'/product_image/'+${product.title}+'/'+${product.mainImage}" alt="상품 이미지"
+                     class="border product_img2">
             </div>
             <div class="w-1/2 ">
                 <div class="py-2">
@@ -94,7 +88,8 @@
                 <div class="box-border h-20 px-4 mt-3 border border-gray-400">
                     <div class="flex items-center justify-between h-full">
                         <span class="text-xl font-bold">최종 예상 구매가</span>
-                        <input class="text-right text-xl text-red-300 focus:outline-none" th:value="${discountPrice}" readonly/>
+                        <input class="text-right text-xl text-red-300 focus:outline-none" th:value="${discountPrice}"
+                               readonly/>
                     </div>
                 </div>
 
@@ -102,7 +97,9 @@
                     <select name="orderColor" id="color" class="w-full">
                         <option value="no">색상을 선택하세요.</option>
                         <div th:each="color : ${product.productColorList}" id="selectColor">
-                            <option th:value="${color.productColor}" onclick="javascript:changeStyle()">[[${color.productColor}]]</option>
+                            <option th:value="${color.productColor}" onclick="javascript:changeStyle()">
+                                [[${color.productColor}]]
+                            </option>
                         </div>
                     </select>
                 </div>
@@ -121,19 +118,45 @@
                     <div class="flex justify-between w-full table-fixed mt-8 box-border">
                         <div class="flex w-10">
                             <input type="text" class="block w-8 h-8 border border-gray-200 mr-5" id="resultColor">
-                            <div id = "resultSize" class="flex items-center">
+                            <div id="resultSize" class="flex items-center">
                             </div>
 
                         </div>
                         <div class="flex align-middle">
-                            <input type="button" value="-" onclick="minus()" class="w-8 h-8 bg-white cursor-pointer text-2xl">
-                            <input type="text" class="w-8 h-8 bg-white text-black text-bold font-xl text-center" value="1" readonly>
-                            <input type="button" value="+" onclick="plus()" class="w-8 h-8 bg-white cursor-pointer text-2xl">
+                            <input type="button" value="-" onclick="minus()"
+                                   class="w-8 h-8 bg-white cursor-pointer text-2xl">
+                            <input type="text" class="w-8 h-8 bg-white text-black text-bold font-xl text-center focus:outline-none"
+                                   value="1" id="count" readonly>
+                            <input type="button" value="+" onclick="plus()"
+                                   class="w-8 h-8 bg-white cursor-pointer text-2xl">
                         </div>
-                        <div class="flex px-auto py-2 box-border font-bold text-right">최종가격</div>
+                        <script>
+                        var count = 1;
+                        var countEl = document.getElementById("count");
+                        var total_count = document.getElementById("total_count");
+                        var total_count_view = document.getElementById("total_count_view");
+
+                        function minus() {
+                        if(count > 1) {
+                        count--;
+                        countEl.value = count;
+                        total_count_view.value = total_count_view.value - total_count.value;
+                         }
+                        }
+
+                        function plus() {
+                        count++;
+                        countEl.value = count;
+                        total_count_view.value = total_count.value * countEl.value;
+                        }
+
+                        </script>
+                        <input type="text" id="total_count_view" class="flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none"
+                               th:value="${discountPrice}" readonly/>
                     </div>
                     <button class="absolute top-5 right-5 cursor-pointer">
-                        <img src="https://www.hiver.co.kr/static/22.05.01/images/btn-del-option.png" alt="" class="w-5 h-5">
+                        <img src="https://www.hiver.co.kr/static/22.05.01/images/btn-del-option.png" alt=""
+                             class="w-5 h-5">
                     </button>
                 </div>
 
