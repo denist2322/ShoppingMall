@@ -30,6 +30,10 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+  servlet:
+    multipart:
+      maxFileSize: 15MB
+      maxRequestSize : 15MB
 logging:
   level:
     org:

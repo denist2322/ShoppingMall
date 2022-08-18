@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>페이지 이름</title>
+</head>
+
+<main layout:fragment="main">
+    <div class="container max-w-screen-lg mx-auto">
+        <div class="mt-5 mb-2 text-xl font-bold text-center">상품 등록</div>
+        <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
+            <form class="w-1/2" th:action="@{/product/doWrite}" method="post" enctype="multipart/form-data">
+                <!-- ProductName input -->
+                <label for="name">상품명</label>
+                <div class="flex mb-3">
+                    <input type="text" name="title" id="name" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
+                </div>
+                <!-- 상품 설명 -->
+                <label for="content">상품 설명</label>
+                <div class="mb-3">
+                    <textarea type="text" name="body" id="content" cols="15" rows="5" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded flex" placeholder="내용을 입력해주세요.(최대:200자)"></textarea>
+                </div>
+
+                <!-- Price input -->
+                <label for="price">상품 가격</label>
+                <div class="mb-3">
+                    <input type="text" id="price" name="price" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
+                </div>
+
+                <!-- discount input -->
+                <label for="discount">할인률 (%)</label>
+                <div class="mb-3">
+                    <input type="text" id="discount" name="discount" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
+                </div>
+
+                <!-- Category input -->
+                <label for="category">카테고리</label>
+                <div class="mb-3">
+                    <select id="category" name="category" class="w-full px-4 py-2 text-xl select select-bordered">
+                        <option disabled selected>선택하세요</option>
+                        <option value="man">MAN</option>
+                        <option value="woman">WOMAN</option>
+                        <option value="training">TRAINING</option>
+                        <option value="acc">ACC</option>
+                    </select>
+                </div>
+
+                <!-- 색상 input -->
+                <div class="mb-3">
+                    <label for="color">색상</label>
+                    <input type="text" id="color" name="color" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
+                </div>
+
+                <!-- 사이즈 input -->
+                <div class="mb-3">
+                    <label for="size">사이즈</label>
+                    <input type="text" id="size" name="size" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
+                </div>
+
+                <!-- 메인 이미지 -->
+                <div class="mb-5">
+                    <label for="chooseFile1">
+                        메인 이미지(한개 만 적용 가능합니다.)
+                    </label>
+                    <br>
+                    <input type="file" id="chooseFile1" name="mainImage"/>
+                </div>
+                <!-- 상품 상세 이미지 -->
+                <div class="mb-5">
+                    <label for="chooseFile2">
+                        상세 이미지(최소 한개 이상 첨부가 필요합니다.)
+                    </label>
+                    <input type="file" id="chooseFile2" name="detailImage" multiple/>
+                </div>
+
+                <!-- Submit button -->
+                <div class="flex w-full">
+                    <input type="submit" class="btn btn-success flex w-1/2 mr-1" value="등록하기" data-mdb-ripple="true" data-mdb-ripple-color="light">
+                    </input>
+                    <input type="reset" class="btn btn-error flex w-1/2" value="취소하기" data-mdb-ripple="true" data-mdb-ripple-color="light">
+                    </input>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script layout:fragment="script" type='text/javascript'>
+        /*<![CDATA[*/
+        /*]]*/
+</script>
+</html>
