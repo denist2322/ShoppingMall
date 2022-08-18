@@ -81,14 +81,16 @@
                         <div>
                             <span class="block w-full">[[${shoppingCart.product.title}]]</span>
                             <span class="block w-full">[[${shoppingCart.cartColor}]] / [[${shoppingCart.cartSize}]]</span>
+                            <span id="resultBox"></span>
                         </div>
                     </th>
                     <th>
                         <span class="block w-full">[[${shoppingCart.cartCount}]]</span>
                     </th>
-                    <th>
+                    <th class="price">
                         <script>
                         /*<![CDATA[*/
+
                         function calc(){
                             let price = [[${shoppingCart.product.price}]];
                             let discount = 1 - ([[${shoppingCart.product.discount}]] / 100);
@@ -96,6 +98,8 @@
                             document.write(result);
                         }
                         calc();
+
+
                         /*]]*/
                         </script>
                     </th>
@@ -109,12 +113,42 @@
         <div class="w-full h-12 border-b-2 border-black">
         </div>
         <div class="border-2 border-gray-300 p-4 text-2xl h-72 mt-16">
-            <div class="text-2xl h-1/4 pt-2">배송비 :
-                <input type="text" class="">
+            <div class="flex text-2xl h-1/4 pt-6"> 상품금액 :
+                <div class="pl-3" id="totalPrice">
+                    <script>
+                    const totalPriceBox = document.getElementById("totalPrice");
+                    let totalPrice1 = 0;
+                    const prices = document.querySelectorAll(".price");
+
+                    prices.forEach(price => totalPrice1 += parseInt(price.innerText));
+                    totalPriceBox.innerText = totalPrice1;
+
+                    </script>
+                </div>
             </div>
-            <div class="text-2xl h-1/4 pt-6">상품금액 :
-                <input type="text" class="">
+            <div class="flex text-2xl h-1/4 pt-2">배송비 :
+                <div class="pl-3" id="deliveryPrice">
+                    <script>
+                    const totaldeliveryPriceBox = document.getElementById("deliveryPrice");
+
+                    let deliveryPrice = 0;
+
+                    const deliverypricesBox = document.getElementById("totalPrice");
+
+                    /* 배송비 결정 */
+                    if(deliverypricesBox.innerText >= 50000){
+                        deliveryPrice = 0;
+                    } else if(deliverypricesBox.innerText == 0){
+                        deliveryPrice = 0;
+                    } else {
+                        deliveryPrice = 3000;
+                    }
+
+                    totaldeliveryPriceBox.innerText = deliveryPrice;
+                    </script>
+                </div>
             </div>
+
             <div class="text-2xl h-1/4 pt-7">
                 <div class=" text-2xl h-1/4 pt-6 leading-loose border-t-2 border-gray-300">
                     <div class="flex justify-between w-full h-20">
@@ -128,9 +162,8 @@
                 </div>
             </div>
         </div>
-
     </mainthird>
-
+    <input type="hidden" id="" th:value="25000">
 </main>
 </html>
 <!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
@@ -141,7 +174,8 @@
 	let deliveryPrice = 0;
 	let finalTotalPrice = 0;
 
-
+    // 총 가격
+    totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
 
 	/* 배송비 결정 */
 	if(totalPrice >= 30000){
