@@ -7,6 +7,7 @@
 </head>
 
 <main layout:fragment="main">
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <div class="mt-5 mb-2 text-xl font-bold text-center">
         <h1 class="text-3xl">주문하기</h1>
     </div>
@@ -197,7 +198,7 @@
 
         <!--주문하기 버튼 시작-->
         <div class="my-20 box-border text-center">
-            <a href="#" class="cursor-pointer w-full bg-black text-white px-20 py-5 text-2xl box-border">주문하기</a>
+            <button id="iamportPayment" type="button" class="cursor-pointer w-full bg-black text-white px-20 py-5 text-2xl box-border">주문하기</button>
         </div>
         <!--주문하기 버튼 끝-->
     </div>
@@ -205,12 +206,6 @@
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-
-    //원화는 콤마를 붙여준다.
-    var money = $('#money').text();
-    var money2 = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    $('#money').text(money2);
-
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -258,7 +253,35 @@
             }
         }).open();
     }
+    //문서가 준비되면 제일 먼저 실행
+    $(document).ready(function(){
+        $("#iamportPayment").click(function(){
+            payment(); //버튼 클릭하면 호출
+        });
+    })
 
+
+    //버튼 클릭하면 실행
+    function payment(data) {
+        IMP.init('');//아임포트 관리자 콘솔에서 확인한 '가맹점 식별코드' 입력
+        IMP.request_pay({// param
+            pg: "kakaopay.", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
+            pay_method: "card", //지불 방법
+            merchant_uid: "1312323", //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+            name: "회식비", //결제창에 노출될 상품명
+            amount: 500000, //금액
+            buyer_email : "testiamport@naver.com",
+            buyer_name : "강호열",
+            buyer_tel : "01012341234"
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                alert("완료 -> imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : " +rsp.merchant_uid);
+            } else {
+                alert("안됨");
+                // alert("실패 : 코드("+rsp.error_code+") / 메세지(" + rsp.error_msg + ")");
+            }
+        });
+    }
 
 
     </script>
