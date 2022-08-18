@@ -66,4 +66,9 @@ public class Ut {
         return phoneTemp;
     }
 
+    public static String[] splitStar(String color) {
+        String[] AddressTemp = color.split("\\*\\*");
+
+        return AddressTemp;
+    }
 }

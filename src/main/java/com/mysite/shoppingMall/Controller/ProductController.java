@@ -2,6 +2,7 @@ package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Form.OrderSheetForm;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
+import com.mysite.shoppingMall.Form.ProductWriteForm;
 import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
@@ -15,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -28,27 +31,16 @@ public class ProductController {
     private final UserService userService;
 
 
-    //C 생성 ==============================================
-//    @RequestMapping("/doWrite")
-//    @ResponseBody
-//    public String doWrite(String title, String body){
-//        if(Ut.empty(title)){
-//            return "제목을 입력해주세요.";
-//        }
-//        if(Ut.empty(body)){
-//            return "내용을 입력해주세요.";
-//        }
-//
-//        Product product = new Product();
-//        product.setRegDate(LocalDateTime.now());
-//        product.setUpdateDate(LocalDateTime.now());
-//        product.setTitle(title);
-//        product.setBody(body);
-//
-//        productRepository.save(product);
-//
-//        return "%s 상품이 생성되었습니다.".formatted(product.getTitle());
-//    }
+//    C 생성 ==============================================
+    @GetMapping("/doWrite")
+    public String showWrite(ProductWriteForm productWriteForm){
+        return "product/writeProduct.html";
+    }
+    @PostMapping("/doWrite")
+    public String doWrite(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm){
+        productService.doWrite(mainImage, detailImage, productWriteForm);
+        return "redirect:/";
+    }
 
 
     //R 읽기 ==============================================
@@ -135,7 +127,7 @@ public class ProductController {
     public String order(OrderSheetForm orderSheetForm, ProductBuyForm productBuyForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
 
-        productService.readyForOrder(productBuyForm,mallUser);
+        productService.readyForOrder(orderSheetForm,mallUser);
         
         model.addAttribute("mallUser", mallUser);
 
