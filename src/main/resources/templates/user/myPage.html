@@ -1,55 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{common/layout}">
+      layout:decorate="~{common/mypagelayout}">
 <head>
     <meta charset="UTF-8">
-    <title>페이지 이름</title>
+    <title>마이 페이지</title>
 </head>
 
 <main layout:fragment="main">
-    <nav class="top-bar__menu-box-1 text-3xl my-2 w-full flex justify-center">
-        My Page
-    </nav>
-    <div class="myimage flex w-full h-24 border-2 boder-gray-300">
-        <p class="flex h-full justify-center w-28 items-center">
-            <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/img_member_default.gif" alt="">
-        </p>
-        <div class="w-full">
-            <div class="w-full pt-2 h-1/2">[[${mallUser.name}]] 님 저희 쇼핑몰을 이용해 주셔서 감사합니다.</div>
-        </div>
-    </div>
-
-    <div class="myordering mt-6 w-full h-32 border-2 border-gray-300">
-        <div class="w-full h-12">
-            <div class="flex h-12 pl-4 items-center border-b-2 border-gray-300">나의 주문처리 현황</div>
-        </div>
-        <div class="flex h-20">
-            <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
-                입금전
-                <a href="#">
-                    <span>0</span>
-                </a>
-            </li>
-            <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
-                배송준비중
-                <a href="#">
-                    <span>0</span>
-                </a>
-            </li>
-            <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
-                배송중
-                <a href="#">
-                    <span>0</span>
-                </a>
-            </li>
-            <li class="flex w-1/4 justify-center flex-col items-center">
-                배송완료
-                <a href="#">
-                    <span>0</span>
-                </a>
-            </li>
-        </div>
-    </div>
 
     <form th:action="@{|/user/myPage|}" method="post"
           class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
