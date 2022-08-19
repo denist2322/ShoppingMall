@@ -3,9 +3,13 @@ package com.mysite.shoppingMall.Controller;
 import com.mysite.shoppingMall.Repository.ProductRepository;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
+import com.mysite.shoppingMall.Vo.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -26,8 +30,11 @@ public class MainController {
         return "redirect:/main";
     }
 
-//    @RequestMapping("/test")
-//    public String showTest() {
-//        return "common/mypagelayout.html";
-//  }
+    @RequestMapping("/test")
+    public String showTest(Model model) {
+        List<ShoppingCart> shoppingCartList = shoppingCartRepository.findAll();
+        System.out.println(shoppingCartList.get(0));
+        model.addAttribute("shoppingCartList", shoppingCartList);
+        return "user/ordershpping.html";
+  }
 }
