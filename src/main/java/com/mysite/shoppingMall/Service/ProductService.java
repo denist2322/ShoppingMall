@@ -22,10 +22,12 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final FileUploadService fileUploadService;
+    private final FileService fileService;
     private final ProductImageRepository productImageRepository;
     private final ProductSizeRepository productSizeRepository;
     private final ProductColorRepository productColorRepository;
+
+
     public Product findProduct(Long id) {
         Product product = productRepository.findById(id).get();
         return product;
@@ -61,8 +63,9 @@ public class ProductService {
         orderSheetForm.setOrderSheetReceiverAddress3(Address[1].trim()); //동
         orderSheetForm.setOrderSheetReceiverAddress4(Address[2].trim()); //상세주소
     }
+
     @Transactional
-    public List<Product> searchTitleAndBody(String keyword){
+    public List<Product> searchTitleAndBody(String keyword) {
         List<Product> productList = productRepository.findByTitleAndBody(keyword);
         return productList;
     }
@@ -76,19 +79,19 @@ public class ProductService {
         product.setDiscount(productWriteForm.getDiscount());
         product.setCategory(productWriteForm.getCategory());
         product.setMainImage(mainImage.get(0).getOriginalFilename());
-        fileUploadService.doUpload(productWriteForm, mainImage); // 메인 이미지 업로드
+        fileService.doUpload(productWriteForm, mainImage); // 메인 이미지 업로드
         productRepository.save(product);
 
-        for(int i = 0; i < detailImage.size(); i++){
+        for (int i = 0; i < detailImage.size(); i++) {
             ProductImage productImage = new ProductImage();
             productImage.setImages(detailImage.get(i).getOriginalFilename());
             productImage.setProduct(product);
             productImageRepository.save(productImage);
         }
-        fileUploadService.doUpload(productWriteForm, detailImage); // 디테일 이미지 업로드
+        fileService.doUpload(productWriteForm, detailImage); // 디테일 이미지 업로드
 
         String[] tmp = Ut.splitStar(productWriteForm.getColor());
-        for(int i = 0; i < tmp.length; i++){
+        for (int i = 0; i < tmp.length; i++) {
             ProductColor productColor = new ProductColor();
             productColor.setProductColor(tmp[i].trim());
             productColor.setProduct(product);
@@ -96,12 +99,28 @@ public class ProductService {
         }
 
         tmp = Ut.splitStar(productWriteForm.getSize());
-        for(int i = 0; i < tmp.length; i++){
+        for (int i = 0; i < tmp.length; i++) {
             ProductSize productSize = new ProductSize();
             productSize.setProductSize(tmp[i].trim());
             productSize.setProduct(product);
             productSizeRepository.save(productSize);
         }
-        
+
+    }
+
+    public boolean isExists(Long id) {
+        if (productRepository.existsById(id)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void doDelete(Long id) {
+        Product product = productRepository.findById(id).get();
+        // 파일 삭제
+        fileService.deleteFile(product);
+        // 한번에 같이 삭제된다. OneToMany 에서 cascade = CascadeType.REMOVE 했기 때문
+        productRepository.delete(product);
+
     }
 }
