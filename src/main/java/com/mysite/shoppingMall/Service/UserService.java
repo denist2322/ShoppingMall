@@ -47,18 +47,19 @@ public class UserService {
 
     public void setSession(HttpSession session, MallUser user) {
 
-        if (user.getName().equals("관리자")) {
+        if (user.getName().equals("관리자") && user.getUserEmail().equals("admin@test.com")) {
             session.setAttribute("UserId", user.getId());
-            session.setAttribute("authority", "0");
+            session.setAttribute("authority", 0);
+            return;
         }
 
         session.setAttribute("UserId", user.getId());
-        session.setAttribute("authority", "1");
-
+        session.setAttribute("authority", 1);
     }
 
     public void removeSession(HttpSession session, Integer userId) {
         session.removeAttribute("UserId");
+        session.removeAttribute("authority");
     }
 
     public void create(JoinForm joinForm) {

@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -52,7 +49,7 @@ public class ProductController {
     }
 
     @RequestMapping("/detail") // 단건조회
-    public String showDetail(Long id, ProductBuyForm productBuyForm, Model model) {
+    public String showDetail(Long id, ProductBuyForm productBuyForm, HttpSession session ,Model model) {
 
         Product product = productService.findProduct(id);
         int discountPrice = productService.calcPrice(product, id);
@@ -63,6 +60,15 @@ public class ProductController {
 
 
     //U 수정 ==============================================
+    @GetMapping("/doModify")
+    public String showModify(ProductWriteForm productWriteForm){
+        return "product/modifyProduct.html";
+    }
+    @PostMapping("/doModify")
+    public String doModify(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm){
+        productService.doWrite(mainImage, detailImage, productWriteForm);
+        return "redirect:/";
+    }
 //    @RequestMapping("/doModify")
 //    @ResponseBody
 //    public String doModify(Long id, String title, String body){
@@ -90,18 +96,21 @@ public class ProductController {
 
 
     //D 삭제 ==============================================
-//    @RequestMapping("/doDelete")
-//    @ResponseBody
-//    public String doDelete(Long id){
-//        if(!productRepository.existsById(id)){
-//            return "%d번 게시물이 없습니다.".formatted(id);
-//        }
-//
-//        Product product = productRepository.findById(id).get();
-//        productRepository.delete(product);
-//
-//        return "%d번 게시물을 삭제했습니다.".formatted(id);
-//    }
+    @RequestMapping("/doDelete")
+    public String doDelete(Long id, Model model){
+
+        if(!productService.isExists(id)){
+            model.addAttribute("msg", "게시물이 존재하지 않습니다.");
+            model.addAttribute("replaceUri", "/");
+            return "common/js";
+        }
+
+        productService.doDelete(id);
+
+        model.addAttribute("msg", "삭제 완료되었습니다.");
+        model.addAttribute("replaceUri", "/");
+        return "common/js";
+    }
 
     //post 방식을 써야 ? 파라미터를 지울 수 있음.
     @GetMapping("/orderSheetTmp")
