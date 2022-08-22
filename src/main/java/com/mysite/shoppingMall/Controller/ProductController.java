@@ -30,13 +30,19 @@ public class ProductController {
 
 //    C 생성 ==============================================
     @GetMapping("/doWrite")
-    public String showWrite(ProductWriteForm productWriteForm){
+    public String showWrite(ProductWriteForm productWriteForm, HttpSession session){
+        IsLogined isLogined = Ut.isLogined(session);
+        if(isLogined.getAuthority() == null){
+            return "redirect:/";
+
+        }
+
         return "product/writeProduct.html";
     }
     @PostMapping("/doWrite")
     public String doWrite(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm){
         productService.doWrite(mainImage, detailImage, productWriteForm);
-        return "redirect:/";
+        return "redirect:/adminPage";
     }
 
 

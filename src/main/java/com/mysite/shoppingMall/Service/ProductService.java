@@ -123,4 +123,8 @@ public class ProductService {
         productRepository.delete(product);
 
     }
+
+    public List<Product> getList() {
+        return productRepository.findAll();
+    }
 }
