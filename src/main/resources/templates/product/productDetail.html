@@ -177,8 +177,6 @@
                 <div class="box-border flex justify-center w-full mt-5">
                     <a href="javascript:cart()" class="items-center p-3 text-white bg-gray-700 mr-4">장바구니</a>
                     <a href="javascript:order()" class="items-center p-3 text-white bg-black mr-4">구매하기</a>
-                    <a th:if="${session.authority == 0}" href="javascript:modifyProduct()" class="items-center p-3 text-white bg-blue-400 mr-4">수정하기</a>
-                    <a th:if="${session.authority == 0}" href="javascript:deleteProduct()" class="items-center p-3 text-white bg-red-500">삭제하기</a>
                 </div>
             </div>
         </form>

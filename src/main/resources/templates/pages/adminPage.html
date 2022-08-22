@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+</head>
+
+<main layout:fragment="main">
+    <div class="text-3xl mb-10 flex justify-center mt-10">관리자 페이지</div>
+    <hr class="-mt-5">
+    <div class="con flex flex-col justify-center items-center" style="height:70vh;">
+        <a th:href="@{|/product/doWrite|}" class="btn btn-active w-96 h-16 text-2xl mb-5">상품 작성</a>
+        <a th:href="@{|/adminPage/productList|}" class="btn btn-active w-96 h-16 text-2xl mb-5">상품 리스트</a>
+    </div>
+</main>
+</html>

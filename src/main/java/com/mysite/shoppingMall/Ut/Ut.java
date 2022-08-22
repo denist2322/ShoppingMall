@@ -6,9 +6,6 @@ import javax.servlet.http.HttpSession;
 
 public class Ut {
 
-    private int userId;
-    private int login;
-
     public static boolean empty(Object obj) {
         if (obj == null) {
             return true;
@@ -23,16 +20,17 @@ public class Ut {
     }
 
     public static IsLogined isLogined(HttpSession session) {
+        IsLogined result = new IsLogined();
         if (session.getAttribute("UserId") != null){
-            IsLogined result = new IsLogined();
             result.setLogin(1);
             result.setUserId((int)session.getAttribute("UserId"));
+            result.setAuthority((int)session.getAttribute("authority"));
             return result;
         }
 
-        IsLogined result = new IsLogined();
         result.setLogin(0);
         result.setUserId(0);
+        result.setAuthority(null);
         return result;
     }
 

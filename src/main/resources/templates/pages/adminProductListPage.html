@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+</head>
+
+<main layout:fragment="main">
+    <div class="text-3xl mb-10 flex justify-center mt-10">관리자 페이지(상품 리스트)</div>
+    <hr class="-mt-5">
+    <div style="height:70vh;">
+        <div class="overflow-x-auto">
+            <table class="table w-full">
+                <!-- head -->
+                <thead>
+                <tr>
+                    <th class="text-base w-1">상품번호</th>
+                    <th class="text-base w-1">생성날짜</th>
+                    <th class="text-base">상품명</th>
+                    <th class="text-base">가격</th>
+                    <th class="text-base">할인율</th>
+                    <th class="text-base">할인가</th>
+                    <th class="text-base">카테고리</th>
+                    <th class="text-base w-1">세부사항</th>
+                </tr>
+                </thead>
+                <tbody>
+                <div th:each="product : ${productList}">
+                    <!-- row 1 -->
+                    <tr>
+                        <th class="text-base">[[${product.id}]]</th>
+                        <td class="text-base" th:text="${(product.regDate).toString().substring(0,10)}"></td>
+                        <td class="text-base">[[${product.title}]]</td>
+                        <td class="text-base">[[${product.price}]]</td>
+                        <td class="text-base">[[${product.discount}]]%</td>
+                        <td class="text-base"></td>
+                        <td class="text-base">[[${product.category}]]</td>
+                        <td>
+                            <div class="flex">
+                                <div>
+                                    <a class="btn btn-link text-base text-red-600" href="">삭제</a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-link text-base text-blue-600" href="">수정</a>
+                                </div>
+                                <div>
+                                    <a class="btn btn-link text-base text-black" href="">이동</a>
+                                <div>
+                            </div>
+                        </td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</html>

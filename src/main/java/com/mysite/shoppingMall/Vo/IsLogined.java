@@ -9,5 +9,7 @@ public class IsLogined {
 
     private Integer userId;
     private Integer login;
+    private Integer authority;
+
 
 }
