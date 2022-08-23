@@ -76,6 +76,7 @@ public class ProductController {
         Product product = productService.findProduct(id);
         String color = productService.setColorString(product.getProductColorList());
         String size = productService.setSizeString(product.getProductSizeList());
+        System.out.println(product.getTitle());
 
         model.addAttribute("product",product);
         model.addAttribute("color",color);
