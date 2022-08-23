@@ -1,7 +1,7 @@
 package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Repository.QuestionAnswerRepository;
-import com.mysite.shoppingMall.Vo.QuestionAnswer;
+import com.mysite.shoppingMall.Domain.QuestionAnswer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -5,9 +5,9 @@ import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
 import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Vo.IsLogined;
-import com.mysite.shoppingMall.Vo.Product;
-import com.mysite.shoppingMall.Vo.ShoppingCart;
+import com.mysite.shoppingMall.Domain.IsLogined;
+import com.mysite.shoppingMall.Domain.Product;
+import com.mysite.shoppingMall.Domain.ShoppingCart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +49,7 @@ public class MainController {
         return "pages/adminPage.html";
     }
 
+    // == 관리자 상품 리스트 페이지 ==
     @RequestMapping("/adminPage/productList")
     public String productList(HttpSession session, Model model){
         IsLogined islogined = Ut.isLogined(session);

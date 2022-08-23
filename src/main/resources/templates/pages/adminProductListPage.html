@@ -34,19 +34,19 @@
                         <td class="text-base">[[${product.title}]]</td>
                         <td class="text-base">[[${product.price}]]</td>
                         <td class="text-base">[[${product.discount}]]%</td>
-                        <td class="text-base"></td>
+                        <td class="text-base" th:text="${(product.price) * (100 - (product.discount)) / 100}"></td>
                         <td class="text-base">[[${product.category}]]</td>
                         <td>
                             <div class="flex">
                                 <div>
-                                    <a class="btn btn-link text-base text-red-600" href="">삭제</a>
+                                    <a class="btn btn-link text-base text-black" th:href="'/product/detail?id='+${product.id}">이동</a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-link text-base text-blue-600" href="">수정</a>
+                                    <a class="btn btn-link text-base text-red-600" th:href="'/product/doDelete?id='+${product.id}">삭제</a>
                                 </div>
                                 <div>
-                                    <a class="btn btn-link text-base text-black" href="">이동</a>
-                                <div>
+                                    <a class="btn btn-link text-base text-blue-600" th:href="'/product/doModify?id='+${product.id}">수정</a>
+                                </div>
                             </div>
                         </td>
                     </tr>

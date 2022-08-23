@@ -3,7 +3,7 @@ package com.mysite.shoppingMall.Service;
 import com.mysite.shoppingMall.Form.FindPwForm;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Form.MailDto;
-import com.mysite.shoppingMall.Vo.MallUser;
+import com.mysite.shoppingMall.Domain.MallUser;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.mail.SimpleMailMessage;

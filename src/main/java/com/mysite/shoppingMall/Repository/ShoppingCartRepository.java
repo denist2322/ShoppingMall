@@ -1,6 +1,6 @@
 package com.mysite.shoppingMall.Repository;
 
-import com.mysite.shoppingMall.Vo.ShoppingCart;
+import com.mysite.shoppingMall.Domain.ShoppingCart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

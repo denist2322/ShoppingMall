@@ -8,7 +8,7 @@ import com.mysite.shoppingMall.Repository.ProductImageRepository;
 import com.mysite.shoppingMall.Repository.ProductRepository;
 import com.mysite.shoppingMall.Repository.ProductSizeRepository;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Vo.*;
+import com.mysite.shoppingMall.Domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -126,5 +126,27 @@ public class ProductService {
 
     public List<Product> getList() {
         return productRepository.findAll();
+    }
+
+    public String setColorString(List<ProductColor> productColorList) {
+        String color = "";
+        for(int i = 0 ; i < productColorList.size(); i++){
+            if(i == productColorList.size()-1){
+                color += productColorList.get(i).getProductColor();
+            }
+            color += productColorList.get(i).getProductColor() + "**";
+        }
+        return color;
+    }
+
+    public String setSizeString(List<ProductSize> productSizeList) {
+        String size = "";
+        for(int i = 0 ; i < productSizeList.size(); i++){
+            if(i == productSizeList.size()-1){
+                size += productSizeList.get(i).getProductSize();
+            }
+            size += productSizeList.get(i).getProductSize() + "**";
+        }
+        return size;
     }
 }

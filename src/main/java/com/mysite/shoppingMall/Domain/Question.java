@@ -1,4 +1,4 @@
-package com.mysite.shoppingMall.Vo;
+package com.mysite.shoppingMall.Domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

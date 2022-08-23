@@ -1,4 +1,4 @@
-package com.mysite.shoppingMall.Vo;
+package com.mysite.shoppingMall.Domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,16 +12,13 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class MallUser {
+public class Article {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
-    private String userEmail;
-    private String userPassword;
-    private String name;
-    private Integer birthday;
-    private String homeAddress;
-    private String cellphone;
+    private String title;
+    private String body;
+
 }
