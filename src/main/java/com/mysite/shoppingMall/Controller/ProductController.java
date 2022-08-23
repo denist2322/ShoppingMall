@@ -83,6 +83,7 @@ public class ProductController {
         model.addAttribute("size",size);
         return "product/writeProduct.html";
     }
+
     @PostMapping("/doModify")
     public String doModify(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm){
         productService.doWrite(mainImage, detailImage, productWriteForm);
