@@ -133,6 +133,7 @@ public class ProductService {
         for(int i = 0 ; i < productColorList.size(); i++){
             if(i == productColorList.size()-1){
                 color += productColorList.get(i).getProductColor();
+                break;
             }
             color += productColorList.get(i).getProductColor() + "**";
         }
@@ -144,6 +145,7 @@ public class ProductService {
         for(int i = 0 ; i < productSizeList.size(); i++){
             if(i == productSizeList.size()-1){
                 size += productSizeList.get(i).getProductSize();
+                break;
             }
             size += productSizeList.get(i).getProductSize() + "**";
         }

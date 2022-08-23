@@ -1,17 +1,12 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Domain.IsLogined;
+import com.mysite.shoppingMall.Domain.MallUser;
+import com.mysite.shoppingMall.Domain.ShoppingCart;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Service.ShoppingCartService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
-<<<<<<< Updated upstream
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.ShoppingCart;
-=======
-import com.mysite.shoppingMall.Vo.IsLogined;
-import com.mysite.shoppingMall.Vo.MallUser;
-import com.mysite.shoppingMall.Vo.ShoppingCart;
->>>>>>> Stashed changes
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
