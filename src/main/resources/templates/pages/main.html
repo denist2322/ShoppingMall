@@ -18,9 +18,9 @@
     <!-- Swiper -->
     <div class="swiper mySwiper mt-5">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://image.brandi.me/home/banner/bannerImage_819539_1659513250.jpg"></div>
-            <div class="swiper-slide"><img src="https://image.brandi.me/home/banner/bannerImage_3_1659512163.jpg"></div>
-            <div class="swiper-slide"><img src="https://image.brandi.me/home/banner/bannerImage_7_1659322032.jpg"></div>
+            <div class="swiper-slide slide01"><img src="https://image.brandi.me/home/banner/bannerImage_819539_1659513250.jpg"></div>
+            <div class="swiper-slide slide02"><img src="https://image.brandi.me/home/banner/bannerImage_3_1659512163.jpg"></div>
+            <div class="swiper-slide slide03"><img src="https://image.brandi.me/home/banner/bannerImage_7_1659322032.jpg"></div>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -33,12 +33,14 @@
     <!-- Initialize Swiper -->
     <script>
       var swiper = new Swiper(".mySwiper", {
+      loop: true,
         spaceBetween: 30,
         centeredSlides: true,
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,
         },
+
         pagination: {
           el: ".swiper-pagination",
           clickable: true,

@@ -4,6 +4,7 @@ import com.mysite.shoppingMall.Repository.ProductRepository;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
 import com.mysite.shoppingMall.Service.ProductService;
+import com.mysite.shoppingMall.Service.ShoppingCartService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Domain.IsLogined;
 import com.mysite.shoppingMall.Domain.Product;
@@ -26,6 +27,8 @@ public class MainController {
     private QuestionRepository questionRepository;
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
+
+    private ShoppingCartService shoppingCartService;
     private final ProductService productService;
 
     @RequestMapping("/main")
@@ -62,11 +65,11 @@ public class MainController {
         return "pages/adminProductListPage.html";
     }
 
-    @RequestMapping("/test")
-    public String showTest(Model model) {
-        List<ShoppingCart> shoppingCartList = shoppingCartRepository.findAll();
-        System.out.println(shoppingCartList.get(0));
-        model.addAttribute("shoppingCartList", shoppingCartList);
-        return "user/ordershpping.html";
-  }
+//    @RequestMapping("/test")
+//    public String showTest(Model model, HttpSession session) {
+//        IsLogined isLogined = Ut.isLogined(session);
+//        List<ShoppingCart> shoppingCartList = shoppingCartRepository.findByMallUserId(isLogined.getUserId());
+//        model.addAttribute("shoppingCartList", shoppingCartList);
+//        return "user/ordershpping.html";
+//  }
 }
