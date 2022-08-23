@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class ProductWriteForm {
+    private long id;
     @NotNull(message="제목을 입력하세요.")
     private String title;
     private String body;

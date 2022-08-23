@@ -1,4 +1,4 @@
-package com.mysite.shoppingMall.Vo;
+package com.mysite.shoppingMall.Domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,13 +8,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class ProductColor {
+public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String productColor;
-
+    private Long id;
+    private String images;
     @ManyToOne
     private Product product;
 }

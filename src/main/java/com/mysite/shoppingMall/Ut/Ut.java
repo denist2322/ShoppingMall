@@ -1,6 +1,6 @@
 package com.mysite.shoppingMall.Ut;
 
-import com.mysite.shoppingMall.Vo.IsLogined;
+import com.mysite.shoppingMall.Domain.IsLogined;
 
 import javax.servlet.http.HttpSession;
 

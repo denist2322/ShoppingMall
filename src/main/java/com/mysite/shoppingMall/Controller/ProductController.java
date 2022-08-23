@@ -6,9 +6,9 @@ import com.mysite.shoppingMall.Form.ProductWriteForm;
 import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Vo.IsLogined;
-import com.mysite.shoppingMall.Vo.MallUser;
-import com.mysite.shoppingMall.Vo.Product;
+import com.mysite.shoppingMall.Domain.IsLogined;
+import com.mysite.shoppingMall.Domain.MallUser;
+import com.mysite.shoppingMall.Domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,12 +30,13 @@ public class ProductController {
 
 //    C 생성 ==============================================
     @GetMapping("/doWrite")
-    public String showWrite(ProductWriteForm productWriteForm, HttpSession session){
+    public String showWrite(ProductWriteForm productWriteForm, HttpSession session, Model model){
         IsLogined isLogined = Ut.isLogined(session);
         if(isLogined.getAuthority() == null){
             return "redirect:/";
-
         }
+        Product product = new Product();
+        model.addAttribute("product",product);
 
         return "product/writeProduct.html";
     }
@@ -67,8 +68,19 @@ public class ProductController {
 
     //U 수정 ==============================================
     @GetMapping("/doModify")
-    public String showModify(ProductWriteForm productWriteForm){
-        return "product/modifyProduct.html";
+    public String showModify(Long id, ProductWriteForm productWriteForm, HttpSession session, Model model){
+        IsLogined isLogined = Ut.isLogined(session);
+        if(isLogined.getAuthority() == null){
+            return "redirect:/";
+        }
+        Product product = productService.findProduct(id);
+        String color = productService.setColorString(product.getProductColorList());
+        String size = productService.setSizeString(product.getProductSizeList());
+
+        model.addAttribute("product",product);
+        model.addAttribute("color",color);
+        model.addAttribute("size",size);
+        return "product/writeProduct.html";
     }
     @PostMapping("/doModify")
     public String doModify(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm){
@@ -107,14 +119,14 @@ public class ProductController {
 
         if(!productService.isExists(id)){
             model.addAttribute("msg", "게시물이 존재하지 않습니다.");
-            model.addAttribute("replaceUri", "/");
+            model.addAttribute("historyBack", "true");
             return "common/js";
         }
 
         productService.doDelete(id);
 
         model.addAttribute("msg", "삭제 완료되었습니다.");
-        model.addAttribute("replaceUri", "/");
+        model.addAttribute("historyBack", "true");
         return "common/js";
     }
 

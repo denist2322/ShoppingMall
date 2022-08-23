@@ -14,7 +14,7 @@
                 <!-- ProductName input -->
                 <label for="name">상품명</label>
                 <div class="flex mb-3">
-                    <input type="text" name="title" id="name" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
+                    <input type="text" name="title" id="name" th:value = ${product.title} class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
                 </div>
                 <!-- 상품 설명 -->
                 <label for="content">상품 설명</label>

@@ -2,7 +2,7 @@ package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Vo.Question;
+import com.mysite.shoppingMall.Domain.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

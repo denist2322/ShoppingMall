@@ -1,6 +1,6 @@
 package com.mysite.shoppingMall.Repository;
 
-import com.mysite.shoppingMall.Vo.MallUser;
+import com.mysite.shoppingMall.Domain.MallUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

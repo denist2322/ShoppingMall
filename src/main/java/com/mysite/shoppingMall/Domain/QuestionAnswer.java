@@ -1,4 +1,4 @@
-package com.mysite.shoppingMall.Vo;
+package com.mysite.shoppingMall.Domain;
 
 import lombok.Getter;
 import lombok.Setter;
