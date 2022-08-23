@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{common/mypagelayout}">
+      layout:decorate="~{common/layout_noHeadUnder}">
 <head>
     <meta charset="UTF-8">
     <title>마이 페이지</title>
@@ -8,80 +8,123 @@
 
 <main layout:fragment="main">
 
-    <form th:action="@{|/user/myPage|}" method="post"
-          class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-        <div class="w-3/4">
-<!--            <div th:replace="/common/errorForm :: formErrorsFragment"></div>-->
-            <!-- userId input -->
-            <div class="mb-6 flex mt-6">
-                <input
-                        type="text"
-                        name="email2"
-                        class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="이메일"
-                        th:value="${mallUser.userEmail}"
-                        readonly
-                />
-            </div>
-            <!-- Password input -->
-            <div class="mb-6">
-                <input
-                        type="password"
-                        name="password1"
-                        class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="비밀번호"
-                />
+            <nav class="top-bar__menu-box-1 text-3xl my-2 w-full flex justify-center">
+                My Page
+            </nav>
+            <div class="myimage flex w-full h-24 border-2 boder-gray-300">
+                <p class="flex h-full justify-center w-28 items-center">
+                    <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/img_member_default.gif" alt="">
+                </p>
+                <div class="w-full">
+                    <div class="flex w-full pt-2 h-full items-center">[[${mallUser.name}]] 님 저희 쇼핑몰을 이용해 주셔서 감사합니다.</div>
+                </div>
             </div>
 
-            <div class="mb-6 flex">
-                <input
-                        type="password"
-                        name="password2"
-                        class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="비밀번호 확인"
-                />
+            <div class="myordering mt-6 w-full h-32 border-2 border-gray-300">
+                <div class="w-full h-12">
+                    <div class="flex h-12 pl-4 items-center border-b-2 border-gray-300">나의 주문처리 현황</div>
+                </div>
+                <div class="flex h-20">
+                    <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
+                        입금전
+                        <a th:href="@{|/shippingLookup|}">
+                            <span>0</span>
+                        </a>
+                    </li>
+                    <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
+                        배송준비중
+                        <a th:href="@{|/shippingLookup|}">
+                            <span>0</span>
+                        </a>
+                    </li>
+                    <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
+                        배송중
+                        <a th:href="@{|/shippingLookup|}">
+                            <span>0</span>
+                        </a>
+                    </li>
+                    <li class="flex w-1/4 justify-center flex-col items-center">
+                        배송완료
+                        <a th:href="@{|/shippingLookup|}">
+                            <span>0</span>
+                        </a>
+                    </li>
+                </div>
             </div>
+            <form th:action="@{|/user/myPage|}" method="post"
+                  class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+                <div class="w-3/4">
+                    <!--            <div th:replace="/common/errorForm :: formErrorsFragment"></div>-->
+                    <!-- userId input -->
+                    <div class="mb-6 flex mt-6">
+                        <input
+                                type="text"
+                                name="email2"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="이메일"
+                                th:value="${mallUser.userEmail}"
+                                readonly
+                        />
+                    </div>
+                    <!-- Password input -->
+                    <div class="mb-6">
+                        <input
+                                type="password"
+                                name="password1"
+                                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="비밀번호"
+                        />
+                    </div>
 
-            <div class="mb-6 flex">
-                <input
-                        type="text"
-                        name="name2"
-                        class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="이름"
-                        th:value="${mallUser.name}"
-                />
-            </div>
+                    <div class="mb-6 flex">
+                        <input
+                                type="password"
+                                name="password2"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="비밀번호 확인"
+                        />
+                    </div>
 
-            <div class="mb-6 flex">
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                name="name2"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="이름"
+                                th:value="${mallUser.name}"
+                        />
+                    </div>
 
-                <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" name="address1" th:value="${joinForm.address1}" id="sample6_postcode"
-                       placeholder="우편번호" readonly>
+                    <div class="mb-6 flex">
 
-                <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none justify-center"
-                       type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-            </div>
+                        <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" name="address1" th:value="${joinForm.address1}" id="sample6_postcode"
+                               placeholder="우편번호" readonly>
 
-            <div class="mb-6 flex">
+                        <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none justify-center"
+                               type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                    </div>
 
-                <input class="flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" name="address2" th:value="${joinForm.address2}" id="sample6_address" placeholder="주소"
-                       readonly/>
-                <br>
-            </div>
+                    <div class="mb-6 flex">
 
-            <div class="mb-6 flex">
+                        <input class="flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" name="address2" th:value="${joinForm.address2}" id="sample6_address" placeholder="주소"
+                               readonly/>
+                        <br>
+                    </div>
 
-                <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" name="address3" th:value="${joinForm.address3}" id="sample6_extraAddress" placeholder="동" readonly/>
+                    <div class="mb-6 flex">
 
-                <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                       type="text" name="address4" th:value="${joinForm.address4}" id="sample6_detailAddress" placeholder="상세주소" />
+                        <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" name="address3" th:value="${joinForm.address3}" id="sample6_extraAddress" placeholder="동" readonly/>
 
-            </div>
+                        <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                               type="text" name="address4" th:value="${joinForm.address4}" id="sample6_detailAddress" placeholder="상세주소" />
 
-            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-            <script>
+                    </div>
+
+                    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                    <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -133,54 +176,54 @@
 
             </script>
 
-            <div class="mb-6 flex">
-                <input
-                        type="text"
-                        name="birthday2"
-                        th:value="${mallUser.birthday}"
-                        class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="생년월일 앞 6자리"
+                    <div class="mb-6 flex">
+                        <input
+                                type="text"
+                                name="birthday2"
+                                th:value="${mallUser.birthday}"
+                                class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                placeholder="생년월일 앞 6자리"
 
-                />
-            </div>
+                        />
+                    </div>
 
-            <div class="mb-6 flex">
-                <input
-                        type="text" name="cellphone2_1" th:value="${joinForm.cellphone2_1}"
-                        class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='3' readonly/>
-                <input
-                        type="text" name="cellphone2_2" th:value="${joinForm.cellphone2_2}"
-                        class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4' readonly/>
-                <input
-                        type="text" name="cellphone2_3" th:value="${joinForm.cellphone2_3}"
-                        class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4' readonly/>
-            </div>
+                    <div class="mb-6 flex">
+                        <input
+                                type="text" name="cellphone2_1" th:value="${joinForm.cellphone2_1}"
+                                class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='3' readonly/>
+                        <input
+                                type="text" name="cellphone2_2" th:value="${joinForm.cellphone2_2}"
+                                class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4' readonly/>
+                        <input
+                                type="text" name="cellphone2_3" th:value="${joinForm.cellphone2_3}"
+                                class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4' readonly/>
+                    </div>
 
-            <!-- Submit button -->
-            <div class="flex">
-                <button
-                        type="submit"
-                        class="flex w-2/1 justify-center items-center h-11 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                        data-mdb-ripple="true"
-                        data-mdb-ripple-color="light"
-                >
-                    수정하기
-                </button>
-                <button
-                        type="submit"
-                        class="flex w-2/1 justify-center items-center h-11 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                        data-mdb-ripple="true"
-                        data-mdb-ripple-color="light"
-                >
-                    취소
-                </button>
-            </div>
-            <div
-                    class="flex items-center my-4 before:flex-1 before:mt-0.5 after:flex-1 after:mt-0.5"
-            >
-            </div>
-        </div>
-    </form>
+                    <!-- Submit button -->
+                    <div class="flex">
+                        <button
+                                type="submit"
+                                class="flex w-2/1 justify-center items-center h-11 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                        >
+                            수정하기
+                        </button>
+                        <button
+                                type="submit"
+                                class="flex w-2/1 justify-center items-center h-11 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                        >
+                            취소
+                        </button>
+                    </div>
+                    <div
+                            class="flex items-center my-4 before:flex-1 before:mt-0.5 after:flex-1 after:mt-0.5"
+                    >
+                    </div>
+                </div>
+            </form>
 
 </main>
 </html>

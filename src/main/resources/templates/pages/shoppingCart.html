@@ -5,25 +5,10 @@
     <meta charset="UTF-8">
     <title>페이지 이름</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function() {
-			$("#cbx_chkAll").click(function() {
-				if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
-				else $("input[name=chk]").prop("checked", false);
-			});
-
-			$("input[name=chk]").click(function() {
-				var total = $("input[name=chk]").length;
-				var checked = $("input[name=chk]:checked").length;
-
-				if(total != checked) $("#cbx_chkAll").prop("checked", false);
-				else $("#cbx_chkAll").prop("checked", true);
-			});
-		});
-	</script>
 </head>
 
 <main layout:fragment="main">
+
 
     <headerUnder class="top-bar h-12 flex">
         <nav class="top-bar__menu-box-1 w-full flex justify-center">
@@ -115,36 +100,12 @@
         <div class="border-2 border-gray-300 p-4 text-2xl h-72 mt-16">
             <div class="flex text-2xl h-1/4 pt-6"> 상품금액 :
                 <div class="pl-3" id="totalPrice">
-                    <script>
-                    const totalPriceBox = document.getElementById("totalPrice");
-                    let totalPrice1 = 0;
-                    const prices = document.querySelectorAll(".price");
-
-                    prices.forEach(price => totalPrice1 += parseInt(price.innerText));
-                    totalPriceBox.innerText = totalPrice1;
-
-                    </script>
                 </div>
             </div>
             <div class="flex text-2xl h-1/4 pt-2">배송비 :
                 <div class="pl-3" id="deliveryPrice">
                     <script>
-                    const totaldeliveryPriceBox = document.getElementById("deliveryPrice");
 
-                    let deliveryPrice = 0;
-
-                    const deliverypricesBox = document.getElementById("totalPrice");
-
-                    /* 배송비 결정 */
-                    if(deliverypricesBox.innerText >= 50000){
-                        deliveryPrice = 0;
-                    } else if(deliverypricesBox.innerText == 0){
-                        deliveryPrice = 0;
-                    } else {
-                        deliveryPrice = 3000;
-                    }
-
-                    totaldeliveryPriceBox.innerText = deliveryPrice;
                     </script>
                 </div>
             </div>
@@ -153,7 +114,9 @@
                 <div class=" text-2xl h-1/4 pt-6 leading-loose border-t-2 border-gray-300">
                     <div class="flex justify-between w-full h-20">
                         <span>총 결제금액 :
-                            <input type="text" class="">
+                            <div id="finalTotalPrice">
+
+                            </div>
                         </span>
                         <button type="button" class=" text-right mr-6 border-2 text-white bg-black btn btn-active"
                                 onclick="orders()">주문하기
@@ -163,12 +126,12 @@
             </div>
         </div>
     </mainthird>
-    <input type="hidden" id="" th:value="25000">
 </main>
 </html>
 <!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
-<script layout:fragment="script" type='text/javascript'>
-    $(document).ready(function(){
+<script>
+
+/*
 
 	let totalPrice = 0;
 	let deliveryPrice = 0;
@@ -179,13 +142,56 @@
 
 	finalTotalPrice = totalPrice + deliveryPrice;
 
-	/* 값 삽입 */
+	 값 삽입
 	// 총 가격
 	$(".totalPrice_span").text(totalPrice.toLocaleString());
 	// 배송비
 	$(".delivery_price").text(deliveryPrice);
 	// 최종 가격(총 가격 + 배송비)
 	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
-});
+*/
+    const totalPriceBox = document.getElementById("totalPrice");
+    let totalPrice1 = 0;
+    const prices = document.querySelectorAll(".price");
+    prices.forEach(price => totalPrice1 += parseInt(price.innerText));
+    totalPriceBox.innerText = totalPrice1;
+
+    const totaldeliveryPriceBox = document.getElementById("deliveryPrice");
+
+        let deliveryPrice = 0;
+
+        const deliverypricesBox = document.getElementById("totalPrice");
+
+        /* 배송비 결정 */
+        if(deliverypricesBox.innerText >= 50000){
+            deliveryPrice = 0;
+        } else if(deliverypricesBox.innerText == 0){
+            deliveryPrice = 0;
+        } else {
+            deliveryPrice = 3000;
+    }
+
+    totaldeliveryPriceBox.innerText = deliveryPrice;
+
+    let finalTotalPrice = 0;
+
+    finalTotalPrice = totalPrice1 + deliveryPrice;
+
+    tmp = "<input type=\"text\" name=\"totalPrice\" value=" + finalTotalPrice + ">"
+    $("#finalTotalPrice").replaceWith(tmp);
+
+	$("#cbx_chkAll").click(function() {
+				if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
+				else $("input[name=chk]").prop("checked", false);
+			});
+
+	$("input[name=chk]").click(function() {
+				var total = $("input[name=chk]").length;
+				var checked = $("input[name=chk]:checked").length;
+
+				if(total != checked) $("#cbx_chkAll").prop("checked", false);
+				else $("#cbx_chkAll").prop("checked", true);
+			});
+
 
 </script>
