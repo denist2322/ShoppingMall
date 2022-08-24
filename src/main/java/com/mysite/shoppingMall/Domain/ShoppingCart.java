@@ -15,6 +15,7 @@ public class ShoppingCart {
     private String cartColor;
     private String cartSize;
     private long cartCount;
+    private long cartTotalPrice;
     @ManyToOne
     private Product product;
     @ManyToOne

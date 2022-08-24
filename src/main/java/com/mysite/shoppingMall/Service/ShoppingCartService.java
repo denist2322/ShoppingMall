@@ -28,6 +28,7 @@ public class ShoppingCartService {
     }
 
     public void addCart(ProductBuyForm productBuyForm, HttpSession session) {
+        System.out.println(productBuyForm.getOrderCounter());
         IsLogined isLogined = Ut.isLogined(session);
 
         MallUser mallUser = userRepository.findById(isLogined.getUserId()).get();
@@ -45,7 +46,13 @@ public class ShoppingCartService {
         shoppingCart.setProduct(product);
         shoppingCart.setCartColor(productBuyForm.getOrderColor());
         shoppingCart.setCartSize(productBuyForm.getOrderSize());
-        shoppingCart.setCartCount(2);
+        shoppingCart.setCartCount(productBuyForm.getOrderCounter());
+        shoppingCart.setCartTotalPrice(productBuyForm.getOrderTotalPrice());
         shoppingCartRepository.save(shoppingCart);
+    }
+
+    public void deleteCart(long id) {
+        ShoppingCart cart = shoppingCartRepository.findById(id).get();
+        shoppingCartRepository.delete(cart);
     }
 }

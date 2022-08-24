@@ -33,17 +33,17 @@
                         <dd class="table-cell p-3 align-middle border-t border-b">
                             <span class="block">[[${productBuyForm.orderTitle}]]</span>
                             <span class="block">[[${productBuyForm.orderColor}]] / [[${productBuyForm.orderSize}]]</span>
-                            <span>1개</span>
+                            <span>[[${productBuyForm.orderCounter}]]개</span>
                         </dd>
-                        <dd class="table-cell p-3 align-middle border-t border-b">[[${productBuyForm.orderPrice}]]원</dd>
+                        <dd class="table-cell p-3 align-middle border-t border-b">[[${productBuyForm.orderTotalPrice}]]원</dd>
                     </dl>
                 </div>
 
-                <div class="px-5 py-4 text-right border-b-2 border-black text-gray-400">상품<span class="text-black"> [[${productBuyForm.orderPrice}]]</span>원
-                    + 배송<span class="text-black"> 0</span>원<span class="pl-3 box-border text-black">주문금액 [[${productBuyForm.orderPrice}]]원</span>
+                <div class="px-5 py-4 text-right border-b-2 border-black text-gray-400">상품<span class="text-black"> [[${productBuyForm.orderTotalPrice}]]</span>원
+                    + 배송<span class="text-black"> 0</span>원<span class="pl-3 box-border text-black">주문금액 [[${productBuyForm.orderTotalPrice}]]원</span>
                 </div>
 
-                <div class="text-2xl text-right p-5 box-border">총 결제금액 <span class="text-yellow-400">[[${productBuyForm.orderPrice}]]</span><span>원</span>
+                <div class="text-2xl text-right p-5 box-border">총 결제금액 <span class="text-yellow-400">[[${productBuyForm.orderTotalPrice}]]</span><span>원</span>
                 </div>
             </div>
         </div>
@@ -166,12 +166,12 @@
             <div class="mb-10 table w-full border-b border-black">
                 <dl class="px-2 overflow-hidden mb-15">
                     <dt class="font-bold float-left w-1/2 px-2 py-3">총 상품금액</dt>
-                    <dd class="float-left text-right w-1/2 px-2 py-3" id="money">[[${productBuyForm.orderPrice}]]원</dd>
+                    <dd class="float-left text-right w-1/2 px-2 py-3">[[${productBuyForm.orderTotalPrice}]]원</dd>
                     <dt class="font-bold float-left w-1/2 px-2 py-3">배송비</dt>
-                    <dd class="float-left text-right w-1/2 px-2 py-3" id="money">0원</dd>
+                    <dd class="float-left text-right w-1/2 px-2 py-3">0원</dd>
                     <dt class="text-3xl font-bold float-left w-1/2 px-2 py-3">총 결제예상 금액</dt>
                     <dd class="text-3xl font-bold text-yellow-400 float-left text-right w-1/2 px-2 py-3" id="money">
-                        [[${productBuyForm.orderPrice}]]원
+                        [[${productBuyForm.orderTotalPrice}]]원
                     </dd>
                 </dl>
             </div>

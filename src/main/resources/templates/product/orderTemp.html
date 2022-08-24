@@ -11,6 +11,8 @@
     <input type="hidden" name="orderSize" th:value = "${productBuyForm.orderSize}">
     <input type="hidden" name="orderPrice" th:value = "${productBuyForm.orderPrice}">
     <input type="hidden" name="orderNumber" th:value = "${productBuyForm.orderNumber}">
+    <input type="hidden" name="orderCounter" th:value = "${productBuyForm.orderCounter}">
+    <input type="hidden" name="orderTotalPrice" th:value = "${productBuyForm.orderTotalPrice}">
 </form>
 <script layout:fragment="script" type='text/javascript'>
     document.sendData.submit();

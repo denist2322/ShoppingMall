@@ -14,4 +14,5 @@ public class ProductBuyForm {
     private String orderPrice;
     private long orderCounter;
     private long orderNumber;
+    private long orderTotalPrice;
 }

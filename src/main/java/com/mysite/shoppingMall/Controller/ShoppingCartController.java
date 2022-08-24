@@ -49,4 +49,10 @@ public class ShoppingCartController {
         shoppingCartService.addCart(productBuyForm, session);
         return "redirect:/shoppingCart";
     }
+
+    @RequestMapping("/deleteCart")
+    public String deleteCart(long id){
+        shoppingCartService.deleteCart(id);
+        return "redirect:/shoppingCart";
+    }
 }
