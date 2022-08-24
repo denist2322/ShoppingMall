@@ -73,23 +73,9 @@
                         <span class="block w-full">[[${shoppingCart.cartCount}]]</span>
                     </th>
                     <th class="price">
-                        <script>
-                        /*<![CDATA[*/
-
-                        function calc(){
-                            let price = [[${shoppingCart.product.price}]];
-                            let discount = 1 - ([[${shoppingCart.product.discount}]] / 100);
-                            let result = price * discount;
-                            document.write(result);
-                        }
-                        calc();
-
-
-                        /*]]*/
-                        </script>
-                    </th>
+                        [[${shoppingCart.cartTotalPrice}]]
                     <th>
-                        <button class="block w-full"><i class="fa-solid fa-x"></i></button>
+                        <a th:href="'/deleteCart?id='+${shoppingCart.id}"><i class="fa-solid fa-trash"></i></a>
                     </th>
                 </tr>
                 </tbody>
@@ -192,6 +178,4 @@
 				if(total != checked) $("#cbx_chkAll").prop("checked", false);
 				else $("#cbx_chkAll").prop("checked", true);
 			});
-
-
 </script>
