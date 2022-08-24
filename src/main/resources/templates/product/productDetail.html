@@ -137,36 +137,52 @@
 
                         </div>
                         <div class="flex align-middle">
-                            <input type="button" value="-" onclick="minus()"
-                                   class="w-8 h-8 bg-white cursor-pointer text-2xl">
-                            <input type="text" class="w-8 h-8 bg-white text-black text-bold font-xl text-center focus:outline-none"
-                                   value="1" id="count" readonly>
-                            <input type="button" value="+" onclick="plus()"
-                                   class="w-8 h-8 bg-white cursor-pointer text-2xl">
+                            <button type="button" onclick="minus()"
+                                   class="w-8 h-8 bg-white cursor-pointer text-2xl"/>-</button>
+                            <div id="count">
+                            <input type="text" id="inputCount" class="w-8 h-8 bg-white text-black text-bold font-xl text-center focus:outline-none"
+                                   value="1" readonly>
+                            </div>
+                            <button type="button" onclick="plus()"
+                                   class="w-8 h-8 bg-white cursor-pointer text-2xl"/>+</button>
                         </div>
                         <script>
                         var count = 1;
-                        var countEl = document.getElementById("count");
-                        var total_count = document.getElementById("total_count");
-                        var total_count_view = document.getElementById("total_count_view");
-
+                        var result = ""
                         function minus() {
                         if(count > 1) {
                         count--;
-                        countEl.value = count;
-                        total_count_view.value = total_count_view.value - total_count.value;
+
+                        result = "<div id=\"count\">";
+                        result += "<input type=\"text\" id=\"inputCount\" class=\"w-8 h-8 bg-white text-black text-bold font-xl text-center focus:outline-none\" value=\"" + count + "\" readonly>";
+                        result += "<div>";
+
+                        $("#count").replaceWith(result);
+                        replace();
                          }
                         }
 
                         function plus() {
                         count++;
-                        countEl.value = count;
-                        total_count_view.value = total_count.value * countEl.value;
+                        result = "<div id=\"count\">";
+                        result += "<input type=\"text\" id=\"inputCount\" class=\"w-8 h-8 bg-white text-black text-bold font-xl text-center focus:outline-none\" value=\"" + count + "\" readonly>";
+                        result += "<div>";
+
+                        $("#count").replaceWith(result);
+                        replace();
                         }
 
                         </script>
-                        <input type="text" id="total_count_view" class="flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none"
+                        <input type="text" id="totalPrice" class="flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none"
                                th:value="${discountPrice}" readonly/>
+                        <script>
+                            function replace(){
+                                    var count = $("#inputCount").val();
+                                    var price = [[${discountPrice}]];
+                                    var result = "<input type=\"text\" id=\"totalPrice\" class=\"flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none\" value=\"" + (count*price) + "\"readonly/>";
+                                    $("#totalPrice").replaceWith(result);
+                            }
+                        </script>
                     </div>
                     <button class="absolute top-5 right-5 cursor-pointer">
                         <img src="https://www.hiver.co.kr/static/22.05.01/images/btn-del-option.png" alt=""
