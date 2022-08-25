@@ -210,6 +210,23 @@ INSERT INTO Product_size SET
    product_size = "L",
    product_id = 1;
 
+CREATE TABLE `order_sheet` (
+   id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   sheet_number VARCHAR(20) NOT NULL,
+   sheet_orderer_email VARCHAR(20) NOT NULL,
+   sheet_orderer_name VARCHAR(20) NOT NULL,
+   sheet_orderer_phone VARCHAR(20) NOT NULL,
+   sheet_reveiver_name VARCHAR(20) NOT NULL,
+   sheet_receiver_phone VARCHAR(20) NOT NULL,
+   sheet_reveiver_address VARCHAR(100) NOT NULL,
+   sheet_option TEXT NOT NULL,
+   shipping_cost INT UNSIGNED NOT NULL,
+   product_cost INT UNSIGNED NOT NULL,
+   total_price INT NOT NULL,
+   now_state INT(4) UNSIGNED NOT NULL COMMENT '0: 입금전, 1:배송준비중, 2:배송중, 3:배송완료'
+);
+
+
 SELECT * FROM Product_color;
 SELECT * FROM Product_size;
 
