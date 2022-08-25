@@ -15,4 +15,5 @@ public class ProductBuyForm {
     private long orderCounter;
     private long orderNumber;
     private long orderTotalPrice;
+    private long shippingCost;
 }

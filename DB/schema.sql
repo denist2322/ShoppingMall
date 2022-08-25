@@ -161,6 +161,7 @@ CREATE TABLE Shopping_cart(
     cart_color VARCHAR(20) NOT NULL,
     cart_size VARCHAR(20) NOT NULL,
     cart_count INT UNSIGNED NOT NULL,
+    cart_total_price INT UNSIGNED NOT NULL,
     product_id INT UNSIGNED NOT NULL,
     mall_user_id INT UNSIGNED NOT NULL
 );
@@ -169,6 +170,7 @@ INSERT INTO Shopping_cart SET
 cart_color = "White",
 cart_size = "Free",
 cart_count = 2,
+cart_total_price = 50000,
 product_id = 1,
 mall_user_id = 1;
 
@@ -210,3 +212,4 @@ INSERT INTO Product_size SET
 
 SELECT * FROM Product_color;
 SELECT * FROM Product_size;
+
