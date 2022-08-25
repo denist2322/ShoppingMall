@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>글쓰기</title>
+</head>
+
+<main layout:fragment="main">
+  <div class="container max-w-screen-lg mx-auto">
+    <div class="mt-5 mb-2 text-xl font-bold text-center">QnA 작성</div>
+    <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
+      <form class="w-1/2" th:action="@{/question/doWrite}" th:object="${questionForm}" method="post">
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+          <div th:each="err:${#fields.allErrors()}" th:text="${err}" />
+    </div>
+        <!-- userId input -->
+        <div>제목</div>
+        <div class="flex mb-6">
+          <input
+                  type="text"
+                  name="subject"
+                  class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
+                  placeholder="제목을 입력해주세요."
+          />
+        </div>
+        <!-- Password input -->
+
+        <label for="content">내용</label>
+        <div class="mb-6">
+          <textarea name="content" id="content" cols="30" rows="15" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded felx" placeholder="내용을 입력해주세요."></textarea>
+        </div>
+
+
+        <!-- Submit button -->
+        <div class="flex">
+          <button
+                  type="submit"
+                  class="flex items-center justify-center w-full mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                  data-mdb-ripple="true"
+                  data-mdb-ripple-color="light"
+          >
+            작성하기
+          </button>
+          <button
+                  type="submit"
+                  class="flex items-center justify-center w-full text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                  data-mdb-ripple="true"
+                  data-mdb-ripple-color="light"
+          >
+            취소
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+</html>

@@ -1,5 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Domain.QuestionAnswer;
 import com.mysite.shoppingMall.Repository.QuestionAnswerRepository;
 import com.mysite.shoppingMall.Domain.QuestionAnswer;
 import lombok.RequiredArgsConstructor;
