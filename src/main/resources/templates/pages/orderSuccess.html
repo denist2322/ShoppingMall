@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>페이지 이름</title>
+</head>
+
+<main layout:fragment="main">
+    <div class="con flex flex-col justify-center items-center" style="height:70vh;">
+        <div class="text-4xl mb-10">주문이 완료되었습니다.</div>
+        <a th:href="@{|/|}" class="btn btn-active w-72 text-xl">메인페이지로 이동</a>
+    </div>
+</main>
+</html>

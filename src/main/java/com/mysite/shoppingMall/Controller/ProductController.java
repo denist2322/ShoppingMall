@@ -31,7 +31,7 @@ public class ProductController {
     private final ShoppingCartService shoppingCartService;
 
 
-//    C 생성 ==============================================
+    //C 생성 ==============================================
     @GetMapping("/doWrite")
     public String showWrite(ProductWriteForm productWriteForm, HttpSession session, Model model){
         IsLogined isLogined = Ut.isLogined(session);
@@ -135,7 +135,7 @@ public class ProductController {
         return "common/js";
     }
 
-    //post 방식을 써야 ? 파라미터를 지울 수 있음.
+    //주문서 전달 (새로고침시 주문번호 바뀌는거 방지) ===============================
     @GetMapping("/orderSheetTmp")
     public String orderSheet(ProductBuyForm productBuyForm, BindingResult bindingResult, HttpSession session, Model model) {
         IsLogined isLogined = Ut.isLogined(session);
@@ -154,6 +154,7 @@ public class ProductController {
         return "product/orderTemp.html";
     }
 
+    // 주문창 =======================================
     @PostMapping("/order")
     public String order(OrderSheetForm orderSheetForm, ProductBuyForm productBuyForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
@@ -164,7 +165,13 @@ public class ProductController {
 
         return "product/order.html";
     }
+    // 주문 내역 저장 ================================
+    @GetMapping("/saveOrder")
+    public String saveOrder(){
+        return "pages/orderSuccess.html";
+    }
 
+    // 검색 =========================================
     @GetMapping("/search")
     public String search(String keyword, Model model){
         List<Product>productList = productService.searchTitleAndBody(keyword);
