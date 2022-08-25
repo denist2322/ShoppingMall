@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Q&A detail</title>
+</head>
+<body>
+
+<main layout:fragment="main">
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
+            <div class="flex-grow"></div>
+
+        <h1 th:text="${question.subject}">제목</h1>
+        <div th:text="${question.content}">내용</div>
+        <a th:href="@{/question/modify/{id} (id = ${question.id}) }">수정</a>
+        <a href="#">삭제</a>
+
+</main>
+
+</body>
+</html>
+
