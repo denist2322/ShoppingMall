@@ -65,5 +65,9 @@ public class QuestionService {
         return pageable;
     }
 
+    public void doDelete(Integer id){
+        questionRepository.findById(id);
+    }
+
 
 }

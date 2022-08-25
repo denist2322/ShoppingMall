@@ -117,19 +117,25 @@ public class QuestionController {
 //    }
 
 
-    //D 삭제 ==============================================
-    @RequestMapping("/doDelete")
-    @ResponseBody
-    public String doDelete(Integer id){
-//        if(!questionRepository.existsById(id)){
-//            return "%d번 게시물이 없습니다.".formatted(id);
-//        }
+//    //D 삭제 ==============================================
+//    @RequestMapping("/doDelete")
+//    @ResponseBody
+//    public String doDelete(Integer id){
+////        if(!questionRepository.existsById(id)){
+////            return "%d번 게시물이 없습니다.".formatted(id);
+////        }
+//
+//        Question question = questionRepository.findById(id).get();
+//        questionRepository.delete(question);
+//
+//        return "%d번 게시물을 삭제했습니다.".formatted(id);
+//    }
 
+    @GetMapping("/delete")
+    public String doDelete(Integer id){
         Question question = questionRepository.findById(id).get();
         questionRepository.delete(question);
-
-        return "%d번 게시물을 삭제했습니다.".formatted(id);
+        return "redirect:/question/list";
     }
-
 
 }
