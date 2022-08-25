@@ -38,9 +38,12 @@ public class ProductService {
         return productList;
     }
 
-    public void setRandomNum(ProductBuyForm productBuyForm) {
+    public void setReady(ProductBuyForm productBuyForm) {
         int orderNumber = (int) (Math.random() * 10000000);
         productBuyForm.setOrderNumber(orderNumber);
+        if(productBuyForm.getOrderTotalPrice() < 50000){
+            productBuyForm.setShippingCost(3000);
+        }
     }
 
     public int calcPrice(Product product, Long id) {

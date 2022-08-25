@@ -4,6 +4,7 @@ import com.mysite.shoppingMall.Form.OrderSheetForm;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Form.ProductWriteForm;
 import com.mysite.shoppingMall.Service.ProductService;
+import com.mysite.shoppingMall.Service.ShoppingCartService;
 import com.mysite.shoppingMall.Service.UserService;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Domain.IsLogined;
@@ -26,6 +27,8 @@ public class ProductController {
 
     private final ProductService productService;
     private final UserService userService;
+
+    private final ShoppingCartService shoppingCartService;
 
 
 //    C 생성 ==============================================
@@ -146,8 +149,7 @@ public class ProductController {
             return "redirect:/product/detail?id=" + productBuyForm.getProductId();
         }
 
-        productService.setRandomNum(productBuyForm);
-
+        productService.setReady(productBuyForm);
 
         return "product/orderTemp.html";
     }

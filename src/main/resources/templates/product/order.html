@@ -23,27 +23,43 @@
                             <span class="overflow-hidden w-20 overflow-ellipsis">주문번호 : [[${productBuyForm.orderNumber}]]</span>
                         </dt>
                         <dt class="pb-4 table-cell text-center"></dt>
-                        <dt class="pb-4">주문 금액</dt>
                     </dl>
+                    <hr/>
                     <dl class="table-row overflow-visible">
-                        <dd class="table-cell w-1/7 p-3 border-t border-b">
-                            <img th:src="'/product_image/'+${productBuyForm.orderTitle}+'/'+${productBuyForm.orderImage}"
-                                 alt="없음" class="product_img">
-                        </dd>
-                        <dd class="table-cell p-3 align-middle border-t border-b">
-                            <span class="block">[[${productBuyForm.orderTitle}]]</span>
-                            <span class="block">[[${productBuyForm.orderColor}]] / [[${productBuyForm.orderSize}]]</span>
-                            <span>[[${productBuyForm.orderCounter}]]개</span>
-                        </dd>
-                        <dd class="table-cell p-3 align-middle border-t border-b">[[${productBuyForm.orderTotalPrice}]]원</dd>
+                        <div th:if="#{shoppingCartList == null}" class="flex justify-between items-center">
+                            <dd class="table-cell w-1/7 p-3">
+                                <img th:src="'/product_image/'+${productBuyForm.orderTitle}+'/'+${productBuyForm.orderImage}"
+                                     alt="없음" class="product_img">
+                            </dd>
+                            <dd class="table-cell p-3 align-middle">
+                                <span class="block">[[${productBuyForm.orderTitle}]]</span>
+                                <span class="block">[[${productBuyForm.orderColor}]] / [[${productBuyForm.orderSize}]]</span>
+                                <span>[[${productBuyForm.orderCounter}]]개</span>
+                            </dd>
+                            <dd class="table-cell p-3 mr-3">[[${productBuyForm.orderTotalPrice}]]원</dd>
+                        </div>
+                        <div th:if="#{shoppingCartList != null}" class="flex justify-between items-center">
+                            <div th:each="shoppingCart : ${shoppingCartList}">
+                                <dd class="table-cell w-1/7 p-3 border-t border-b">
+                                    <img th:src="'/product_image/'+${shoppingCart.product.title}+'/'+${shoppingCart.product.mainImage}"
+                                         alt="없음" class="product_img">
+                                </dd>
+                                <dd class="table-cell p-3 align-middle border-t border-b">
+                                    <span class="block">[[${shoppingCart.product.title}]]</span>
+                                    <span class="block">[[${shoppingCart.cartColor}]] / [[${shoppingCart.cartSize}]]</span>
+                                    <span>[[${shoppingCart.cartCount}]]개</span>
+                                </dd>
+                                <dd class="table-cell p-3 mr-3">[[${productBuyForm.orderTotalPrice}]]원</dd>
+                            </div>
+                        </div>
                     </dl>
                 </div>
-
+                <hr/>
                 <div class="px-5 py-4 text-right border-b-2 border-black text-gray-400">상품<span class="text-black"> [[${productBuyForm.orderTotalPrice}]]</span>원
-                    + 배송<span class="text-black"> 0</span>원<span class="pl-3 box-border text-black">주문금액 [[${productBuyForm.orderTotalPrice}]]원</span>
+                    + 배송<span class="text-black"> [[${productBuyForm.shippingCost}]]</span>원<span class="pl-3 box-border text-black">주문금액 [[${productBuyForm.orderTotalPrice + productBuyForm.shippingCost}]]원</span>
                 </div>
 
-                <div class="text-2xl text-right p-5 box-border">총 결제금액 <span class="text-yellow-400">[[${productBuyForm.orderTotalPrice}]]</span><span>원</span>
+                <div class="text-2xl text-right p-5 box-border">총 결제금액 <span class="text-yellow-400">[[${productBuyForm.orderTotalPrice + productBuyForm.shippingCost}]]</span><span>원</span>
                 </div>
             </div>
         </div>
@@ -168,10 +184,10 @@
                     <dt class="font-bold float-left w-1/2 px-2 py-3">총 상품금액</dt>
                     <dd class="float-left text-right w-1/2 px-2 py-3">[[${productBuyForm.orderTotalPrice}]]원</dd>
                     <dt class="font-bold float-left w-1/2 px-2 py-3">배송비</dt>
-                    <dd class="float-left text-right w-1/2 px-2 py-3">0원</dd>
+                    <dd class="float-left text-right w-1/2 px-2 py-3">[[${productBuyForm.shippingCost}]]원</dd>
                     <dt class="text-3xl font-bold float-left w-1/2 px-2 py-3">총 결제예상 금액</dt>
                     <dd class="text-3xl font-bold text-yellow-400 float-left text-right w-1/2 px-2 py-3" id="money">
-                        [[${productBuyForm.orderTotalPrice}]]원
+                        [[${productBuyForm.orderTotalPrice + productBuyForm.shippingCost}]]원
                     </dd>
                 </dl>
             </div>
