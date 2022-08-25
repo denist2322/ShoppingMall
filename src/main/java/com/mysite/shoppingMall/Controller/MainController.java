@@ -65,6 +65,7 @@ public class MainController {
         return "pages/adminProductListPage.html";
     }
 
+    // 잠깐 확인좀
 //    @RequestMapping("/test")
 //    public String showTest(Model model, HttpSession session) {
 //        IsLogined isLogined = Ut.isLogined(session);
