@@ -25,6 +25,7 @@ public class QuestionController {
     @Autowired
     private UserRepository userRepository;
 
+
     //C 생성 ==============================================
     @GetMapping("/doWrite")
     public String doWrite(QuestionForm questionForm){
@@ -33,14 +34,15 @@ public class QuestionController {
     }
 
     @PostMapping("/doWrite")
-    public String doWrite(@Valid QuestionForm questionForm, BindingResult bindingResult, HttpSession session){
+    public String doWrite(@Valid QuestionForm questionForm, BindingResult bindingResult, HttpSession session, Model model){
         if(bindingResult.hasErrors()){
             return "QnA/write.html";
         }
-
         this.questionService.doWrite(questionForm.getSubject(), questionForm.getContent(), session);
 
-        return "redirect:/question/list";
+        model.addAttribute("message", "글 작성이 완료되었습니다.");
+        model.addAttribute("searchUrl", "/question/list");
+        return "QnA/message.html";
     }
 
 
