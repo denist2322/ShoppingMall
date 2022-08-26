@@ -33,7 +33,7 @@
                 <tbody class="justify-between">
 
                 <tr th:each="question, loop : ${paging}" class="">
-                    <th th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}" class="px-4 py-3"></th>
+                    <th th:text="${question.id}" class="px-4 py-3"></th>
                     <th th:text="${question.mallUser.name}" class="px-4 py-3"></th>
                     <th  class="px-4 py-3"><a th:text="${question.subject}" th:href="@{|/question/detail/${question.id}|}" ></a></th>
                     <th th:text="${(question.createDate).toString().substring(0,10)}" class="px-4 py-3"></th>
@@ -68,7 +68,12 @@
                     th:if="${page >= paging.number-5 and page <= paging.number+5}"
                     th:classappend="${page == paging.number} ? 'active'"
                     class="page-item">
-                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    <div th:if="${kw == null}">
+                        <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </div>
+                    <div th:if="${kw != null}">
+                        <a th:text="${page}" class="page-link" th:href="'/question/detail?kw=' + ${kw} + '&page=' + ${page}"></a>
+                    </div>
                 </li>
                 <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
                     <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
