@@ -71,6 +71,6 @@ public class MainController {
 //        IsLogined isLogined = Ut.isLogined(session);
 //        List<ShoppingCart> shoppingCartList = shoppingCartRepository.findByMallUserId(isLogined.getUserId());
 //        model.addAttribute("shoppingCartList", shoppingCartList);
-//        return "user/ordershpping.html";
+//        return "user/orderShipping.html";
 //  }
 }

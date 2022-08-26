@@ -300,7 +300,7 @@
                 result += "<input type=\"hidden\" name=\"orderSheetTotalPrice\" value=\"" + [[${productBuyForm.shippingCost + productBuyForm.orderTotalPrice}]]  + "\"/>"
                 result += "<input type=\"hidden\" name=\"paymentSuccess\" value=\"success\"/>";
                 $("#isPaymentSuccess").replaceWith(result);
-                saveOrder.action = "/product/saveOrder";
+                saveOrder.action = "/product/saveOrderTmp";
                 saveOrder.method = "get";
                 saveOrder.submit();
             } else {
