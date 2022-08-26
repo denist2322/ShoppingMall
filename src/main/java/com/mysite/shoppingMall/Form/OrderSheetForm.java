@@ -26,7 +26,10 @@ public class OrderSheetForm {
     private String orderSheetReceiverAddress3;
     private String orderSheetReceiverAddress4;
     private String orderSheetReceiverOption;
-    private long totalPrice;
+
+    private long orderSheetShippingCost;
+    private long orderSheetProductCost;
+    private long orderSheetTotalPrice;
     @NotNull(message = "결제가 필요합니다.")
     private String paymentSuccess;
 }

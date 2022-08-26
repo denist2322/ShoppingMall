@@ -149,7 +149,7 @@ mall_user_id = 2;
 
 INSERT INTO Question SET
 create_date = NOW(),
-`subject` = '질문 4',
+`subject` = '안녕 4',
 content = '교환 발송은 언제 되나요 ?',
 modify_date = NOW(),
 mall_user_id = 2;
@@ -223,10 +223,12 @@ CREATE TABLE `order_sheet` (
    shipping_cost INT UNSIGNED NOT NULL,
    product_cost INT UNSIGNED NOT NULL,
    total_price INT NOT NULL,
-   now_state INT(4) UNSIGNED NOT NULL COMMENT '0: 입금전, 1:배송준비중, 2:배송중, 3:배송완료'
+   now_state INT(4) UNSIGNED NOT NULL COMMENT '0: 입금전, 1:배송준비중, 2:배송중, 3:배송완료',
+   mall_user_id INT UNSIGNED NOT NULL
 );
 
 
 SELECT * FROM Product_color;
 SELECT * FROM Product_size;
+SELECT * FROM `order_sheet`;
 

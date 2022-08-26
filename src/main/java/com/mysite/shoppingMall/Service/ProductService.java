@@ -3,16 +3,14 @@ package com.mysite.shoppingMall.Service;
 import com.mysite.shoppingMall.Form.OrderSheetForm;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Form.ProductWriteForm;
-import com.mysite.shoppingMall.Repository.ProductColorRepository;
-import com.mysite.shoppingMall.Repository.ProductImageRepository;
-import com.mysite.shoppingMall.Repository.ProductRepository;
-import com.mysite.shoppingMall.Repository.ProductSizeRepository;
+import com.mysite.shoppingMall.Repository.*;
 import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +24,8 @@ public class ProductService {
     private final ProductImageRepository productImageRepository;
     private final ProductSizeRepository productSizeRepository;
     private final ProductColorRepository productColorRepository;
+    private final UserService userService;
+    private final OrderSheetRepository orderSheetRepository;
 
 
     public Product findProduct(Long id) {
@@ -41,7 +41,7 @@ public class ProductService {
     public void setReady(ProductBuyForm productBuyForm) {
         int orderNumber = (int) (Math.random() * 10000000);
         productBuyForm.setOrderNumber(orderNumber);
-        if(productBuyForm.getOrderTotalPrice() < 50000){
+        if (productBuyForm.getOrderTotalPrice() < 50000) {
             productBuyForm.setShippingCost(3000);
         }
     }
@@ -133,8 +133,8 @@ public class ProductService {
 
     public String setColorString(List<ProductColor> productColorList) {
         String color = "";
-        for(int i = 0 ; i < productColorList.size(); i++){
-            if(i == productColorList.size()-1){
+        for (int i = 0; i < productColorList.size(); i++) {
+            if (i == productColorList.size() - 1) {
                 color += productColorList.get(i).getProductColor();
                 break;
             }
@@ -145,13 +145,39 @@ public class ProductService {
 
     public String setSizeString(List<ProductSize> productSizeList) {
         String size = "";
-        for(int i = 0 ; i < productSizeList.size(); i++){
-            if(i == productSizeList.size()-1){
+        for (int i = 0; i < productSizeList.size(); i++) {
+            if (i == productSizeList.size() - 1) {
                 size += productSizeList.get(i).getProductSize();
                 break;
             }
             size += productSizeList.get(i).getProductSize() + "**";
         }
         return size;
+    }
+
+    public void saveOrder(OrderSheetForm orderSheetForm, HttpSession session) {
+        OrderSheet orderSheet = new OrderSheet();
+        orderSheet.setSheetNumber(orderSheetForm.getOrderSheetNumber());
+        String orderEmail = orderSheetForm.getOrderSheetEmail1() + "@" + orderSheetForm.getOrderSheetEmail2();
+        orderSheet.setSheetOrdererEmail(orderEmail);
+        orderSheet.setSheetOrdererName(orderSheetForm.getOrderSheetName());
+        String orderPhone = orderSheetForm.getOrderSheetCellPhone1() + "-" + orderSheetForm.getOrderSheetCellPhone2() + "-" + orderSheetForm.getOrderSheetCellPhone3();
+        orderSheet.setSheetOrdererPhone(orderPhone);
+        orderSheet.setSheetReceiverName(orderSheetForm.getOrderSheetReceiver());
+        String receiverPhone = orderSheetForm.getOrderSheetReceiverPhone1() + "-" + orderSheetForm.getOrderSheetReceiverPhone2() + "-" + orderSheetForm.getOrderSheetCellPhone3();
+        orderSheet.setSheetReceiverPhone(receiverPhone);
+        String address = orderSheetForm.getOrderSheetReceiverAddress2() + " " + orderSheetForm.getOrderSheetReceiverAddress3() + " " + orderSheetForm.getOrderSheetReceiverAddress4() + " " + orderSheetForm.getOrderSheetReceiverAddress1();
+        orderSheet.setSheetReceiverAddress(address);
+        orderSheet.setSheetOption(orderSheetForm.getOrderSheetReceiverOption());
+        orderSheet.setShippingCost(orderSheetForm.getOrderSheetShippingCost());
+        orderSheet.setProductCost(orderSheetForm.getOrderSheetProductCost());
+        orderSheet.setTotalPrice(orderSheetForm.getOrderSheetTotalPrice());
+        orderSheet.setNowState(1);
+
+        MallUser malluser = userService.getUser(session);
+        orderSheet.setMallUser(malluser);
+
+        orderSheetRepository.save(orderSheet);
+
     }
 }

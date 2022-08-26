@@ -167,7 +167,10 @@ public class ProductController {
     }
     // 주문 내역 저장 ================================
     @GetMapping("/saveOrder")
-    public String saveOrder(){
+    public String saveOrder(OrderSheetForm orderSheetForm, HttpSession session){
+
+        productService.saveOrder(orderSheetForm, session);
+
         return "pages/orderSuccess.html";
     }
 
