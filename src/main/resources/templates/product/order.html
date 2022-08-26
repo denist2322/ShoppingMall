@@ -66,9 +66,8 @@
         <!-- 주문상품 정보 끝 -->
 
         <!-- 주문자 정보 시작 -->
-        <form action="">
+        <form id="saveOrder">
             <input type="hidden" name="orderSheetNumber" th:value="${productBuyForm.orderNumber}">
-            <input type="hidden" name="paymentSuccess" value="success">
             <div class="box-border">
                 <h2 class="mt-10 box-border border-b-2 border-black text-xl">주문자 정보</h2>
                 <div class="mb-10 table w-full border-b border-black">
@@ -116,7 +115,7 @@
                     <dl class="table-row">
                         <dt class="table-cell w-1/5 font-bold align-middle p-1 border-b border-gray-300">수령자</dt>
                         <dd class="w-4/5 table-cell p-1 align-middle border-b border-gray-300">
-                            <input type="text" name="orderSheetName" th:value="${mallUser.name}"
+                            <input type="text" name="orderSheetReceiver" th:value="${mallUser.name}"
                                    class="w-full border-2 mx-1 px-4 py-3 box-border">
                         </dd>
                     </dl>
@@ -295,8 +294,15 @@
             buyer_tel : "[[${mallUser.cellphone}]]"
         }, function (rsp) { // callback
             if (rsp.success) {
-                $("#isPaymentSuccess").replaceWith("<input type=\"hidden\" name=\"paymentSuccess\" value=\"success\"/>");
-                location.href="/product/saveOrder";
+                var result = ""
+                result = "<input type=\"hidden\" name=\"orderSheetShippingCost\" value=\"" + [[${productBuyForm.shippingCost}]]  + "\"/>"
+                result += "<input type=\"hidden\" name=\"orderSheetProductCost\" value=\"" + [[${productBuyForm.orderTotalPrice}]]  + "\"/>"
+                result += "<input type=\"hidden\" name=\"orderSheetTotalPrice\" value=\"" + [[${productBuyForm.shippingCost + productBuyForm.orderTotalPrice}]]  + "\"/>"
+                result += "<input type=\"hidden\" name=\"paymentSuccess\" value=\"success\"/>";
+                $("#isPaymentSuccess").replaceWith(result);
+                saveOrder.action = "/product/saveOrder";
+                saveOrder.method = "get";
+                saveOrder.submit();
             } else {
                 $("#isPaymentSuccess").replaceWith("<input type=\"hidden\" name=\"paymentSuccess\" value=\"fail\"/>");
                 alert("결제에 실패했습니다.");
