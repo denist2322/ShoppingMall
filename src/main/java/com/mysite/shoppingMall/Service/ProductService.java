@@ -180,4 +180,8 @@ public class ProductService {
         orderSheetRepository.save(orderSheet);
 
     }
+
+    public List<OrderSheet> getOrderList(Integer userId) {
+        return orderSheetRepository.findByMallUserId(userId);
+    }
 }

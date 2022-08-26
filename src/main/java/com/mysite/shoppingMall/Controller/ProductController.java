@@ -166,11 +166,20 @@ public class ProductController {
         return "product/order.html";
     }
     // 주문 내역 저장 ================================
-    @GetMapping("/saveOrder")
+    // 새로고침시 중복으로 DB에 저장되는거 방지
+    @GetMapping("/saveOrderTmp")
     public String saveOrder(OrderSheetForm orderSheetForm, HttpSession session){
+        if(!orderSheetForm.getPaymentSuccess().equals("success")){
+            return "/";
+        }
 
         productService.saveOrder(orderSheetForm, session);
 
+        return "redirect:/product/successPage";
+    }
+
+    @GetMapping("/successPage")
+    public String successPage(){
         return "pages/orderSuccess.html";
     }
 

@@ -1,12 +1,12 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Form.*;
-import com.mysite.shoppingMall.Repository.UserRepository;
-import com.mysite.shoppingMall.Service.MailService;
-import com.mysite.shoppingMall.Service.UserService;
-import com.mysite.shoppingMall.Ut.Ut;
 import com.mysite.shoppingMall.Domain.IsLogined;
 import com.mysite.shoppingMall.Domain.MallUser;
+import com.mysite.shoppingMall.Domain.OrderSheet;
+import com.mysite.shoppingMall.Form.*;
+import com.mysite.shoppingMall.Service.ProductService;
+import com.mysite.shoppingMall.Service.UserService;
+import com.mysite.shoppingMall.Ut.Ut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
-    private final MailService mailService;
-    private final UserRepository userRepository;
     private final UserService userService;
+    private final ProductService productService;
 
     @RequestMapping("/login")
     public String showLogin(LoginForm loginForm, Model model) {
@@ -223,6 +223,17 @@ public class UserController {
     @RequestMapping("/findPw")
     public String findPw(FindPwForm findPwForm){
         return "user/findPw.html";
+    }
+
+    // == 주문 처리 현황 페이지 ==
+    @RequestMapping("/shippingLookup")
+    public String showTest(Model model, HttpSession session) {
+        MallUser mallUser = userService.getUser(session);
+        IsLogined isLogined = Ut.isLogined(session);
+        List<OrderSheet> orderSheetList = productService.getOrderList(isLogined.getUserId());
+        model.addAttribute("mallUser", mallUser);
+        model.addAttribute("orderSheetList",orderSheetList);
+        return "user/orderShipping.html";
     }
 
 }

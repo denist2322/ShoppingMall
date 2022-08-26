@@ -1,7 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.MallUser;
 import com.mysite.shoppingMall.Domain.ShoppingCart;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Service.ShoppingCartService;
@@ -32,17 +31,7 @@ public class ShoppingCartController {
         return "pages/shoppingCart.html";
     }
 
-    @RequestMapping("/shippingLookup")
-    public String showTest(Model model, HttpSession session) {
-        MallUser mallUser = userService.getUser(session);
 
-        IsLogined isLogined = Ut.isLogined(session);
-        List<ShoppingCart> shoppingCartList = shoppingCartService.getCartList(isLogined.getUserId());
-
-        model.addAttribute("mallUser", mallUser);
-        model.addAttribute("shoppingCartList", shoppingCartList);
-        return "user/ordershpping.html";
-    }
 
     @RequestMapping("/addCart")
     public String addCart(ProductBuyForm productBuyForm, HttpSession session){
