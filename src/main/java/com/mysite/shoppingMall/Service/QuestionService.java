@@ -41,6 +41,7 @@ public class QuestionService {
         question.setSubject(subject);
         question.setContent(content);
         question.setCreateDate(LocalDateTime.now());
+        question.setModifyDate(LocalDateTime.now());
         question.setMallUser(mallUser);
         this.questionRepository.save(question);
     }

@@ -60,7 +60,8 @@ public class QuestionController {
         model.addAttribute("question", question);
         return "QnA/question_detail";
     }
-
+    
+    // 검색 ==========================================================
     @RequestMapping("/detail")
     public String findDetail(@RequestParam(value="page", defaultValue="0") int page,String kw,Model model){
         Page<Question> paging = this.questionService.keywordQuestion(page, kw);
@@ -68,6 +69,7 @@ public class QuestionController {
             System.out.println(question.getSubject());
         }
         model.addAttribute("paging", paging);
+        model.addAttribute("kw",kw);
         return "QnA/qna.html";
     }
 
@@ -88,48 +90,6 @@ public class QuestionController {
 
         return "redirect:/question/list";
     }
-
-    //U 수정 ==============================================
-//    @RequestMapping("/doModify")
-//    @ResponseBody
-//    public String doModify(Integer id, String subject, String content){
-//        if(id == null){
-//            return "게시물 번호를 입력해주세요.";
-//        }
-//        if(Ut.empty(subject)){
-//            return "질문 번호를 입력해주세요.";
-//        }
-//        if(Ut.empty(content)){
-//            return "질문 내용을 입력해주세요.";
-//        }
-//        if(!questionRepository.existsById(id)){
-//            return "게시물이 없습니다.";
-//        }
-//
-//        Question question = questionRepository.findById(id).get();
-//
-//        question.setCreateDate(LocalDateTime.now());
-//        question.setSubject(subject);
-//        question.setContent(content);
-//
-//        questionRepository.save(question);
-//        return "%d번 질문이 수정 되었습니다.".formatted(question.getId());
-//    }
-
-
-//    //D 삭제 ==============================================
-//    @RequestMapping("/doDelete")
-//    @ResponseBody
-//    public String doDelete(Integer id){
-////        if(!questionRepository.existsById(id)){
-////            return "%d번 게시물이 없습니다.".formatted(id);
-////        }
-//
-//        Question question = questionRepository.findById(id).get();
-//        questionRepository.delete(question);
-//
-//        return "%d번 게시물을 삭제했습니다.".formatted(id);
-//    }
 
     @GetMapping("/delete")
     public String doDelete(Integer id){
