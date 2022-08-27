@@ -1,14 +1,13 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Domain.IsLogined;
+import com.mysite.shoppingMall.Domain.Product;
 import com.mysite.shoppingMall.Repository.ProductRepository;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
 import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Service.ShoppingCartService;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.Product;
-import com.mysite.shoppingMall.Domain.ShoppingCart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,6 +70,7 @@ public class MainController {
 //        IsLogined isLogined = Ut.isLogined(session);
 //        List<ShoppingCart> shoppingCartList = shoppingCartRepository.findByMallUserId(isLogined.getUserId());
 //        model.addAttribute("shoppingCartList", shoppingCartList);
-//        return "user/orderShipping.html";
+//        return "user/orderHistory.html";
 //  }
+
 }

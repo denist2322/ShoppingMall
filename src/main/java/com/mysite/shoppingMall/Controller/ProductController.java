@@ -79,7 +79,6 @@ public class ProductController {
         Product product = productService.findProduct(id);
         String color = productService.setColorString(product.getProductColorList());
         String size = productService.setSizeString(product.getProductSizeList());
-        System.out.println(product.getTitle());
 
         model.addAttribute("product",product);
         model.addAttribute("color",color);
@@ -92,31 +91,6 @@ public class ProductController {
         productService.doWrite(mainImage, detailImage, productWriteForm);
         return "redirect:/";
     }
-//    @RequestMapping("/doModify")
-//    @ResponseBody
-//    public String doModify(Long id, String title, String body){
-//        if(id == null){
-//            return "게시물 번호를 입력해주세요.";
-//        }
-//        if(Ut.empty(title)){
-//            return "제목을 입력해주세요.";
-//        }
-//        if(Ut.empty(body)){
-//            return "내용을 입력해주세요.";
-//        }
-//        if(!productRepository.existsById(id)){
-//            return "게시물이 없습니다.";
-//        }
-//
-//        Product product = productRepository.findById(id).get();
-//
-//        product.setTitle(title);
-//        product.setBody(body);
-//        productRepository.save(product);
-//
-//        return "%d번 게시물이 수정되었습니다.".formatted(product.getId());
-//    }
-
 
     //D 삭제 ==============================================
     @RequestMapping("/doDelete")

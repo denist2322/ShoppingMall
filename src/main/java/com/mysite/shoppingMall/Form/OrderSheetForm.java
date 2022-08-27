@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,6 +31,8 @@ public class OrderSheetForm {
     private long orderSheetShippingCost;
     private long orderSheetProductCost;
     private long orderSheetTotalPrice;
+
+    private List<Long> productsId;
     @NotNull(message = "결제가 필요합니다.")
     private String paymentSuccess;
 }
