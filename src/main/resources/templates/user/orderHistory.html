@@ -27,26 +27,26 @@
         <div class="flex h-20">
             <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
                 입금전
-                <a th:href="@{|/shippingLookup|}">
-                    <span>0</span>
+                <a th:href="@{|/user/orderHistory|}">
+                    <span>[[${shippingState.get(0)}]]</span>
                 </a>
             </li>
             <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
                 배송준비중
-                <a href="#">
-                    <span>0</span>
+                <a th:href="@{|/user/orderHistory|}">
+                    <span>[[${shippingState.get(1)}]]</span>
                 </a>
             </li>
             <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
                 배송중
-                <a href="#">
-                    <span>0</span>
+                <a th:href="@{|/user/orderHistory|}">
+                    <span>[[${shippingState.get(2)}]]</span>
                 </a>
             </li>
             <li class="flex w-1/4 justify-center flex-col items-center">
                 배송완료
-                <a href="#">
-                    <span>0</span>
+                <a th:href="@{|/user/orderHistory|}">
+                    <span>[[${shippingState.get(3)}]]</span>
                 </a>
             </li>
         </div>
@@ -71,9 +71,8 @@
             <th class="justify-center">구매상태</th>
             <th class="justify-center">주문상세</th>
         </tr>
-
         </thead>
-        <div th:each="shoppingCart : ${shoppingCartList}">
+        <div th:each="orderSheet : ${orderSheetList}">
             <tbody class="border-b-2 border-gray-200 h-32">
             <tr>
                 <th class="flex h-full">

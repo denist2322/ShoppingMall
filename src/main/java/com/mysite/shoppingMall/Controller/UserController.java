@@ -226,14 +226,16 @@ public class UserController {
     }
 
     // == 주문 처리 현황 페이지 ==
-    @RequestMapping("/shippingLookup")
+    @RequestMapping("/orderHistory")
     public String showTest(Model model, HttpSession session) {
         MallUser mallUser = userService.getUser(session);
         IsLogined isLogined = Ut.isLogined(session);
         List<OrderSheet> orderSheetList = productService.getOrderList(isLogined.getUserId());
+        List<Integer> shippingState = productService.getShippingState();
         model.addAttribute("mallUser", mallUser);
         model.addAttribute("orderSheetList",orderSheetList);
-        return "user/orderShipping.html";
+        model.addAttribute("shippingState",shippingState);
+        return "user/orderHistory.html";
     }
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -183,5 +184,14 @@ public class ProductService {
 
     public List<OrderSheet> getOrderList(Integer userId) {
         return orderSheetRepository.findByMallUserId(userId);
+    }
+
+    public List<Integer> getShippingState() {
+        List<Integer> state = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++){
+            state.add(orderSheetRepository.findByNowState(i).size());
+        }
+        return state;
     }
 }
