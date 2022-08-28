@@ -26,6 +26,7 @@
                     </dl>
                     <hr/>
                     <dl class="table-row overflow-visible">
+                        <!--  상품이 한개 일때 -->
                         <div th:if="#{shoppingCartList == null}" class="flex justify-between items-center">
                             <dd class="table-cell w-1/7 p-3">
                                 <img th:src="'/product_image/'+${productBuyForm.orderTitle}+'/'+${productBuyForm.orderImage}"
@@ -38,6 +39,7 @@
                             </dd>
                             <dd class="table-cell p-3 mr-3">[[${productBuyForm.orderTotalPrice}]]원</dd>
                         </div>
+                        <!--  상품이 여러개 일때(쇼핑카트로 주문서가 작성될 때) -->
                         <div th:if="#{shoppingCartList != null}" class="flex justify-between items-center">
                             <div th:each="shoppingCart : ${shoppingCartList}">
                                 <dd class="table-cell w-1/7 p-3 border-t border-b">
@@ -175,6 +177,9 @@
 
         <!--나머지 정보-->
             <input type="hidden" name="productsId" th:value="${productBuyForm.productsId}">
+            <input type="hidden" name="orderSheetColor" th:value="${productBuyForm.orderColor}">
+            <input type="hidden" name="orderSheetSize" th:value="${productBuyForm.orderSize}">
+            <input type="hidden" name="orderSheetCount" th:value="${productBuyForm.orderCounter}">
             <div id="isPaymentSuccess">
             </div>
         </form>
