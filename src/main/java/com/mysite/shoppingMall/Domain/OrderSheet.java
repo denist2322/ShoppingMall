@@ -3,6 +3,7 @@ package com.mysite.shoppingMall.Domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -10,6 +11,7 @@ public class OrderSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
+    public LocalDateTime regDate;
     public String sheetNumber;
     public String sheetOrdererEmail;
     public String sheetOrdererName;

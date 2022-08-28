@@ -178,6 +178,7 @@ public class ProductService {
             orderSheet.setSheetProductColor(orderSheetForm.getOrderSheetColor().get(i));
             orderSheet.setSheetProductSize(orderSheetForm.getOrderSheetSize().get(i));
             orderSheet.setSheetProductCount(orderSheetForm.getOrderSheetCount().get(i));
+            orderSheet.setRegDate(LocalDateTime.now());
             orderSheet.setNowState(1);
 
             MallUser malluser = userService.getUser(session);
@@ -194,11 +195,16 @@ public class ProductService {
         return orderSheetRepository.findByMallUserId(userId);
     }
 
-    public List<Integer> getShippingState() {
+    public List<OrderSheet> getOrderList() {
+        return orderSheetRepository.findAll();
+    }
+
+    public List<Integer> getShippingState(HttpSession session) {
+        int userid = Ut.isLogined(session).getUserId();
         List<Integer> state = new ArrayList<>();
 
         for(int i = 0; i < 4; i++){
-            state.add(orderSheetRepository.findByNowState(i).size());
+            state.add(orderSheetRepository.findByNowStateAndMallUserId(i, userid).size());
         }
         return state;
     }
