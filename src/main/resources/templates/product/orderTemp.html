@@ -5,6 +5,7 @@
 </head>
 <body>
 <form name="sendData" th:action="@{|/product/order|}" method="post">
+    <input type="hidden" name="productsId" th:value = "${productBuyForm.productsId}">
     <input type="hidden" name="orderImage" th:value = "${productBuyForm.orderImage}">
     <input type="hidden" name="orderTitle" th:value = "${productBuyForm.orderTitle}">
     <input type="hidden" name="orderColor" th:value = "${productBuyForm.orderColor}">

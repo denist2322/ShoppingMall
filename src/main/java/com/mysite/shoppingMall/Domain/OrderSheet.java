@@ -25,4 +25,7 @@ public class OrderSheet {
 
     @ManyToOne
     MallUser mallUser;
+
+    @ManyToOne
+    Product Product;
 }

@@ -60,7 +60,7 @@
 
         <!-- 상품 정보 시작 -->
         <form class="flex justify-center w-full px-5 pt-20 pb-20" id="orderForm">
-            <input type="hidden" name="productId" th:value="${product.id}"/>
+            <input type="hidden" name="productsId" th:value="${product.id}"/>
             <input type="hidden" name="orderImage" th:value="${product.mainImage}"/>
             <input type="hidden" name="orderTitle" th:value="${product.title}"/>
             <input type="hidden" name="orderPrice" th:value="${discountPrice}"/>

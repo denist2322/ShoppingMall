@@ -120,7 +120,7 @@ public class ProductController {
 
         if (productBuyForm.getOrderColor().equals("no") || productBuyForm.getOrderSize().equals("no")) {
             bindingResult.reject("", "색상 혹은 사이즈를 선택해주세요.");
-            return "redirect:/product/detail?id=" + productBuyForm.getProductId();
+            return "redirect:/product/detail?id=" + productBuyForm.getProductsId();
         }
 
         productService.setReady(productBuyForm);
@@ -139,6 +139,7 @@ public class ProductController {
 
         return "product/order.html";
     }
+
     // 주문 내역 저장 ================================
     // 새로고침시 중복으로 DB에 저장되는거 방지
     @GetMapping("/saveOrderTmp")
