@@ -137,6 +137,7 @@ public class UserController {
     @GetMapping("/myPage")
     public String myPage(JoinForm joinForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
+        List<Integer> shippingState = productService.getShippingState();
 
         String[] addressTmp = Ut.splitAddress(mallUser.getHomeAddress());
         joinForm.setAddress1(addressTmp[3].trim());
@@ -148,6 +149,7 @@ public class UserController {
         joinForm.setCellphone2_2(cellPhoneTmp[1].trim());
         joinForm.setCellphone2_3(cellPhoneTmp[2].trim());
         model.addAttribute("mallUser", mallUser);
+        model.addAttribute("shippingState",shippingState);
 
         return "user/myPage.html";
 
@@ -158,12 +160,11 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "user/myPage.html";
         }
-
         userService.modifyUser(joinForm);
-
 
         model.addAttribute("msg", "회원정보가 수정되었습니다.");
         model.addAttribute("replaceUri", "/user/myPage");
+
         return "common/js";
     }
 

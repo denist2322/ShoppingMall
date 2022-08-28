@@ -28,29 +28,30 @@
                     <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
                         입금전
                         <a th:href="@{|/user/orderHistory|}">
-                            <span>0</span>
+                            <span>[[${shippingState.get(0)}]]</span>
                         </a>
                     </li>
                     <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
                         배송준비중
                         <a th:href="@{|/user/orderHistory|}">
-                            <span>0</span>
+                            <span>[[${shippingState.get(1)}]]</span>
                         </a>
                     </li>
                     <li class="flex w-1/4 border-r border-gray-300 justify-center flex-col items-center">
                         배송중
                         <a th:href="@{|/user/orderHistory|}">
-                            <span>0</span>
+                            <span>[[${shippingState.get(2)}]]</span>
                         </a>
                     </li>
                     <li class="flex w-1/4 justify-center flex-col items-center">
                         배송완료
                         <a th:href="@{|/user/orderHistory|}">
-                            <span>0</span>
+                            <span>[[${shippingState.get(3)}]]</span>
                         </a>
                     </li>
                 </div>
             </div>
+    
             <form th:action="@{|/user/myPage|}" method="post"
                   class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
                 <div class="w-3/4">

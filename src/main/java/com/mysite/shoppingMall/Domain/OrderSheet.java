@@ -22,10 +22,13 @@ public class OrderSheet {
     public long productCost;
     public long totalPrice;
     public int nowState;
+    public String sheetProductColor;
+    public String sheetProductSize;
+    public long sheetProductCount;
 
     @ManyToOne
     MallUser mallUser;
 
     @ManyToOne
-    Product Product;
+    Product product;
 }

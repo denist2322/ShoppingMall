@@ -32,6 +32,9 @@ public class OrderSheetForm {
     private long orderSheetProductCost;
     private long orderSheetTotalPrice;
 
+    private List<String> orderSheetColor;
+    private List<String> orderSheetSize;
+    private List<Long> orderSheetCount;
     private List<Long> productsId;
 
     @NotNull(message = "결제가 필요합니다.")

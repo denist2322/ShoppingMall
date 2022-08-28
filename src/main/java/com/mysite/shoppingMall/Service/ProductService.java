@@ -158,7 +158,7 @@ public class ProductService {
 
     public void saveOrder(OrderSheetForm orderSheetForm, HttpSession session) {
 
-        for(Long productId : orderSheetForm.getProductsId()) {
+        for(int i =0; i<orderSheetForm.getProductsId().size(); i++) {
             OrderSheet orderSheet = new OrderSheet();
             orderSheet.setSheetNumber(orderSheetForm.getOrderSheetNumber());
             String orderEmail = orderSheetForm.getOrderSheetEmail1() + "@" + orderSheetForm.getOrderSheetEmail2();
@@ -175,12 +175,15 @@ public class ProductService {
             orderSheet.setShippingCost(orderSheetForm.getOrderSheetShippingCost());
             orderSheet.setProductCost(orderSheetForm.getOrderSheetProductCost());
             orderSheet.setTotalPrice(orderSheetForm.getOrderSheetTotalPrice());
+            orderSheet.setSheetProductColor(orderSheetForm.getOrderSheetColor().get(i));
+            orderSheet.setSheetProductSize(orderSheetForm.getOrderSheetSize().get(i));
+            orderSheet.setSheetProductCount(orderSheetForm.getOrderSheetCount().get(i));
             orderSheet.setNowState(1);
 
             MallUser malluser = userService.getUser(session);
             orderSheet.setMallUser(malluser);
 
-            Product product = productRepository.findById(productId).get();
+            Product product = productRepository.findById(orderSheetForm.getProductsId().get(i)).get();
             orderSheet.setProduct(product);
 
             orderSheetRepository.save(orderSheet);
