@@ -212,20 +212,24 @@ INSERT INTO Product_size SET
 
 CREATE TABLE `order_sheet` (
    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-   sheet_number VARCHAR(20) NOT NULL,
-   sheet_orderer_email VARCHAR(20) NOT NULL,
+   reg_date DATETIME NOT NULL,
+   sheet_number VARCHAR(30) NOT NULL,
+   sheet_orderer_email VARCHAR(50) NOT NULL,
    sheet_orderer_name VARCHAR(20) NOT NULL,
-   sheet_orderer_phone VARCHAR(20) NOT NULL,
+   sheet_orderer_phone VARCHAR(30) NOT NULL,
    sheet_receiver_name VARCHAR(20) NOT NULL,
-   sheet_receiver_phone VARCHAR(20) NOT NULL,
-   sheet_receiver_address VARCHAR(100) NOT NULL,
+   sheet_receiver_phone VARCHAR(50) NOT NULL,
+   sheet_receiver_address VARCHAR(150) NOT NULL,
    sheet_option TEXT NOT NULL,
    shipping_cost INT UNSIGNED NOT NULL,
    product_cost INT UNSIGNED NOT NULL,
    total_price INT NOT NULL,
+   sheet_product_color VARCHAR(20) NOT NULL,
+   sheet_product_size VARCHAR(20) NOT NULL,
+   sheet_product_count VARCHAR(20) NOT NULL,
    now_state INT(4) UNSIGNED NOT NULL COMMENT '0: 입금전, 1:배송준비중, 2:배송중, 3:배송완료',
    mall_user_id INT UNSIGNED NOT NULL,
-   product_id int unsigned not null
+   product_id INT UNSIGNED NOT NULL
 );
 
 

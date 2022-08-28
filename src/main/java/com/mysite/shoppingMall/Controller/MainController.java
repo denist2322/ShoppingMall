@@ -1,6 +1,7 @@
 package com.mysite.shoppingMall.Controller;
 
 import com.mysite.shoppingMall.Domain.IsLogined;
+import com.mysite.shoppingMall.Domain.OrderSheet;
 import com.mysite.shoppingMall.Domain.Product;
 import com.mysite.shoppingMall.Repository.ProductRepository;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -41,7 +43,7 @@ public class MainController {
     }
 
     // == 관리자 페이지 ==
-    @RequestMapping("/adminPage")
+    @GetMapping("/adminPage")
     public String adminPage(HttpSession session){
         IsLogined islogined = Ut.isLogined(session);
         if(islogined.getAuthority() == null){
@@ -52,7 +54,7 @@ public class MainController {
     }
 
     // == 관리자 상품 리스트 페이지 ==
-    @RequestMapping("/adminPage/productList")
+    @GetMapping("/adminPage/productList")
     public String productList(HttpSession session, Model model){
         IsLogined islogined = Ut.isLogined(session);
         if(islogined.getAuthority() == null){
@@ -64,6 +66,15 @@ public class MainController {
         return "pages/adminProductListPage.html";
     }
 
+    // == 유저 주문 내역 페이지 ==
+    @GetMapping("/adminPage/userOrderList")
+    public String userOrderList(Model model){
+
+        List<OrderSheet> orderSheetList = productService.getOrderList();
+
+        model.addAttribute("orderSheetList",orderSheetList);
+        return "pages/adminOrderListPage.html";
+    }
     // 잠깐 확인좀
 //    @RequestMapping("/test")
 //    public String showTest(Model model, HttpSession session) {

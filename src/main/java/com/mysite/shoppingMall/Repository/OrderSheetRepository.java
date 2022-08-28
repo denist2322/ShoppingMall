@@ -8,5 +8,5 @@ import java.util.List;
 public interface OrderSheetRepository extends JpaRepository<OrderSheet, Long> {
     List<OrderSheet> findByMallUserId(Integer userId);
 
-    List<OrderSheet> findByNowState(int i);
+    List<OrderSheet> findByNowStateAndMallUserId(int i, int userId);
 }

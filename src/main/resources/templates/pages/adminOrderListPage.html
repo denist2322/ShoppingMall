@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{common/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+</head>
+
+<main layout:fragment="main">
+    <div class="text-3xl mb-10 flex justify-center mt-10">관리자 페이지(상품 리스트)</div>
+    <hr class="-mt-5">
+    <div style="height:70vh;">
+        <div class="overflow-x-auto">
+            <table class="table w-full">
+                <!-- head -->
+                <thead>
+                <tr>
+                    <th class="text-base">주문번호</th>
+                    <th class="text-base">주문날짜</th>
+                    <th class="text-base">상품 정보</th>
+                    <th class="text-base">구매자</th>
+                    <th class="text-base">구매자 이메일</th>
+                    <th class="text-base">구매자 번호</th>
+                    <th class="text-base">수령인</th>
+                    <th class="text-base">수령인 번호</th>
+                    <th class="text-base">배송지</th>
+                    <th class="text-base">배송상태</th>
+                    <th class="text-base">세부사항</th>
+                </tr>
+                </thead>
+                <tbody>
+                <div th:each="orderSheet : ${orderSheetList}">
+                    <!-- row 1 -->
+                    <tr>
+                        <td class="text-base">[[${orderSheet.sheetNumber}]]</td>
+                        <td class="text-base">[[${(orderSheet.regDate).toString().substring(0,10)}]]</td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                        <td class="text-base"></td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</html>

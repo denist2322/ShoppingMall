@@ -137,7 +137,7 @@ public class UserController {
     @GetMapping("/myPage")
     public String myPage(JoinForm joinForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
-        List<Integer> shippingState = productService.getShippingState();
+        List<Integer> shippingState = productService.getShippingState(session);
 
         String[] addressTmp = Ut.splitAddress(mallUser.getHomeAddress());
         joinForm.setAddress1(addressTmp[3].trim());
@@ -232,7 +232,7 @@ public class UserController {
         MallUser mallUser = userService.getUser(session);
         IsLogined isLogined = Ut.isLogined(session);
         List<OrderSheet> orderSheetList = productService.getOrderList(isLogined.getUserId());
-        List<Integer> shippingState = productService.getShippingState();
+        List<Integer> shippingState = productService.getShippingState(session);
         model.addAttribute("mallUser", mallUser);
         model.addAttribute("orderSheetList",orderSheetList);
         model.addAttribute("shippingState",shippingState);
