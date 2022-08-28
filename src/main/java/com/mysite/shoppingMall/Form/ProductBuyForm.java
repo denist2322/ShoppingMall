@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductBuyForm {
-    private long productId;
+    private long productsId;
     private String orderImage;
     private String orderTitle;
     private String orderColor;

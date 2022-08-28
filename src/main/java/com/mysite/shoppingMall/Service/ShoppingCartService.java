@@ -32,10 +32,10 @@ public class ShoppingCartService {
         IsLogined isLogined = Ut.isLogined(session);
 
         MallUser mallUser = userRepository.findById(isLogined.getUserId()).get();
-        Product product = productRepository.findById((long)productBuyForm.getProductId()).get();
+        Product product = productRepository.findById((long)productBuyForm.getProductsId()).get();
 
-        if(shoppingCartRepository.existsByProductIdAndCartColor(productBuyForm.getProductId(), productBuyForm.getOrderColor())) {
-            ShoppingCart shoppingCart = shoppingCartRepository.findByProductIdAndCartColor(productBuyForm.getProductId(), productBuyForm.getOrderColor());
+        if(shoppingCartRepository.existsByProductIdAndCartColor(productBuyForm.getProductsId(), productBuyForm.getOrderColor())) {
+            ShoppingCart shoppingCart = shoppingCartRepository.findByProductIdAndCartColor(productBuyForm.getProductsId(), productBuyForm.getOrderColor());
             shoppingCart.setCartCount(productBuyForm.getOrderCounter());
             shoppingCartRepository.save(shoppingCart);
             return;

@@ -11,7 +11,7 @@ CREATE TABLE mall_user(
  user_password VARCHAR(100) NOT NULL,
  `name` VARCHAR(20) NOT NULL,
  birthday INT(100) UNSIGNED NOT NULL,
- home_address VARCHAR(50) NOT NULL,
+ home_address VARCHAR(150) NOT NULL,
  cellphone CHAR(20) NOT NULL
 );
 
@@ -224,7 +224,8 @@ CREATE TABLE `order_sheet` (
    product_cost INT UNSIGNED NOT NULL,
    total_price INT NOT NULL,
    now_state INT(4) UNSIGNED NOT NULL COMMENT '0: 입금전, 1:배송준비중, 2:배송중, 3:배송완료',
-   mall_user_id INT UNSIGNED NOT NULL
+   mall_user_id INT UNSIGNED NOT NULL,
+   product_id int unsigned not null
 );
 
 

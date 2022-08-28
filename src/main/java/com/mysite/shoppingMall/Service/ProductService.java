@@ -157,29 +157,34 @@ public class ProductService {
     }
 
     public void saveOrder(OrderSheetForm orderSheetForm, HttpSession session) {
-        OrderSheet orderSheet = new OrderSheet();
-        orderSheet.setSheetNumber(orderSheetForm.getOrderSheetNumber());
-        String orderEmail = orderSheetForm.getOrderSheetEmail1() + "@" + orderSheetForm.getOrderSheetEmail2();
-        orderSheet.setSheetOrdererEmail(orderEmail);
-        orderSheet.setSheetOrdererName(orderSheetForm.getOrderSheetName());
-        String orderPhone = orderSheetForm.getOrderSheetCellPhone1() + "-" + orderSheetForm.getOrderSheetCellPhone2() + "-" + orderSheetForm.getOrderSheetCellPhone3();
-        orderSheet.setSheetOrdererPhone(orderPhone);
-        orderSheet.setSheetReceiverName(orderSheetForm.getOrderSheetReceiver());
-        String receiverPhone = orderSheetForm.getOrderSheetReceiverPhone1() + "-" + orderSheetForm.getOrderSheetReceiverPhone2() + "-" + orderSheetForm.getOrderSheetCellPhone3();
-        orderSheet.setSheetReceiverPhone(receiverPhone);
-        String address = orderSheetForm.getOrderSheetReceiverAddress2() + " " + orderSheetForm.getOrderSheetReceiverAddress3() + " " + orderSheetForm.getOrderSheetReceiverAddress4() + " " + orderSheetForm.getOrderSheetReceiverAddress1();
-        orderSheet.setSheetReceiverAddress(address);
-        orderSheet.setSheetOption(orderSheetForm.getOrderSheetReceiverOption());
-        orderSheet.setShippingCost(orderSheetForm.getOrderSheetShippingCost());
-        orderSheet.setProductCost(orderSheetForm.getOrderSheetProductCost());
-        orderSheet.setTotalPrice(orderSheetForm.getOrderSheetTotalPrice());
-        orderSheet.setNowState(1);
 
-        MallUser malluser = userService.getUser(session);
-        orderSheet.setMallUser(malluser);
+        for(Long productId : orderSheetForm.getProductsId()) {
+            OrderSheet orderSheet = new OrderSheet();
+            orderSheet.setSheetNumber(orderSheetForm.getOrderSheetNumber());
+            String orderEmail = orderSheetForm.getOrderSheetEmail1() + "@" + orderSheetForm.getOrderSheetEmail2();
+            orderSheet.setSheetOrdererEmail(orderEmail);
+            orderSheet.setSheetOrdererName(orderSheetForm.getOrderSheetName());
+            String orderPhone = orderSheetForm.getOrderSheetCellPhone1() + "-" + orderSheetForm.getOrderSheetCellPhone2() + "-" + orderSheetForm.getOrderSheetCellPhone3();
+            orderSheet.setSheetOrdererPhone(orderPhone);
+            orderSheet.setSheetReceiverName(orderSheetForm.getOrderSheetReceiver());
+            String receiverPhone = orderSheetForm.getOrderSheetReceiverPhone1() + "-" + orderSheetForm.getOrderSheetReceiverPhone2() + "-" + orderSheetForm.getOrderSheetCellPhone3();
+            orderSheet.setSheetReceiverPhone(receiverPhone);
+            String address = orderSheetForm.getOrderSheetReceiverAddress2() + " " + orderSheetForm.getOrderSheetReceiverAddress3() + " " + orderSheetForm.getOrderSheetReceiverAddress4() + " " + orderSheetForm.getOrderSheetReceiverAddress1();
+            orderSheet.setSheetReceiverAddress(address);
+            orderSheet.setSheetOption(orderSheetForm.getOrderSheetReceiverOption());
+            orderSheet.setShippingCost(orderSheetForm.getOrderSheetShippingCost());
+            orderSheet.setProductCost(orderSheetForm.getOrderSheetProductCost());
+            orderSheet.setTotalPrice(orderSheetForm.getOrderSheetTotalPrice());
+            orderSheet.setNowState(1);
 
-        orderSheetRepository.save(orderSheet);
+            MallUser malluser = userService.getUser(session);
+            orderSheet.setMallUser(malluser);
 
+            Product product = productRepository.findById(productId).get();
+            orderSheet.setProduct(product);
+
+            orderSheetRepository.save(orderSheet);
+        }
     }
 
     public List<OrderSheet> getOrderList(Integer userId) {
