@@ -1,37 +1,36 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Domain.QuestionAnswer;
-import com.mysite.shoppingMall.Repository.QuestionAnswerRepository;
-import com.mysite.shoppingMall.Domain.QuestionAnswer;
+import com.mysite.shoppingMall.Domain.Question;
+import com.mysite.shoppingMall.Service.QuestionAnswerService;
+import com.mysite.shoppingMall.Service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/answer")
 public class QuestionAnswerController {
-    private final QuestionAnswerRepository questionAnswerRepository;
+    private final QuestionService questionService;
+    private final QuestionAnswerService questionAnswerService;
 
-    @RequestMapping("/create")
-    @ResponseBody
-    public String create(String body){
-        QuestionAnswer answer = new QuestionAnswer();
-        answer.setRegDate(LocalDateTime.now());
-        answer.setUpdateDate(LocalDateTime.now());
-        answer.setBody(body);
-        questionAnswerRepository.save(answer);
+    @PostMapping("/create/{id}")
+    public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam String body){
+        Question question = this.questionService.getQuestion(id);
+        this.questionAnswerService.create(question, body);
 
-        return "생성완료";
+        return String.format("redirect:/question/detail/%s", id);
     }
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public List<QuestionAnswer> Test(){
-        return questionAnswerRepository.findAll();
-    }
+//    @RequestMapping("/test")
+//    @ResponseBody
+//    public List<QuestionAnswer> Test(){
+//
+//        return questionAnswerRepository.findAll();
+//    }
+
 }

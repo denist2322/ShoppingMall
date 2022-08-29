@@ -13,7 +13,6 @@ public class QuestionAnswer {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
-    private LocalDateTime regDate;
     private LocalDateTime updateDate;
     private String body;
 
