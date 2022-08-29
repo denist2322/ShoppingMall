@@ -91,26 +91,22 @@ SELECT * FROM product_image;
 
 CREATE TABLE question_answer(
 id INT(100) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-reg_date DATETIME NOT NULL,
 update_date DATETIME NOT NULL,
 `body` TEXT NOT NULL,
 question_id INT UNSIGNED NOT NULL
 );
 
 INSERT INTO question_answer SET
- reg_date = NOW(),
  update_date  = NOW(),
  `body` = "환불 안해줄꺼야",
   question_id=1;
 
   INSERT INTO question_answer SET
- reg_date = NOW(),
  update_date  = NOW(),
  `body` = "환불 안해줄꺼야",
   question_id=2;
 
   INSERT INTO question_answer SET
- reg_date = NOW(),
  update_date  = NOW(),
  `body` = "환불 안해줄꺼야",
   question_id=3;
@@ -236,4 +232,3 @@ CREATE TABLE `order_sheet` (
 SELECT * FROM Product_color;
 SELECT * FROM Product_size;
 SELECT * FROM `order_sheet`;
-
