@@ -46,8 +46,7 @@ public class MainController {
     // == 관리자 페이지 ==
     @GetMapping("/adminPage")
     public String adminPage(HttpSession session){
-        IsLogined islogined = Ut.isLogined(session);
-        if(islogined.getAuthority() == null){
+        if(!notAdmin(session).equals("admin")){
             return "redirect:/";
         }
 
@@ -57,8 +56,7 @@ public class MainController {
     // == 관리자 상품 리스트 페이지 ==
     @GetMapping("/adminPage/productList")
     public String productList(HttpSession session, Model model){
-        IsLogined islogined = Ut.isLogined(session);
-        if(islogined.getAuthority() == null){
+        if(!notAdmin(session).equals("admin")){
             return "redirect:/";
         }
 
@@ -69,7 +67,11 @@ public class MainController {
 
     // == 유저 주문 내역 페이지 ==
     @GetMapping("/adminPage/userOrderList")
-    public String userOrderList(Model model){
+    public String userOrderList(HttpSession session, Model model){
+
+        if(!notAdmin(session).equals("admin")){
+            return "redirect:/";
+        }
 
         List<OrderSheet> orderSheetList = productService.getOrderList();
 
@@ -80,7 +82,10 @@ public class MainController {
     // == 유저 주문 내역 삭제 ==
     @GetMapping("/deleteOrder")
     @ResponseBody
-    public String deleteOrder(long id){
+    public String deleteOrder(HttpSession session, long id){
+        if(!notAdmin(session).equals("admin")){
+            return "redirect:/";
+        }
         productService.deleteOrder(id);
         return "success";
     }
@@ -88,10 +93,22 @@ public class MainController {
     // == 유저 주문 내역 수정 ==
     @GetMapping("/modifyOrder")
     @ResponseBody
-    public String modifyOrder(long id, long nowState){
+    public String modifyOrder(HttpSession session, long id, long nowState){
+        if(!notAdmin(session).equals("admin")){
+            return "redirect:/";
+        }
         productService.modifyShippingOrder(id, nowState);
         return "success";
     }
+
+    private String notAdmin(HttpSession session) {
+        IsLogined islogined = Ut.isLogined(session);
+        if(islogined.getAuthority() == null){
+            return "notAdmin";
+        }
+        return "admin";
+    }
+
 
     // 잠깐 확인좀
 //    @RequestMapping("/test")
