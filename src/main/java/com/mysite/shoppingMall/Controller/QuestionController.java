@@ -93,9 +93,36 @@ public class QuestionController {
         return "redirect:/question/list";
     }
 
-    @GetMapping("/delete")
-    public String doDelete(Integer id){
-        Question question = questionRepository.findById(id).get();
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String doDelete(Integer mallUserId, HttpSession session){
+        boolean isLogined = false;
+        Integer MallUserId = 0;
+
+        if(session.getAttribute("mallUserId") != null){
+            isLogined = true;
+            mallUserId = (Integer) session.getAttribute("mallUserId");
+        }
+        if(isLogined == false){
+            return """
+                    <script>
+                    alert('로그인 후 이용해주세요.');
+                    history.back();
+                    </script>
+                    """;
+        }
+
+        Question question = questionRepository.findById(mallUserId).get();
+
+        if(question.getMallUser().getId() != mallUserId){
+            return """
+                    <script>
+                    alert('권한이 없습니다.');
+                    history.back();
+                    </script>
+                    """.formatted(mallUserId);
+        }
+
         questionRepository.delete(question);
         return "redirect:/question/list";
     }
