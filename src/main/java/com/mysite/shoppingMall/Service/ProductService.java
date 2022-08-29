@@ -208,4 +208,16 @@ public class ProductService {
         }
         return state;
     }
+
+
+    public void deleteOrder(long id) {
+        OrderSheet orderSheet = orderSheetRepository.findById(id).get();
+        orderSheetRepository.delete(orderSheet);
+    }
+
+    public void modifyShippingOrder(long id, long nowState) {
+        OrderSheet orderSheet = orderSheetRepository.findById(id).get();
+        orderSheet.setNowState((int)nowState);
+        orderSheetRepository.save(orderSheet);
+    }
 }

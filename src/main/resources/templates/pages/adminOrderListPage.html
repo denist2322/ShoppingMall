@@ -16,8 +16,8 @@
                 <thead>
                 <tr>
                     <th class="text-base">주문번호</th>
-                    <th class="text-base">주문날짜</th>
                     <th class="text-base">상품 정보</th>
+                    <th class="text-base">주문날짜</th>
                     <th class="text-base">구매자</th>
                     <th class="text-base">구매자 이메일</th>
                     <th class="text-base">구매자 번호</th>
@@ -25,30 +25,102 @@
                     <th class="text-base">수령인 번호</th>
                     <th class="text-base">배송지</th>
                     <th class="text-base">배송상태</th>
+                    <th class="text-base">가격</th>
                     <th class="text-base">세부사항</th>
                 </tr>
                 </thead>
                 <tbody>
                 <div th:each="orderSheet : ${orderSheetList}">
-                    <!-- row 1 -->
-                    <tr>
-                        <td class="text-base">[[${orderSheet.sheetNumber}]]</td>
+                    <tr th:id="'divDel' + ${orderSheet.id}">
+                        <th class="text-base">[[${orderSheet.sheetNumber}]]</th>
+                        <td class="flex flex-col text-base">
+                            <span class="text-xs">[[${orderSheet.product.title}]]</span>
+                            <span class="text-xs">[[${orderSheet.sheetProductColor}]]</span>
+                            <span class="text-xs">[[${orderSheet.sheetProductSize}]]</span>
+                        </td>
                         <td class="text-base">[[${(orderSheet.regDate).toString().substring(0,10)}]]</td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
-                        <td class="text-base"></td>
+                        <td class="text-base">[[${orderSheet.sheetOrdererName}]]</td>
+                        <td class="text-base">[[${orderSheet.sheetOrdererEmail}]]</td>
+                        <td class="text-base">[[${orderSheet.sheetOrdererPhone}]]</td>
+                        <td class="text-base">[[${orderSheet.sheetReceiverName}]]</td>
+                        <td class="text-base">[[${orderSheet.sheetReceiverPhone}]]</td>
+                        <td class="text-base">[[${orderSheet.sheetReceiverAddress}]]</td>
+                        <td class="flex flex-col text-base">
+                            <div th:id="'divMod' + ${orderSheet.id}">
+                                <span th:if="${orderSheet.nowState == 0}">입금전</span>
+                                <span th:if="${orderSheet.nowState == 1}">배송준비중</span>
+                                <span th:if="${orderSheet.nowState == 2}">배송중</span>
+                                <span th:if="${orderSheet.nowState == 3}">배송완료</span>
+                                <span th:if="${orderSheet.nowState == 4}">구매확정</span>
+                            </div>
+                            <select th:id="'selMod' + ${orderSheet.id}" class="mt-1">
+                                <option value="0">입금전</option>
+                                <option value="1">배송준비중</option>
+                                <option value="2">배송중</option>
+                                <option value="3">배송완료</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="flex flex-col text-base">
+                                <span class="text-sm">[[${orderSheet.productCost}]] 원</span>
+                                <span class="text-sm" th:if="${orderSheet.shippingCost != 0}">유료배송</span>
+                                <span class="text-sm" th:if="${orderSheet.shippingCost == 0}">무료배송</span>
+                            </div>
+                        </td>
+                        <td class="text-base">
+                            <a th:href="'javascript:orderModify('+${orderSheet.id}+')'" class="btn btn-active btn-link -ml-5">수정</a>
+                            <a th:href="'javascript:orderDelete('+${orderSheet.id}+')'" class="btn btn-active btn-link -ml-5 text-red-600">삭제</a>
+                        </td>
                     </tr>
                 </div>
                 </tbody>
             </table>
         </div>
     </div>
+    <script layout:fragment="script" type='text/javascript'>
+        function orderModify(id){
+            var tmp = $("#selMod"+id).val();
+            $.ajax({
+                url : "/modifyOrder?id=" + id + "&nowState=" + tmp,
+                type : "GET",
+                success: function(result){
+                    console.log("tmp:", tmp);
+                    var tag = "";
+                    tag += "<div id=\"divMod" + id + "\">";
+                    if(tmp == 0){
+                        tag += "<span>입금전</span>"
+                    }
+                    else if(tmp == 1){
+                        tag += "<span>배송준비중</span>"
+                    }
+                    else if(tmp == 2){
+                        tag += "<span>배송중</span>"
+                    }
+                    else if(tmp == 3){
+                        tag += "<span>배송완료</span>"
+                    }
+                    tag += "</div>"
+
+                    $("#divMod" + id).replaceWith(tag);
+                },
+                error: function(error){
+                    console.log("에러발생");
+                }
+            });
+        }
+
+        function orderDelete(id){
+            $.ajax({
+                url : "/deleteOrder?id=" + id,
+                type : "GET",
+                success: function(result){
+                    $('#divDel' + id).replaceWith("");
+                },
+                error: function(error){
+                    console.log("에러발생");
+                }
+            });
+        }
+    </script>
 </main>
 </html>

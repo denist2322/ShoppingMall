@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -75,6 +76,23 @@ public class MainController {
         model.addAttribute("orderSheetList",orderSheetList);
         return "pages/adminOrderListPage.html";
     }
+
+    // == 유저 주문 내역 삭제 ==
+    @GetMapping("/deleteOrder")
+    @ResponseBody
+    public String deleteOrder(long id){
+        productService.deleteOrder(id);
+        return "success";
+    }
+
+    // == 유저 주문 내역 수정 ==
+    @GetMapping("/modifyOrder")
+    @ResponseBody
+    public String modifyOrder(long id, long nowState){
+        productService.modifyShippingOrder(id, nowState);
+        return "success";
+    }
+
     // 잠깐 확인좀
 //    @RequestMapping("/test")
 //    public String showTest(Model model, HttpSession session) {
