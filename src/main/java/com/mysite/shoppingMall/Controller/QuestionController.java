@@ -77,10 +77,21 @@ public class QuestionController {
         return "QnA/qna.html";
     }
 
-    @GetMapping("/modify/{id}")
-    public String questionModify(@PathVariable("id") Integer id, Model model){
+    @RequestMapping("/modify/{id}")
+    public String questionModify(Integer questionId, Integer mallUserId, Model model, HttpSession session){
+        IsLogined isLogined = Ut.isLogined(session);
 
-        model.addAttribute("question", questionService.getQuestion(id));
+        if(isLogined.getUserId() != mallUserId){
+            model.addAttribute("msg", "수정 권한이 없습니다.");
+            model.addAttribute("historyBack","true");
+
+            return "common/js.html";
+        }
+
+        if(isLogined.getUserId() == mallUserId) {
+            model.addAttribute("question", questionService.getQuestion(questionId));
+        }
+
         return "QnA/boardmodify.html";
     }
 
@@ -107,7 +118,7 @@ public class QuestionController {
         }
 
         if(isLogined.getUserId() != mallUserId){
-            model.addAttribute("msg", "권한이 없습니다.");
+            model.addAttribute("msg", "삭제 권한이 없습니다.");
             model.addAttribute("historyBack","true");
 
             return "common/js.html";
