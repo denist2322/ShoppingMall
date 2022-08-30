@@ -10,29 +10,71 @@
 <body>
 
 <main layout:fragment="main">
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <div class="container max-w-screen-lg mx-auto">
+        <div class="mt-5 mb-2 text-xl font-bold text-center">QnA 상세보기</div>
+        <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
+            <div class="">
+                <form th:action="@{/question/update/{id}(id = ${question.id})}" method="post">
+                    <!-- userId input -->
+                    <div>제목</div>
+                    <div class="flex mb-6">
+                        <input
+                                type="text"
+                                name="subject"
+                                th:value="${question.subject}"
+                                class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
+                                placeholder="제목을 입력해주세요."
+                         readonly/>
+                    </div>
+                    <!-- Password input -->
 
-            <div class="flex-grow"></div>
+                    <label for="content">내용</label>
+                    <div class="mb-6">
+                        <textarea th:text="${question.content}" name="content" id="content" cols="30" rows="15" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded felx" placeholder="내용을 입력해주세요."></textarea>
+                    </div>
 
-        <h1 th:text="${question.subject}">제목</h1>
-        <div th:text="${question.content}">내용</div>
-         <a th:href="@{/question/modify/{id} (id = ${question.id}) }">수정</a>
-    <form th:action="@{|/question/delete|}">
-        <input type="hidden" name="mallUserId" th:value="${question.mallUser.id}">
-        <input type="hidden" name="questionId" th:value="${question.id}">
-        <button onclick="if ( confirm('정말로 삭제하겠습니까?') == false ) return false;">삭제</button>
-    </form>
-    <h5 th:text="|${#lists.size(question.questionAnswerList)}개의 답변이 있습니다.|"></h5>
-    <div>
-        <ul>
-            <li th:each="questionAnswer : ${question.questionAnswerList}" th:text="${questionAnswer.body}"></li>
-        </ul>
+
+                    <!-- Submit button -->
+                    <div class="flex">
+                            <a th:href="@{/question/modify/{id} (id = ${question.id})}" class="flex items-center justify-center w-full mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">수정</a>
+                        <form th:action="@{|/question/delete|}">
+                            <input type="hidden" name="mallUserId" th:value="${question.mallUser.id}">
+                            <input type="hidden" name="questionId" th:value="${question.id}">
+                            <a class="flex items-center justify-center w-full text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg" onclick="if ( confirm('정말로 삭제하겠습니까?') == false ) return false;" >글 삭제</a>
+                        </form>
+                    </div>
+
+
+                    <div class="mt-6">
+                        <table>
+                        <div>
+                            <tbody class="border-b-2 border-gray-200">
+                            <tr class="mt-2">
+                                <li th:each="questionAnswer : ${question.questionAnswerList}" th:text="${questionAnswer.body}"></li>
+                            </tr>
+                            </tbody>
+                        </div>
+                    </table>
+                        <form th:action="@{|/answer/create/${question.id}|}" method="post">
+                            <textarea class="mt-8 w-full border border-gray-300 border-solid rounded focus:text-gray-700" name="body" id="body" rows="5"></textarea>
+                            <div class="w-full text-end">
+                                <input type="submit" value="답변등록">
+                            </div>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
     </div>
-    <form th:action="@{|/answer/create/${question.id}|}" method="post">
-        <textarea name="body" id="body" rows="15"></textarea>
-        <input type="submit" value="답변등록">
-    </form>
-
 </main>
 
 </body>
