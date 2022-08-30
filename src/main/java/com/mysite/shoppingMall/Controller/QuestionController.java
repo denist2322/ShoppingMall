@@ -1,10 +1,12 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Domain.IsLogined;
 import com.mysite.shoppingMall.Domain.Question;
 import com.mysite.shoppingMall.Form.QuestionForm;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Service.QuestionService;
+import com.mysite.shoppingMall.Ut.Ut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -94,35 +96,24 @@ public class QuestionController {
     }
 
     @RequestMapping("/delete")
-    @ResponseBody
-    public String doDelete(Integer mallUserId, HttpSession session){
-        boolean isLogined = false;
-        Integer MallUserId = 0;
+    public String doDelete(Integer questionId, Integer mallUserId, HttpSession session, Model model){
+        IsLogined isLogined = Ut.isLogined(session);
 
-        if(session.getAttribute("mallUserId") != null){
-            isLogined = true;
-            mallUserId = (Integer) session.getAttribute("mallUserId");
-        }
-        if(isLogined == false){
-            return """
-                    <script>
-                    alert('로그인 후 이용해주세요.');
-                    history.back();
-                    </script>
-                    """;
+        if(isLogined.getLogin() == 0){
+            model.addAttribute("msg", "로그인후 이용해주세요.");
+            model.addAttribute("historyBack","true");
+
+            return "common/js.html";
         }
 
-        Question question = questionRepository.findById(mallUserId).get();
+        if(isLogined.getUserId() != mallUserId){
+            model.addAttribute("msg", "권한이 없습니다.");
+            model.addAttribute("historyBack","true");
 
-        if(question.getMallUser().getId() != mallUserId){
-            return """
-                    <script>
-                    alert('권한이 없습니다.');
-                    history.back();
-                    </script>
-                    """.formatted(mallUserId);
+            return "common/js.html";
         }
 
+        Question question = questionRepository.findById(questionId).get();
         questionRepository.delete(question);
         return "redirect:/question/list";
     }
