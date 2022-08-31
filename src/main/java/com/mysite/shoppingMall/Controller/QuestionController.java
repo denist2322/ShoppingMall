@@ -111,6 +111,7 @@ public class QuestionController {
         IsLogined isLogined = Ut.isLogined(session);
 
         if(isLogined.getLogin() == 0){
+            System.out.println("여기 왔다감 1");
             model.addAttribute("msg", "로그인후 이용해주세요.");
             model.addAttribute("historyBack","true");
 
@@ -118,12 +119,14 @@ public class QuestionController {
         }
 
         if(isLogined.getUserId() != mallUserId){
+            System.out.println("여기 왔다감 2");
             model.addAttribute("msg", "삭제 권한이 없습니다.");
             model.addAttribute("historyBack","true");
 
             return "common/js.html";
         }
 
+        System.out.println("여기 왔다감 3");
         Question question = questionRepository.findById(questionId).get();
         questionRepository.delete(question);
         return "redirect:/question/list";
