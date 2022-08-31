@@ -47,7 +47,7 @@
             <!-- 글쓰기 클릭메뉴 -->
             <div class="flex w-full h-16 bg-gray-300 justify-end pr-4 items-center border-2 border-gray-300">
 
-                <a class="text-right bg-red-500">
+                <a class="text-right">
 
                    <button th:classappend="${session.UserId} == null ? hidden" class="{{session.UserId != null ? btn btn-sm btn-active : hidden}}"  th:onclick="|location.href='/question/doWrite'|">글쓰기</button>
 

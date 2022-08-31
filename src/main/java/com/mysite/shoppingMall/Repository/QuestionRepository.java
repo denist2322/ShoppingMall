@@ -17,4 +17,5 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     List<Question> findByMallUserId(Integer userId);
     Page<Question> findAll(Pageable pageable);
 
+
 }

@@ -67,7 +67,6 @@ public class QuestionService {
     }
 
     public void doDelete(Integer id){
-
         questionRepository.findById(id);
     }
 

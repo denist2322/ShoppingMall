@@ -35,12 +35,14 @@
 
 
                     <!-- Submit button -->
-                    <div class="flex">
-                            <a th:href="@{/question/modify/{id} (id = ${question.id})}" class="flex items-center justify-center w-full mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">수정</a>
-                        <form class="flex items-center justify-center w-full text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg" id="questionDelForm">
+                    <div>
+                        <form id="questionATag">
+                            <div class="flex">
                             <input type="hidden" name="mallUserId" th:value="${question.mallUser.id}">
                             <input type="hidden" name="questionId" th:value="${question.id}">
-                            <a onclick="if ( confirm('정말로 삭제하겠습니까?') == false ) return false;" href="javascript:questionDel();" >글 삭제</a>
+                            <a class="flex items-center justify-center w-full mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg" href="javascript:questionModify();" >수정</a>
+                            <a class="flex items-center justify-center w-full text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg" onclick="if ( confirm('정말로 삭제하겠습니까?') == false ) return false;" href="javascript:questionDel();" >글 삭제</a>
+                            </div>
                         </form>
                     </div>
 
@@ -65,14 +67,20 @@
                 </div>
             </div>
         </div>
+
     <script fragment="script" type='text/javascript'>
     function questionDel(){
-        questionDelForm.action = "/question/delete";
-        questionDelForm.method = "Get";
-        questionDelForm.submit();
+        questionATag.action = "/question/delete";
+        questionATag.method = "Get";
+        questionATag.submit();
     }
-
+    function questionModify(){
+        questionATag.action = "/question/modify";
+        questionATag.method = "Get";
+        questionATag.submit();
+    }
     </script>
+
 </main>
 </html>
 

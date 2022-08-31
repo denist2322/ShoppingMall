@@ -77,7 +77,7 @@ public class QuestionController {
         return "QnA/qna.html";
     }
 
-    @RequestMapping("/modify/{id}")
+    @RequestMapping("/modify")
     public String questionModify(Integer questionId, Integer mallUserId, Model model, HttpSession session){
         IsLogined isLogined = Ut.isLogined(session);
 
@@ -88,13 +88,13 @@ public class QuestionController {
             return "common/js.html";
         }
 
-        if(isLogined.getUserId() == mallUserId) {
-            model.addAttribute("question", questionService.getQuestion(questionId));
-        }
+        Question question = questionRepository.findById(questionId).get();
+        model.addAttribute("question",question);
 
         return "QnA/boardmodify.html";
     }
 
+    // 수정페이지 ==========================================================
     @PostMapping("/update/{id}")
     public String questionUpdate(@PathVariable("id") Integer id, QuestionForm questionForm){ // question 제목이랑 내용을 받아옴
         Question questionTemp = questionService.getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴
@@ -111,7 +111,7 @@ public class QuestionController {
         IsLogined isLogined = Ut.isLogined(session);
 
         if(isLogined.getLogin() == 0){
-            System.out.println("여기 왔다감 1");
+
             model.addAttribute("msg", "로그인후 이용해주세요.");
             model.addAttribute("historyBack","true");
 
@@ -119,14 +119,13 @@ public class QuestionController {
         }
 
         if(isLogined.getUserId() != mallUserId){
-            System.out.println("여기 왔다감 2");
+
             model.addAttribute("msg", "삭제 권한이 없습니다.");
             model.addAttribute("historyBack","true");
 
             return "common/js.html";
         }
 
-        System.out.println("여기 왔다감 3");
         Question question = questionRepository.findById(questionId).get();
         questionRepository.delete(question);
         return "redirect:/question/list";
