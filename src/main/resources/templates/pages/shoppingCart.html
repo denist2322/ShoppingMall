@@ -49,7 +49,7 @@
                 <tbody class="border-b-2 border-gray-200">
                 <tr>
                     <th class="justify-center">
-                        <input type="checkbox" name="chk" onclick="checked()"/>
+                        <input type="checkbox" name="chk[]" />
                     </th>
                     <th class="flex h-full">
                         <ul class="flex w-full items-center justify-center h-full p-6">
@@ -86,7 +86,7 @@
         <div class="border-2 border-gray-300 p-4 text-2xl h-72 mt-16">
             <div class="flex text-2xl h-1/4 pt-6"> 상품금액 :
                 <div class="pl-3" id="totalPrice">
-                    <input type="text" name="OrderPrice" id="inputPrice" class="focus:outline-none"value="0" readonly>
+
                 </div>
             </div>
             <div class="flex text-2xl h-1/4 pt-2">배송비 :
@@ -117,69 +117,20 @@
 </html>
 <!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
 <script>
+            // 상품 총 가격을 불러오기
+            const TotalPriceBox = document.getElementById("totalPrice");
+            //총가격을 넣을 변수 생성
+            let TotalItemsPrice = 0;
+            // 개별가격을 불러오기
+            const prices = document.querySelectorAll(".price");
+            // price만큼 순회하는 함수
+            prices.forEach(price => TotalItemsPrice += parseInt(price.innerHTML));
+            // 변화된 총 가격 값을 불러온 총가격 변수에 넣는다.
+            TotalPriceBox.innerText = TotalItemsPrice;
 
-/*
+            let PriceTotal = 0;
 
-	let totalPrice = 0;
-	let deliveryPrice = 0;
-	let finalTotalPrice = 0;
-
-    // 총 가격
-    totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
-
-	finalTotalPrice = totalPrice + deliveryPrice;
-
-	 값 삽입
-	// 총 가격
-	$(".totalPrice_span").text(totalPrice.toLocaleString());
-	// 배송비
-	$(".delivery_price").text(deliveryPrice);
-	// 최종 가격(총 가격 + 배송비)
-	$(".finalTotalPrice_span").text(finalTotalPrice.toLocaleString());
-*/
-    const totalPriceBox = document.getElementById("totalPrice");
-    let totalPrice1 = 0;
-    const prices = document.querySelectorAll(".price");
-    prices.forEach(price => totalPrice1 += parseInt(price.innerText));
-    totalPriceBox.innerText = totalPrice1;
-
-    const totaldeliveryPriceBox = document.getElementById("deliveryPrice");
-
-        let deliveryPrice = 0;
-
-        const deliverypricesBox = document.getElementById("totalPrice");
-
-        /* 배송비 결정 */
-        if(deliverypricesBox.innerText >= 50000){
-            deliveryPrice = 0;
-        } else if(deliverypricesBox.innerText == 0){
-            deliveryPrice = 0;
-        } else {
-            deliveryPrice = 3000;
-    }
-
-    totaldeliveryPriceBox.innerText = deliveryPrice;
-
-    let finalTotalPrice = 0;
-
-    finalTotalPrice = totalPrice1 + deliveryPrice;
-
-    tmp = "<input type=\"text\" name=\"totalPrice\" class=\"focus:outline-none\" value=" + finalTotalPrice + " readonly>"
-    $("#finalTotalPrice").replaceWith(tmp);
-
-
-    // 전체 체크 여부 확인 구문
-	$("#cbx_chkAll").click(function() {
-				if($("#cbx_chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
-				else $("input[name=chk]").prop("checked", false);
-			});
-
-	$("input[name=chk]").click(function() {
-				var total = $("input[name=chk]").length;
-				var checked = $("input[name=chk]:checked").length;
-
-				if(total != checked) $("#cbx_chkAll").prop("checked", false); // 만약 체크박스 전체와 체크 된 값이 다르면 전체 체크박스 해제
-				else $("#cbx_chkAll").prop("checked", true);
-			});
-
+            PriceTotal = TotalItemsPrice;
+            result = "<input type=\text\" name=\"totalPrice\" class=\"focus:outline-none\" value=" + PriceTotal + " readonly>"
+            $("#PriceTotal").replaceWith(result);
 </script>
