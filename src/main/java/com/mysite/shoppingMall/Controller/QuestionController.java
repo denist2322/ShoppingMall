@@ -15,7 +15,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/question")
@@ -59,9 +61,33 @@ public class QuestionController {
     }
 
     @RequestMapping("/detail/{id}") // 단건조회
-    public String showDetail(Model model, @PathVariable("id") Integer id){
-        Question question = this.questionService.getQuestion(id);
-        model.addAttribute("question", question);
+    public String showDetail(Model model, @PathVariable("id") Integer id, HttpSession session, Integer mallUserId){
+        IsLogined isLogined = Ut.isLogined(session);
+
+        System.out.println("파라미터로 받은 값: " + mallUserId);
+
+        System.out.println("questionId: " + id);
+        Question question = questionRepository.findById(id).get();
+        model.addAttribute("question",question);
+        System.out.println("현재 로그인한 사람 id: " + isLogined.getUserId());
+        System.out.println("글 쓴 사람 id: " + question.getMallUser().getId());
+
+        if(isLogined.getUserId() == 1){
+            System.out.println(isLogined.getUserId());
+            return "QnA/question_detail";
+        }
+
+
+        if(isLogined.getUserId() != question.getMallUser().getId()){
+            model.addAttribute("msg", "권한이 없습니다.");
+            model.addAttribute("historyBack","true");
+
+            System.out.println(isLogined.getUserId());
+
+            return "common/js.html";
+        }
+
+
         return "QnA/question_detail";
     }
     
