@@ -37,8 +37,6 @@
                     <th th:text="${question.mallUser.name}" class="px-4 py-3"></th>
                     <th  class="px-4 py-3"><a th:text="${question.subject}" th:href="@{|/question/detail/${question.id}|}" ></a></th>
                     <th th:text="${(question.createDate).toString().substring(0,10)}" class="px-4 py-3"></th>
-
-
                 </tr>
 
                 </tbody>
