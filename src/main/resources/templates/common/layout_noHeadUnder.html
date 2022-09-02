@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 <!--daisyUI import-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.6.0/dist/full.css" type="text/css"/>
+<!--폰트어썸-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
 <head>
     <meta charset="UTF-8">
     <!--    <div th:replace="common/darkMod :: darkFragment"></div>-->
@@ -23,81 +25,81 @@
 
             <ul class="top-bar icon flex items-center mx-auto">
                 <li>
-                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3 text-xl">로그인</a>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3 text-xl"><i class="fa-solid fa-right-to-bracket"></i></a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" class="p-3 text-xl">로그아웃</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{|/user/doLogout|}" class="p-3 text-xl"><i class="fa-solid fa-right-from-bracket"></i></a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId == null}" th:href="@{|/user/join|}" class="p-3 text-xl">회원가입</a>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/join|}" class="p-3 text-xl"><i class="fa-solid fa-user-plus"></i></a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" th:href="@{/user/myPage}" class="p-3 text-xl">마이페이지</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{/user/myPage}" class="p-3 text-xl"><i class="fa-solid fa-user"></i></a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId != null}" th:href="@{|/shoppingCart|}" class="p-3 text-xl">장바구니</a>
+                    <a th:if = "${session.UserId != null}" th:href="@{|/shoppingCart|}" class="p-3 text-xl"><i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
                 <li>
-                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3 text-xl">장바구니</a>
+                    <a th:if = "${session.UserId == null}" th:href="@{|/user/login|}" class="p-3 text-xl"><i class="fa-solid fa-cart-shopping"></i></a>
                 </li>
             </ul>
         </div>
-
+    </div>
 <main layout:fragment="main">
 </main>
-<div class="footer w-full h-96 flex flex-col">
-    <nav class="division w-full h-20 flex justify-center items-center border border-gray mt-5 mb-5">
+</section>
+<div class="footer h-96 flex flex-col bg-gray-200 mt-8">
+    <nav class="division h-20 w-full flex justify-center items-center mb-5 border border-gray-300">
         <ul class="flex">
             <li>
-                <a href="" class="flex h-full px-5 items-center">회사소개</a>
+                <a href="/companyintroduce" class="flex h-full px-5 items-center">회사소개</a>
             </li>
             <li>
-                <a href="" class="flex h-full px-5 items-center"> Q & A</a>
+                <a th:href="@{|/question/list|}" class="flex h-full px-5 items-center"> Q & A</a>
             </li>
             <li>
-                <a href="" class="flex h-full px-5 items-center"> 이용약관</a>
+                <a href="/Terms_of_service" class="flex h-full px-5 items-center"> 이용약관</a>
             </li>
             <li>
                 <a href="https://www.law.go.kr/html/renew/privacy.html" class="flex h-full px-5 items-center">개인정보처리방침</a>
             </li>
         </ul>
     </nav>
+    <div class="con">
+        <nav class="address flex w-full h-64">
+            <div class="address-left flex w-3/5 flex-col pr-8 pl-8">
+                <div class="flex text-3xl">하늘하늘</div>
+                <div class="flex mt-2 flex-col">
+                    <span><strong>대표이사 : </strong>하늘이좋아 사업자등록번호 : 1234-56-78910 통신판매업신고 : 1111-충남공주-22222</span>
+                    <span><strong>호스팅사업자 : </strong>(주)하늘하늘 주소 : 서울 강남구 테헤란로38길 12 (역삼동)</span>
+                    <span><strong>개인정보관리책임자 : </strong>이하늘(privacy@brandi.co.kr)</span>
 
-    <nav class="address flex w-full h-64">
-        <div class="address-left flex w-3/5 flex-col mr-8">
-            <div class="flex text-3xl">하늘하늘</div>
-            <div class="flex mt-2">
-        <span>대표이사 : 하늘이좋아 사업자등록번호 : 1234-56-78910 통신판매업신고 : 1111-충남공주-22222
-        호스팅사업자 : (주)하늘하늘 주소 : 서울 강남구 테헤란로38길 12 (역삼동)
-          개인정보관리책임자 : 이하늘(privacy@brandi.co.kr)
-        </span>
-            </div>
-            <div class="flex mt-2">
+                </div>
+                <div class="flex mt-2">
         <span>(주)하늘하늘가 제공하는 하늘하늘서비스는 통신판매중개자로서 통신판매 당사자가 아니며,
 판매자가 등록한 상품정보 및 거래에 하늘하늘은 책임지지 않습니다.</span>
-            </div>
-            <div class="flex mt-2">
+                </div>
+                <div class="flex mt-2">
         <span>100% 정품
 하늘하늘에서 판매되는 모든 브랜드 제품은 정식제조, 정식수입원을 통해 유통되는 100% 정품입니다.</span>
+                </div>
+                <div class="flex mt-5">
+                    <span class="pr-3 font-bold">안전거래센터</span>
+                    <a href="https://sites.google.com/brandi.co.kr/safety/%ED%99%88" target="_blank"class="declare text-gray-500">신고하기</a>
+                    <a th:if = "${session.authority == 0}" th:href="@{|/adminPage|}" class="ml-3 text-l">관리자 페이지</a>
+                </div>
             </div>
-            <div class="flex mt-5">
-                <span class="mr-3">안전거래센터</span>
-                <a href="https://sites.google.com/brandi.co.kr/safety/%ED%99%88" target="_blank"class="declare text-gray-500">신고하기</a>
-                <a th:if = "${session.authority == 0}" th:href="@{|/adminPage|}" class="ml-3 text-l">관리자 페이지</a>
-            </div>
-        </div>
-        <div class="address-right flex w-2/5 flex-col">
-            <div class="flex text-3xl">고객센터</div>
-            <a href="#" class="text-3xl"> 1234-5678</a>
-            <div class="flex mt-2">
-      <span>영업시간 AM 10:00 ~ PM 17:00(주말 및 공휴일 휴무)
-점심시간 PM 12:30 ~ PM 13:30</span>
-            </div>
+            <div class="address-right flex w-2/5 flex-col">
+                <div class="flex text-3xl">고객센터</div>
+                <a href="#" class="text-3xl"> 1234-5678</a>
+                <div class="flex mt-2 flex-col">
+                    <span><strong>영업시간 AM 10:00 ~ PM 17:00(주말 및 공휴일 휴무)</strong></span>
+                    <span><strong>점심시간 PM 12:30 ~ PM 13:30</strong></span>
+                </div>
 
-        </div>
+            </div>
     </nav>
 </div>
-</section>
 </body>
 </html>
 

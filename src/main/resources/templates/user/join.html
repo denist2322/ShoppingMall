@@ -42,23 +42,23 @@
                             <input
                                     th:if="${mailDto.email == null}"
                                     type="submit"
-                                    class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                    class="flex w-1/5 text-right border-2 text-white bg-black btn btn-active "
                                     data-mdb-ripple="true"
                                     data-mdb-ripple-color="light"
                                     value="인증번호 발송"
                             />
                         </div>
-                    </form>
 
-                    <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post" class="flex w-2/5 box-border">
-                        <input type="hidden" name="email" th:value="${mailDto.email}" class="w-full">
+                    <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post">
+                        <input type="hidden" name="email" th:value="${mailDto.email}" class="">
                         <input
                                 type="submit"
-                                class="flex justify-center w-full ml-1 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                class="flex w-1/5 text-right border-2 text-white bg-black btn btn-active "
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                                 value="재전송"
                         >
+                    </form>
                     </form>
                 </div>
 
@@ -74,7 +74,7 @@
                         />
                         <button
                                 type="submit"
-                                class="flex justify-center w-2/5 items-center h-11 bg-green-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700"
+                                class="flex w-1/5 text-right border-2 text-white bg-black btn btn-active "
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                         >
@@ -218,7 +218,7 @@
                     <div class="flex">
                         <button
                                 type="submit"
-                                class="flex w-2/1 justify-center items-center h-11 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                                class="flex w-full text-right border-2 text-white bg-black btn btn-active"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                         >

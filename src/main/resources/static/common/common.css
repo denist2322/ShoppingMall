@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'BMJUA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-family: 'ChosunSm';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.1/ChosunSm.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -11,7 +11,7 @@ html > body select,
 html > body textarea,
 html > body pre,
 html > body button {
-  font-family:"BMJUA";
+  font-family:"ChosunSm";
   color: #333;
   text-underline-position: under;
   line-height:1.3;
@@ -32,8 +32,8 @@ body {
 }
 
 .swiper {
-    width: 100%;
-    height: 100%;
+    width: 1190px;
+    height: 540px;
 }
 
 .swiper-slide {
@@ -63,13 +63,6 @@ align-items: center;
   object-fit: cover;
 }
 
-.top-bar__menu-box-1 li:hover{
-    border-bottom-width: 2px;
-    --tw-border-opacity: 1;
-    border-color: rgba(0, 0, 0, var(--tw-border-opacity));
-    color: aqua;
-}
-
 .con {
   width:1190px;
   margin-left: auto;
@@ -85,6 +78,18 @@ align-items: center;
     width:400px;
     height:400px;
     }
+
+.footer{
+    width:1652px;
+}
+
+.request{
+    width: 500px;
+}
+
+.top-bar__menu-box-1 li:hover{
+    font-weight: 700;
+}
 
 .icon.solid:before {
 		font-weight: 900 !important;

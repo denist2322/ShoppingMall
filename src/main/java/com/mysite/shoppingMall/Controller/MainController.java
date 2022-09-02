@@ -109,6 +109,16 @@ public class MainController {
         return "admin";
     }
 
+    // 회사소개 페이지
+    @RequestMapping("/companyintroduce")
+    public String companyintroduce() {
+        return "pages/companyintroduce.html";
+    }
+
+    @RequestMapping("/Terms_of_service")
+    public String Terms_of_service() {
+        return "pages/Termsofservice.html";
+    }
 
     // 잠깐 확인좀
 //    @RequestMapping("/test")
