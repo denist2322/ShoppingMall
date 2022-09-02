@@ -1,8 +1,8 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.MallUser;
-import com.mysite.shoppingMall.Domain.OrderSheet;
+import com.mysite.shoppingMall.Ut.IsLogined;
+import com.mysite.shoppingMall.Entity.MallUser;
+import com.mysite.shoppingMall.Entity.OrderSheet;
 import com.mysite.shoppingMall.Form.*;
 import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Service.UserService;

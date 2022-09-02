@@ -1,7 +1,7 @@
 package com.mysite.shoppingMall.Service;
 
 import com.mysite.shoppingMall.Form.ProductWriteForm;
-import com.mysite.shoppingMall.Domain.Product;
+import com.mysite.shoppingMall.Entity.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,6 +1,6 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Domain.Question;
+import com.mysite.shoppingMall.Entity.Question;
 import com.mysite.shoppingMall.Service.QuestionAnswerService;
 import com.mysite.shoppingMall.Service.QuestionService;
 import lombok.RequiredArgsConstructor;

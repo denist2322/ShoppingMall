@@ -1,7 +1,7 @@
 package com.mysite.shoppingMall.Service;
 
-import com.mysite.shoppingMall.Domain.Question;
-import com.mysite.shoppingMall.Domain.QuestionAnswer;
+import com.mysite.shoppingMall.Entity.Question;
+import com.mysite.shoppingMall.Entity.QuestionAnswer;
 import com.mysite.shoppingMall.Repository.QuestionAnswerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

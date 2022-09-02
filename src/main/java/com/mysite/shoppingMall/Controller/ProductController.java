@@ -1,20 +1,22 @@
 package com.mysite.shoppingMall.Controller;
 
+import com.mysite.shoppingMall.Entity.MallUser;
+import com.mysite.shoppingMall.Entity.Product;
 import com.mysite.shoppingMall.Form.OrderSheetForm;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Form.ProductWriteForm;
 import com.mysite.shoppingMall.Service.ProductService;
-import com.mysite.shoppingMall.Service.ShoppingCartService;
 import com.mysite.shoppingMall.Service.UserService;
+import com.mysite.shoppingMall.Ut.IsLogined;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.MallUser;
-import com.mysite.shoppingMall.Domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -28,7 +30,6 @@ public class ProductController {
     private final ProductService productService;
     private final UserService userService;
 
-    private final ShoppingCartService shoppingCartService;
 
 
     //C 생성 ==============================================

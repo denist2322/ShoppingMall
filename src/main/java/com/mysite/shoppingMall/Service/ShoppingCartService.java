@@ -5,10 +5,10 @@ import com.mysite.shoppingMall.Repository.ProductRepository;
 import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.MallUser;
-import com.mysite.shoppingMall.Domain.Product;
-import com.mysite.shoppingMall.Domain.ShoppingCart;
+import com.mysite.shoppingMall.Ut.IsLogined;
+import com.mysite.shoppingMall.Entity.MallUser;
+import com.mysite.shoppingMall.Entity.Product;
+import com.mysite.shoppingMall.Entity.ShoppingCart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

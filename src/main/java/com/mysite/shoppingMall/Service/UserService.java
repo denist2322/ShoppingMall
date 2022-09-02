@@ -3,7 +3,7 @@ package com.mysite.shoppingMall.Service;
 import com.mysite.shoppingMall.Form.FindEmailForm;
 import com.mysite.shoppingMall.Form.JoinForm;
 import com.mysite.shoppingMall.Repository.UserRepository;
-import com.mysite.shoppingMall.Domain.MallUser;
+import com.mysite.shoppingMall.Entity.MallUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

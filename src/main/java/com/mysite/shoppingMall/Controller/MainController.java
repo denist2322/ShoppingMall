@@ -1,16 +1,11 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.OrderSheet;
-import com.mysite.shoppingMall.Domain.Product;
-import com.mysite.shoppingMall.Repository.ProductRepository;
-import com.mysite.shoppingMall.Repository.QuestionRepository;
-import com.mysite.shoppingMall.Repository.ShoppingCartRepository;
+import com.mysite.shoppingMall.Entity.OrderSheet;
+import com.mysite.shoppingMall.Entity.Product;
 import com.mysite.shoppingMall.Service.ProductService;
-import com.mysite.shoppingMall.Service.ShoppingCartService;
+import com.mysite.shoppingMall.Ut.IsLogined;
 import com.mysite.shoppingMall.Ut.Ut;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +18,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class MainController {
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private ShoppingCartRepository shoppingCartRepository;
 
-    private ShoppingCartService shoppingCartService;
     private final ProductService productService;
 
     @RequestMapping("/main")
