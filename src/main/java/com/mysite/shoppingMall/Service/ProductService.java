@@ -5,7 +5,7 @@ import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Form.ProductWriteForm;
 import com.mysite.shoppingMall.Repository.*;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Domain.*;
+import com.mysite.shoppingMall.Entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

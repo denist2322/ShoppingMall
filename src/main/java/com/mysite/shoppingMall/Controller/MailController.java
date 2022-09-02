@@ -14,12 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MailController {
     private final MailService mailService;
 
-//    @GetMapping("/mail")
-//    public String getMail(MailDto mailDto) {
-//        return "user/join";
-//    }
-
-    // == 메일보내기 ==
+    // == 회원가입 메일보내기 ==
     @PostMapping("/mail")
     public String execMail(MailDto mailDto, Model model) {
         if(mailService.findEmail(mailDto.getEmail())){
@@ -31,6 +26,7 @@ public class MailController {
         return "user/joinTemp.html";
     }
 
+    // == 비밀번호 찾기 이메일 발송 부분 ==
     @PostMapping("/findPwMail")
     public String findPwMail(FindPwForm findPwForm, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
@@ -47,7 +43,7 @@ public class MailController {
         return "user/pwTemp.html";
     }
 
-    // == 인증 확인 ==
+    // == 인증 여부 확인 ==
     @PostMapping("/confirm")
     public String confirm(MailDto mailDto) {
         if (mailDto.getAuthentication().equals(mailDto.getConfirmAuthentication())) {
@@ -59,10 +55,11 @@ public class MailController {
         return "user/joinTemp.html";
     }
 
+    // == 인증 확인 비밀번호(확인완료시 비밀번호를 변경함) ==
     @PostMapping("/confirmPw")
-    public String confirmPw(FindPwForm findPwForm){
+    public String confirmPw(FindPwForm findPwForm, MailDto mailDto){
         if (findPwForm.getAuthentication().equals(findPwForm.getConfirmAuthentication())){
-            mailService.findPw(findPwForm);
+            mailService.findPw(findPwForm, mailDto);
             return "user/pwTemp.html";
         }
         mailService.findPwForm(findPwForm);

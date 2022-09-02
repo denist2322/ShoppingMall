@@ -1,7 +1,7 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.Question;
+import com.mysite.shoppingMall.Ut.IsLogined;
+import com.mysite.shoppingMall.Entity.Question;
 import com.mysite.shoppingMall.Form.QuestionForm;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Repository.UserRepository;
@@ -15,9 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/question")

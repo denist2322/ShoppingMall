@@ -1,4 +1,4 @@
-package com.mysite.shoppingMall.Domain;
+package com.mysite.shoppingMall.Entity;
 
 import lombok.Getter;
 import lombok.Setter;

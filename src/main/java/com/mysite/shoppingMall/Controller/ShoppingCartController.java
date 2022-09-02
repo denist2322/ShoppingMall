@@ -1,10 +1,9 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.ShoppingCart;
+import com.mysite.shoppingMall.Entity.ShoppingCart;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Service.ShoppingCartService;
-import com.mysite.shoppingMall.Service.UserService;
+import com.mysite.shoppingMall.Ut.IsLogined;
 import com.mysite.shoppingMall.Ut.Ut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
 
-    private final UserService userService;
 
     // == 장바구니 ==
     @RequestMapping("/shoppingCart")

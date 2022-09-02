@@ -1,8 +1,8 @@
 package com.mysite.shoppingMall.Service;
 
-import com.mysite.shoppingMall.Domain.IsLogined;
-import com.mysite.shoppingMall.Domain.MallUser;
-import com.mysite.shoppingMall.Domain.Question;
+import com.mysite.shoppingMall.Ut.IsLogined;
+import com.mysite.shoppingMall.Entity.MallUser;
+import com.mysite.shoppingMall.Entity.Question;
 import com.mysite.shoppingMall.Repository.QuestionRepository;
 import com.mysite.shoppingMall.Repository.UserRepository;
 import com.mysite.shoppingMall.Ut.Ut;
