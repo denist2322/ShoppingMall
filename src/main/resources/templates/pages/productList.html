@@ -7,6 +7,7 @@
 </head>
 
 <main layout:fragment="main">
+    <div class="max-width">
     <div class="con grid">
         <section class="grid">
             <div th:if="${productList.size() == 0}" class="con h-96 grid justify-center items-center text-lg">
@@ -53,6 +54,7 @@
                 </div>
             </div>
         </section>
+    </div>
     </div>
 </main>
 </html>

@@ -63,6 +63,17 @@ align-items: center;
   object-fit: cover;
 }
 
+.swiper-slide1>a img {
+  display:relative;
+  width: 595px;
+  height: 540px;
+}
+
+.max-width {
+    width: 1190px;
+    height: 1050px;
+}
+
 .con {
   width:1190px;
   margin-left: auto;
