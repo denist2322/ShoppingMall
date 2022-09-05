@@ -54,47 +54,50 @@
 
         <!-- 페이징처리 시작 -->
         <div>
-        <div th:if="${!paging.isEmpty()}" class="flex justify-center">
-            <ul class="pagination justify-content-center flex justify-between w-72 mt-6">
-                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                    <a class="page-link"
-                       th:href="@{|?page=${paging.number-1}|}">
-                        <span>이전</span>
-                    </a>
-                </li>
-                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                    th:classappend="${page == paging.number} ? 'active'"
-                    class="page-item">
-                    <div th:if="${kw == null}">
-                        <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-                    </div>
-                    <div th:if="${kw != null}">
-                        <a th:text="${page}" class="page-link" th:href="'/question/detail?kw=' + ${kw} + '&page=' + ${page}"></a>
-                    </div>
-                </li>
-                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
-                        <span>다음</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+            <div th:if="${!paging.isEmpty()}" class="flex justify-center">
+                <ul class="pagination justify-content-center flex justify-between w-72 mt-6">
+                    <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                        <a class="page-link"
+                           th:if="${paging.number} > 0"
+                           th:href="@{|?page=${paging.number-1}|}">
+                            <span>이전</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                        th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                        th:classappend="${page == paging.number} ? 'active'"
+                        class="page-item">
+                        <div th:if="${kw == null}">
+                            <a th:text="${page}" class="page-link" th:classappend="${pageNo == page} ? 'pageNoStyle' : '' " th:href="@{|?page=${page}|}"></a>
+                        </div>
+                        <div th:if="${kw != null}">
+                            <a th:text="${page}" class="page-link" th:href="'/question/detail?kw=' + ${kw} + '&page=' + ${page}"></a>
+                        </div>
+                    </li>
+                    <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                        <a class="page-link"
+                           th:if="${paging.number < (paging.totalPages-1)}"
+                           th:href="@{|?page=${paging.number+1}|}">
+                            <span>다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- 페이징처리 끝 -->
 
-            <!-- 검색 -->
-            <div class="flex mt-3 mb-8 items-center w-full h-12">
-                <form th:action="@{|/question/detail|}" method="get" id="searchForm">
-                    <input class="h-1/2 ml-3 mr-2 border border-gray-500" type="text" id="kw" name="kw" th:value="${kw}" placeholder="검색">
-                    <input type="hidden" id="page" name="page" th:value="${paging.number}">
-                    <button>
-                        <img src="https://www.boom-style.com/design/kr/board_list_new_c_3_image_url_4.gif" alt="">
-                    </button>
-                </form>
-            </div>
+        <!-- 검색 -->
+        <div class="flex mt-3 mb-8 items-center w-full h-12">
+            <form th:action="@{|/question/detail|}" method="get" id="searchForm">
+                <input class="h-1/2 ml-3 mr-2 border border-gray-500" type="text" id="kw" name="kw" th:value="${kw}" placeholder="검색">
+                <input type="hidden" id="page" name="page" th:value="${paging.number}">
+                <button>
+                    <img src="https://www.boom-style.com/design/kr/board_list_new_c_3_image_url_4.gif" alt="">
+                </button>
+            </form>
+        </div>
 
-            </div>
+        </div>
     </section>
 </main>
 </html>

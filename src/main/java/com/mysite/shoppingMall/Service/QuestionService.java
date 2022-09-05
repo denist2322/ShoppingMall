@@ -28,6 +28,7 @@ public class QuestionService {
 
     private final UserRepository userRepository;
 
+    // 게시글 리스트 처리 =============================================
     public Page<Question> getList(int page) {
         Pageable pageable = doPageable(page);
         return this.questionRepository.findAll(pageable);
@@ -53,6 +54,12 @@ public class QuestionService {
 
     }
 
+    public Question modify(Integer questionId){
+        Question question = questionRepository.findById(questionId).get();
+
+        return ;
+    }
+
     @Transactional
     public Page<Question> keywordQuestion(int page, String kw){
         Pageable pageable = doPageable(page);
@@ -62,11 +69,12 @@ public class QuestionService {
     public Pageable doPageable(int page){
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // page는 조회할 페이지의 번호이고 10은 한 페이지에 보여줄 게시물의 갯수를 의미
         return pageable;
     }
 
     public void doDelete(Integer id){
+
         questionRepository.findById(id);
     }
 
