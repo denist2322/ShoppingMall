@@ -54,7 +54,7 @@
 
         <!-- 페이징처리 시작 -->
         <div>
-        <div th:if="${!paging.isEmpty()}" class="flex justify-center">
+        <div th:if="${!paging.isEmpty()}" class="flex justify-center font-bold">
             <ul class="pagination justify-content-center flex justify-between w-72 mt-6">
                 <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
                     <a class="page-link"
@@ -86,11 +86,9 @@
             <!-- 검색 -->
             <div class="flex mt-3 mb-8 items-center w-full h-12">
                 <form th:action="@{|/question/detail|}" method="get" id="searchForm">
-                    <input class="h-1/2 ml-3 mr-2 border border-gray-500" type="text" id="kw" name="kw" th:value="${kw}" placeholder="검색">
+                    <input class="text-lg h-1/2 ml-3 mr-2 border border-gray-500" type="text" id="kw" name="kw" th:value="${kw}" placeholder="검색">
                     <input type="hidden" id="page" name="page" th:value="${paging.number}">
-                    <button>
-                        <img src="https://www.boom-style.com/design/kr/board_list_new_c_3_image_url_4.gif" alt="">
-                    </button>
+                    <button type="button" onclick="javascript:isKeyword()" class="fa fa-search fa-xl pl-3"></button>
                 </form>
             </div>
 
