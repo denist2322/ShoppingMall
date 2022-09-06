@@ -50,7 +50,6 @@ public class QuestionService {
 
     public Question getQuestion(Integer id) {
         Optional<Question> question = this.questionRepository.findById(id);
-
         return question.orElse(null);
 
     }
@@ -68,13 +67,7 @@ public class QuestionService {
         return pageable;
     }
 
-    public void doDelete(Integer id){
-
-        questionRepository.findById(id);
-    }
-
-
-    public Question qnaupDate(Integer id, QuestionForm questionForm) {
+    public Question doUpdate(Integer id, QuestionForm questionForm) {
         Question questionTemp = getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴
         questionTemp.setSubject(questionForm.getSubject()); //기존에 있던 내용을 가지고 오고 새로 가져온 내용을 덮어 씌움.
         questionTemp.setContent(questionForm.getContent());
@@ -83,4 +76,13 @@ public class QuestionService {
 
         return questionTemp;
     }
+
+    public Question doDelete(Integer questionId){
+        Question question = getQuestion(questionId);
+
+        questionRepository.delete(question);
+
+        return question;
+    }
+
 }
