@@ -28,7 +28,7 @@ public class QuestionController {
     private UserRepository userRepository;
 
 
-    //C 생성 ==============================================
+    //C 게시글 생성 ==============================================
     @GetMapping("/doWrite")
     public String doWrite(QuestionForm questionForm){
 
@@ -48,59 +48,42 @@ public class QuestionController {
     }
 
 
-
-    //R 읽기 ==============================================
+    //게시글 조회 ==============================================
     @RequestMapping("/list")
-    public String showQuestion(Model model, @RequestParam(value="page", defaultValue="0") int page){
-        Page<Question> paging = this.questionService.getList(page);
+    public String showQuestion(Model model, @RequestParam(value="page", defaultValue="0") int pageNo){
+        Page<Question> paging = this.questionService.getList(pageNo);
         model.addAttribute("paging", paging);
+        model.addAttribute("pageNo",pageNo);
         return "QnA/qna.html";
-
     }
 
-    @RequestMapping("/detail/{id}") // 단건조회
-    public String showDetail(Model model, @PathVariable("id") Integer id, HttpSession session, Integer mallUserId){
+    // 게시글 단건 조회 ==============================================
+    @RequestMapping("/detail/{id}")
+    public String showDetail(Model model, @PathVariable("id") Integer id, HttpSession session){
         IsLogined isLogined = Ut.isLogined(session);
-
-        System.out.println("파라미터로 받은 값: " + mallUserId);
-
-        System.out.println("questionId: " + id);
-        Question question = questionRepository.findById(id).get();
+        Question question = questionService.getQuestion(id);
         model.addAttribute("question",question);
-        System.out.println("현재 로그인한 사람 id: " + isLogined.getUserId());
-        System.out.println("글 쓴 사람 id: " + question.getMallUser().getId());
 
-        if(isLogined.getUserId() == 1){
-            System.out.println(isLogined.getUserId());
+        if(isLogined.getUserId() == question.getMallUser().getId() || (isLogined.getAuthority() != null && isLogined.getAuthority() == 0 )) {
             return "QnA/question_detail";
+
         }
+        model.addAttribute("msg", "권한이 없습니다.");
+        model.addAttribute("historyBack", "true");
 
-
-        if(isLogined.getUserId() != question.getMallUser().getId()){
-            model.addAttribute("msg", "권한이 없습니다.");
-            model.addAttribute("historyBack","true");
-
-            System.out.println(isLogined.getUserId());
-
-            return "common/js.html";
-        }
-
-
-        return "QnA/question_detail";
+        return "common/js.html";
     }
     
     // 검색 ==========================================================
     @RequestMapping("/detail")
     public String findDetail(@RequestParam(value="page", defaultValue="0") int page,String kw,Model model){
         Page<Question> paging = this.questionService.keywordQuestion(page, kw);
-        for(Question question : paging){
-            System.out.println(question.getSubject());
-        }
         model.addAttribute("paging", paging);
         model.addAttribute("kw",kw);
         return "QnA/qna.html";
     }
 
+    // 게시글 수정 ==========================================================
     @RequestMapping("/modify")
     public String questionModify(Integer questionId, Integer mallUserId, Model model, HttpSession session){
         IsLogined isLogined = Ut.isLogined(session);
