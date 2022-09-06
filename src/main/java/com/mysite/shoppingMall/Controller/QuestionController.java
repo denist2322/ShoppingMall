@@ -89,14 +89,14 @@ public class QuestionController {
     // 게시글 수정 ==========================================================
     @RequestMapping("/modify")
     public String questionModify(Integer questionId, Integer mallUserId, Model model, HttpSession session){
-        IsLogined isLogined = Ut.isLogined(session);
+        IsLogined isLogined = Ut.isLogined(session); // 세션 사용해서 로그인 확인
 
-        if((isLogined.getAuthority() != null && isLogined.getAuthority() == 0 )){
-            Question question = questionRepository.findById(questionId).get();
+        if((isLogined.getAuthority() != null && isLogined.getAuthority() == 0 )){ // 관리자가 null 이 아니다. 그리고 관리자다.
+            Question question = questionService.getQuestion(questionId); //questionId 를 가져옴
             model.addAttribute("question",question);
             return "QnA/boardmodify.html";
         }
-        if(isLogined.getUserId() != mallUserId ){
+        if(isLogined.getUserId() != mallUserId ){ // 글쓴 Id 랑 로그인 Id가 다르면
             model.addAttribute("msg", "수정 권한이 없습니다.");
             model.addAttribute("historyBack","true");
 
@@ -104,8 +104,8 @@ public class QuestionController {
         }
 
 
-        //Question question = questionService.getQuestion(questionId);
-        Question question = questionRepository.findById(questionId).get();
+        Question question = questionService.getQuestion(questionId);
+//        Question question = questionRepository.findById(questionId).get();
         model.addAttribute("question",question);
 
         return "QnA/boardmodify.html";
@@ -114,14 +114,7 @@ public class QuestionController {
     // 수정페이지 ==========================================================
     @PostMapping("/update/{id}")
     public String questionUpdate(@PathVariable("id") Integer id, QuestionForm questionForm){ // questionForm 에서 제목이랑 내용을 받아옴
-        Question questionTemp = questionService.qnaupDate(id, questionForm);
-
-//        Question questionTemp = questionService.getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴
-//        questionTemp.setSubject(questionForm.getSubject()); //기존에 있던 내용을 가지고 오고 새로 가져온 내용을 덮어 씌움.
-//        questionTemp.setContent(questionForm.getContent());
-//
-//        questionRepository.save(questionTemp); // 기존에 있던 객체 불러오고 거기에 새로 가져온 내용을 덮어 씌워서 저장함.
-
+        Question questionTemp = questionService.doUpdate(id, questionForm);
         return "redirect:/question/list";
     }
 
@@ -129,7 +122,7 @@ public class QuestionController {
     public String doDelete(Integer questionId, Integer mallUserId, HttpSession session, Model model){
         IsLogined isLogined = Ut.isLogined(session);
 
-        if(isLogined.getLogin() == 0 ){
+        if(isLogined.getLogin() == 0 ){ // 로그인이 비어있는지 확인.
 
             model.addAttribute("msg", "로그인후 이용해주세요.");
             model.addAttribute("historyBack","true");
@@ -137,7 +130,7 @@ public class QuestionController {
             return "common/js.html";
         }
 
-        if(isLogined.getUserId() != mallUserId && isLogined.getAuthority() != 0){
+        if(isLogined.getUserId() != mallUserId && isLogined.getAuthority() != 0){ // 글쓴 Id 와 로그인유저 Id 다르거나 and (관리자가 0임) 관리자가 아니라면
 
             model.addAttribute("msg", "삭제 권한이 없습니다.");
             model.addAttribute("historyBack","true");
@@ -145,8 +138,8 @@ public class QuestionController {
             return "common/js.html";
         }
 
-        Question question = questionRepository.findById(questionId).get();
-        questionRepository.delete(question);
+        questionService.doDelete(questionId);
+
         return "redirect:/question/list";
     }
 
