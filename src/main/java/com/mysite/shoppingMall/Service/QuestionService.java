@@ -1,5 +1,6 @@
 package com.mysite.shoppingMall.Service;
 
+import com.mysite.shoppingMall.Form.QuestionForm;
 import com.mysite.shoppingMall.Ut.IsLogined;
 import com.mysite.shoppingMall.Entity.MallUser;
 import com.mysite.shoppingMall.Entity.Question;
@@ -68,8 +69,18 @@ public class QuestionService {
     }
 
     public void doDelete(Integer id){
+
         questionRepository.findById(id);
     }
 
 
+    public Question qnaupDate(Integer id, QuestionForm questionForm) {
+        Question questionTemp = getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴
+        questionTemp.setSubject(questionForm.getSubject()); //기존에 있던 내용을 가지고 오고 새로 가져온 내용을 덮어 씌움.
+        questionTemp.setContent(questionForm.getContent());
+
+        questionRepository.save(questionTemp);
+
+        return questionTemp;
+    }
 }

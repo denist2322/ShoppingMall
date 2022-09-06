@@ -19,13 +19,16 @@ public class Ut {
 
     public static IsLogined isLogined(HttpSession session) {
         IsLogined result = new IsLogined();
+        // 관리자 0 유저 1 => 권한
+        // 로그인이 이루어졌다면
         if (session.getAttribute("UserId") != null){
             result.setLogin(1);
             result.setUserId((int)session.getAttribute("UserId"));
             result.setAuthority((int)session.getAttribute("authority"));
             return result;
         }
-
+        
+        // 로그인이 되지 않았다면
         result.setLogin(0);
         result.setUserId(0);
         result.setAuthority(null);

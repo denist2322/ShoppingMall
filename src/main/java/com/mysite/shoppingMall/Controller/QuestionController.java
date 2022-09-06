@@ -60,8 +60,11 @@ public class QuestionController {
     // 게시글 단건 조회 ==============================================
     @RequestMapping("/detail/{id}")
     public String showDetail(Model model, @PathVariable("id") Integer id, HttpSession session){
+
+
         IsLogined isLogined = Ut.isLogined(session);
         Question question = questionService.getQuestion(id);
+        System.out.println("작성자 id: " +question.getMallUser().getId());
         model.addAttribute("question",question);
 
         if(isLogined.getUserId() == question.getMallUser().getId() || (isLogined.getAuthority() != null && isLogined.getAuthority() == 0 )) {
@@ -88,13 +91,20 @@ public class QuestionController {
     public String questionModify(Integer questionId, Integer mallUserId, Model model, HttpSession session){
         IsLogined isLogined = Ut.isLogined(session);
 
-        if(isLogined.getUserId() != mallUserId){
+        if((isLogined.getAuthority() != null && isLogined.getAuthority() == 0 )){
+            Question question = questionRepository.findById(questionId).get();
+            model.addAttribute("question",question);
+            return "QnA/boardmodify.html";
+        }
+        if(isLogined.getUserId() != mallUserId ){
             model.addAttribute("msg", "수정 권한이 없습니다.");
             model.addAttribute("historyBack","true");
 
             return "common/js.html";
         }
 
+
+        //Question question = questionService.getQuestion(questionId);
         Question question = questionRepository.findById(questionId).get();
         model.addAttribute("question",question);
 
@@ -103,12 +113,14 @@ public class QuestionController {
 
     // 수정페이지 ==========================================================
     @PostMapping("/update/{id}")
-    public String questionUpdate(@PathVariable("id") Integer id, QuestionForm questionForm){ // question 제목이랑 내용을 받아옴
-        Question questionTemp = questionService.getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴
-        questionTemp.setSubject(questionForm.getSubject()); //기존에 있던 내용을 가지고 오고 새로 가져온 내용을 덮어 씌움.
-        questionTemp.setContent(questionForm.getContent());
+    public String questionUpdate(@PathVariable("id") Integer id, QuestionForm questionForm){ // questionForm 에서 제목이랑 내용을 받아옴
+        Question questionTemp = questionService.qnaupDate(id, questionForm);
 
-        questionRepository.save(questionTemp); // 기존에 있던 객체 불러오고 거기에 새로 가져온 내용을 덮어 씌워서 저장함.
+//        Question questionTemp = questionService.getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴
+//        questionTemp.setSubject(questionForm.getSubject()); //기존에 있던 내용을 가지고 오고 새로 가져온 내용을 덮어 씌움.
+//        questionTemp.setContent(questionForm.getContent());
+//
+//        questionRepository.save(questionTemp); // 기존에 있던 객체 불러오고 거기에 새로 가져온 내용을 덮어 씌워서 저장함.
 
         return "redirect:/question/list";
     }
@@ -117,7 +129,7 @@ public class QuestionController {
     public String doDelete(Integer questionId, Integer mallUserId, HttpSession session, Model model){
         IsLogined isLogined = Ut.isLogined(session);
 
-        if(isLogined.getLogin() == 0){
+        if(isLogined.getLogin() == 0 ){
 
             model.addAttribute("msg", "로그인후 이용해주세요.");
             model.addAttribute("historyBack","true");
@@ -125,7 +137,7 @@ public class QuestionController {
             return "common/js.html";
         }
 
-        if(isLogined.getUserId() != mallUserId){
+        if(isLogined.getUserId() != mallUserId && isLogined.getAuthority() != 0){
 
             model.addAttribute("msg", "삭제 권한이 없습니다.");
             model.addAttribute("historyBack","true");
