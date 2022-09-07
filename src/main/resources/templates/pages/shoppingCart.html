@@ -49,7 +49,7 @@
                 <tbody class="border-b-2 border-gray-200">
                 <tr>
                     <th class="justify-center">
-                        <input type="checkbox" name="chk[]" />
+                        <input type="checkbox" th:id="'chk'+${shoppingCart.id}" th:onchange="'javascript:checkPrice('+ ${shoppingCart.cartTotalPrice} + ',' + ${shoppingCart.id} +')'"/>
                     </th>
                     <th class="flex h-full">
                         <ul class="flex w-full items-center justify-center h-full p-6">
@@ -86,7 +86,7 @@
         <div class="border-2 border-gray-300 p-4 text-2xl h-72 mt-16">
             <div class="flex text-2xl h-1/4 pt-6"> 상품금액 :
                 <div class="pl-3" id="totalPrice">
-
+                        0
                 </div>
             </div>
             <div class="flex text-2xl h-1/4 pt-2">배송비 :
@@ -117,20 +117,22 @@
 </html>
 <!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
 <script>
-            // 상품 총 가격을 불러오기
-            const TotalPriceBox = document.getElementById("totalPrice");
-            //총가격을 넣을 변수 생성
-            let TotalItemsPrice = 0;
-            // 개별가격을 불러오기
-            const prices = document.querySelectorAll(".price");
-            // price만큼 순회하는 함수
-            prices.forEach(price => TotalItemsPrice += parseInt(price.innerHTML));
-            // 변화된 총 가격 값을 불러온 총가격 변수에 넣는다.
-            TotalPriceBox.innerText = TotalItemsPrice;
+            let chTotalPrice = 0;
 
-            let PriceTotal = 0;
+            function checkPrice(price, chId){
+                if($("#chk"+chId).is(":checked")){
+                    chTotalPrice += price;
 
-            PriceTotal = TotalItemsPrice;
-            result = "<input type=\text\" name=\"totalPrice\" class=\"focus:outline-none\" value=" + PriceTotal + " readonly>"
-            $("#PriceTotal").replaceWith(result);
+                    let result = "<div class=\"pl-3\" id=\"totalPrice\">" + chTotalPrice +"</div>";
+
+                    $("#totalPrice").replaceWith(result);
+                }
+                else{
+                    chTotalPrice -= price;
+
+                    let result = "<div class=\"pl-3\" id=\"totalPrice\">" + chTotalPrice +"</div>";
+
+                    $("#totalPrice").replaceWith(result);
+                }
+            }
 </script>
