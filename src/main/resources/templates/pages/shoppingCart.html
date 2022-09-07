@@ -91,18 +91,16 @@
             </div>
             <div class="flex text-2xl h-1/4 pt-2">배송비 :
                 <div class="pl-3" id="deliveryPrice">
-                    <script>
-
-                    </script>
+                    0
                 </div>
             </div>
 
             <div class="text-2xl h-1/4 pt-7">
                 <div class=" text-2xl h-1/4 pt-6 leading-loose border-t-2 border-gray-300">
                     <div class="flex justify-between w-full h-20">
-                        <span>총 결제금액 :
-                            <div id="finalTotalPrice">
-
+                        <span class="flex">총 결제금액 :
+                            <div class="pl-3" id="finalTotalPrice">
+                                    0
                             </div>
                         </span>
                         <button type="button" class="text-right mr-6 border-2 text-white bg-black btn btn-active"
@@ -118,7 +116,8 @@
 <!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
 <script>
             let chTotalPrice = 0;
-
+            let DeliveryTotalPrice = 0;
+            let finalTotalPrice = 0;
             function checkPrice(price, chId){
                 if($("#chk"+chId).is(":checked")){
                     chTotalPrice += price;
@@ -134,5 +133,28 @@
 
                     $("#totalPrice").replaceWith(result);
                 }
-            }
+
+                const DeliveryPrice = document.getElementById("totalPrice");
+
+                if(DeliveryPrice.innerText >= 50000 || DeliveryPrice.innerText == 0) {
+                    DeliveryTotalPrice = 0;
+
+                    let DeliPrice = "<div class=\"pl-3\" id=\"deliveryPrice\">" + DeliveryTotalPrice + "</div>";
+
+                    $("#deliveryPrice").replaceWith(DeliPrice);
+                } else {
+                    DeliveryTotalPrice = 3000;
+
+                    let DeliPrice = "<div class=\"pl-3\" id=\"deliveryPrice\">" + DeliveryTotalPrice + "</div>";
+
+                    $("#deliveryPrice").replaceWith(DeliPrice);
+                    }
+                    replace();
+                }
+
+                function replace(){
+                    finalTotalPrice = chTotalPrice + DeliveryTotalPrice;
+                    var FinalTotalPrice = "<div class=\"pl-3\" id=\"finalTotalPrice\">" + finalTotalPrice + "</div>";
+                    $("#finalTotalPrice").replaceWith(FinalTotalPrice);
+                }
 </script>
