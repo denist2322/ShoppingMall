@@ -29,12 +29,6 @@ public class QuestionService {
 
     private final UserRepository userRepository;
 
-    // 게시글 리스트 처리 =============================================
-    public Page<Question> getList(int page) {
-        Pageable pageable = doPageable(page);
-        return this.questionRepository.findAll(pageable);
-    }
-
     public void doWrite(String subject, String content, HttpSession session){
         IsLogined isLogined = Ut.isLogined(session);
         MallUser mallUser = userRepository.findById(isLogined.getUserId()).get();
@@ -46,6 +40,19 @@ public class QuestionService {
         question.setModifyDate(LocalDateTime.now());
         question.setMallUser(mallUser);
         this.questionRepository.save(question);
+    }
+
+    // 게시글 리스트 처리 =============================================
+    public Page<Question> getList(int page) { //getList 메서드는 정수 타입의 페이지번호를 입력받아 해당 페이지의 질문 목록을 리턴하는 메서드로 변경
+        Pageable pageable = doPageable(page);
+        return this.questionRepository.findAll(pageable);
+    }
+
+    public Pageable doPageable(int page){
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // page 는 조회할 페이지의 번호이고 10은 한 페이지에 보여줄 게시물의 갯수를 의미
+        return pageable;
     }
 
     public Question getQuestion(Integer id) {
@@ -60,12 +67,7 @@ public class QuestionService {
         return questionRepository.findBySubjectAndContent(kw,pageable);
     }
 
-    public Pageable doPageable(int page){
-        List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("id"));
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // page는 조회할 페이지의 번호이고 10은 한 페이지에 보여줄 게시물의 갯수를 의미
-        return pageable;
-    }
+
 
     public Question doUpdate(Integer id, QuestionForm questionForm) {
         Question questionTemp = getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴

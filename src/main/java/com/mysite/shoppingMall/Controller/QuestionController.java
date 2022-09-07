@@ -28,7 +28,7 @@ public class QuestionController {
     private UserRepository userRepository;
 
 
-    //C 게시글 생성 ==============================================
+    //C qna 게시글 생성 ==============================================
     @GetMapping("/doWrite")
     public String doWrite(QuestionForm questionForm){
 
@@ -48,7 +48,7 @@ public class QuestionController {
     }
 
 
-    //게시글 조회 ==============================================
+    // qna 게시글 조회 ==============================================
     @RequestMapping("/list")
     public String showQuestion(Model model, @RequestParam(value="page", defaultValue="0") int pageNo){
         Page<Question> paging = this.questionService.getList(pageNo);
@@ -57,20 +57,18 @@ public class QuestionController {
         return "QnA/qna.html";
     }
 
-    // 게시글 단건 조회 ==============================================
+    // qna 게시글 단건 조회 ==============================================
     @RequestMapping("/detail/{id}")
     public String showDetail(Model model, @PathVariable("id") Integer id, HttpSession session){
-
-
         IsLogined isLogined = Ut.isLogined(session);
+
         Question question = questionService.getQuestion(id);
-        System.out.println("작성자 id: " +question.getMallUser().getId());
         model.addAttribute("question",question);
 
         if(isLogined.getUserId() == question.getMallUser().getId() || (isLogined.getAuthority() != null && isLogined.getAuthority() == 0 )) {
             return "QnA/question_detail";
-
         }
+
         model.addAttribute("msg", "권한이 없습니다.");
         model.addAttribute("historyBack", "true");
 
