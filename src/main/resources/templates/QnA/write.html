@@ -31,7 +31,7 @@
         <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-base text-red-500">내용은 필수항목 입니다.</p>
         <div id="contentError"></div>
         <div class="mb-6">
-          <textarea name="content" id="content" cols="30" rows="15" th:value="${questionForm.getContent()}" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded felx" placeholder="내용을 입력해주세요."></textarea>
+          <textarea name="content" id="content" cols="30" rows="15" th:value="${questionForm.getContent()}" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded " placeholder="내용을 입력해주세요."></textarea>
         </div>
 
 
@@ -39,7 +39,7 @@
         <div class="flex">
           <button
                   type="submit"
-                  class="flex items-center justify-center w-full mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                  class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active mr-1"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
           >
@@ -47,7 +47,7 @@
           </button>
           <button
                   type="submit"
-                  class="flex items-center justify-center w-full text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                  class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
           >
