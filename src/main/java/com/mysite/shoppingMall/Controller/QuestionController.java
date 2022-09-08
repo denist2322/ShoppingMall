@@ -41,7 +41,7 @@ public class QuestionController {
             return "QnA/write.html";
         }
 
-        this.questionService.doWrite(questionForm.getSubject(), questionForm.getContent(), session);
+        this.questionService.doWrite(questionForm.getSubject(), questionForm.getContent(), session); // 글 작성
 
         model.addAttribute("msg", "글 작성이 완료되었습니다.");
         model.addAttribute("replaceUri", "/question/list");
