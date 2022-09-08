@@ -11,24 +11,27 @@
     <div class="mt-5 mb-2 text-xl font-bold text-center">QnA 작성</div>
     <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
       <form class="w-1/2" th:action="@{/question/doWrite}" th:object="${questionForm}" method="post">
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-          <div th:each="err:${#fields.allErrors()}" th:text="${err}" />
-    </div>
         <!-- userId input -->
+
         <div>제목</div>
+        <p th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-base text-red-500">제목은 필수항목 입니다.</p>
+        <div id="subjectError"></div>
         <div class="flex mb-6">
           <input
                   type="text"
                   name="subject"
                   class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
+                  th:value="${questionForm.getSubject()}"
                   placeholder="제목을 입력해주세요."
           />
         </div>
         <!-- Password input -->
 
-        <label for="content">내용</label>
+        <div>내용</div>
+        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-base text-red-500">내용은 필수항목 입니다.</p>
+        <div id="contentError"></div>
         <div class="mb-6">
-          <textarea name="content" id="content" cols="30" rows="15" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded felx" placeholder="내용을 입력해주세요."></textarea>
+          <textarea name="content" id="content" cols="30" rows="15" th:value="${questionForm.getContent()}" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded felx" placeholder="내용을 입력해주세요."></textarea>
         </div>
 
 

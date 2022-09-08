@@ -40,11 +40,12 @@ public class QuestionController {
         if(bindingResult.hasErrors()){
             return "QnA/write.html";
         }
+
         this.questionService.doWrite(questionForm.getSubject(), questionForm.getContent(), session);
 
-        model.addAttribute("message", "글 작성이 완료되었습니다.");
-        model.addAttribute("searchUrl", "/question/list");
-        return "QnA/message.html";
+        model.addAttribute("msg", "글 작성이 완료되었습니다.");
+        model.addAttribute("replaceUri", "/question/list");
+        return "common/js.html";
     }
 
 
