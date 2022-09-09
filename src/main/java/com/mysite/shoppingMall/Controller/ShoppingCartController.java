@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -25,10 +26,13 @@ public class ShoppingCartController {
     public String shoppingCart(HttpSession session, Model model) {
         IsLogined isLogined = Ut.isLogined(session);
         List<ShoppingCart> shoppingCartList = shoppingCartService.getCartList(isLogined.getUserId());
+        List<Integer> ShoppingDetailPrice = shoppingCartService.getPriceList(isLogined.getUserId());
+
         model.addAttribute("shoppingCartList", shoppingCartList);
+        model.addAttribute("ShoppingDetailPrice",ShoppingDetailPrice);
+
         return "pages/shoppingCart.html";
     }
-
 
 
     @RequestMapping("/addCart")
@@ -42,4 +46,15 @@ public class ShoppingCartController {
         shoppingCartService.deleteCart(id);
         return "redirect:/shoppingCart";
     }
+
+    // 장바구니에서 체크여부 변환 =======================
+    @RequestMapping("/isChecked")
+    @ResponseBody
+    public String isChecked(int check, long id){
+        shoppingCartService.changeChecked(check,id);
+        return "success";
+    }
+
+
+
 }

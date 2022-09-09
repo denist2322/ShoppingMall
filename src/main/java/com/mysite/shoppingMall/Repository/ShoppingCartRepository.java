@@ -11,4 +11,6 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart,Long>
     boolean existsByProductIdAndCartColor(long productId, String orderColor);
 
     ShoppingCart findByProductIdAndCartColor(long productId, String orderColor);
+
+    List<ShoppingCart> findByMallUserIdAndChecked(Integer userId, Integer i);
 }
