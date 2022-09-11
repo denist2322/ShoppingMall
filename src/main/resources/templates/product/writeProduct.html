@@ -7,10 +7,12 @@
 </head>
 
 <main layout:fragment="main">
+
     <div class="container max-w-screen-lg mx-auto">
         <div class="mt-5 mb-2 text-xl font-bold text-center">상품 등록</div>
         <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
-            <form class="w-1/2" th:action="@{/product/doWrite}" method="post" enctype="multipart/form-data">
+            <form id="productForm"  class="w-1/2" enctype="multipart/form-data">
+                <input type="hidden" name="id" th:value="${product.id}">
                 <!-- ProductName input -->
                 <label for="title">상품명</label>
                 <div class="flex mb-3">
@@ -58,31 +60,52 @@
                     <label for="size">사이즈</label>
                     <input type="text" id="size" name="size" th:value="${size}" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
                 </div>
-
-                <!-- 메인 이미지 -->
-                <div class="mb-5">
-                    <label for="chooseFile1">
-                        메인 이미지(한개 만 적용 가능합니다.)
-                    </label>
-                    <br>
-                    <input type="file" id="chooseFile1" name="mainImage"/>
-                </div>
-                <!-- 상품 상세 이미지 -->
-                <div class="mb-5">
-                    <label for="chooseFile2">
-                        상세 이미지(최소 한개 이상 첨부가 필요합니다.)
-                    </label>
-                    <input type="file" id="chooseFile2" name="detailImage" multiple/>
+                <div th:if="${doModify != 1}">
+                    <!-- 메인 이미지 -->
+                    <div class="mb-5">
+                        <label for="chooseFile1">
+                            메인 이미지(한개 만 적용 가능합니다.)
+                        </label>
+                        <br>
+                        <input type="file" id="chooseFile1" name="mainImage"/>
+                    </div>
+                    <!-- 상품 상세 이미지 -->
+                    <div class="mb-5">
+                        <label for="chooseFile2">
+                            상세 이미지(최소 한개 이상 첨부가 필요합니다.)
+                        </label>
+                        <input type="file" id="chooseFile2" name="detailImage" multiple/>
+                    </div>
                 </div>
 
                 <!-- Submit button -->
                 <div class="flex w-full">
-                    <input type="submit" class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active" value="등록하기" data-mdb-ripple="true" data-mdb-ripple-color="light">
-                    <input type="reset" class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active" value="취소하기" data-mdb-ripple="true" data-mdb-ripple-color="light">
+                    <button th:if="${doModify != 1}" type="submit" class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active" data-mdb-ripple="true" data-mdb-ripple-color="light" onclick="javascript:productSubmit();">등록하기</button>
+                    <button th:if="${doModify == 1}" type="submit" class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active" data-mdb-ripple="true" data-mdb-ripple-color="light" onclick="javascript:productModify();">수정하기</button>
+                    <button type="button" class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active" data-mdb-ripple="true" data-mdb-ripple-color="light" onclick="javascript:cancel();">취소하기</button>
                 </div>
             </form>
         </div>
     </div>
+    <script layout:fragment="script" type='text/javascript'>
+    function productSubmit() {
+        productForm.action = "/product/doWrite";
+        productForm.method = "post";
+        productForm.submit();
+    }
+
+    function productModify() {
+        productForm.action = "/product/doModify";
+        productForm.method = "post";
+        productForm.submit();
+    }
+
+    function cancel() {
+        history.back();
+    }
+    </script>
 </main>
+
+
 
 </html>

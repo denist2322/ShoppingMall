@@ -15,4 +15,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p WHERE p.title LIKE %:kw% OR p.body LIKE %:kw%" )
     List<Product> findByTitleAndBody(@Param("kw")String keyword);
+
 }

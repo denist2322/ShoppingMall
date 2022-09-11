@@ -88,4 +88,8 @@ public class UserService {
         user.setUpdateDate(LocalDateTime.now());
     }
 
+    public void deleteUser(HttpSession session) {
+        MallUser user = getUser(session);
+        userRepository.delete(user);
+    }
 }

@@ -29,7 +29,6 @@ public class ShoppingCartService {
     }
 
     public void addCart(ProductBuyForm productBuyForm, HttpSession session) {
-        System.out.println(productBuyForm.getOrderCounter());
         IsLogined isLogined = Ut.isLogined(session);
 
         MallUser mallUser = userRepository.findById(isLogined.getUserId()).get();
@@ -38,6 +37,7 @@ public class ShoppingCartService {
         if (shoppingCartRepository.existsByProductIdAndCartColor(productBuyForm.getProductsId(), productBuyForm.getOrderColor())) {
             ShoppingCart shoppingCart = shoppingCartRepository.findByProductIdAndCartColor(productBuyForm.getProductsId(), productBuyForm.getOrderColor());
             shoppingCart.setCartCount(productBuyForm.getOrderCounter());
+            shoppingCart.setCartTotalPrice(productBuyForm.getOrderTotalPrice());
             shoppingCartRepository.save(shoppingCart);
             return;
         }
@@ -55,6 +55,10 @@ public class ShoppingCartService {
     public void deleteCart(long id) {
         ShoppingCart cart = shoppingCartRepository.findById(id).get();
         shoppingCartRepository.delete(cart);
+    }
+
+    public void deleteCart(ShoppingCart shoppingCart) {
+        shoppingCartRepository.delete(shoppingCart);
     }
 
     public void changeChecked(int check, long id) {
@@ -88,4 +92,6 @@ public class ShoppingCartService {
     public List<ShoppingCart> getCheckedCartList(Integer userId) {
         return shoppingCartRepository.findByMallUserIdAndChecked(userId, 1);
     }
+
+
 }

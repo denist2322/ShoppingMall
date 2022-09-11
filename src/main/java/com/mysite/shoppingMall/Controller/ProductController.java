@@ -38,7 +38,7 @@ public class ProductController {
     @GetMapping("/doWrite")
     public String showWrite(ProductWriteForm productWriteForm, HttpSession session, Model model) {
         IsLogined isLogined = Ut.isLogined(session);
-        if (isLogined.getAuthority() == null) {
+        if (isLogined.getAuthority() != 0) {
             return "redirect:/";
         }
         Product product = new Product();
@@ -83,16 +83,18 @@ public class ProductController {
         Product product = productService.findProduct(id);
         String color = productService.setColorString(product.getProductColorList());
         String size = productService.setSizeString(product.getProductSizeList());
+        productWriteForm.setId(id);
 
         model.addAttribute("product", product);
         model.addAttribute("color", color);
         model.addAttribute("size", size);
+        model.addAttribute("doModify", 1);
         return "product/writeProduct.html";
     }
 
     @PostMapping("/doModify")
-    public String doModify(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm) {
-        productService.doWrite(mainImage, detailImage, productWriteForm);
+    public String doModify(ProductWriteForm productWriteForm) {
+        productService.doModify(productWriteForm);
         return "redirect:/";
     }
 

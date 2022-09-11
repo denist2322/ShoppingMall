@@ -1,11 +1,11 @@
 package com.mysite.shoppingMall.Controller;
 
-import com.mysite.shoppingMall.Ut.IsLogined;
 import com.mysite.shoppingMall.Entity.MallUser;
 import com.mysite.shoppingMall.Entity.OrderSheet;
 import com.mysite.shoppingMall.Form.*;
 import com.mysite.shoppingMall.Service.ProductService;
 import com.mysite.shoppingMall.Service.UserService;
+import com.mysite.shoppingMall.Ut.IsLogined;
 import com.mysite.shoppingMall.Ut.Ut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -156,10 +157,20 @@ public class UserController {
     }
 
     @PostMapping("/myPage")
-    public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult, Model model) {
+    public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult, Model model,HttpSession session) {
+        IsLogined isLogined = Ut.isLogined(session);
         if (bindingResult.hasErrors()) {
             return "user/myPage.html";
         }
+
+        if(isLogined.getLogin() == 0 || isLogined.getAuthority() == 0){
+            model.addAttribute("msg", "잘못된 접근입니다.");
+            model.addAttribute("historyBack", "/user/myPage");
+
+            return "common/js";
+        }
+
+
         userService.modifyUser(joinForm);
 
         model.addAttribute("msg", "회원정보가 수정되었습니다.");
@@ -168,34 +179,28 @@ public class UserController {
         return "common/js";
     }
 
-    // === 회원 탈퇴 ===
-//    @RequestMapping("/doDelete")
-//    @ResponseBody
-//    public String doDelete(String userEmail, String userPassword, HttpSession session) {
-//        if (Ut.empty(userEmail)) {
-//            return "이메일을 입력해주세요.";
-//        }
-//
-//        if (Ut.empty(userPassword)) {
-//            return "비밀번호를 입력해주세요.";
-//        }
-//
-//        Optional<MallUser> opUser = userRepository.findByuserEmail(userEmail);
-//        MallUser user = opUser.orElse(null);
-//
-//        if (user == null) {
-//            return "회원이 존재하지 않습니다.";
-//        }
-//
-////        if (!passwordEncoder.matches(userPassword, user.getUserPassword())) {
-////            return "비밀번호를 확인해주세요";
-////        }
-//
-//        userRepository.delete(user);
-//        session.removeAttribute("UserId");
-//
-//        return "탈퇴가 처리 완료되었습니다.";
-//    }
+//     === 회원 탈퇴 ===
+    @GetMapping("/doDelete")
+    @ResponseBody
+    public String doDelete(HttpSession session) {
+        IsLogined isLogined = Ut.isLogined(session);
+
+        if(isLogined.getLogin() == 0 || isLogined.getAuthority() == 0){
+            return """
+                    <script>
+                    alert("잘못된 접근입니다.");
+                    history.back();
+                    </script>
+                    """;
+        }
+        userService.deleteUser(session);
+            return  """
+                    <script>
+                    alert("탈퇴처리가 완료되었습니다.");
+                    location.replace("/");
+                    </script>
+                    """;
+    }
 
 
     // == 이메일 찾기 ==
