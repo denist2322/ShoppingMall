@@ -201,7 +201,7 @@
                     </div>
 
                     <!-- Submit button -->
-                    <div class="flex w-full">
+                    <div th:if="${session.get('authority') != 0}" class="flex w-full">
                         <button
                                 type="submit"
                                 class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active"
@@ -210,14 +210,15 @@
                         >
                             수정하기
                         </button>
-                        <button
-                                type="submit"
+                        <a
                                 class="flex w-1/2 text-right mr-6 border-2 text-white bg-black btn btn-active"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
+                                onclick="if ( confirm('정말로 탈퇴하시겠습니까?') == false ) return false;"
+                                th:href="@{|/user/doDelete|}"
                         >
-                            삭제하기
-                        </button>
+                            탈퇴하기
+                        </a>
                     </div>
                     <div
                             class="flex items-center my-4 before:flex-1 before:mt-0.5 after:flex-1 after:mt-0.5"

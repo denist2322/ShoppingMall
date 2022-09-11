@@ -1,17 +1,18 @@
 package com.mysite.shoppingMall.Service;
 
+import com.mysite.shoppingMall.Entity.*;
 import com.mysite.shoppingMall.Form.OrderSheetForm;
 import com.mysite.shoppingMall.Form.ProductBuyForm;
 import com.mysite.shoppingMall.Form.ProductWriteForm;
 import com.mysite.shoppingMall.Repository.*;
 import com.mysite.shoppingMall.Ut.Ut;
-import com.mysite.shoppingMall.Entity.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,15 +78,13 @@ public class ProductService {
 
     public void doWrite(List<MultipartFile> mainImage, List<MultipartFile> detailImage, ProductWriteForm productWriteForm) {
         Product product = new Product();
+
         product.setRegDate(LocalDateTime.now());
-        product.setTitle(productWriteForm.getTitle());
-        product.setBody(productWriteForm.getBody());
-        product.setPrice(productWriteForm.getPrice());
-        product.setDiscount(productWriteForm.getDiscount());
-        product.setCategory(productWriteForm.getCategory());
         product.setMainImage(mainImage.get(0).getOriginalFilename());
         fileService.doUpload(productWriteForm, mainImage); // 메인 이미지 업로드
+        createAndModify(productWriteForm, product);
         productRepository.save(product);
+        colorAndSize(productWriteForm, product);
 
         for (int i = 0; i < detailImage.size(); i++) {
             ProductImage productImage = new ProductImage();
@@ -95,6 +94,41 @@ public class ProductService {
         }
         fileService.doUpload(productWriteForm, detailImage); // 디테일 이미지 업로드
 
+    }
+
+    public void doModify(ProductWriteForm productWriteForm) {
+        Product product = productRepository.findById(productWriteForm.getId()).orElse(null);
+
+        String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\product_image\\";
+        // 1. 원본 폴더
+        File file = new File(root + product.getTitle());
+        // 2. 새로운 폴더
+        File newFile = new File(root + productWriteForm.getTitle());
+        // 폴더 이름을 변경해줌.
+        file.renameTo(newFile);
+
+        createAndModify(productWriteForm, product);
+
+        productRepository.save(product);
+        for(int i = 0; i< product.getProductColorList().size(); i++){
+            productColorRepository.delete(product.getProductColorList().get(i));
+        }
+        for(int i = 0; i< product.getProductSizeList().size(); i++){
+            productSizeRepository.delete(product.getProductSizeList().get(i));
+        }
+        colorAndSize(productWriteForm, product);
+    }
+
+    private void createAndModify(ProductWriteForm productWriteForm, Product product) {
+        product.setTitle(productWriteForm.getTitle());
+        product.setBody(productWriteForm.getBody());
+        product.setPrice(productWriteForm.getPrice());
+        product.setDiscount(productWriteForm.getDiscount());
+        product.setCategory(productWriteForm.getCategory());
+    }
+
+    private void colorAndSize(ProductWriteForm productWriteForm, Product product) {
+        // == 색상 업로드 == (**을 통해 구분받는다.)
         String[] tmp = Ut.splitStar(productWriteForm.getColor());
         for (int i = 0; i < tmp.length; i++) {
             ProductColor productColor = new ProductColor();
@@ -102,7 +136,7 @@ public class ProductService {
             productColor.setProduct(product);
             productColorRepository.save(productColor);
         }
-
+        // == 사이즈 업로드 == (**을 통해 구분받는다.)
         tmp = Ut.splitStar(productWriteForm.getSize());
         for (int i = 0; i < tmp.length; i++) {
             ProductSize productSize = new ProductSize();
@@ -110,8 +144,9 @@ public class ProductService {
             productSize.setProduct(product);
             productSizeRepository.save(productSize);
         }
-
     }
+
+
 
     public boolean isExists(Long id) {
         if (productRepository.existsById(id)) {
@@ -190,6 +225,7 @@ public class ProductService {
             orderSheet.setProduct(shoppingCartList.get(i).getProduct());
 
             orderSheetRepository.save(orderSheet);
+            shoppingCartService.deleteCart(shoppingCartList.get(i));
         }
     }
 
@@ -250,6 +286,7 @@ public class ProductService {
         productBuyForm.setShippingCost(prices.get(1));
         productBuyForm.setOrderTitle(shoppingCartList.get(0).getProduct().getTitle());
     }
+
 
 
 }
