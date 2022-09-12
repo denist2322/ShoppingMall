@@ -13,30 +13,35 @@
         <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
             <form id="productForm"  class="w-1/2" enctype="multipart/form-data">
                 <input type="hidden" name="id" th:value="${product.id}">
-                <!-- ProductName input -->
+                <!-- 상품이름 입력 시작 -->
                 <label for="title">상품명</label>
                 <div class="flex mb-3">
                     <input type="text" name="title" id="title" th:value="${product.title}" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
                 </div>
-                <!-- 상품 설명 -->
+                <!-- 상품이름 입력 끝 -->
+
+                <!-- 상품 설명 입력 시작 -->
                 <label for="body">상품 설명</label>
                 <div class="mb-3">
                     <textarea type="text" name="body" id="body" th:value="${product.body}" cols="15" rows="5" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded flex" placeholder="내용을 입력해주세요."></textarea>
                 </div>
+                <!-- 상품 설명 입력 끝 -->
 
-                <!-- Price input -->
+                <!-- 상품 가격 입력 시작 -->
                 <label for="price">상품 가격</label>
                 <div class="mb-3">
                     <input type="text" id="price" name="price" th:value="${product.price}" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
                 </div>
+                <!-- 상품 가격 입력 끝 -->
 
-                <!-- discount input -->
+                <!-- 할인률 입력 시작 -->
                 <label for="discount">할인률 (%)</label>
                 <div class="mb-3">
                     <input type="text" id="discount" name="discount" th:value="${product.discount}" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
                 </div>
+                <!-- 할인률 입력 끝 -->
 
-                <!-- Category input -->
+                <!-- 카테고리 입력 시작 -->
                 <label for="category">카테고리</label>
                 <div class="mb-3">
                     <select id="category" name="category" class="w-full px-4 py-2 text-xl select select-bordered">
@@ -48,18 +53,22 @@
                         <option value="acc">ACC</option>
                     </select>
                 </div>
+                <!-- 카테고리 입력 끝 -->
 
-                <!-- 색상 input -->
+                <!-- 색상 입력 시작 -->
                 <div class="mb-3">
                     <label for="color">색상</label>
                     <input type="text" id="color" name="color" th:value="${color}" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
                 </div>
+                <!-- 색상 입력 끝 -->
 
-                <!-- 사이즈 input -->
+                <!-- 사이즈 입력 시작 -->
                 <div class="mb-3">
                     <label for="size">사이즈</label>
                     <input type="text" id="size" name="size" th:value="${size}" class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700" />
                 </div>
+                <!-- 사이즈 입력 끝 -->
+
                 <div th:if="${doModify != 1}">
                     <!-- 메인 이미지 -->
                     <div class="mb-5">
@@ -69,7 +78,7 @@
                         <br>
                         <input type="file" id="chooseFile1" name="mainImage"/>
                     </div>
-                    <!-- 상품 상세 이미지 -->
+                    <!-- 상품 이미지 가져오기 시작 -->
                     <div class="mb-5">
                         <label for="chooseFile2">
                             상세 이미지(최소 한개 이상 첨부가 필요합니다.)
@@ -77,8 +86,8 @@
                         <input type="file" id="chooseFile2" name="detailImage" multiple/>
                     </div>
                 </div>
+                <!-- 상품 이미지 가져오기 끝 -->
 
-                <!-- Submit button -->
                 <div class="flex w-full">
                     <button th:if="${doModify != 1}" type="submit" class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active" data-mdb-ripple="true" data-mdb-ripple-color="light" onclick="javascript:productSubmit();">등록하기</button>
                     <button th:if="${doModify == 1}" type="submit" class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active" data-mdb-ripple="true" data-mdb-ripple-color="light" onclick="javascript:productModify();">수정하기</button>

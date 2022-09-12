@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <!-- 데이지UI 불러오기 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@2.22.0/dist/full.css" type="text/css"/>
+<!-- 공용 css 불러오기 -->
 <link rel="stylesheet" href="/common/common.css">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +19,7 @@
         <div class="text-2xl w-full font-bold mt-5 mb-2 text-center">이메일 찾기</div>
         <div th:if="${mallUserEmail == null}">
             <form th:action="@{|/user/findEmail|}" method="post">
-                <!-- Email input -->
+                <!-- 이름 입력 시작 -->
                 <div class="mb-3">
                     <input
                             type="text"
@@ -27,8 +28,9 @@
                             placeholder="이름"
                     />
                 </div>
+                <!-- 이름 입력 끝 -->
 
-                <!-- BirthDay input -->
+                <!-- 생년월일 입력 시작 -->
                 <div class="mb-3">
                     <input
                             type="text"
@@ -37,6 +39,7 @@
                             placeholder="생년월일"
                     />
                 </div>
+                <!-- 생년월일 입력 끝 -->
 
                 <div class="flex w-full h-auto justify-between">
                     <input
@@ -46,6 +49,7 @@
                 </div>
             </form>
         </div>
+        <!-- 회원 이메일 정보 보여주기 시작 -->
         <div th:if="${mallUserEmail != null}">
             <div>
                 회원님의 이메일은 [[${mallUserEmail}]] 입니다.
@@ -57,6 +61,7 @@
                 </button>
             </div>
         </div>
+        <!-- 회원 이메일 정보 보여주기 끝 -->
     </div>
 </div>
 </div>
