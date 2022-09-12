@@ -65,10 +65,14 @@
             <input type="hidden" name="orderTitle" th:value="${product.title}"/>
             <input type="hidden" name="orderPrice" th:value="${discountPrice}"/>
 
+            <!-- 상품 메인 이미지 시작 -->
             <div class="w-1/2">
                 <img th:src="'/product_image/'+${product.title}+'/'+${product.mainImage}" alt="상품 이미지"
                      class="border product_img2">
             </div>
+            <!-- 상품 메인 이미지 끝 -->
+
+            <!-- 상품 정보 시작 -->
             <div class="w-1/2 ">
                 <div class="py-2">
                     <h2 class="text-3xl ">[[${product.title}]]</h2>
@@ -174,16 +178,20 @@
                              class="w-5 h-5">
                     </button>
                 </div>
+                <!-- 상품 정보 끝 -->
 
+                <!-- 장비구니 및 구매하기 버튼 시작(상품을 선택 안할 시 작동 안함) -->
                 <div class="box-border flex justify-center w-full mt-5">
                     <a href="javascript:cart()" class="items-center p-3 text-white bg-gray-700 mr-4 btn">장바구니</a>
                     <a href="javascript:order()" class="items-center p-3 text-white bg-black mr-4 btn">구매하기</a>
                 </div>
+                <!-- 장바구니 및 구매하기 버튼 끝 -->
+
             </div>
         </form>
         <!-- 상품 정보 끝 -->
 
-        <!-- 상품상세 정보 페이지 시작-->
+        <!-- 상품상세 이미지 시작 -->
         <section class="max-w-screen-lg h-full">
 
             <div class="flex">
@@ -196,7 +204,7 @@
                 </div>
             </div>
         </section>
-        <!-- 상품상세 정보 페이지 끝 -->
+        <!-- 상품상세 이미지 끝 -->
     </div>
 </main>
 </html>

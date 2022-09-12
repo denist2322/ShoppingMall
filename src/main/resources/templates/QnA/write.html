@@ -11,8 +11,8 @@
     <div class="mt-5 mb-2 text-xl font-bold text-center">QnA 작성</div>
     <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
       <form class="w-1/2" th:action="@{/question/doWrite}" th:object="${questionForm}" method="post">
-        <!-- userId input -->
 
+        <!-- 제목 입력 시작 -->
         <div>제목</div>
         <p th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="text-base text-red-500">제목은 필수항목 입니다.</p>
         <div id="subjectError"></div>
@@ -25,17 +25,18 @@
                   placeholder="제목을 입력해주세요."
           />
         </div>
-        <!-- Password input -->
+        <!-- 제목 입력 끝 -->
 
+        <!-- 내용 입력 시작 -->
         <div>내용</div>
         <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-base text-red-500">내용은 필수항목 입니다.</p>
         <div id="contentError"></div>
         <div class="mb-6">
-          <textarea name="content" id="content" cols="30" rows="15" th:value="${questionForm.getContent()}" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded " placeholder="내용을 입력해주세요."></textarea>
+          <textarea name="content" id="content" cols="15" rows="5" th:value="${questionForm.getContent()}" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded " placeholder="내용을 입력해주세요."></textarea>
         </div>
+        <!-- 내용 입력 끝 -->
 
-
-        <!-- Submit button -->
+        <!-- 작성하기 및 취소 버튼 시작 -->
         <div class="flex">
           <button
                   type="submit"
@@ -54,6 +55,8 @@
             취소
           </button>
         </div>
+        <!-- 작성하기 및 취소 버튼 끝 -->
+
       </form>
     </div>
   </div>

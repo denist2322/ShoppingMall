@@ -119,3 +119,8 @@ align-items: center;
 		font-family: 'Font Awesome 5 Free';
 	    ...;
 		}
+
+ul.list-image {
+    list-style-image: url("https://ifh.cc/g/ABaaYW.png");
+    font-size: 20px;
+}

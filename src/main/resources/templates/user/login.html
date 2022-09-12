@@ -14,16 +14,16 @@
 </head>
 
 <body>
-<!-- 로그인 폼 시작 -->
 <section class="h-screen">
     <div class="con h-full text-gray-800">
         <div
                 class="flex justify-center items-center flex-wrap h-full"
         >
             <div>
+                <!-- 로그인 폼 시작 -->
                 <form th:action="@{|/user/doLogin|}" th:object="${loginForm}" method="POST" class="w-96">
                     <div th:replace="/common/errorForm :: formErrorsFragment"></div>
-                    <!-- Email input -->
+                    <!-- 이메일 입력 시작 -->
                     <div class="mb-6">
                         <input
                                 type="email"
@@ -33,8 +33,9 @@
                                 th:value="${loginForm.email}"
                         />
                     </div>
+                    <!-- 이메일 입력 끝 -->
 
-                    <!-- Password input -->
+                    <!-- 패스워드 입력 시작 -->
                     <div class="mb-6">
                         <input
                                 type="password"
@@ -43,14 +44,18 @@
                                 placeholder="Password"
                         />
                     </div>
+                    <!-- 패스워드 입력 끝 -->
 
+                    <!-- 이메일 및 비밀번호 찾기 버튼 시작 -->
                     <div class="flex justify-between items-center mb-6">
                         <div class="font-semibold text-base form-group form-check">
                             <a th:href="@{|/user/findEmail|}">이메일 찾기</a>
                         </div>
                         <a th:href="@{|/user/findPw|}" class="font-semibold text-base">비밀번호 찾기</a>
                     </div>
+                    <!-- 이메일 및 비밀번호 찾기 버튼 끝 -->
 
+                    <!-- 회원가입 버튼 시작 -->
                     <div class="text-right">
                         <input
                                 type="submit"
@@ -64,7 +69,9 @@
                             >
                         </p>
                     </div>
+                    <!-- 회원가입 버튼 끝 -->
                 </form>
+                <!-- 로그인 폼 끝 -->
             </div>
         </div>
     </div>

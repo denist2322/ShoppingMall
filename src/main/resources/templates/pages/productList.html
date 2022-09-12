@@ -10,9 +10,12 @@
     <div class="max-width">
     <div class="con grid">
         <section class="grid">
+            <!-- 상품이 존재하지 않을 경우 -->
             <div th:if="${productList.size() == 0}" class="con h-96 grid justify-center items-center text-lg">
                 현재 상품이 존재하지 않습니다.
             </div>
+
+            <!-- 상품 정보 시작 -->
             <div th:if="${productList.size() != 0}" class="grid grid-cols-4">
                 <div th:each="product : ${productList}">
                         <script layout:fragment="script" type='text/javascript'>
@@ -53,6 +56,7 @@
                     </div>
                 </div>
             </div>
+            <!-- 상품 정보 끝 -->
         </section>
     </div>
     </div>
