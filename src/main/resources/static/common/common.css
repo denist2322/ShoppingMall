@@ -90,6 +90,11 @@ align-items: center;
     height:400px;
     }
 
+.product_img3 {
+    width:400px;
+    height:300px;
+    }
+
 .footer{
     width:1652px;
 }
@@ -121,6 +126,6 @@ align-items: center;
 		}
 
 ul.list-image {
-    list-style-image: url("https://ifh.cc/g/ABaaYW.png");
-    font-size: 20px;
+    list-style-image: url("https://ifh.cc/g/QPy07R.png");
+    font-size:5px;
 }
