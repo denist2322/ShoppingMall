@@ -10,27 +10,30 @@
 
 
 <main layout:fragment="main">
-        <div class="max-w-screen-lg mx-auto">
+        <div class="">
             <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
-                <div class="w-1/2">
+                <div class="w-full">
             <!-- 제목 시작 -->
-            <div class="flex mt-5 mb-2 text-xl font-bold text-left">제목</div>
-            <div class="flex mb-6">
-                <input
-                        name="subject"
-                        th:value="${question.subject}"
-                        class="flex w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border-none border-solid rounded focus:text-gray-700 outline-none"
-                        readonly/>
-            </div>
-            <!-- 제목 끝 -->
-
-            <!-- 내용 시작 -->
-            <label for="content" class="flex mt-5 mb-2 text-xl font-bold text-left">내용</label>
-            <div class="mb-6">
-                <div th:text="${question.content}" name="content" id="content" class="w-full h-15 px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border-none border-solid rounded outline-none"
-                >
-                </div>
-            </div>
+            <table class="table w-full justify-center my-10">
+                <thead>
+                <tr class="w-auto h-16">
+                    <th class="py-3 text-xl text-center">작성자</th>
+                    <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${question.mallUser.name}"></td>
+                </tr>
+                <tr class="w-full h-16">
+                    <th class="py-3 text-xl text-center">작성 날짜</th>
+                    <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${(question.createDate).toString().substring(0,10)}"></td>
+                </tr>
+                <tr class="w-full h-16">
+                    <th class="py-3 text-xl text-center">제목</th>
+                    <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${question.subject}" name="subject"></td>
+                </tr>
+                <tr class="w-full h-16">
+                    <th class="py-3 text-xl text-center">질문내용</th>
+                    <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${question.content}" name="content" id="content"></th>
+                </tr>
+                </thead>
+            </table>
             <!-- 내용 끝 -->
 
                     <div>
@@ -44,18 +47,21 @@
                         </form>
                     </div>
 
-                    <div class="mt-6">
+                    <div class="mt-16">
                         <!-- 답변 목록 시작 -->
                         <table>
-                        <div>
-                            <tbody class="ml-5 border-b-2 border-gray-200">
+                            <tbody>
+                            <tr>
+                                <ul class="text-base text-center bg-gray-200 rounded-lg h-6 leading-6">
+                                    <li>답변</li>
+                                </ul>
+                            </tr>
                             <tr class="mt-2">
-                                <ul class="list-image">
-                                <li class="text-xl" th:each="questionAnswer : ${question.questionAnswerList}" th:text="${questionAnswer.body}"></li>
+                                <ul class="list-image ml-8">
+                                <li class="text-xl my-2" th:each="questionAnswer : ${question.questionAnswerList}" th:text="${questionAnswer.body}"></li>
                                 </ul>
                             </tr>
                             </tbody>
-                        </div>
                     </table>
                         <!-- 답변 목록 끝 -->
 

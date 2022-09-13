@@ -9,11 +9,11 @@
 
 <main layout:fragment="main">
     <div class="container max-w-screen-lg mx-auto">
-        <div class="mt-5 mb-2 text-xl font-bold text-center">QnA 수정</div>
+        <div class="mt-5 mb-2 text-xl font-bold text-center">Q & A 수정</div>
         <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
-                <div class="">
-                    <form th:action="@{/question/update/{id}(id = ${question.id})}" method="post">
-                <!-- userId input -->
+        <form class="w-1/2" th:action="@{/question/update/{id}(id = ${question.id})}" method="post">
+
+                <!-- 제목 입력 시작 -->
                 <div>제목</div>
                 <div class="flex mb-6">
                     <input
@@ -24,19 +24,20 @@
                             placeholder="제목을 입력해주세요."
                     />
                 </div>
-                <!-- Password input -->
+                <!-- 제목 입력 끝 -->
 
+                <!-- 내용 입력 시작 -->
                 <label for="content">내용</label>
                 <div class="mb-6">
-                    <textarea th:text="${question.content}" name="content" id="content" cols="30" rows="15" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded felx" placeholder="내용을 입력해주세요."></textarea>
+                    <textarea th:text="${question.content}" name="content" id="content" cols="15" rows="5" class="w-full px-4 py-2 m-0 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded" placeholder="내용을 입력해주세요."></textarea>
                 </div>
+                <!-- 내용 입력 끝 -->
 
-
-                <!-- Submit button -->
+                <!-- 수정하기 및 취소 버튼 시작 -->
                 <div class="flex">
                     <button
                             type="submit"
-                            class="flex items-center justify-center w-full mr-2 text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                            class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active mr-1"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                     >
@@ -44,15 +45,16 @@
                     </button>
                     <button
                             type="submit"
-                            class="flex items-center justify-center w-full text-sm font-medium leading-snug text-white uppercase transition duration-150 ease-in-out bg-blue-600 rounded shadow-md w-2/1 h-11 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+                            class="flex w-1/2 text-right border-2 text-white bg-black btn btn-active"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                     >
                         취소
                     </button>
                 </div>
-                    </form>
-                </div>
+                <!-- 수정하기 및 취소 버튼 끝 -->
+
+               </form>
         </div>
     </div>
 </main>

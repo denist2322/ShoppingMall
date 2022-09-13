@@ -37,9 +37,9 @@
                         <a th:href="'/product/detail?id='+${product.id}">
                             <img th:src="'/product_image/'+${product.title}+'/'+${product.mainImage}" alt="옷"
                                  class="product_img3 rounded-lg">
-                            <div class="overflow-hidden whitespace-pre-line overflow-ellipsis">[[${product.title}]]
+                            <div class="overflow-hidden whitespace-pre-line overflow-ellipsis text-lg text-center">[[${product.title}]]
                             </div>
-                            <div class="flex whitespace-normal overflow-ellipsis text-lg">
+                            <div class="flex whitespace-normal overflow-ellipsis text-lg justify-center">
                                 <strong class="text-xl font-bold text-red-500 mr-2">[[${product.discount}]]%</strong>
                                 <em class="text-xl font-bold line-through comma mr-2">
                                     <script layout:fragment="script" type='text/javascript'>
