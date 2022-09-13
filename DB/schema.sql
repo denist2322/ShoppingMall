@@ -158,6 +158,7 @@ CREATE TABLE Shopping_cart(
     cart_size VARCHAR(20) NOT NULL,
     cart_count INT UNSIGNED NOT NULL,
     cart_total_price INT UNSIGNED NOT NULL,
+    checked TINYINT UNSIGNED NOT NULL,
     product_id INT UNSIGNED NOT NULL,
     mall_user_id INT UNSIGNED NOT NULL
 );
@@ -167,6 +168,7 @@ cart_color = "White",
 cart_size = "Free",
 cart_count = 2,
 cart_total_price = 50000,
+checked = 1,
 product_id = 1,
 mall_user_id = 1;
 

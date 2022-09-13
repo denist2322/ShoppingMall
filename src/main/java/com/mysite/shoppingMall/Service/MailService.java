@@ -50,7 +50,8 @@ public class MailService {
         message.setTo(email);
         message.setSubject(title);
         message.setText(msg);
-        mailSender.send(message);
+//        mailSender.send(message);
+        System.out.println(randomAuthentication);
         return randomAuthentication;
     }
 

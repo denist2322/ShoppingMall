@@ -38,6 +38,7 @@ public class ShoppingCartService {
             ShoppingCart shoppingCart = shoppingCartRepository.findByProductIdAndCartColor(productBuyForm.getProductsId(), productBuyForm.getOrderColor());
             shoppingCart.setCartCount(productBuyForm.getOrderCounter());
             shoppingCart.setCartTotalPrice(productBuyForm.getOrderTotalPrice());
+            shoppingCart.setCartSize(productBuyForm.getOrderSize());
             shoppingCartRepository.save(shoppingCart);
             return;
         }
