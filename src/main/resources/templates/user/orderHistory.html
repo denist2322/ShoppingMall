@@ -8,6 +8,7 @@
 
 <main layout:fragment="main">
 
+    <!-- 상단 네비 바 시작 -->
     <nav class="top-bar__menu-box-1 text-3xl my-2 w-full flex justify-center">
         My Page
     </nav>
@@ -20,6 +21,7 @@
         </div>
     </div>
 
+    <!-- 주문처리 현황 처리 시작 -->
     <div class="myordering mt-6 w-full h-32 border-2 border-gray-300">
         <div class="w-full h-12">
             <div class="flex h-12 pl-4 items-center border-b-2 border-gray-300">나의 주문처리 현황</div>
@@ -51,7 +53,10 @@
             </li>
         </div>
     </div>
+    <!-- 주문처리 현황 처리 끝 -->
+    <!-- 상단 네비 바 끝 -->
 
+    <!-- 테이블 시작 -->
     <h2 class="h-10 ml-2 mt-4 text-xl leading-10 border-b-2 border-black"></h2>
     <mainthird>
     <table class="w-full h-2/5">
@@ -72,6 +77,7 @@
             <th class="justify-center">주문상태</th>
         </tr>
         </thead>
+        <!-- 테이블 for 문으로 데이터 받아 테이블 생성 시작 -->
         <div th:each="orderSheet, i : ${orderSheetList}">
             <tbody class="border-b-2 border-gray-200 h-32">
             <tr>
@@ -108,6 +114,8 @@
                 <th>
                     <span>[[${orderSheet.productCost}]] 원</span>
                 </th>
+                <!-- 테이블 for 문으로 데이터 받아 테이블 생성 시작 -->
+                <!-- if 문을 통한 배송상태 확인 시작 -->
                 <th>
                     <span th:if="${orderSheet.nowState == 0}" class="flex justify-center text-lg">입금전</span>
                     <span th:if="${orderSheet.nowState == 1}" class="flex justify-center text-lg">배송준비중</span>
@@ -115,11 +123,12 @@
                     <span th:if="${orderSheet.nowState == 3}" class="flex justify-center text-lg">배송완료</span>
                     <button th:if="${orderSheet.nowState == 2 || orderSheet.nowState == 3}" class="btn">배송조회</button>
                 </th>
-
+                <!-- if 문을 통한 배송상태 확인 끝 -->
             </tr>
             </tbody>
         </div>
         </table>
+        <!-- 테이블 끝 -->
    </mainthird>
 
 </main>

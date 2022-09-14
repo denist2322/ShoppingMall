@@ -16,7 +16,7 @@
         <div class="con px-6 py-12" th:object="${joinForm}">
 
             <!-- 이메일 인증  -->
-            <div class="flex justify-center w-full items-center flex-wrap h-full text-gray-800">
+            <div class="height-1 flex justify-center w-full items-center flex-wrap text-gray-800">
                 <div class="flex justify-center items-center text-red-500 pb-3 box-border">
                     <div>
                         <div th:replace="/common/errorForm :: formErrorsFragment"></div>
@@ -90,6 +90,7 @@
                 <form th:action="@{|/user/doJoin|}" method="post" class="w-full">
                     <input type="hidden" name="email2" th:value="${mailDto.email}">
                     <input type="hidden" name="Success" th:value="${mailDto.success}">
+
                     <!-- Password input -->
                     <div class="mb-6">
                         <input

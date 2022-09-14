@@ -21,6 +21,8 @@
     <mainSecond>
         <h2 class="h-10 ml-2 mt-4 text-xl leading-10 border-b-2 border-black">상품목록</h2>
     </mainSecond>
+
+    <!-- 장바구니 테이블 시작 -->
     <mainthird>
         <table class="w-full h-2/5">
             <colgroup class="#">
@@ -44,6 +46,7 @@
                 <th class="justify-center">삭제</th>
             </tr>
 
+            <!-- 반복해서 테이블 데이터 생성 -->
             </thead>
             <div th:each="shoppingCart : ${shoppingCartList}">
                 <tbody class="border-b-2 border-gray-200">
@@ -52,6 +55,8 @@
                         <input type="checkbox" th:if="${shoppingCart.checked==1}" th:id="'chk'+${shoppingCart.id}" th:onchange="'javascript:checkPrice('+ ${shoppingCart.cartTotalPrice} + ',' + ${shoppingCart.id} +')'" checked="on"/>
                         <input type="checkbox" th:if="${shoppingCart.checked==0}" th:id="'chk'+${shoppingCart.id}" th:onchange="'javascript:checkPrice('+ ${shoppingCart.cartTotalPrice} + ',' + ${shoppingCart.id} +')'"/>
                     </th>
+
+                    <!-- 메인 이미지 -->
                     <th class="flex h-full">
                         <ul class="flex w-full items-center justify-center h-full p-6">
                             <li>
@@ -63,6 +68,8 @@
                             </li>
                         </ul>
                     </th>
+
+                    <!-- 상품명, 색상, 사이즈, 갯수 -->
                     <th class="">
                         <div>
                             <span class="block w-full">[[${shoppingCart.product.title}]]</span>
@@ -82,6 +89,9 @@
                 </tbody>
             </div>
         </table>
+        <!-- 장바구니 테이블 끝 -->
+
+        <!-- 하단 상품금액,배송비,총 결제금액 부분 -->
         <div class="w-full h-12 border-b-2 border-black">
         </div>
         <div class="border-2 border-gray-300 p-4 text-2xl h-72 mt-16">
@@ -116,7 +126,7 @@
     </mainthird>
 </main>
 </html>
-<!--자바스크립트 필요. 개수에 따른 가격 계산, 총액 계산, 체크박스를 누르면 계산이 달라짐-->
+<!-- 체크박스 관련 시작 -->
 <script>
         let chTotalPrice = [[${ShoppingDetailPrice.get(0)}]];
         function checkPrice(price, chId){
@@ -165,4 +175,29 @@
             $("#finalTotalPrice").replaceWith(result);
         }
 
+
+        $(document).ready(function() {
+            $("#cbx_chkAll").click(function() {
+                let items = $('.price');
+                let sum = 0;
+                let totalPrice = $('#totalPrice');
+
+                if($("#cbx_chkAll").is(":checked")) {
+                $("input[type=checkbox]").prop("checked", true);
+                for(let i = 0; i < items.length; i++) {
+                    sum += parseInt(items[i].innerText);
+                }
+                totalPrice.text(sum);
+                }
+                else {
+                $("input[type=checkbox]").prop("checked", false);
+                for(let i = 0; i < items.length; i++) {
+                    sum = 0;
+                }
+                totalPrice.text(sum);
+                }
+            });
+
+        });
 </script>
+<!-- 체크박스 관련 끝 -->
