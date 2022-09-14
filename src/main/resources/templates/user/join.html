@@ -19,14 +19,14 @@
             <div class="height-1 flex justify-center w-full items-center flex-wrap text-gray-800">
                 <div class="flex justify-center items-center text-red-500 pb-3 box-border">
                     <div>
-                        <div th:replace="/common/errorForm :: formErrorsFragment"></div>
                         <div th:if="${mailDto.success == 'Success'}">인증이 완료되었습니다.</div>
                         <div th:if="${mailDto.fail == 'Fail'}">인증이 실패했습니다.</div>
                     </div>
                 </div>
-                <div class="flex w-full mb-6">
+                <div class="flex flex-wrap w-full mb-6">
                     <form th:action="@{|/mail|}" method="post" class="flex w-full">
                         <!-- userId input -->
+
                         <div class="flex w-full">
                             <input
                                     th:if="${mailDto.email == null}"
@@ -53,6 +53,7 @@
                             />
                         </div>
 
+
                     <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post">
                         <input type="hidden" name="email" th:value="${mailDto.email}" class="">
                         <input
@@ -64,6 +65,7 @@
                         >
                     </form>
                     </form>
+                    <div th:if="${#fields.hasErrors('email2')}" th:errors="*{email2}" class= "flex text-base text-red-500"></div>
                 </div>
 
                 <!-- 이메일 인증받은 인증번호 확인하기 -->
@@ -92,43 +94,48 @@
                     <input type="hidden" name="Success" th:value="${mailDto.success}">
 
                     <!-- Password input -->
-                    <div class="mb-6">
+                    <div class="mb-6 flex flex-wrap" >
                         <input
                                 type="password"
                                 name="password1"
                                 class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="비밀번호"
                         />
+                        <div th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" class= "flex text-base text-red-500"></div>
                     </div>
 
-                    <div class="mb-6 flex">
+                    <div class="mb-6 flex flex-wrap">
                         <input
                                 type="password"
                                 name="password2"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="비밀번호 확인"
                         />
+                        <div th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" class= "flex text-base text-red-500"></div>
                     </div>
 
                     <!-- 이름 등록  -->
-                    <div class="mb-6 flex">
+                    <div class="mb-6 flex flex-wrap">
                         <input
                                 type="text"
                                 name="name2"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="이름"
                         />
+                        <div th:if="${#fields.hasErrors('name2')}" th:errors="*{name2}" class= "flex text-base text-red-500"></div>
                     </div>
 
                     <!-- 우편번호 찾아서 등록  -->
-                    <div class="mb-6 flex">
+                    <div class="flex">
 
                         <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                type="text" name="address1" id="sample6_postcode" placeholder="우편번호" readonly/>
 
                         <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none justify-center"
                                type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/><br>
+
                     </div>
+                    <div th:if="${#fields.hasErrors('address1')}" th:errors="*{address1}" class= "text-base text-red-500 mb-6"></div>
 
                     <div class="mb-6 flex">
 
@@ -145,17 +152,18 @@
                     </div>
 
                     <!-- 생년월일 등록  -->
-                    <div class="mb-6 flex">
+                    <div class="mb-6 flex flex-wrap">
                         <input
                                 type="text"
                                 name="birthday2"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 placeholder="생년월일 앞6자리"
                         />
+                        <div th:if="${#fields.hasErrors('birthday2')}" th:errors="*{birthday2}" class= "flex text-base text-red-500"></div>
                     </div>
 
                     <!-- 휴대폰 번호 등록  -->
-                    <div class="mb-6 flex">
+                    <div class="mb-6 flex flex-wrap">
                         <input
                                 type="text" name="cellphone2_1" placeholder="010"
                                 class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='3'>
@@ -165,6 +173,7 @@
                         <input
                                 type="text" name="cellphone2_3" placeholder="0000"
                                 class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4'>
+                        <div th:if="${#fields.hasErrors('cellphone2_3')}" th:errors="*{cellphone2_3}" class= "flex text-base text-red-500"></div>
                     </div>
 
                     <!-- Submit button -->
