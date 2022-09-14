@@ -8,6 +8,7 @@
 
 <main layout:fragment="main">
 
+    <!-- 상단 네비 바 부분 시작 -->
             <nav class="top-bar__menu-box-1 text-3xl my-2 w-full flex justify-center">
                 My Page
             </nav>
@@ -20,6 +21,7 @@
                 </div>
             </div>
 
+    <!-- 주문처리, 입금처리 부분 -->
             <div class="myordering mt-6 w-full h-32 border-2 border-gray-300">
                 <div class="w-full h-12">
                     <div class="flex h-12 pl-4 items-center border-b-2 border-gray-300">나의 주문처리 현황</div>
@@ -51,9 +53,11 @@
                     </li>
                 </div>
             </div>
+    <!-- 상단 네비 바 부분 끝 -->
 
+    <!-- 회원정보 수정 부분 시작 -->
             <form th:action="@{|/user/myPage|}" method="post"
-                  class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+                  class="height-1 flex justify-center items-center flex-wrap g-6 text-gray-800">
                 <div class="w-3/4">
                     <!--            <div th:replace="/common/errorForm :: formErrorsFragment"></div>-->
                     <!-- userId input -->
@@ -124,6 +128,8 @@
 
                     </div>
 
+
+                    <!-- 주소검색 api 시작 -->
                     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                     <script>
     function sample6_execDaumPostcode() {
@@ -176,6 +182,7 @@
 
 
             </script>
+                    <!-- 주소검색 api 끝 -->
 
                     <div class="mb-6 flex">
                         <input
@@ -199,6 +206,7 @@
                                 type="text" name="cellphone2_3" th:value="${joinForm.cellphone2_3}"
                                 class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4' readonly/>
                     </div>
+                    <!-- 회원정보 수정 부분 끝 -->
 
                     <!-- Submit button -->
                     <div th:if="${session.get('authority') != 0}" class="flex w-full">

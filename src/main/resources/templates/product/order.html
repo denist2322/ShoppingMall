@@ -42,18 +42,19 @@
                             <dd class="table-cell p-3 mr-3">[[${productBuyForm.orderTotalPrice}]]원</dd>
                         </div>
                         <!--  상품이 여러개 일때(쇼핑카트로 주문서가 작성될 때) -->
-                        <div th:if="${shoppingCartList != null}" class="flex justify-between items-center">
-                            <div th:each="shoppingCart : ${shoppingCartList}">
-                                <dd class="table-cell w-1/7 p-3 border-t border-b">
+                        <div th:if="${shoppingCartList != null}" class="flex-wrap justify-between items-center">
+                            <div th:each="shoppingCart : ${shoppingCartList}" class="w-full border-t border-b">
+                                <dd class="table-cell w-1/7 p-3">
                                     <img th:src="'/product_image/'+${shoppingCart.product.title}+'/'+${shoppingCart.product.mainImage}"
                                          alt="없음" class="product_img">
                                 </dd>
-                                <dd class="table-cell p-3 align-middle border-t border-b">
+                                <dd class="table-cell p-3 align-middle w-96 text-center">
                                     <span class="block">[[${shoppingCart.product.title}]]</span>
                                     <span class="block">[[${shoppingCart.cartColor}]] / [[${shoppingCart.cartSize}]]</span>
                                     <span>[[${shoppingCart.cartCount}]]개</span>
                                 </dd>
-                                <dd class="table-cell p-3 mr-3">[[${shoppingCart.cartTotalPrice}]]원</dd>
+
+                                <dd class="table-cell p-3 mr-3 text-center w-96 align-middle">[[${shoppingCart.cartTotalPrice}]]원</dd>
                             </div>
                         </div>
                     </dl>
