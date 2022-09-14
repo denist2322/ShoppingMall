@@ -10,26 +10,26 @@
 
 
 <main layout:fragment="main">
-        <div class="">
+
             <div class="flex flex-wrap items-center justify-center h-full text-gray-800">
                 <div class="w-full">
             <!-- 제목 시작 -->
             <table class="table w-full justify-center my-10">
                 <thead>
                 <tr class="w-auto h-16">
-                    <th class="py-3 text-xl text-center">작성자</th>
+                    <th class="py-3 text-xl text-center bg-gray-100">작성자</th>
                     <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${question.mallUser.name}"></td>
                 </tr>
                 <tr class="w-full h-16">
-                    <th class="py-3 text-xl text-center">작성 날짜</th>
+                    <th class="py-3 text-xl text-center bg-gray-100">작성 날짜</th>
                     <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${(question.createDate).toString().substring(0,10)}"></td>
                 </tr>
                 <tr class="w-full h-16">
-                    <th class="py-3 text-xl text-center">제목</th>
+                    <th class="py-3 text-xl text-center bg-gray-100">제목</th>
                     <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${question.subject}" name="subject"></td>
                 </tr>
                 <tr class="w-full h-16">
-                    <th class="py-3 text-xl text-center">질문내용</th>
+                    <th class="py-3 text-xl text-center bg-gray-100">질문내용</th>
                     <td class="py-3 text-lg whitespace-pre-line font-normal" th:text="${question.content}" name="content" id="content"></th>
                 </tr>
                 </thead>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
 
     <script fragment="script" type='text/javascript'>
     function questionDel(){
