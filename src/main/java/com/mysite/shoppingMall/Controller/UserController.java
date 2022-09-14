@@ -117,7 +117,7 @@ public class UserController {
         }
 
         if (joinForm.getAddress1().trim().length() == 0 || joinForm.getAddress2().trim().length() == 0 || joinForm.getAddress3().trim().length() == 0 || joinForm.getAddress4().trim().length() == 0) {
-            bindingResult.reject("", "주소를 입력해주세요.");
+            bindingResult.rejectValue("addressError","", "주소를 입력해주세요.");
             return "user/join.html";
         }
 
