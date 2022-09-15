@@ -24,6 +24,7 @@ public class ShoppingCartController {
     // == 장바구니 ==
     @RequestMapping("/shoppingCart")
     public String shoppingCart(HttpSession session, Model model) {
+        System.out.println("안녕안녕~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         IsLogined isLogined = Ut.isLogined(session);
         List<ShoppingCart> shoppingCartList = shoppingCartService.getCartList(isLogined.getUserId());
         List<Integer> ShoppingDetailPrice = shoppingCartService.getPriceList(isLogined.getUserId());
@@ -55,6 +56,13 @@ public class ShoppingCartController {
         return "success";
     }
 
-
+    @RequestMapping("/allChecked")
+    @ResponseBody
+    public List<Integer> isChecked(int check, HttpSession session){
+        IsLogined isLogined = Ut.isLogined(session);
+        shoppingCartService.changeChecked(check,session);
+        List<Integer> ShoppingDetailPrice = shoppingCartService.getPriceList(isLogined.getUserId());
+        return ShoppingDetailPrice;
+    }
 
 }

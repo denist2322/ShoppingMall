@@ -160,16 +160,16 @@
         function setPrice(){
             let shippingCost = 0
             let result = "";
-            if(chTotalPrice < 50000 && chTotalPrice != 0) {
-                shippingCost = 3000;
-                result = "<div class=\"pl-3\" id=\"deliveryPrice\">3000</div>";
-                $("#deliveryPrice").replaceWith(result);
-            }
-            else{
+            if(chTotalPrice >= 50000 || chTotalPrice === 0) {
                 result = "<div class=\"pl-3\" id=\"deliveryPrice\">0</div>";
                 $("#deliveryPrice").replaceWith(result);
             }
+            else{
+                shippingCost = 3000;
+                result = "<div class=\"pl-3\" id=\"deliveryPrice\">3000</div>";
+                $("#deliveryPrice").replaceWith(result);
 
+            }
             let finalTotalPrice = chTotalPrice + shippingCost;
             result = "<div class=\"pl-3\" id=\"finalTotalPrice\">" + finalTotalPrice + "</div>";
             $("#finalTotalPrice").replaceWith(result);
@@ -178,26 +178,34 @@
 
         $(document).ready(function() {
             $("#cbx_chkAll").click(function() {
-                let items = $('.price');
-                let sum = 0;
-                let totalPrice = $('#totalPrice');
-
                 if($("#cbx_chkAll").is(":checked")) {
                 $("input[type=checkbox]").prop("checked", true);
-                for(let i = 0; i < items.length; i++) {
-                    sum += parseInt(items[i].innerText);
-                }
-                totalPrice.text(sum);
+                $.ajax({
+                        url : "/allChecked?check=1",
+                        type : "GET",
+                        success : function(data){
+                            console.log(data)
+                            chTotalPrice = data[0];
+                            result = "<div class=\"pl-3\" id=\"totalPrice\">" + chTotalPrice +"</div>";
+                            $("#totalPrice").replaceWith(result);
+                            setPrice();
+                        }
+                    });
                 }
                 else {
                 $("input[type=checkbox]").prop("checked", false);
-                for(let i = 0; i < items.length; i++) {
-                    sum = 0;
-                }
-                totalPrice.text(sum);
+                $.ajax({
+                        url : "/allChecked?check=0",
+                        type : "GET",
+                        success : function(data){
+                            chTotalPrice = data[0];
+                            result = "<div class=\"pl-3\" id=\"totalPrice\">" + chTotalPrice +"</div>";
+                            $("#totalPrice").replaceWith(result);
+                            setPrice();
+                        }
+                    });
                 }
             });
-
         });
 </script>
 <!-- 체크박스 관련 끝 -->

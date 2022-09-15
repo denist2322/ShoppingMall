@@ -22,6 +22,7 @@ public class ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     public List<ShoppingCart> getCartList(Integer userId) {
         List<ShoppingCart> shoppingCartList = shoppingCartRepository.findByMallUserId(userId);
@@ -68,8 +69,18 @@ public class ShoppingCartService {
         shoppingCartRepository.save(cart);
     }
 
+    public void changeChecked(int check, HttpSession session) {
+        MallUser user = userService.getUser(session);
+        List<ShoppingCart> carts = shoppingCartRepository.findByMallUserId(user.getId());
+        for(ShoppingCart cart : carts){
+            cart.setChecked(check);
+            shoppingCartRepository.save(cart);
+        }
+    }
+
     // 장바구니 가격을 계산함 (체크박스를 한번 체크하면 계속 기억하기 때문에 사전에 가격 계산이 필요하다.)
     public List<Integer> getPriceList(Integer userId) {
+        // list 0번째 : 상품금액 , 1번째 : 배송비, 2번째 : 총 비용
         List<ShoppingCart> cartList = getCheckedCartList(userId);
         List<Integer> prices = new ArrayList<>();
         int productPrice = 0;
@@ -80,7 +91,7 @@ public class ShoppingCartService {
 
         prices.add(productPrice);
 
-        if (productPrice > 50000 || cartList.size() == 0) {
+        if (productPrice >= 50000 || cartList.size() == 0) {
             prices.add(0);
             prices.add(productPrice);
         } else {
