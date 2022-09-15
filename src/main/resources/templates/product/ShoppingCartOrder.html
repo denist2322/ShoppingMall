@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <title>페이지 이름</title>
+  <script src="/common/AddressSearch.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="/common/Payment.js"></script>
 </head>
 
 <main layout:fragment="main">
@@ -206,87 +209,5 @@
     <!--주문하기 버튼 끝-->
   </div>
 
-
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
-
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
-            }
-        }).open();
-    }
-    //문서가 준비되면 제일 먼저 실행
-    $(document).ready(function(){
-        $("#iamportPayment").click(function(){
-            payment(); //버튼 클릭하면 호출
-        });
-    })
-
-
-    //버튼 클릭하면 실행
-    function payment(data) {
-        IMP.init('');//아임포트 관리자 콘솔에서 확인한 '가맹점 식별코드' 입력
-        IMP.request_pay({// param
-            pg: "kakaopay.", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
-            pay_method: "card", //지불 방법
-            merchant_uid: "131232322", //가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
-            name: "회식비", //결제창에 노출될 상품명
-            amount: 50, //금액
-            buyer_email : "testiamport@naver.com",
-            buyer_name : "강호열",
-            buyer_tel : "01012341234"
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                alert("완료 -> imp_uid : "+rsp.imp_uid+" / merchant_uid(orderKey) : " +rsp.merchant_uid);
-            } else {
-                alert("안됨");
-                // alert("실패 : 코드("+rsp.error_code+") / 메세지(" + rsp.error_msg + ")");
-            }
-        });
-    }
-
-
-    </script>
 </main>
 </html>
