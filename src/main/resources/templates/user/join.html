@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap w-full mb-6">
-                    <form th:action="@{|/mail|}" method="post" class="flex w-full">
+                    <form th:action="@{|/mail|}" method="POST" class="flex w-full">
                         <!-- userId input -->
 
                         <div class="flex w-full">
@@ -53,16 +53,15 @@
                         </div>
 
 
-                    <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post">
-                        <input type="hidden" name="email" th:value="${mailDto.email}" class="">
-                        <input
-                                type="submit"
-                                class="flex w-1/5 text-right border-2 text-white bg-black btn btn-active "
-                                data-mdb-ripple="true"
-                                data-mdb-ripple-color="light"
-                                value="재전송"
-                        >
-                    </form>
+                        <form th:if="${mailDto.success != 'Success'} and ${mailDto.email != null}" th:action="@{|/mail|}" method="post">
+                            <input
+                                    type="submit"
+                                    class="flex w-1/5 text-right border-2 text-white bg-black btn btn-active "
+                                    data-mdb-ripple="true"
+                                    data-mdb-ripple-color="light"
+                                    value="재전송"
+                            >
+                        </form>
                     </form>
                     <div th:if="${#fields.hasErrors('email2')}" th:errors="*{email2}" class= "flex text-base text-red-500"></div>
                 </div>
@@ -89,6 +88,7 @@
                     </div>
                 </form>
                 <form th:action="@{|/user/doJoin|}" method="post" class="w-full">
+                    <input type="hidden" name="email" th:value="${mailDto.email}">
                     <input type="hidden" name="email2" th:value="${mailDto.email}">
                     <input type="hidden" name="Success" th:value="${mailDto.success}">
 
@@ -98,6 +98,7 @@
                                 type="password"
                                 name="password1"
                                 class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                th:value="${joinForm.password1}"
                                 placeholder="비밀번호"
                         />
                         <div th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" class= "flex text-base text-red-500"></div>
@@ -108,6 +109,7 @@
                                 type="password"
                                 name="password2"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                th:value="${joinForm.password2}"
                                 placeholder="비밀번호 확인"
                         />
                         <div th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" class= "flex text-base text-red-500"></div>
@@ -119,6 +121,7 @@
                                 type="text"
                                 name="name2"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                th:value="${joinForm.name2}"
                                 placeholder="이름"
                         />
                         <div th:if="${#fields.hasErrors('name2')}" th:errors="*{name2}" class= "flex text-base text-red-500"></div>
@@ -128,7 +131,7 @@
                     <div class="flex">
 
                         <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" name="address1" id="sample6_postcode" placeholder="우편번호" readonly/>
+                               type="text" name="address1" id="sample6_postcode" placeholder="우편번호" th:value="${joinForm.address1}" readonly/>
 
                         <input class="flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none justify-center"
                                type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"/><br>
@@ -139,15 +142,15 @@
                     <div class="mb-6 flex">
 
                         <input class="flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" name="address2" id="sample6_address" placeholder="주소" readonly/>
+                               type="text" name="address2" id="sample6_address" th:value="${joinForm.address2}" placeholder="주소" readonly/>
                         <br>
                     </div>
 
                     <div class="mb-6 flex">
                         <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" name="address3" id="sample6_extraAddress" placeholder="동" readonly/>
+                               type="text" name="address3" id="sample6_extraAddress" placeholder="동" th:value="${joinForm.address3}" readonly/>
                         <input class="flex w-1/2 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                               type="text" name="address4" id="sample6_detailAddress" placeholder="상세주소"/>
+                               type="text" name="address4" id="sample6_detailAddress" th:value="${joinForm.address4}" placeholder="상세주소"/>
                     </div>
 
                     <!-- 생년월일 등록  -->
@@ -156,6 +159,7 @@
                                 type="text"
                                 name="birthday2"
                                 class="form-control flex w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                th:value="${joinForm.birthday2}"
                                 placeholder="생년월일 앞6자리"
                         />
                         <div th:if="${#fields.hasErrors('birthday2')}" th:errors="*{birthday2}" class= "flex text-base text-red-500"></div>
@@ -164,13 +168,13 @@
                     <!-- 휴대폰 번호 등록  -->
                     <div class="mb-6 flex flex-wrap">
                         <input
-                                type="text" name="cellphone2_1" placeholder="010"
+                                type="text" name="cellphone2_1" placeholder="010" th:value="${joinForm.cellphone2_1}"
                                 class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='3'>
                         <input
-                                type="text" name="cellphone2_2" placeholder="0000"
+                                type="text" name="cellphone2_2" placeholder="0000" th:value="${joinForm.cellphone2_2}"
                                 class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4'>
                         <input
-                                type="text" name="cellphone2_3" placeholder="0000"
+                                type="text" name="cellphone2_3" placeholder="0000" th:value="${joinForm.cellphone2_3}"
                                 class="form-control flex w-1/3 px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" maxlength='4'>
                         <div th:if="${#fields.hasErrors('cellphone2_3')}" th:errors="*{cellphone2_3}" class= "flex text-base text-red-500"></div>
                     </div>

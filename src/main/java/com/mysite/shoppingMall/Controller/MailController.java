@@ -22,6 +22,13 @@ public class MailController {
             model.addAttribute("replaceUri", "/user/join");
             return "common/js";
         }
+
+        if(mailDto.getEmail().trim().length() == 0){
+            model.addAttribute("msg", "이메일을 작성해주세요.");
+            model.addAttribute("replaceUri", "/user/join");
+            return "common/js";
+        }
+
         mailService.mailSimpleSend(mailDto);
         return "user/joinTemp.html";
     }
