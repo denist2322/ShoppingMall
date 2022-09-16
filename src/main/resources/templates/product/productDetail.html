@@ -4,44 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>페이지 이름</title>
-</head>
+    <script src="/common/ProductDetail.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+            let price = /*[[${discountPrice}]]*/;
+            /*]]>*/
 
-<main layout:fragment="main">
-    <!-- 스크립트 구문  -->
-    <script layout:fragment="script" type='text/javascript'>
-        function order(){
-            orderForm.action = "/product/orderSheetTmp";
-            orderForm.method = "get";
-            orderForm.submit();
-        }
-
-        function cart(){
-            orderForm.action = "/addCart";
-            orderForm.method = "get";
-            orderForm.submit();
-        }
-
-        // 옷의 색상을 선택하면 화면에 보여줌.
-         $(function() {
-            $("#color").change(function() {
-                $("#resultColor").css("background", $("option:selected").val().toLowerCase());
-           });
-         });
-
-         // 선택한 사이즈 화면에 보여줌
-         $(function() {
-            $("#size").change(function() {
-                let removeColor = $("#color").val();
-                let result = $("option:selected").text().replace(removeColor,"");
-                result = result.replace("색상을 선택하세요.","");
-                if(result != "사이즈를 선택하세요."){
-                    $("#resultSize").text(result);
-                }
-           });
-         });
-
-
-         // 원화는 세자리마다 콤마를 찍는다.
+        // 원화는 세자리마다 콤마를 찍는다.
          /*<![CDATA[*/
          function commaPrice(){
               let price = [[${product.price}]];
@@ -54,8 +23,11 @@
               document.write(discountPrice.toLocaleString());
          }
          /*]]*/
-
     </script>
+</head>
+
+<main layout:fragment="main">
+    <!-- 스크립트 구문  -->
     <div class="max-w-screen-lg mx-auto">
 
         <!-- 상품 정보 시작 -->
@@ -79,19 +51,19 @@
                 </div>
                 <div class="flex justify-between mt-2">
                     <div class="box-border">
-                        <span class="items-center mr-2 text-2xl font-bold text-red-500">[[${product.discount}]]%</span>
-                        <span class="mr-2 text-2xl font-bold">\
-                            <script layout:fragment="script" type='text/javascript'>commaDisPrice()</script>
+                        <span class="items-center mr-2 text-2xl font-bold text-yellow-600">[[${product.discount}]]%</span>
+                        <span class="mr-2 text-2xl font-bold">
+                            <script layout:fragment="script" type='text/javascript'>commaDisPrice()</script>원
                         </span>
                         <span class="text-lg text-gray-500 line-through">
-                            <script layout:fragment="script" type='text/javascript'>commaPrice()</script>
+                            <script layout:fragment="script" type='text/javascript'>commaPrice()</script>원
                         </span>
                     </div>
                 </div>
                 <div class="box-border h-20 px-4 mt-3 border border-gray-400">
                     <div class="flex items-center justify-between h-full">
                         <span class="text-xl font-bold">최종 예상 구매가</span>
-                        <input class="text-right text-xl text-red-300 focus:outline-none" th:value="${discountPrice}"
+                        <input class="text-right text-xl text-yellow-600 focus:outline-none" th:value="${discountPrice}"
                                readonly/>
                     </div>
                 </div>
@@ -123,7 +95,6 @@
                             <input type="text" class="block w-8 h-8 border border-gray-200 mr-5" id="resultColor">
                             <div id="resultSize" class="flex items-center">
                             </div>
-
                         </div>
                         <div class="flex align-middle">
                             <button type="button" onclick="minus()"
@@ -135,43 +106,8 @@
                             <button type="button" onclick="plus()"
                                    class="w-8 h-8 bg-white cursor-pointer text-2xl"/>+</button>
                         </div>
-                        <script>
-                        var count = 1;
-                        var result = ""
-                        function minus() {
-                        if(count > 1) {
-                        count--;
-
-                        result = "<div id=\"count\">";
-                        result += "<input type=\"text\" id=\"inputCount\" name=\"orderCounter\" class=\"w-8 h-8 bg-white text-black text-bold font-xl text-center focus:outline-none\" value=\"" + count + "\" readonly>";
-                        result += "<div>";
-
-                        $("#count").replaceWith(result);
-                        replace();
-                         }
-                        }
-
-                        function plus() {
-                        count++;
-                        result = "<div id=\"count\">";
-                        result += "<input type=\"text\" id=\"inputCount\" name=\"orderCounter\" class=\"w-8 h-8 bg-white text-black text-bold font-xl text-center focus:outline-none\" value=\"" + count + "\" readonly>";
-                        result += "<div>";
-
-                        $("#count").replaceWith(result);
-                        replace();
-                        }
-
-                        </script>
                         <input type="text" id="totalPrice" name="orderTotalPrice" class="flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none"
                                th:value="${discountPrice}" readonly/>
-                        <script>
-                            function replace(){
-                                    var count = $("#inputCount").val();
-                                    var price = [[${discountPrice}]];
-                                    var result = "<input type=\"text\" id=\"totalPrice\" name=\"orderTotalPrice\" class=\"flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none\" value=\"" + (count*price) + "\"readonly/>";
-                                    $("#totalPrice").replaceWith(result);
-                            }
-                        </script>
                     </div>
                 </div>
                 <!-- 상품 정보 끝 -->
