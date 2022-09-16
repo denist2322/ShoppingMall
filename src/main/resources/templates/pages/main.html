@@ -3,16 +3,16 @@
       layout:decorate="~{common/layout}">
 <head>
     <meta charset="UTF-8">
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </head>
 
 <main layout:fragment="main">
-    <head>
+    <div>
         <meta charset="utf-8" />
         <title>Swiper demo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-
-
-    </head>
+    </div>
 
     <body>
     <!-- Swiper 이미지-->
@@ -35,31 +35,7 @@
         </div>
     </div>
 
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-      loop: true,
-        spaceBetween: 30,
-        centeredSlides: true,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: false,
-        },
-
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-
-    </script>
     </body>
 </main>
 </html>
+<script type="text/javascript" src="../common/Swiper.js"></script>
