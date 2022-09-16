@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>페이지 이름</title>
+    <script src="/common/WriteProduct.js"></script>
 </head>
 
 <main layout:fragment="main">
@@ -96,25 +97,6 @@
             </form>
         </div>
     </div>
-    <script layout:fragment="script" type='text/javascript'>
-    function productSubmit() {
-        productForm.action = "/product/doWrite";
-        productForm.method = "post";
-        productForm.submit();
-    }
-
-    function productModify() {
-        productForm.action = "/product/doModify";
-        productForm.method = "post";
-        productForm.submit();
-    }
-
-    function cancel() {
-        history.back();
-    }
-    </script>
 </main>
-
-
 
 </html>
