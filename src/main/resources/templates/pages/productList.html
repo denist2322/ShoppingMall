@@ -18,16 +18,22 @@
 
             <!-- 상품 정보 시작 -->
             <div th:if="${productList.size() != 0}" class="grid grid-cols-4">
-                <div th:each="product : ${productList}" class="shadow-2xl rounded-xl">
+                <div th:each="product : ${productList}" class="shadow-lg rounded-xl mr-3 mt-2">
                         <script layout:fragment="script" type='text/javascript'>
                              /*<![CDATA[*/
+                             function comma(){
                                 let number = [[${product.price}]];
-
+                                document.write(number.toLocaleString());
+                                }
+                             function priceLoad(){
                                 let price = [[${product.price}]];
                                 let discount = 1 - [[${product.discount}]] / 100;
+                                let result = price * discount;
+                                document.write(result.toLocaleString());
+                                }
                              /*]]>*/
                         </script>
-                    <div class="h-auto p-5 box-border mt-2.5">
+                    <div class="h-auto p-5 box-border">
                         <a th:href="'/product/detail?id='+${product.id}">
                             <img th:src="'/product_image/'+${product.title}+'/'+${product.mainImage}" alt="옷"
                                  class="product_img3 rounded-xl">
