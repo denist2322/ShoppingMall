@@ -55,6 +55,7 @@ public class MailService {
         return randomAuthentication;
     }
 
+    // == 메일이 존재하는지 확인한다. ==
     public boolean findEmail(String email) {
         if (!userRepository.existsByuserEmail(email)) {
             return false;
@@ -63,7 +64,7 @@ public class MailService {
         return true;
     }
 
-
+    // == 비밀번호가 실제로 존재했을 경우 비밀번호를 변경하고 메일을 발송한다. ==
     public void findPw(FindPwForm findPwForm, MailDto mailDto) {
         findPwForm.setIsSuccess("success");
         String passwordTmp = RandomStringUtils.randomAlphanumeric(5);
@@ -75,6 +76,7 @@ public class MailService {
 //        System.out.println(passwordTmp);
     }
 
+    // == 메일이 인증이 완료되었는지의 여부를 판단함. ==
     public void isSuccess(int i, MailDto mailDto) {
         if (i == 1) {
             mailDto.setSuccess("Success");
@@ -85,6 +87,7 @@ public class MailService {
         }
     }
 
+    // == 비밀번호 찾기가 정상적으로 수행 되었는지를 확인함.
     public void findPwForm(FindPwForm findPwForm) {
         findPwForm.setIsSuccess("fail");
     }

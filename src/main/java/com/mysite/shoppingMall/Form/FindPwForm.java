@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+// == 비밀번호 찾기에 관련된 DTO ==
 public class FindPwForm {
     @NotNull(message = "이메일을 입력해주세요.")
     private String email;

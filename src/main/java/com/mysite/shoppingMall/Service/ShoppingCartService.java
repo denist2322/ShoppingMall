@@ -24,11 +24,13 @@ public class ShoppingCartService {
     private final UserRepository userRepository;
     private final UserService userService;
 
+    // 유저의 쇼핑 카트 정보를 가져온다.
     public List<ShoppingCart> getCartList(Integer userId) {
         List<ShoppingCart> shoppingCartList = shoppingCartRepository.findByMallUserId(userId);
         return shoppingCartList;
     }
 
+    // 쇼핑 카트에 목록을 추가한다.
     public void addCart(ProductBuyForm productBuyForm, HttpSession session) {
         IsLogined isLogined = Ut.isLogined(session);
 
@@ -54,21 +56,25 @@ public class ShoppingCartService {
         shoppingCartRepository.save(shoppingCart);
     }
 
+    // 쇼핑 카트에서 목록을 삭제한다. (id로 삭제)
     public void deleteCart(long id) {
         ShoppingCart cart = shoppingCartRepository.findById(id).get();
         shoppingCartRepository.delete(cart);
     }
 
+    // 쇼핑 카트에서 목록을 삭제한다. (객체를 이용하여 삭제)
     public void deleteCart(ShoppingCart shoppingCart) {
         shoppingCartRepository.delete(shoppingCart);
     }
 
+    // 체크박스의 체크 여부를 변환한다.
     public void changeChecked(int check, long id) {
         ShoppingCart cart = shoppingCartRepository.findById(id).get();
         cart.setChecked(check);
         shoppingCartRepository.save(cart);
     }
 
+    // 체크박스의 전체 체크 여부를 변환한다.
     public void changeChecked(int check, HttpSession session) {
         MallUser user = userService.getUser(session);
         List<ShoppingCart> carts = shoppingCartRepository.findByMallUserId(user.getId());

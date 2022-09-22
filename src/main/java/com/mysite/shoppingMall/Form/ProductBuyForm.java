@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+// == 제품을 구매할때 넘기는 정보 관련 DTO ==
 public class ProductBuyForm {
     private long productsId;
     private String orderImage;

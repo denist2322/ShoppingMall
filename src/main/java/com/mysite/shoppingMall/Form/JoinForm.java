@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+// == 회원가입 정보 DTO ==
 public class JoinForm {
     @NotEmpty(message = "이메일을 입력하세요.")
     private String email2;

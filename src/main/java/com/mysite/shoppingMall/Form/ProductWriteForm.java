@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+// == 제품 작성 관련 DTO ==
 public class ProductWriteForm {
     private long id;
     @NotNull(message="제목을 입력하세요.")

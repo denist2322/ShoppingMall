@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+// == 제품 테이블 ==
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +25,13 @@ public class Product {
     private long price;
     private long discount;
     private String category;
+    // 제품에 제품색상 테이블을 연결 시킨다.
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<ProductColor> productColorList;
-
+    // 제품에 제품 사이즈를 연결 시킨다.
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<ProductSize> productSizeList;
-
+    // 제품에 제품 이미지를 연결 시킨다.
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<ProductImage> productImageList;
 }

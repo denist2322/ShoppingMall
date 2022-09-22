@@ -29,6 +29,7 @@ public class QuestionService {
 
     private final UserRepository userRepository;
 
+    // 질문 게시글을 작성한다.
     public void doWrite(String subject, String content, HttpSession session){
         IsLogined isLogined = Ut.isLogined(session);
         MallUser mallUser = userRepository.findById(isLogined.getUserId()).get();
@@ -42,12 +43,13 @@ public class QuestionService {
         this.questionRepository.save(question);
     }
 
-    // 게시글 리스트 처리 =============================================
+    // 질문 게시글을 작성한다.
     public Page<Question> getList(int page) { //getList 메서드는 정수 타입의 페이지번호를 입력받아 해당 페이지의 질문 목록을 리턴하는 메서드로 변경
         Pageable pageable = doPageable(page);
         return this.questionRepository.findAll(pageable);
     }
 
+    // QnA 게시판 페이징 처리
     public Pageable doPageable(int page){
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
@@ -55,20 +57,20 @@ public class QuestionService {
         return pageable;
     }
 
+    // 질문 단건을 가져온다.
     public Question getQuestion(Integer id) {
         Optional<Question> question = this.questionRepository.findById(id);
         return question.orElse(null);
-
     }
 
+    // 검색 진행 후 페이징을 처리한다.
     @Transactional
     public Page<Question> keywordQuestion(int page, String kw){
         Pageable pageable = doPageable(page);
         return questionRepository.findBySubjectAndContent(kw,pageable);
     }
 
-
-
+    // 질문 내용을 수정한다.
     public Question doUpdate(Integer id, QuestionForm questionForm) {
         Question questionTemp = getQuestion(id); //question 이라는 객체를 만듬 = questionService.getQuestion(id) 기존에 있던 내용이 담겨서 옴
         questionTemp.setSubject(questionForm.getSubject()); //기존에 있던 내용을 가지고 오고 새로 가져온 내용을 덮어 씌움.
@@ -79,6 +81,7 @@ public class QuestionService {
         return questionTemp;
     }
 
+    // 질문을 삭제한다.
     public Question doDelete(Integer questionId){
         Question question = getQuestion(questionId);
 
