@@ -18,6 +18,7 @@ public class QuestionAnswerController {
     private final QuestionService questionService;
     private final QuestionAnswerService questionAnswerService;
 
+    // == QnA 답변 작성 ==
     @PostMapping("/create/{id}")
     public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam String body){
         Question question = this.questionService.getQuestion(id); // 아이디를 찾아와서

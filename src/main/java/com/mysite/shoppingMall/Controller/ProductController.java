@@ -34,9 +34,12 @@ public class ProductController {
     private final ShoppingCartService shoppingCartService;
 
 
-    //C 생성 ==============================================
+    // == 상품 작성 ==
+
+    // 작성 페이지를 보여준다
     @GetMapping("/doWrite")
     public String showWrite(ProductWriteForm productWriteForm, HttpSession session, Model model) {
+        // 로그인 여부 확인 후 권한, id를 매번 작성하기에는 비 효율 적이기 때문에 Util 을 이용.
         IsLogined isLogined = Ut.isLogined(session);
         if (isLogined.getAuthority() != 0) {
             return "redirect:/";
@@ -46,7 +49,7 @@ public class ProductController {
 
         return "product/writeProduct.html";
     }
-
+    // 실제로 작성을 수행한다.
     @PostMapping("/doWrite")
     public String doWrite(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm) {
         productService.doWrite(mainImage, detailImage, productWriteForm);
@@ -54,7 +57,9 @@ public class ProductController {
     }
 
 
-    //R 읽기 ==============================================
+    // == 상품 조회 ==
+
+    // == 상품 리스트 조회 ==
     @RequestMapping("/list")
     public String showList(String category, Model model) {
         List<Product> productList = productService.findCategory(category);
@@ -62,6 +67,7 @@ public class ProductController {
         return "pages/productList.html";
     }
 
+    // == 상품 단건 조회 ==
     @RequestMapping("/detail") // 단건조회
     public String showDetail(Long id, ProductBuyForm productBuyForm, HttpSession session, Model model) {
 
@@ -73,7 +79,7 @@ public class ProductController {
     }
 
 
-    //U 수정 ==============================================
+    // == 상품 정보 수정 ==
     @GetMapping("/doModify")
     public String showModify(Long id, ProductWriteForm productWriteForm, HttpSession session, Model model) {
         IsLogined isLogined = Ut.isLogined(session);
@@ -98,7 +104,7 @@ public class ProductController {
         return "redirect:/";
     }
 
-    //D 삭제 ==============================================
+    // == 상품 정보 삭제 ==
     @RequestMapping("/doDelete")
     public String doDelete(Long id, Model model) {
 
@@ -138,7 +144,7 @@ public class ProductController {
         return "product/orderTemp.html";
     }
 
-    // 주문창 =======================================
+    // == 주문창 ==
     @PostMapping("/order")
     public String order(OrderSheetForm orderSheetForm, ProductBuyForm productBuyForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
@@ -172,13 +178,14 @@ public class ProductController {
         }
         return "redirect:/product/successPage";
     }
-
+    
+    // 주문이 성공적으로 진행 되었을 때 실행
     @GetMapping("/successPage")
     public String successPage() {
         return "pages/orderSuccess.html";
     }
 
-    // 검색 =========================================
+    // ==  검색 ==
     @GetMapping("/search")
     public String search(String keyword, Model model) {
         List<Product> productList = productService.searchTitleAndBody(keyword);

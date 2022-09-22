@@ -34,20 +34,21 @@ public class ShoppingCartController {
         return "pages/shoppingCart.html";
     }
 
-
+    // == 장바구니 상품 추가 ==
     @RequestMapping("/addCart")
     public String addCart(ProductBuyForm productBuyForm, HttpSession session){
         shoppingCartService.addCart(productBuyForm, session);
         return "redirect:/shoppingCart";
     }
 
+    // == 장바구니 상품 삭제 ==
     @RequestMapping("/deleteCart")
     public String deleteCart(long id){
         shoppingCartService.deleteCart(id);
         return "redirect:/shoppingCart";
     }
 
-    // 장바구니에서 체크여부 변환 =======================
+    // == 장바구니에서 체크여부 변환 ==
     @RequestMapping("/isChecked")
     @ResponseBody
     public String isChecked(int check, long id){
@@ -55,6 +56,7 @@ public class ShoppingCartController {
         return "success";
     }
 
+    // == 장바구니 전체 선택 혹은 해제 ==
     @RequestMapping("/allChecked")
     @ResponseBody
     public List<Integer> isChecked(int check, HttpSession session){

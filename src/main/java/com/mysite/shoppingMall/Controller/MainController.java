@@ -21,6 +21,7 @@ public class MainController {
 
     private final ProductService productService;
 
+    // == main 홈 페이지 ==
     @RequestMapping("/main")
     public String showMain() {
         return "pages/main.html";
@@ -33,8 +34,8 @@ public class MainController {
 
     // == 관리자 페이지 ==
     @GetMapping("/adminPage")
-    public String adminPage(HttpSession session){
-        if(!notAdmin(session).equals("admin")){
+    public String adminPage(HttpSession session) {
+        if (!Ut.notAdmin(session).equals("admin")) {
             return "redirect:/";
         }
 
@@ -43,35 +44,35 @@ public class MainController {
 
     // == 관리자 상품 리스트 페이지 ==
     @GetMapping("/adminPage/productList")
-    public String productList(HttpSession session, Model model){
-        if(!notAdmin(session).equals("admin")){
+    public String productList(HttpSession session, Model model) {
+        if (!Ut.notAdmin(session).equals("admin")) {
             return "redirect:/";
         }
 
         List<Product> productList = productService.getList();
-        model.addAttribute("productList",productList);
+        model.addAttribute("productList", productList);
         return "pages/adminProductListPage.html";
     }
 
     // == 유저 주문 내역 페이지 ==
     @GetMapping("/adminPage/userOrderList")
-    public String userOrderList(HttpSession session, Model model){
+    public String userOrderList(HttpSession session, Model model) {
 
-        if(!notAdmin(session).equals("admin")){
+        if (!Ut.notAdmin(session).equals("admin")) {
             return "redirect:/";
         }
 
         List<OrderSheet> orderSheetList = productService.getOrderList();
 
-        model.addAttribute("orderSheetList",orderSheetList);
+        model.addAttribute("orderSheetList", orderSheetList);
         return "pages/adminOrderListPage.html";
     }
 
     // == 유저 주문 내역 삭제 ==
     @GetMapping("/deleteOrder")
     @ResponseBody
-    public String deleteOrder(HttpSession session, long id){
-        if(!notAdmin(session).equals("admin")){
+    public String deleteOrder(HttpSession session, long id) {
+        if (!Ut.notAdmin(session).equals("admin")) {
             return "redirect:/";
         }
         productService.deleteOrder(id);
@@ -81,20 +82,12 @@ public class MainController {
     // == 유저 주문 내역 수정 ==
     @GetMapping("/modifyOrder")
     @ResponseBody
-    public String modifyOrder(HttpSession session, long id, long nowState){
-        if(!notAdmin(session).equals("admin")){
+    public String modifyOrder(HttpSession session, long id, long nowState) {
+        if (!Ut.notAdmin(session).equals("admin")) {
             return "redirect:/";
         }
         productService.modifyShippingOrder(id, nowState);
         return "success";
-    }
-
-    private String notAdmin(HttpSession session) {
-        IsLogined islogined = Ut.isLogined(session);
-        if(islogined.getAuthority() == null){
-            return "notAdmin";
-        }
-        return "admin";
     }
 
     // 회사소개 페이지
@@ -103,18 +96,10 @@ public class MainController {
         return "pages/companyintroduce.html";
     }
 
+    // == 이용약관 페이지 ==
     @RequestMapping("/Terms_of_service")
     public String Terms_of_service() {
         return "pages/Termsofservice.html";
     }
-
-    // 잠깐 확인좀
-//    @RequestMapping("/test")
-//    public String showTest(Model model, HttpSession session) {
-//        IsLogined isLogined = Ut.isLogined(session);
-//        List<ShoppingCart> shoppingCartList = shoppingCartRepository.findByMallUserId(isLogined.getUserId());
-//        model.addAttribute("shoppingCartList", shoppingCartList);
-//        return "user/orderHistory.html";
-//  }
 
 }

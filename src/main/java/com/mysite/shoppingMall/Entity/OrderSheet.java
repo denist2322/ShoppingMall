@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
+// == 주문서 정보 테이블 ==
 public class OrderSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -12,9 +12,11 @@ import java.util.List;
 @Service
 public class FileService {
 
+    // 파일 업로드를 진행한다.
     public void doUpload(ProductWriteForm productWriteForm, List<MultipartFile> fileList) {
         String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\product_image\\" + productWriteForm.getTitle();
 
+        // 파일 경로에 폴더가 존재하지 않으면 생성한다.
         File fileCheck = new File(root);
         if (!fileCheck.exists()) fileCheck.mkdirs();
 
@@ -31,6 +33,7 @@ public class FileService {
         }
     }
 
+    // 파일 삭제를 진행한다.
     public void deleteFile(Product product) {
         String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\product_image\\" + product.getTitle();
         new File(root + "\\" + product.getMainImage()).delete();

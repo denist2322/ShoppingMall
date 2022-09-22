@@ -28,18 +28,20 @@ public class UserController {
     private final UserService userService;
     private final ProductService productService;
 
+    // == 로그인 ==
+    // 로그인 페이지 출력
     @RequestMapping("/login")
     public String showLogin(LoginForm loginForm, Model model) {
         model.addAttribute("Red", "text-red-500");
         return "user/login.html";
     }
-
-    // === 로그인 ===
+    // 실제로 로그인이 이루어짐
     @RequestMapping("/doLogin")
     public String doLogin(Model model, HttpSession session, @Valid LoginForm loginForm, BindingResult bindingResult) {
 
         IsLogined isLogined = Ut.isLogined(session);
 
+        // Valid를 검사한다.
         if (bindingResult.hasErrors()) {
             return "user/login.html";
         }
@@ -99,12 +101,13 @@ public class UserController {
         return "common/js";
     }
 
-    // === 회원가입 ===
+    // == 회원가입 ==
     @RequestMapping("/join")
     public String showJoin(MailDto mailDto, JoinForm joinForm) {
         return "user/join.html";
     }
 
+    // == 실제 회원가입이 이루어짐 ==
     @PostMapping("/doJoin")
     public String doJoin(MailDto mailDto, @Valid JoinForm joinForm, BindingResult bindingResult, Model model) {
         if (!mailDto.getSuccess().equals("Success")) {
@@ -134,21 +137,13 @@ public class UserController {
         return "common/js";
     }
 
-    // === 회원정보 수정 ===
+    // == 회원정보 수정 ==
     @GetMapping("/myPage")
     public String myPage(JoinForm joinForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);
         List<Integer> shippingState = productService.getShippingState(session);
 
-        String[] addressTmp = Ut.splitAddress(mallUser.getHomeAddress());
-        joinForm.setAddress1(addressTmp[3].trim());
-        joinForm.setAddress2(addressTmp[0].trim());
-        joinForm.setAddress3(addressTmp[1].trim());
-        joinForm.setAddress4(addressTmp[2].trim());
-        String[] cellPhoneTmp = Ut.splitCellPhone(mallUser.getCellphone());
-        joinForm.setCellphone2_1(cellPhoneTmp[0].trim());
-        joinForm.setCellphone2_2(cellPhoneTmp[1].trim());
-        joinForm.setCellphone2_3(cellPhoneTmp[2].trim());
+        productService.convertAdAndPhone(joinForm, mallUser);
         model.addAttribute("mallUser", mallUser);
         model.addAttribute("shippingState",shippingState);
 
@@ -156,6 +151,7 @@ public class UserController {
 
     }
 
+    // == 마이페이지 ==
     @PostMapping("/myPage")
     public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult, Model model,HttpSession session) {
         IsLogined isLogined = Ut.isLogined(session);
@@ -179,7 +175,7 @@ public class UserController {
         return "common/js";
     }
 
-//     === 회원 탈퇴 ===
+    // == 회원 탈퇴 ==
     @GetMapping("/doDelete")
     @ResponseBody
     public String doDelete(HttpSession session) {

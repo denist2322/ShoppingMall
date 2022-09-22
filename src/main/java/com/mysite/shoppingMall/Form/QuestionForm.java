@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+// == 질문 작성 관련 DTO ==
 public class QuestionForm {
     @NotEmpty(message = "제목은 필수항목 입니다.")
     @Size(max = 200)

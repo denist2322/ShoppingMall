@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+// == 유저 정보 테이블 ==
 public class MallUser {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -25,6 +26,7 @@ public class MallUser {
     private String homeAddress;
     private String cellphone;
 
+    // 유저 테이블에 질문 테이블을 연결시킨다.
     @OneToMany(mappedBy = "mallUser", cascade = CascadeType.REMOVE)
     private List<Question> questionList;
 }

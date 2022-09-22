@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
+// == 로그인 관련 DTO ==
 public class LoginForm {
     @NotEmpty(message = "이메일을 입력해주세요")
     @Email
