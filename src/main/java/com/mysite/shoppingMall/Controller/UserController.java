@@ -137,7 +137,7 @@ public class UserController {
         return "common/js";
     }
 
-    // == 회원정보 수정 ==
+    // == 마이페이지 화면 출력 ==
     @GetMapping("/myPage")
     public String myPage(JoinForm joinForm, HttpSession session, Model model) {
         MallUser mallUser = userService.getUser(session);

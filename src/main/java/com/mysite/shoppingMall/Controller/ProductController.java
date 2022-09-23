@@ -156,7 +156,6 @@ public class ProductController {
             model.addAttribute("shoppingCartList", shoppingCartList);
         };
 
-
         model.addAttribute("mallUser", mallUser);
 
         return "product/order.html";

@@ -50,8 +50,7 @@ public class MailService {
         message.setTo(email);
         message.setSubject(title);
         message.setText(msg);
-//        mailSender.send(message);
-        System.out.println(randomAuthentication);
+        mailSender.send(message);
         return randomAuthentication;
     }
 
@@ -64,7 +63,7 @@ public class MailService {
         return true;
     }
 
-    // == 비밀번호가 실제로 존재했을 경우 비밀번호를 변경하고 메일을 발송한다. ==
+    // == 비밀번호 찾기 본인인증이 완료되었을 경우 비밀번호를 변경하고 메일을 발송한다. ==
     public void findPw(FindPwForm findPwForm, MailDto mailDto) {
         findPwForm.setIsSuccess("success");
         String passwordTmp = RandomStringUtils.randomAlphanumeric(5);
@@ -73,7 +72,6 @@ public class MailService {
         userRepository.save(mallUser);
         mailDto.setTitle("(쇼핑몰 SKIES)새로운 비밀번호입니다.");
         mailDto.setMessage("아래 비밀번호로 로그인 후 마이페이지에서 변경해주세요.");
-//        System.out.println(passwordTmp);
     }
 
     // == 메일이 인증이 완료되었는지의 여부를 판단함. ==
