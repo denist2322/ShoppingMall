@@ -36,7 +36,7 @@ public class QuestionController {
         return "QnA/write.html";
     }
 
-    // 질문 작성 수행
+    // == 질문 작성 수행 ==
     @PostMapping("/doWrite")
     public String doWrite(@Valid QuestionForm questionForm, BindingResult bindingResult, HttpSession session, Model model){
         if(bindingResult.hasErrors()){
@@ -113,7 +113,7 @@ public class QuestionController {
         return "QnA/boardmodify.html";
     }
 
-    // 질문 게시글 실제로 수정
+    // == 질문 게시글 실제로 수정 ==
     @PostMapping("/update/{id}")
     public String questionUpdate(@PathVariable("id") Integer id, QuestionForm questionForm){ // questionForm 에서 제목이랑 내용을 받아옴
         Question questionTemp = questionService.doUpdate(id, questionForm);
