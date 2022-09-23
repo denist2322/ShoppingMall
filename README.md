@@ -69,15 +69,15 @@
 
 ## 📝 MainService
 * Mail
-* 1. 회원가입 화면
+ 1. 회원가입 화면
 ![1  메일](https://user-images.githubusercontent.com/105466435/191875198-a4809ed3-fa3d-4c44-93e0-1fbb06862351.PNG)
-* 2. 메일 전송
+ 2. 메일 전송
 ![1-2 메일](https://user-images.githubusercontent.com/105466435/191875203-ccea6e8e-e7dc-43f1-afe2-517f2232a04a.PNG)
-* 3. 메일 수신
+ 3. 메일 수신
 ![1-3 메일](https://user-images.githubusercontent.com/105466435/191875204-9265a2a4-cfa6-4780-8635-07c5c820577e.PNG)
-* 4. 인증 번호 입력
+ 4. 인증 번호 입력
 ![1-4 메일](https://user-images.githubusercontent.com/105466435/191875205-fe41686d-94bb-4c46-bca4-dcb401decce0.PNG)
-* 5. 인증 완료
+ 5. 인증 완료
 ![1-5 메일](https://user-images.githubusercontent.com/105466435/191875207-837f86b4-40d7-4676-bf9f-9138501d7f7d.PNG)
 
 
