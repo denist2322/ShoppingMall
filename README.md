@@ -67,6 +67,10 @@
 * implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 * implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
 
+## 📝 ERD 설계
+
+## 📝 Rest API 문서
+
 ## 📝 MainService
 ### Mail
  1. 회원가입 화면
@@ -92,6 +96,4 @@
  5. 결제 완료 페이지
 ![결제5](https://user-images.githubusercontent.com/105466435/192080655-dd955f24-c6bd-45b5-bd03-36a6b66a019e.PNG)
 
-## ERD 설계
 
-## Rest API 문서
