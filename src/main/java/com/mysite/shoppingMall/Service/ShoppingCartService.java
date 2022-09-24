@@ -55,7 +55,7 @@ public class ShoppingCartService {
         shoppingCart.setCartTotalPrice(productBuyForm.getOrderTotalPrice());
         shoppingCartRepository.save(shoppingCart);
     }
-    
+
     // 오버로딩 기법 사용
     // 쇼핑 카트에서 목록을 삭제한다. (id로 삭제)
     public void deleteCart(long id) {
@@ -79,7 +79,7 @@ public class ShoppingCartService {
     public void changeChecked(int check, HttpSession session) {
         MallUser user = userService.getUser(session);
         List<ShoppingCart> carts = shoppingCartRepository.findByMallUserId(user.getId());
-        for(ShoppingCart cart : carts){
+        for (ShoppingCart cart : carts) {
             cart.setChecked(check);
             shoppingCartRepository.save(cart);
         }

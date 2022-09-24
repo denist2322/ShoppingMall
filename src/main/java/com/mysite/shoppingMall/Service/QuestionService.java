@@ -30,7 +30,7 @@ public class QuestionService {
     private final UserRepository userRepository;
 
     // 질문 게시글을 작성한다.
-    public void doWrite(String subject, String content, HttpSession session){
+    public void doWrite(String subject, String content, HttpSession session) {
         IsLogined isLogined = Ut.isLogined(session);
         MallUser mallUser = userRepository.findById(isLogined.getUserId()).get();
 
@@ -50,7 +50,7 @@ public class QuestionService {
     }
 
     // QnA 게시판 페이징 처리
-    public Pageable doPageable(int page){
+    public Pageable doPageable(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts)); // page 는 조회할 페이지의 번호이고 10은 한 페이지에 보여줄 게시물의 갯수를 의미
@@ -65,9 +65,9 @@ public class QuestionService {
 
     // 검색 진행 후 페이징을 처리한다.
     @Transactional
-    public Page<Question> keywordQuestion(int page, String kw){
+    public Page<Question> keywordQuestion(int page, String kw) {
         Pageable pageable = doPageable(page);
-        return questionRepository.findBySubjectAndContent(kw,pageable);
+        return questionRepository.findBySubjectAndContent(kw, pageable);
     }
 
     // 질문 내용을 수정한다.
@@ -82,7 +82,7 @@ public class QuestionService {
     }
 
     // 질문을 삭제한다.
-    public Question doDelete(Integer questionId){
+    public Question doDelete(Integer questionId) {
         Question question = getQuestion(questionId);
 
         questionRepository.delete(question);

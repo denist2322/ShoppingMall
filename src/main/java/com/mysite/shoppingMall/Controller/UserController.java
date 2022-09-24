@@ -35,6 +35,7 @@ public class UserController {
         model.addAttribute("Red", "text-red-500");
         return "user/login.html";
     }
+
     // 실제로 로그인이 이루어짐
     @RequestMapping("/doLogin")
     public String doLogin(Model model, HttpSession session, @Valid LoginForm loginForm, BindingResult bindingResult) {
@@ -120,7 +121,7 @@ public class UserController {
         }
 
         if (joinForm.getAddress1().trim().length() == 0 || joinForm.getAddress2().trim().length() == 0 || joinForm.getAddress3().trim().length() == 0 || joinForm.getAddress4().trim().length() == 0) {
-            bindingResult.rejectValue("addressError","", "주소를 입력해주세요.");
+            bindingResult.rejectValue("addressError", "", "주소를 입력해주세요.");
             return "user/join.html";
         }
 
@@ -145,7 +146,7 @@ public class UserController {
 
         productService.convertAdAndPhone(joinForm, mallUser);
         model.addAttribute("mallUser", mallUser);
-        model.addAttribute("shippingState",shippingState);
+        model.addAttribute("shippingState", shippingState);
 
         return "user/myPage.html";
 
@@ -153,13 +154,13 @@ public class UserController {
 
     // == 마이페이지 ==
     @PostMapping("/myPage")
-    public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult, Model model,HttpSession session) {
+    public String myPage(@Valid JoinForm joinForm, BindingResult bindingResult, Model model, HttpSession session) {
         IsLogined isLogined = Ut.isLogined(session);
         if (bindingResult.hasErrors()) {
             return "user/myPage.html";
         }
 
-        if(isLogined.getLogin() == 0 || isLogined.getAuthority() == 0){
+        if (isLogined.getLogin() == 0 || isLogined.getAuthority() == 0) {
             model.addAttribute("msg", "잘못된 접근입니다.");
             model.addAttribute("historyBack", "/user/myPage");
 
@@ -181,7 +182,7 @@ public class UserController {
     public String doDelete(HttpSession session) {
         IsLogined isLogined = Ut.isLogined(session);
 
-        if(isLogined.getLogin() == 0 || isLogined.getAuthority() == 0){
+        if (isLogined.getLogin() == 0 || isLogined.getAuthority() == 0) {
             return """
                     <script>
                     alert("잘못된 접근입니다.");
@@ -190,40 +191,41 @@ public class UserController {
                     """;
         }
         userService.deleteUser(session);
-            return  """
-                    <script>
-                    alert("탈퇴처리가 완료되었습니다.");
-                    location.replace("/");
-                    </script>
-                    """;
+        return """
+                <script>
+                alert("탈퇴처리가 완료되었습니다.");
+                location.replace("/");
+                </script>
+                """;
     }
 
 
     // == 이메일 찾기 ==
     @GetMapping("/findEmail")
-    public String findEmail(FindEmailForm findEmailForm){
+    public String findEmail(FindEmailForm findEmailForm) {
         return "user/findEmail.html";
     }
 
     @PostMapping("/findEmail")
-    public String findEmail(@Valid FindEmailForm findEmailForm, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()){
+    public String findEmail(@Valid FindEmailForm findEmailForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             return "user/findEmail.html";
         }
 
         MallUser mallUser = userService.getUser(findEmailForm);
 
-        if(mallUser == null){
-            bindingResult.reject("","일치하는 회원이 존재하지 않습니다.");
+        if (mallUser == null) {
+            bindingResult.reject("", "일치하는 회원이 존재하지 않습니다.");
             return "user/findEmail.html";
         }
-        model.addAttribute("mallUserEmail",mallUser.getUserEmail());
+        model.addAttribute("mallUserEmail", mallUser.getUserEmail());
 
         return "user/findEmail.html";
     }
+
     // == 비밀번호 찾기 ==
     @RequestMapping("/findPw")
-    public String findPw(FindPwForm findPwForm){
+    public String findPw(FindPwForm findPwForm) {
         return "user/findPw.html";
     }
 
@@ -235,8 +237,8 @@ public class UserController {
         List<OrderSheet> orderSheetList = productService.getOrderList(isLogined.getUserId());
         List<Integer> shippingState = productService.getShippingState(session);
         model.addAttribute("mallUser", mallUser);
-        model.addAttribute("orderSheetList",orderSheetList);
-        model.addAttribute("shippingState",shippingState);
+        model.addAttribute("orderSheetList", orderSheetList);
+        model.addAttribute("shippingState", shippingState);
         return "user/orderHistory.html";
     }
 

@@ -28,7 +28,7 @@ public class MailService {
         String randomAuthentication = sendAuthentication(mailDto.getEmail(), title);
         mailDto.setAuthentication(randomAuthentication);
         mailDto.setConfirmAuthentication("");
-    //  System.out.println(randomAuthentication);
+        //  System.out.println(randomAuthentication);
     }
 
     // == 비밀번호 찾기 메일 발송 및 발송 확인 ==
@@ -39,7 +39,7 @@ public class MailService {
         findPwForm.setAuthentication(randomAuthentication);
         findPwForm.setConfirmAuthentication("");
         findPwForm.setIsSend("send");
-    //  System.out.println(randomAuthentication);
+        //  System.out.println(randomAuthentication);
     }
 
     // == 메일 발송 ==

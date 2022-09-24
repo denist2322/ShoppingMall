@@ -20,11 +20,11 @@ public class QuestionAnswerController {
 
     // == QnA 답변 작성 ==
     @PostMapping("/create/{id}")
-    public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam String body){
+    public String createAnswer(Model model, @PathVariable("id") Integer id, @RequestParam String body) {
         Question question = this.questionService.getQuestion(id); // 아이디를 찾아와서
         this.questionAnswerService.create(question, body); // 서비스에 일을시켜 답변을 등록한다.
 
-        
+
         return String.format("redirect:/question/detail/%s", id);
     }
 
