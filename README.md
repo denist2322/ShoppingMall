@@ -80,7 +80,7 @@
  5. 인증 완료
 ![1-5 메일](https://user-images.githubusercontent.com/105466435/191875207-837f86b4-40d7-4676-bf9f-9138501d7f7d.PNG)
 
-### 결제
+### Payment
  1. 상품 페이지
 ![결제1](https://user-images.githubusercontent.com/105466435/192080651-b58d63df-3710-42ec-b800-becefbeaddd2.PNG)
  2. 주문 페이지
@@ -92,3 +92,6 @@
  5. 결제 완료 페이지
 ![결제5](https://user-images.githubusercontent.com/105466435/192080655-dd955f24-c6bd-45b5-bd03-36a6b66a019e.PNG)
 
+## ERD 설계
+
+## Rest API 문서
