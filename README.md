@@ -70,8 +70,6 @@
 ## 📝 ERD 설계
 ![erd-diagram](https://user-images.githubusercontent.com/105466435/192089750-40eb6890-3c89-4171-ad12-4209449ae36e.png)
 
-## 📝 Rest API 문서
-
 ## 📝 MainService
 ### Mail
  1. 회원가입 화면
