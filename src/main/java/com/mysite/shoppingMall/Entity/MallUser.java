@@ -1,4 +1,5 @@
 package com.mysite.shoppingMall.Entity;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 // == 유저 정보 테이블 ==
 public class MallUser {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDateTime regDate;
     private LocalDateTime updateDate;

@@ -37,7 +37,7 @@ public class FileService {
     public void deleteFile(Product product) {
         String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\product_image\\" + product.getTitle();
         new File(root + "\\" + product.getMainImage()).delete();
-        for (int i = 0; i < product.getProductImageList().size(); i++){
+        for (int i = 0; i < product.getProductImageList().size(); i++) {
             new File(root + "\\" + product.getProductImageList().get(i).getImages()).delete();
         }
         new File(root).delete();

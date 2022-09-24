@@ -29,21 +29,21 @@ public class ShoppingCartController {
         List<Integer> ShoppingDetailPrice = shoppingCartService.getPriceList(isLogined.getUserId());
 
         model.addAttribute("shoppingCartList", shoppingCartList);
-        model.addAttribute("ShoppingDetailPrice",ShoppingDetailPrice);
+        model.addAttribute("ShoppingDetailPrice", ShoppingDetailPrice);
 
         return "pages/shoppingCart.html";
     }
 
     // == 장바구니 상품 추가 ==
     @RequestMapping("/addCart")
-    public String addCart(ProductBuyForm productBuyForm, HttpSession session){
+    public String addCart(ProductBuyForm productBuyForm, HttpSession session) {
         shoppingCartService.addCart(productBuyForm, session);
         return "redirect:/shoppingCart";
     }
 
     // == 장바구니 상품 삭제 ==
     @RequestMapping("/deleteCart")
-    public String deleteCart(long id){
+    public String deleteCart(long id) {
         shoppingCartService.deleteCart(id);
         return "redirect:/shoppingCart";
     }
@@ -51,17 +51,17 @@ public class ShoppingCartController {
     // == 장바구니에서 체크여부 변환 ==
     @RequestMapping("/isChecked")
     @ResponseBody
-    public String isChecked(int check, long id){
-        shoppingCartService.changeChecked(check,id);
+    public String isChecked(int check, long id) {
+        shoppingCartService.changeChecked(check, id);
         return "success";
     }
 
     // == 장바구니 전체 선택 혹은 해제 ==
     @RequestMapping("/allChecked")
     @ResponseBody
-    public List<Integer> isChecked(int check, HttpSession session){
+    public List<Integer> isChecked(int check, HttpSession session) {
         IsLogined isLogined = Ut.isLogined(session);
-        shoppingCartService.changeChecked(check,session);
+        shoppingCartService.changeChecked(check, session);
         List<Integer> ShoppingDetailPrice = shoppingCartService.getPriceList(isLogined.getUserId());
         return ShoppingDetailPrice;
     }

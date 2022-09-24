@@ -15,7 +15,7 @@ public class QuestionAnswerService {
     private final QuestionAnswerRepository questionAnswerRepository;
 
     // 질문 답변을 생성한다.
-    public void create(Question question, String body){
+    public void create(Question question, String body) {
         QuestionAnswer questionAnswer = new QuestionAnswer();
         questionAnswer.setBody(body);
         questionAnswer.setUpdateDate(LocalDateTime.now());

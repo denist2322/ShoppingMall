@@ -26,6 +26,7 @@ public class UserService {
 
         return user;
     }
+
     // 유저정보를 가져온다 (세션을 통해서)
     public MallUser getUser(HttpSession session) {
         Integer loginId = (int) session.getAttribute("UserId");
@@ -34,6 +35,7 @@ public class UserService {
 
         return user;
     }
+
     // 유저정보를 가져온다 (폼 객체를 통해서)
     public MallUser getUser(FindEmailForm findEmailForm) {
         Optional<MallUser> opUser = userRepository.findByNameAndBirthday(findEmailForm.getFNname(), findEmailForm.getFNbirthday());
@@ -41,10 +43,12 @@ public class UserService {
 
         return user;
     }
+
     // 비밀번호의 일치 여부를 판단함.
     public boolean matchPw(String userPassword, MallUser user) {
         return passwordEncoder.matches(userPassword, user.getUserPassword());
     }
+
     // 세션에 정보를 저장한다. (로그인 시)
     public void setSession(HttpSession session, MallUser user) {
         // 권한 0 => 관리자 | 권한 1 => 유저
@@ -59,11 +63,13 @@ public class UserService {
         session.setAttribute("UserId", user.getId());
         session.setAttribute("authority", 1);
     }
+
     // 세선을 삭제한다. (로그아웃 시)
     public void removeSession(HttpSession session, Integer userId) {
         session.removeAttribute("UserId");
         session.removeAttribute("authority");
     }
+
     // 유저를 추가한다. (회원가입)
     public void create(JoinForm joinForm) {
         MallUser user = new MallUser();
@@ -73,6 +79,7 @@ public class UserService {
         createAndModify(user, joinForm);
         userRepository.save(user);
     }
+
     // 유저 정보를 수정한다.
     public void modifyUser(JoinForm joinForm) {
         Optional<MallUser> opMallUser = userRepository.findByuserEmail(joinForm.getEmail2());
@@ -80,8 +87,9 @@ public class UserService {
         createAndModify(user, joinForm);
         userRepository.save(user);
     }
+
     // 유저 정보를 생성하고 수정하는데 중복되는 코드를 하나로 모은 것
-    public void createAndModify(MallUser user, JoinForm joinForm){
+    public void createAndModify(MallUser user, JoinForm joinForm) {
         user.setName(joinForm.getName2());
         user.setUserPassword(passwordEncoder.encode(joinForm.getPassword2()));
         String cellPhone = joinForm.getCellphone2_1() + "-" + joinForm.getCellphone2_2() + "-" + joinForm.getCellphone2_3();
@@ -90,6 +98,7 @@ public class UserService {
         user.setHomeAddress(fullAddress);
         user.setUpdateDate(LocalDateTime.now());
     }
+
     // 유저를 삭제함.
     public void deleteUser(HttpSession session) {
         MallUser user = getUser(session);

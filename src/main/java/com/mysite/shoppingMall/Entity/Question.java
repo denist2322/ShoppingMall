@@ -32,7 +32,8 @@ public class Question {
     @ManyToOne
     private MallUser mallUser;
     // 질문 테이블에 질문 답변 테이블을 연결 시킨다.
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // 질문을 삭제하면 그에 달린 답변들도 모두 함께 삭제하기 위해서 cascade = CascadeType.REMOVE 사용
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    // 질문을 삭제하면 그에 달린 답변들도 모두 함께 삭제하기 위해서 cascade = CascadeType.REMOVE 사용
     private List<QuestionAnswer> questionAnswerList;
 
 }

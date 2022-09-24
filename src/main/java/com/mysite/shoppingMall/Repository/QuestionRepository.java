@@ -15,6 +15,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     Page<Question> findBySubjectAndContent(@Param("kw") String kw, Pageable pageable);
 
     List<Question> findByMallUserId(Integer userId);
+
     Page<Question> findAll(Pageable pageable); // pageable 객체를 입력으로 받아 Page<Question> 타입 객체를 리턴하는 findAll 메서드를 생성
 
 

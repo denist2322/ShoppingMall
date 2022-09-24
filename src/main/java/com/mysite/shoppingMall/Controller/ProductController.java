@@ -49,6 +49,7 @@ public class ProductController {
 
         return "product/writeProduct.html";
     }
+
     // 실제로 작성을 수행한다.
     @PostMapping("/doWrite")
     public String doWrite(@RequestParam("mainImage") List<MultipartFile> mainImage, @RequestParam("detailImage") List<MultipartFile> detailImage, ProductWriteForm productWriteForm) {
@@ -134,7 +135,7 @@ public class ProductController {
                 bindingResult.reject("", "색상 혹은 사이즈를 선택해주세요.");
                 return "redirect:/product/detail?id=" + productBuyForm.getProductsId();
             }
-        } catch (NullPointerException E){
+        } catch (NullPointerException E) {
 
         }
         productService.setOrderNum(productBuyForm);
@@ -150,11 +151,12 @@ public class ProductController {
         MallUser mallUser = userService.getUser(session);
         productService.readyForOrder(orderSheetForm, mallUser);
 
-        if(productBuyForm.getProductsId()==0){
+        if (productBuyForm.getProductsId() == 0) {
             List<ShoppingCart> shoppingCartList = shoppingCartService.getCheckedCartList(mallUser.getId());
             productService.setOrderCart(orderSheetForm, productBuyForm, mallUser.getId(), shoppingCartList);
             model.addAttribute("shoppingCartList", shoppingCartList);
-        };
+        }
+        ;
 
         model.addAttribute("mallUser", mallUser);
 
@@ -169,15 +171,14 @@ public class ProductController {
             return "/";
         }
 
-        if(orderSheetForm.getProductsId() == (long) 0) {
-            productService.saveCartOrder(orderSheetForm,session);
-        }
-        else{
+        if (orderSheetForm.getProductsId() == (long) 0) {
+            productService.saveCartOrder(orderSheetForm, session);
+        } else {
             productService.saveOrder(orderSheetForm, session);
         }
         return "redirect:/product/successPage";
     }
-    
+
     // 주문이 성공적으로 진행 되었을 때 실행
     @GetMapping("/successPage")
     public String successPage() {
