@@ -95,4 +95,4 @@
  5. 결제 완료 페이지
 ![결제5](https://user-images.githubusercontent.com/105466435/192080655-dd955f24-c6bd-45b5-bd03-36a6b66a019e.PNG)
 
-
+![api](https://user-images.githubusercontent.com/85655020/192686037-12f21045-6ee8-48ec-952e-1e6f8e7c47ea.png)
