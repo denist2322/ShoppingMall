@@ -28,8 +28,8 @@ function order(){
                 }
            });
          });
-            var count = 1;
-            var result = ""
+            let count = 1;
+            let result = ""
             function minus() {
             if(count > 1) {
              count--;
@@ -54,7 +54,10 @@ function order(){
              }
 
              function replace(){
-             var count = $("#inputCount").val();
-             var result = "<input type=\"text\" id=\"totalPrice\" name=\"orderTotalPrice\" class=\"flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none\" value=\"" + (count*price) + "\"readonly/>";
+             let count = $("#inputCount").val();
+             let result = "<input type=\"text\" id=\"totalPrice\" name=\"orderTotalPrice\" class=\"flex px-auto py-2 box-border bg-gray-200 font-bold text-right focus:outline-none\" value=\"" + (count*price) + "\"readonly/>";
              $("#totalPrice").replaceWith(result);
-     }
+
+             result =  "<input class=\"text-right text-xl text-yellow-600 focus:outline-none\" id=\"expect_price\" value=\"" + (count*price) + "\"readonly/>"
+             $("#expect_price").replaceWith(result);
+            }
