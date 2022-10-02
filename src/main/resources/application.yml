@@ -6,8 +6,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: pullstack1B@gmail.com
-    password: wpzndobhfoqrqasc
+    username: denistt23@gmail.com
+    password: mqwekalhxbxxozzz
     properties:
       mail:
         smtp:
@@ -43,3 +43,10 @@ logging:
         type:
           descriptor:
             sql: trace
+springdoc:
+  swagger-ui:
+    path: shoppingMall.html
+  version: v1
+  paths-to-match:
+    - /**
+

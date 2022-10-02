@@ -61,7 +61,7 @@ public class ProductController {
     // == 상품 조회 ==
 
     // == 상품 리스트 조회 ==
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public String showList(String category, Model model) {
         List<Product> productList = productService.findCategory(category);
         model.addAttribute("productList", productList);
@@ -69,7 +69,7 @@ public class ProductController {
     }
 
     // == 상품 단건 조회 ==
-    @RequestMapping("/detail") // 단건조회
+    @GetMapping("/detail") // 단건조회
     public String showDetail(Long id, ProductBuyForm productBuyForm, HttpSession session, Model model) {
 
         Product product = productService.findProduct(id);
@@ -168,7 +168,7 @@ public class ProductController {
     @GetMapping("/saveOrderTmp")
     public String saveOrder(OrderSheetForm orderSheetForm, HttpSession session) {
         if (!orderSheetForm.getPaymentSuccess().equals("success")) {
-            return "/";
+            return "redirect:/";
         }
 
         if (orderSheetForm.getProductsId() == (long) 0) {

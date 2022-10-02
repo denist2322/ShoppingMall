@@ -70,8 +70,11 @@ public class MailService {
         MallUser mallUser = userService.getUser(findPwForm.getEmail());
         mallUser.setUserPassword(passwordEncoder.encode(passwordTmp));
         userRepository.save(mallUser);
-        mailDto.setTitle("(쇼핑몰 SKIES)새로운 비밀번호입니다.");
-        mailDto.setMessage("아래 비밀번호로 로그인 후 마이페이지에서 변경해주세요.");
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(findPwForm.getEmail());
+        message.setSubject("(쇼핑몰 SKIES)새로운 비밀번호입니다.");
+        message.setText(passwordTmp + " 로 로그인 후 마이페이지에서 변경해주세요.");
+        mailSender.send(message);
     }
 
     // == 메일이 인증이 완료되었는지의 여부를 판단함. ==

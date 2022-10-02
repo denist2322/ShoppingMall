@@ -22,7 +22,7 @@ public class MainController {
     private final ProductService productService;
 
     // == main 홈 페이지 ==
-    @RequestMapping("/main")
+    @GetMapping("/main")
     public String showMain() {
         return "pages/main.html";
     }
@@ -91,13 +91,13 @@ public class MainController {
     }
 
     // 회사소개 페이지
-    @RequestMapping("/companyintroduce")
+    @GetMapping("/companyintroduce")
     public String companyintroduce() {
         return "pages/companyintroduce.html";
     }
 
     // == 이용약관 페이지 ==
-    @RequestMapping("/Terms_of_service")
+    @GetMapping("/Terms_of_service")
     public String Terms_of_service() {
         return "pages/Termsofservice.html";
     }
