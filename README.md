@@ -44,6 +44,13 @@
 ## 📝 Description
 스프링부트(JPA)와 Thymeleaf 를 이용한 의류 쇼핑몰 프로젝트
 
+## 📝 Main Service
+* Mail 전송 (본인인증)
+* 상품 주문 및 결제 (카카오페이 결제)
+* 장바구니 기능 (원하는 상품만 주문 가능)
+* 개인정보 수정 및 회원 탈퇴
+* 상품별 배송상태 확인 가능
+
 ## 📝 Development Environment
 * CPU : Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz 3.19GHz
 * RAM : 16.0GB
@@ -72,13 +79,6 @@
 
 ## 📝 Rest API
 ![api](https://user-images.githubusercontent.com/85655020/192686037-12f21045-6ee8-48ec-952e-1e6f8e7c47ea.png)
-
-## 📝 Main Service
-* Mail 전송 (본인인증)
-* 상품 주문 및 결제 (카카오페이 결제)
-* 장바구니 기능 (원하는 상품만 주문 가능)
-* 개인정보 수정 및 회원 탈퇴
-* 상품별 배송상태 확인 가능
 
 
 ## 📝 기술 설명서
