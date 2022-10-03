@@ -51,11 +51,6 @@
 * 개인정보 수정 및 회원 탈퇴
 * 상품별 배송상태 확인 가능
 
-## 📝 Development Environment
-* CPU : Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz 3.19GHz
-* RAM : 16.0GB
-* GRAPHIC : NVIDIA GeForce GTX 1660
-
 ## 📝 Prerequisite
 * implementation 'org.apache.commons:commons-lang3:3.12.0'
 * implementation 'org.springframework.boot:spring-boot-starter-mail'
