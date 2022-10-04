@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @Controller
 public class MailController {
@@ -35,15 +37,14 @@ public class MailController {
 
     // == 비밀번호 찾기 이메일 발송 부분 ==
     @PostMapping("/findPwMail")
-    public String findPwMail(FindPwForm findPwForm, BindingResult bindingResult, Model model) {
+    public String findPwMail(@Valid FindPwForm findPwForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "user/pwTemp.html";
+            return "user/findPw.html";
         }
 
         if (!mailService.findEmail(findPwForm.getEmail())) {
-            model.addAttribute("msg", "회원이 존재하지 않습니다.");
-            model.addAttribute("replaceUri", "/user/findPw");
-            return "common/js";
+            model.addAttribute("noUser", "noUser");
+            return "user/findPw.html";
         }
 
         mailService.mailSimpleSend(findPwForm);
@@ -64,14 +65,19 @@ public class MailController {
 
     // == 인증 확인 비밀번호(확인완료시 비밀번호를 변경함) ==
     @PostMapping("/confirmPw")
-    public String confirmPw(FindPwForm findPwForm, MailDto mailDto) {
-        // 인증 실패시 fail 반환
+    public String confirmPw(@Valid FindPwForm findPwForm, BindingResult bindingResult ,MailDto mailDto) {
+        if (bindingResult.hasErrors()) {
+            return "user/findPw.html";
+        }
+
+        // 인증 성공시 success 값
         if (findPwForm.getAuthentication().equals(findPwForm.getConfirmAuthentication())) {
             mailService.findPw(findPwForm, mailDto);
             return "user/pwTemp.html";
         }
-        // 인증 성공시 null 값
+
+        // 인증 실패시 fail 반환
         mailService.findPwForm(findPwForm);
-        return "user/pwTemp.html";
+        return "user/findPw.html";
     }
 }

@@ -39,7 +39,7 @@ public class MailService {
         findPwForm.setAuthentication(randomAuthentication);
         findPwForm.setConfirmAuthentication("");
         findPwForm.setIsSend("send");
-        //  System.out.println(randomAuthentication);
+//        System.out.println(randomAuthentication);
     }
 
     // == 메일 발송 ==
