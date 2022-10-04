@@ -21,7 +21,7 @@
                     비밀번호 찾기
                 </div>
                 <div th:if="${findPwForm.isSend != 'send' && findPwForm.isSuccess != 'success'}">
-                    <form th:action="@{|/findPwMail|}" method="post">
+                    <form th:action="@{|/findPwMail|}" th:object="${findPwForm}" method="post">
                         <!-- Email input -->
                         <div>
                             <div class="mb-3 flex">
@@ -31,12 +31,13 @@
                                         class="form-control block w-2/3 px-4 py-2 mr-1 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Email"
                                 />
-
                                 <input
                                         type="submit"
                                         class="w-1/3 py-3 text-white font-medium text-sm rounded box-border bg-black btn btn-active"
                                         value="인증번호 발송"/>
                             </div>
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-base text-red-500"></p>
+                            <p th:if="${noUser == 'noUser'}" class="text-base text-red-500">일치하는 회원이 존재하지 않습니다.</p>
                         </div>
                     </form>
                 </div>
@@ -63,7 +64,9 @@
                     </form>
                 </div>
                 <div th:if="${findPwForm.isSuccess != 'success'}">
-                    <form th:action="@{|/confirmPw|}" method="post">
+                    <form th:action="@{|/confirmPw|}" th:object = "${findPwForm}" method="post">
+                        <input type="hidden" name="isSuccess" th:value="${findPwForm.isSuccess}">
+                        <input type="hidden" name="isSend" th:value="${findPwForm.isSend}">
                         <input type="hidden" name="email" th:value="${findPwForm.email}">
                         <input type="hidden" name="authentication" th:value="${findPwForm.authentication}">
                         <!-- Name input -->
@@ -74,6 +77,7 @@
                                     class="form-control block w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="인증번호 입력"
                             />
+                            <div th:if="${findPwForm.isSuccess == 'fail'}" class="text-base text-red-500">인증번호가 맞지 않습니다.</div>
                         </div>
 
                         <div class="flex w-full h-auto justify-between">
@@ -81,7 +85,6 @@
                                     type="submit"
                                     class="w-full py-3 bg-black text-white font-medium text-sm rounded box-border btn btn-active"
                                     value="확인">
-                            </input>
                         </div>
                     </form>
                 </div>

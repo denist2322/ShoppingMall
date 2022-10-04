@@ -15,10 +15,10 @@
 <body>
 <div class="flex con h-screen">
     <div class="flex w-96 mx-auto justify-center flex-col" th:object="${findEmailForm}">
-        <div th:replace="/common/errorForm :: formErrorsFragment"></div>
         <div class="text-2xl w-full font-bold mt-5 mb-2 text-center">이메일 찾기</div>
         <div th:if="${mallUserEmail == null}">
             <form th:action="@{|/user/findEmail|}" method="post">
+                <div th:if="${noUser == 'noUser'}" class="flex text-base text-red-500">일치하는 유저가 존재하지 않습니다.</div>
                 <!-- 이름 입력 시작 -->
                 <div class="mb-3">
                     <input
@@ -26,7 +26,9 @@
                             name="fNname"
                             class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
                             placeholder="이름"
+                            th:value = "${findEmailForm.fNname}"
                     />
+                    <div th:if="${#fields.hasErrors('fNname')}" th:errors="*{fNname}" class= "flex text-base text-red-500"></div>
                 </div>
                 <!-- 이름 입력 끝 -->
 
@@ -37,8 +39,11 @@
                             name="fNbirthday"
                             class="flex w-full px-4 py-2 mr-3 text-xl text-gray-700 transition ease-in-out bg-white border border-gray-300 border-solid rounded focus:text-gray-700"
                             placeholder="생년월일"
+                            th:value = "${findEmailForm.fNbirthday}"
                     />
+                    <div th:if="${#fields.hasErrors('fNbirthday')}" th:errors="*{fNbirthday}" class= "flex text-base text-red-500"></div>
                 </div>
+
                 <!-- 생년월일 입력 끝 -->
 
                 <div class="flex w-full h-auto justify-between">

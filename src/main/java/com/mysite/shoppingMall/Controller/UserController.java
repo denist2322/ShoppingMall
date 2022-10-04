@@ -215,7 +215,7 @@ public class UserController {
         MallUser mallUser = userService.getUser(findEmailForm);
 
         if (mallUser == null) {
-            bindingResult.reject("", "일치하는 회원이 존재하지 않습니다.");
+            model.addAttribute("noUser","noUser");
             return "user/findEmail.html";
         }
         model.addAttribute("mallUserEmail", mallUser.getUserEmail());
